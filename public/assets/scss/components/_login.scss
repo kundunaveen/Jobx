@@ -1,0 +1,223 @@
+.login-header {
+
+    .logo-image {
+        position: static;
+        top: auto;
+        left: auto;
+        transform: translate(0);
+        margin-right: 15px;
+    }
+
+    .banner-form {
+        margin-top: 0;
+
+        .login-from-btn {
+            padding: 18px 68px;
+
+            @include media('xl') {
+                padding: 18px 36px;
+            }
+        }
+
+        .input-group {
+
+            .form-select {
+                width: 30%;
+
+                @include media('lg') {
+                    width: 10%;
+                }
+
+                @include media('md') {
+                    width: 15%;
+                }
+
+                @include media('sm') {
+                    width: 25%;
+                }
+
+            }
+        }
+    }
+}
+
+.login-page {
+    padding: 250px 0 151px;
+    position: relative;
+    z-index: 2;
+
+    @include media('lg') {
+        padding: 90px 0;
+    }
+
+    .login-img {
+        margin-top: 50px;
+    }
+
+    .login-form {
+
+        .remember-pass {
+            margin: 40px 0 55px;
+        }
+        .login-button {
+            margin-top: 55px;
+        }
+
+        .form-group {
+            position: relative;
+            margin-bottom: 20px;
+
+            .input-icon {
+                position: absolute;
+                top: 0;
+                left: 14px;
+                bottom: 0;
+                z-index: 9;
+                border: none;
+                display: flex;
+                align-items: center;
+                pointer-events: none;
+            }
+        }
+
+        .btn-md {
+            padding: 22px 58px;
+            font-family: $base-font-bold;
+            font-size: 20px;
+        }
+
+        .forget-password {
+
+            a {
+                color: $jaguar-color;
+            }
+        }
+    }
+
+
+    .form-control {
+        font-size: $base-font-size;
+        color: $jaguar-color;
+        @include border-radius(10px);
+        padding: 22px 20px 22px 54px;
+        border: 1px solid $lavender-pinocchio-color ;
+        
+
+        @include placeholder {
+            color: $pale-slate-color ;
+            font-size: $base-font-size;
+            font-weight: 400;
+        }
+
+        &:focus,
+        &:focus-visible {
+            box-shadow: none;
+            border: 1px solid $input-border-color;
+
+            
+        }
+
+        &.search-btn {
+            color: $white-color;
+            border: none;
+            padding: 10px 0px;
+            height: 60px;
+            margin-top: -4px;
+        }
+    }
+
+    .input-group-text {
+        background-color: transparent;
+        border: 1px solid $pale-slate-color;
+        @include border-radius(10px);
+
+    }
+
+    .input-group-text {
+        background-color: transparent;
+        border: 1px solid $pale-slate-color;
+        @include border-radius(10px);
+    }
+
+    .input-group {
+        @include border-radius(10px);
+        box-shadow: 0 0px 30px $light-black-color;
+
+    }
+
+    .login-input {
+        box-shadow: none;
+        margin-bottom: 20px;
+
+        @include placeholder {
+            font-weight: 705;
+        }
+    }
+
+    .name-input-group {
+        background-color: transparent;
+        border: 1px solid $pale-slate-color;
+        @include border-radius(10px);
+    }
+
+    .login-heading {
+        font-size: 30px;
+        margin-bottom: 70px;
+        font-family: $base-font-bold;
+
+        @include media('sm') {
+            margin-bottom: 40px;
+        }
+    }
+
+    .login-subheading {
+        font-size: 14px;
+        line-height: 30px;
+        letter-spacing: 0.5em;
+        text-transform: uppercase;
+        color: $jaguar-color;
+        margin-top: 93.15px;
+        font-family: $base-font-book;
+    }
+
+    .text-blue {
+        color: $website-brand-color;
+        font-family: $base-font-bold;
+    }
+
+    .login-text {
+        font-size: 18px;
+        line-height: 23px;
+        color: $Grey-color;
+        border-radius: 10px;
+    }
+
+}
+
+.login-shape {
+
+    &::after {
+        left: -278px !important;
+        background-size: contain !important;
+        // z-index: 2 !important;
+
+
+        // Responsive Css Here
+
+        @include media('md') {
+
+            left: 0px !important;
+        }
+
+    }
+    &::before {
+        display: none;
+    }
+
+}
+.register-page {
+
+    .login-heading{
+        margin-bottom: 50px;
+    }
+}

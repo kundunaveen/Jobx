@@ -1,0 +1,99 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the button component.
+// -----------------------------------------------------------------------------
+.btn {
+    padding: 12px 35px;
+    border: 1px solid transparent;
+    font-size: 16px;
+    font-family: $base-font-medium;
+    border-radius: 10px;
+
+    &:focus {
+        box-shadow: none;
+        outline: 0 none;
+
+    }
+
+    @extend .transition;
+
+    &.btn-lg {
+        padding: 18px 95px;
+        font-size: 20px;
+        max-width: 100%;
+        width: 100%;
+        background-color: $website-brand-color;
+        border: 1px solid $website-brand-color;
+        color: $white-color;
+
+        @include on-event {
+            background: transparent;
+            color: $website-brand-color;
+            border-color: $website-brand-color;
+        }
+
+        @include media('xxl') {
+            padding: 18px 74px;
+        }
+        @include media('sm') {
+            padding: 18px 60px;
+        }
+    }
+
+    &.btn-md {
+        padding: 14px 58px;
+        background-color: $website-brand-color;
+        border: 1px solid $website-brand-color;
+        color: $white-color;
+
+        @include on-event {
+            background: transparent;
+            color: $website-brand-color;
+            border-color: $website-brand-color;
+        }
+
+        @include media('xxl') {
+            padding: 12px 30px;
+        }
+
+        @include media('lg') {
+            padding: 8px 22px;
+        }
+    }
+
+    &.btn-primary {
+        background: $jaguar-color;
+        color: $white-color;
+        border-color: $jaguar-color;
+
+        @include on-event {
+            background: transparent;
+            color: $website-brand-color;
+            border-color: $website-brand-color;
+        }
+    }
+
+    &.btn-secondary {
+        border: 1px solid $jaguar-color;
+        color: $jaguar-color;
+
+        @include on-event {}
+    }
+
+    &.btn-default {
+        background-color: transparent;
+        border: 1px solid $jaguar-color;
+        color: $jaguar-color;
+
+        @include media('sm') {
+            font-size: 14px;
+            padding: 9px 34px;
+        }
+
+        @include on-event {
+            background-color: $website-brand-color;
+            border: 1px solid $website-brand-color;
+            color: $white-color;
+        }
+    }
+
+}

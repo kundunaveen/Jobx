@@ -1,0 +1,327 @@
+.main-banner-section {
+    position: relative;
+    overflow: hidden;
+
+    h1 {
+        animation: zoom-in-zoom-out 0.8s ease;
+        @extend .transition;
+    }
+
+    &:after,
+    &:before {
+        content: '';
+        position: absolute;
+        top: 0;
+        background-size: auto;
+        height: 100%;
+        z-index: -1;
+    }
+
+    &::before {
+        width: 100%;
+        left: 0;
+        background: image('banner-bg.png') no-repeat;
+
+    }
+
+    &::after {
+        max-width: 1200px;
+        width: 100%;
+        right: 0px;
+        background-size: contain !important;
+        background: image('banner-x.png') no-repeat;
+        animation: fadeInLeft 5s ease;
+        @extend .transition;
+
+        // Responsive Css Here
+
+        // @include media('xxl') {
+        //     max-width: 800px;
+        // }
+
+        @include media('lg') {
+            max-width: 1200px;
+            right: 0px;
+        }
+
+        @include media('sm') {
+            // display: none;
+        }
+    }
+
+}
+
+// Banner Sectiom Start Here
+
+.banner-section {
+    text-align: center;
+    padding-top: 227px;
+    padding-bottom: 285px;
+
+    // Responsive Css Here
+
+    @include media('xxl') {
+        padding-bottom: 50px;
+        padding-top: 150px;
+    }
+
+    @include media('md') {
+        padding-bottom: 50px;
+        padding-top: 70px;
+    }
+
+    &-wrapper {
+
+        .banner-content {
+
+            h1 {
+
+                & span:nth-child(1) {
+                    font-weight: 400;
+                    font-family: $base-font-medium;
+
+                }
+
+                & span:nth-child(2) {
+                    font-family: $base-font-bold;
+                }
+
+            }
+
+            h2 {
+                color: $pale-slate-color;
+                font-family: $base-font-book;
+                font-size: 28px;
+                color:$Grey-color;
+
+                // Responsive Css Here
+
+                @include media('md') {
+                    font-size: 1.4rem;
+                }
+            }
+        }
+
+
+        // banner Form Start Here
+
+        .banner-form {
+            text-align: left;
+            margin-top: 100px;
+
+            .input-group {
+                position: relative;
+
+                .input-group-text {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    padding-left: 25px;
+                    background-color: transparent;
+                    border-right: 0;
+                    z-index: 8;
+                    border: none;
+                    border-radius: 10px;
+                    pointer-events: none;
+                }
+
+                .form-select {
+                    position: absolute;
+                    right: 15px;
+                    top: 16px;
+                    bottom: 0;
+                    width: 22%;
+                    padding: 5px 10px;
+                    border-radius: 10px !important;
+                    height: 40px;
+                    border: none;
+                    background: #000;
+                    color: #fff;
+                    appearance: auto;
+                    z-index: 8;
+
+                    &:focus {
+                        box-shadow: none;
+                    }
+
+                    // Responsive Css Here
+
+                    @include media('xl') {
+                        padding: 5px 0px;
+                    }
+                }
+            }
+
+            .form-control {
+                padding: 20px 20px 20px 54px;
+                font-size: 20px;
+                border-radius: 10px !important;
+
+                &:focus {
+                    box-shadow: none;
+                }
+            }
+
+            .form-icon {
+                font-size: 18px;
+            }
+
+            .form-check {
+
+                label {
+                    margin-bottom: 20px;
+                    font-family: $base-font-book;
+                }
+
+            }            
+
+            .search-advance {
+                margin-top: 10px;
+
+                ul {
+                    padding-left: 0;
+                    display: flex;
+
+                    li {
+                        list-style: none;
+                        width: 100%;
+                        margin-bottom: 10px;
+
+                        a {
+                            color: $website-brand-color;
+
+                            &:hover {
+                                color: $black-color;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// banner Form Start Here
+
+.banner-form {
+    text-align: left;
+    margin-top: 100px;
+
+
+    .form-filter-list{
+        width:100%;
+
+        li {
+            @include media('sm') {
+               margin-bottom: 30px;
+            }
+        }
+    }
+
+    .input-group {
+        position: relative;
+        background: $white-color;
+        @include border-radius(10px);
+
+        .input-group-text {
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            padding-left: 25px;
+            background-color: transparent;
+            border-right: 0;
+            z-index: 0;
+            border: none;
+            @include border-radius(10px);
+        }
+
+        .form-select {
+            position: absolute;
+            right: 15px;
+            top: 16px;
+            bottom: 0;
+            width: 22%;
+            padding: 5px 10px;
+            border-radius: 10px !important;
+            height: 40px;
+            border: none;
+            background: $black-color;
+            color: $white-color;
+            appearance: auto;
+            z-index: 0;
+
+            &:focus {
+                box-shadow: none;
+            }
+
+            // Responsive Css Here
+
+            @include media('xl') {
+                padding: 5px 0px;
+            }
+        }
+    }
+
+    
+
+    label {
+        margin-bottom: 20px;
+        font-family: $base-font-semi-bold;
+    }
+
+    .form-control {
+        padding: 20px 20px 20px 54px;
+        font-size: 20px;
+        border-radius: 10px !important;
+        background-color: transparent;
+        box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+        border: 1px solid $lavender-pinocchio-color;
+
+
+        &:focus {
+            box-shadow: none;
+            outline: 0 none;
+            border: 1px solid $input-border-color;
+        }
+    }
+
+    .form-icon {
+        font-size: 18px;
+    }
+
+    .search-advance {
+        margin-top: 10px;
+
+        ul {
+            padding-left: 0;
+            display: flex;
+
+            li {
+                list-style: none;
+                width: 100%;
+                margin-bottom: 10px;
+
+                a {
+                    color: $website-brand-color;
+                }
+            }
+        }
+    }
+}
+
+.inner-banner {
+    padding: 167px 0 140px;
+
+
+    @include media('md') {
+        padding: 90px 0 80px;
+    }
+
+
+    &:after {
+        max-width: 900px !important;
+    }
+
+}

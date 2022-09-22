@@ -1,0 +1,58 @@
+.spriteicon i {
+    background: url('../images/jobax-sprite.png') no-repeat;
+    width: 50px;
+    height: 50px;
+    background-position: 0 0;
+    display: inline-block;
+
+    &.plan-expire {
+        background-position: -4px -53px;
+    }
+
+    &.applictaion {
+        background-position: -76px -53px;
+    }
+
+    &.closed {
+        background-position: -142px -54px;
+    }
+
+    &.navbar-toggler-icon {
+        background-position: -6px -142px;
+    }
+
+    &.navbar-close {
+        background-position: -6px -190px;
+    }
+
+    &.salary-tools {
+        background-position: -4px -259px;
+        width: 90px;
+        height: 90px;
+    }
+
+    &.quick-apply {
+        background-position: -133px -256px;
+        width: 90px;
+        height: 90px;
+    }
+
+    &.job-alert {
+        background-position: -251px -259px;
+        width: 90px;
+        height: 90px;
+    }
+
+    &.filter-icon {
+        background-position: -229px -14px;
+        width: 22px;
+        height: 22px;
+        transform: scale(0.8);
+    }
+
+
+}
+
+.spriteicon {
+    display: block;
+}

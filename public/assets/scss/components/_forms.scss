@@ -1,0 +1,269 @@
+.browse-file {
+    background: $white-color;
+    border: 1px dashed $light-smoke-color;
+    @include border-radius(11.66px);
+    min-height: 270px;
+}
+
+// X shape inner form page
+
+.inner-login-shape {
+    position: relative;
+    overflow: hidden;
+
+    &::after {
+        content: "";
+        position: absolute;
+        max-width: 1000px;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        right: 0;
+        background-size: 100% !important;
+        background: url(../images/banner-x.png) no-repeat;
+        z-index: 0 !important;
+
+    }
+
+}
+
+
+// All Form Css Here
+
+.main-bg {
+    background-color: $main-bg-color;
+    padding: 170px 0 150px;
+
+
+    @include media('md') {
+        padding: 70px 0;
+    }
+
+
+    .form-inner-wrapper {
+        position: relative;
+        z-index: 2 !important;
+
+
+        .form-inner {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .btn-skip {
+            font-family: $base-font-bold;
+        }
+
+        .btn-form-wrapper {
+            margin-top: 50px;
+        }
+
+        .card {
+            background: rgba(255, 255, 255, 0.6);
+            box-shadow: 0px 0px 34.9845px $light-black-color;
+            @include border-radius(11.6615px);
+            padding: 90px;
+            border: none;
+
+            // Responsive Css Here
+
+            @include media('lg') {
+                padding: 60px;
+            }
+
+            @include media('md') {
+                padding: 40px;
+            }
+
+            @include media('sm') {
+                padding: 20px;
+            }
+
+
+            .progress {
+                margin-bottom: 5.18rem;
+                overflow: visible;
+
+                .progress-bar {
+                    background-color: $website-brand-color;
+                    position: relative;
+                    overflow: visible;
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        top: -18px;
+                        bottom: 0;
+                        right: -40px;
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 100%;
+                        background-color: $website-brand-color;
+                    }
+
+                    &:before {
+                        content: "";
+                        position: absolute;
+                        top: -2px;
+                        bottom: 0;
+                        right: -25px;
+                        width: 10px;
+                        height: 10px;
+                        z-index: 999;
+                        background: image('progress-check.png') no-repeat;
+                    }
+
+                }
+            }
+
+
+
+            .form-heading {
+                font-family: $base-font-bold;
+                font-size: 30px;
+                margin-bottom: 50px;
+
+                // Responsive Css Here
+
+                @include media('sm') {
+                    font-size: 20px;
+                }
+            }
+
+            .form-group {
+
+                margin-bottom: 30px;
+
+                label {
+                    font-size: 18px;
+                    line-height: 23px;
+                    margin-bottom: 12px;
+                    color: $black-color;
+                    font-family: $base-font-medium;
+                }
+                .time-period {
+                    margin-bottom: 32px;
+                }
+
+                .form-control {
+                    background: $white-color;
+                    border: 1px solid $lavender-pinocchio-color;
+
+                    &:focus {
+                        box-shadow: none;
+                        border: 1px solid $input-border-color;
+                    }
+
+                    @include border-radius(10px);
+                    padding: 1rem 3rem;
+
+                    @include placeholder {
+                        font-size: 18px;
+                        color: $Grey-color;
+                    }
+                }
+
+                .form-select {
+                    padding: 1rem 3rem;
+                    @include border-radius(10px);
+                }
+
+                .browse-file {
+                    background: $white-color;
+                    border: 1px dashed $light-smoke-color;
+                    @include border-radius(11.66px);
+                    min-height: 270px;
+                }
+
+                .form-check-label {
+                    color: $jaguar-color;
+                }
+
+                .form-select:focus {
+                    box-shadow: none;
+                }
+
+            }
+
+            .or {
+                position: relative;
+
+                // Responsive Css Here
+
+                @include media('md') {
+                    display: block;
+                    text-align: center;
+                    margin-right: 0;
+                }
+
+                &:after,
+                &:before {
+                    content: "";
+                    position: absolute;
+                    left: 7px;
+                    right: 0;
+                    width: 1px;
+                    background: $lavender-pinocchio-color;
+                    height: 147px;
+
+                }
+
+                &:after {
+                    top: 42px;
+
+                    // Responsive Css Here
+
+                    @include media('md') {
+                        top: 13px;
+                        width: 147px;
+                        height: 1px;
+                        left: 50%;
+                        transform: translateX(13px);
+                    }
+                }
+
+                &:before {
+                    bottom: 42px;
+
+                    // Responsive Css Here
+
+                    @include media('md') {
+                        top: 13px;
+                        min-width: 147px;
+                        height: 1px;
+                        left: 50%;
+                        transform: translateX(-110%);
+                    }
+                }
+            }
+
+            .google-btn {
+
+                img {
+                    border: 1px solid $lavender-pinocchio-color;
+                    padding: 0px 10px;
+                    border-radius: 10px;
+                }
+
+                // Responsive Css Here
+
+                @include media('lg') {
+                    text-align: center;
+                }
+
+                a {
+
+                    // Responsive Css Here
+
+                    @include media('xl') {
+                        margin-top: 20px;
+                        display: inline-block;
+                    }
+
+                }
+
+            }
+        }
+    }
+}
+

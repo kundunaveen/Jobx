@@ -1,0 +1,120 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the header of the site/application.
+// -----------------------------------------------------------------------------
+.header {
+    width: 100%;
+    transition: all 0.2s;
+    position: absolute;
+    background-color: transparent !important;
+    box-shadow: none !important;
+    z-index: 9;
+
+   
+    @include media('md') {
+        position: static;
+    }
+
+    .list-group {
+
+        @include media('sm') {
+            .list-group {
+                flex-direction: row;
+                justify-content: center;
+            }
+        }
+
+        .list-group-item {
+            background-color: transparent;
+        }
+    }
+
+    .link-secondary {
+        color: $jaguar-color;
+        border-bottom: 1px solid $black-color;
+        padding: 0;
+        font-family: $base-font-medium;
+        outline: 0;
+        display: inline-block;
+
+        &:hover {
+            color: $website-brand-color;
+            border-bottom: 1px solid $website-brand-color;
+        }
+
+        @include media('lg') {}
+    }
+
+    p {
+
+
+        @include media('sm') {
+            font-size: 14px;
+        }
+    }
+
+    .logo-image {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+
+        img {
+            @include media('lg') {
+                max-width: 190px;
+            }
+        }
+
+        @include media('md') {
+            position: static;
+            transform: initial;
+        }
+    }
+
+}
+
+.inner-header {
+    background: $white-color  !important;
+    box-shadow: 0px 4px 20px rgb(0 0 0 / 10%) !important;
+    transition: all 0.2s;
+
+
+    .list-group {
+        flex-direction: row !important;
+    }
+
+    .logo-image {
+
+
+        @include media('xl') {
+            transform: translateX(-131%) translateY(-50%);
+        }
+        @include media('md') {
+            transform: translateX(-2%) translateY(-5%);
+        }
+       
+    }
+
+    .icon {
+        font-size: 20px;
+    }
+
+  
+
+
+}
+
+
+.fixed-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%; 
+    background: $white-color  !important;
+    box-shadow: 0px 4px 20px rgb(0 0 0 / 10%) !important;
+    transition: all 0.2s;
+
+
+    @include media('md') {
+        position: static;
+    }
+}

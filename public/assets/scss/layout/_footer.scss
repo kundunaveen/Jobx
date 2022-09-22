@@ -1,0 +1,75 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the footer of the site/application.
+// -----------------------------------------------------------------------------
+.footer {
+    background-color: $white-color;
+
+    &.footer-bg {
+        background-color: #F4F4F4 !important;
+    }    
+
+    .footer-top {
+        padding: 150px 0 70px;
+
+        .footer-logo {
+            margin-bottom: 30px;
+
+            img {
+                width: 185px;
+                height: 40px;
+            }
+        }
+
+
+        @include media('xxl') {
+            padding: 70px 0 50px;
+        }
+
+       
+    
+        .menu-list {
+    
+            h6 {
+                margin-bottom: 20px;
+            }
+    
+            .list-group {
+    
+                .list-group-item {
+
+                    &:hover {
+                        
+                        a {
+                            color:$website-brand-color;
+                       }
+                    }
+                    
+                   a {
+                        font-size: 18px;
+                        color: $black-color;
+                        display: flex;
+                        word-break: break-all;
+                        align-items: center;
+
+                        img {
+                            margin-right: 5px;
+                        }
+                   }
+                }
+            }
+        }   
+    }
+
+    .footer-bottom {
+        padding: 70px 0;
+
+        @include media('xxl') {
+            padding: 35px 0;
+        }
+    }
+
+
+    .list-group-item {
+        background-color: transparent !important;
+    }
+}

@@ -1,0 +1,120 @@
+// -----------------------------------------------------------------------------
+// This file contains all styles related to the model component.
+// -----------------------------------------------------------------------------
+
+.job-listing-model {
+
+    .modal-content {
+        position: relative;
+        padding: 100px;
+        @include border-radius(10px);
+
+        // Responsive Css Here
+
+        @include media('xl') {
+            padding: 60px;
+        }
+
+        @include media('md') {
+            padding: 20px;
+        }
+
+        .modal-header {
+
+            padding-bottom: 40px;
+
+            .modal-job-article {
+
+                h4 {
+                    margin-bottom: 6px;
+                }
+
+                span {
+                    margin-bottom: 24px;
+                }
+            }
+
+            .modal-btn-wrapper {
+                text-align: right;
+
+                span {
+                    margin-bottom: 35px;
+                    display: block;
+                    color: $Grey-color;
+                    font-size: 14px;
+                }
+
+                .btn-close {
+                    position: absolute;
+                    top: 20px;
+                    right: 26px;
+                }
+            }
+        }
+
+        .btn.btn-lg {
+            padding: 4px 0px !important;
+        }
+
+        .modal-body {
+            margin-top: 40px;
+
+            .skills-list {
+                display: flex;
+                flex-direction: row;
+                margin-bottom: 40px;
+
+
+                .list-group-item {
+                    border: 0;
+                    background-color: $parrot-light-color;
+                    color: $green-color;
+                    margin-right: 15px;
+                    border-radius: 12px;
+                }
+
+            }
+
+            .modal-text-wrapper {
+                margin-bottom: 40px;
+
+                h5 {
+                    margin-bottom: 20px;
+                }
+
+                p {
+                    margin-bottom: 0;
+                    font-size: 16px;
+                    line-height: 30px;
+                }
+
+                .btn-primary {
+                    background-color: transparent;
+                    color: $website-brand-color;
+                    border: none;
+                    padding: 0;
+                    position: relative;
+
+                    &:after {
+                        content: "";
+                        position: absolute;
+                        top: 50%;
+                        right: 50%;
+                        transform: translate(353%, -52%);
+                        width: 0;
+                        height: 0;
+                        border-left: 8px solid transparent;
+                        border-right: 8px solid transparent;
+                        border-top: 8px solid $website-brand-color;
+                        border-radius: 20px;
+
+                    }
+                }
+            }
+
+            video {
+                border-radius: 10px;
+            }
+        }
+    }
+}

@@ -1,0 +1,186 @@
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+/**
+ * Set up a decent box model on the root element
+ */
+html {
+  box-sizing: border-box;
+}
+
+/**
+ * Make all elements from the DOM inherit from the parent box-sizing
+ * Since `*` has a specificity of 0, it does not override the `html` value
+ * making all elements inheriting from the root box-sizing value
+ * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+ */
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}
+
+/**
+ * Basic styles for links
+ */
+a {
+  color: $website-brand-color;
+  text-decoration: none;
+  cursor: pointer;
+
+  @include on-event {
+    color: $text-color;
+  }
+}
+
+
+.list-group-item {
+  background-color: transparent;
+}
+
+.icon {
+  font-size: 18px;
+}
+
+.location {
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  direction: ltr;
+
+  // Responsive Css Here
+
+  @include media('xl') {
+    font-size: 12px;
+  }
+
+
+}
+
+img {
+  max-width: 100%;
+}
+
+.x-shape {
+
+  &::after {
+
+    content: '';
+    position: absolute;
+    max-width: 1200px;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background-size: contain !important;
+    background: image('banner-x.png') no-repeat;
+    z-index: -1;
+    animation: fadeInRight 5s ease;
+    @extend .transition;
+
+
+
+    // Responsive Css Here
+
+    @include media('lg') {
+      // display: none;
+    }
+
+  }
+
+}
+//video Button
+.video-wrapper {
+  overflow: hidden;
+
+
+
+  .video-btn {
+    background-color: $website-brand-color;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    //ARROW RIGHT
+    .arrow-right {
+      width: 0px;
+      height: 0px;
+      margin: 10px 0 0 10px;
+      border-top: 20px solid transparent;
+      border-bottom: 20px solid transparent;
+      border-left: 30px solid $white-color;
+    }
+  }
+
+}
+video {
+  width: 100%;
+  max-width: 100%;
+}
+
+
+.form-check-input {
+
+  &:focus {
+      box-shadow: none!important;
+      outline: 0 none;
+
+  }
+}
+
+.card {
+  border-radius: 12px;
+  box-shadow: 0px 0px 41.8407px rgb(0 0 0 / 10%);
+  border: none;
+}
+
+.list-group .list-group-item {
+  background-color: transparent;
+  padding: 0;
+  border: none;
+}
+
+
+// Animation Css Here
+
+@keyframes zoom-in-zoom-out {
+  0% {
+    transform: scale(1, 1);
+  }
+
+  50% {
+    transform: scale(1.3, 1.3);
+  }
+
+  100% {
+    transform: scale(1, 1);
+  }
+}
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeInLeft {
+  0% {
+    opacity: 0;
+    transform: translateX(100px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}

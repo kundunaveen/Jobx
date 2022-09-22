@@ -1,0 +1,92 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass mixins.
+// -----------------------------------------------------------------------------
+
+/// Event wrapper
+/// @author VE
+/// @param {Bool} $self [false] - Whether or not to include current selector
+/// @link https://twitter.com/csswizardry/status/478938530342006784 Original tweet from Harry Roberts
+@mixin on-event($self: false) {
+  @if $self {
+    &,
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  } @else {
+    &:hover,
+    &:active,
+    &:focus {
+      @content;
+    }
+  }
+}
+
+/// Make a context based selector a little more friendly
+/// @author VE
+/// @param {String} $context
+@mixin when-inside($context) {
+  #{$context} & {
+    @content;
+  }
+}
+
+/// Make a context based selector a little more friendly
+/// @author VE
+@mixin transition($property, $duration, $easing: linear) {
+  transition: $property $duration $easing;
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+}
+
+
+//
+//  Media Quries
+//––––––––––––––––––––––––––––––––––––––––––––––––––
+
+// @include respond-below(sm) {}
+@mixin media($breakpoint) {
+
+  // If the breakpoint exists in the map.
+  @if map-has-key($breakpoints, $breakpoint) {
+
+    // Get the breakpoint value.
+    $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+    // Write the media query.
+    @media (max-width: ($breakpoint-value - 1)) {
+      @content;
+    }
+  }
+}
+
+
+//  Placeholder
+@mixin placeholder {
+  &.placeholder {
+      @content;
+  }
+
+  &:-moz-placeholder {
+      @content;
+  }
+
+  &::-webkit-input-placeholder {
+      @content;
+  }
+}
+
+//  Border Radius
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+}
+
+//  transistion
+@mixin transition($property, $duration, $easing: linear) {
+  transition: $property $duration $easing;
+  -webkit-transition: $property $duration $easing;
+  -moz-transition: $property $duration $easing;
+}

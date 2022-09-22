@@ -1,0 +1,94 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+
+$base-font-size       : 1rem;
+
+//COLOR VARIABLES
+$white-color                 : #fff;
+$seashell-color              : #f1f1f1;
+$pale-slate-color            : #BFBFBF;
+$outer-space-color           : #2F353E;
+$black-color                 : #000000;
+$light-black-color           : rgba(0, 0, 0, 0.1);
+$jaguar-color                : #04050A;
+$light-blue-color            : rgba(33, 65, 242, 0.05);
+$Grey-color                  : #928F8F;
+$lavender-pinocchio-color    : #E1E1E1;
+$white-smoke-color           : #F4F4F4;
+$light-smoke-color           : #BDBABA;
+$footer-bg-color             : #F4F4F4;
+$main-bg-color               : #F4F4F4;
+$input-border-color          : #86b7fe;
+$parrot-light-color          : #EEFDE1;
+$green-color                 : #376311;
+$green-highlight-color       : #00D685;
+$green-light-color           : #DAFFF1;
+$red-light-color             : #FFE8E8;
+$red-dark-color              : #FF5C5C;
+$blue-ink-color              : #4D8EFF;
+$blue-hightlight-color       : #E3EDFF;
+$input-border-color          : #86b7fe;
+
+
+
+
+//FONT FAMILY VARIABLES
+$base-font-book :'cooper_hewittbook';
+$base-font-thin :'cooper_hewittthin';
+$base-font-light :'cooper_hewittlight';
+$base-font-medium :'cooper_hewittmedium';
+$base-font-bold : 'cooper_hewittbold';
+$base-font-semi-bold :'cooper_hewittsemibold';
+$base-font-heavy :'cooper_hewittheavy';
+
+/// Copy text color
+/// @type Color
+$text-color: rgb(34, 34, 34) !default;
+
+/// Main brand color
+/// @type Color
+$website-brand-color  : #2343F2 !default;
+
+/// Light grey
+/// @type Color
+$light-grey: rgb(237, 237, 237) !default;
+
+/// Medium grey
+/// @type Color
+$mid-grey: rgb(153, 153, 153) !default;
+
+/// Dark grey
+/// @type Color
+$dark-grey: rgb(68, 68, 68) !default;
+
+
+
+
+
+/// Container's maximum width
+/// @type Length
+$max-width: 1320px !default;
+
+
+
+/// Breakpoints map
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+$breakpoints: (
+ 'xs': 0,
+ 'sm': 576px,
+ 'md': 768px,
+ 'lg': 992px,
+ 'xl': 1200px,
+ 'xxl' : 1400px,
+ 'xxxl': 1700px
+) !default;
+
+
+/// Relative or absolute URL where all assets are served from
+/// @type String
+/// @example scss - When using a CDN
+///   $base-url: 'https://cdn.example.com/assets/';
+$base-url: '../' !default;
