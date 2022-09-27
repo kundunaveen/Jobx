@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-    <section class="dashboard-section inner-login-shape">
+    <section class="dashboard-section inner-login-shape" style="min-height:800px">
         <div class="dashboard-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -104,7 +104,7 @@
                                         <div class="row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">First Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="first_name" class="form-control @error('first_name') is-invalid @enderror" required>
+                                                <input type="text" name="first_name" maxlength="100" value="{{ old('first_name') }}" class="form-control @error('first_name') is-invalid @enderror" required>
                                                 @error('first_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -113,7 +113,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" required>
+                                                <input type="text" name="last_name" maxlength="100" value="{{ old('last_name') }}" class="form-control @error('last_name') is-invalid @enderror" required>
                                                 @error('last_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -124,7 +124,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Email <span class="text-danger">*</span></label>
-                                                <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" required>
+                                                <input type="email" value="{{ old('email') }}" maxlength="100" name="email" class="form-control @error('email') is-invalid @enderror" required>
                                                 @error('email')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -133,7 +133,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Password <span class="text-danger">*</span></label>
-                                                <input name="password" type="password" class="form-control @error('password') is-invalid @enderror" required>
+                                                <input name="password" type="password" maxlength="100" class="form-control @error('password') is-invalid @enderror" required>
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -144,7 +144,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Confirm Password <span class="text-danger">*</span></label>
-                                                <input type="password" name="password_confirmation" class="form-control" required>
+                                                <input type="password" maxlength="100" name="password_confirmation" class="form-control" required>
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Gender <span class="text-danger">*</span></label>
@@ -158,21 +158,21 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Current Salary <strong>(LPA)</strong></label>
-                                                <input type="number" step="0.01" name="current_salary" class="form-control">
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" value="{{ old('current_salary') }}" step="0.01" name="current_salary" class="form-control">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Expected Salary <strong>(LPA)</strong></label>
-                                                <input type="number" step="0.01" name="expected_salary" class="form-control">
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" value="{{ old('expected_salary') }}" step="0.01" name="expected_salary" class="form-control">
                                             </div>
                                         </div>
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
-                                                <label class="form-label">Experience</label>
-                                                <input type="number" step="0.01" name="experience" class="form-control">
+                                                <label class="form-label">Experience (Yrs)</label>
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" max="40" value="{{ old('experience') }}" step="0.01" name="experience" class="form-control">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Languages</label>
-                                                <select class="form-control" name="languages[]" id="languages" multiple>
+                                                <select value="{{ old('languages') }}" class="form-control" name="languages[]" id="languages" multiple>
                                                     @foreach($languages as $language)
                                                     <option value="{{$language->id}}">{{$language->value}}</option>
                                                     @endforeach
@@ -186,7 +186,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Address <span class="text-danger">*</span></label>
-                                                <input name="address" type="text" class="form-control @error('address') is-invalid @enderror" required>
+                                                <input name="address" maxlength="100" value="{{ old('address') }}" type="text" class="form-control @error('address') is-invalid @enderror" required>
                                                 @error('address')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -240,7 +240,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Zip <span class="text-danger">*</span></label>
-                                                <input type="number" name="zip" class="form-control @error('zip') is-invalid @enderror" required>
+                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7" type="number" value="{{ old('zip') }}" name="zip" class="form-control @error('zip') is-invalid @enderror" required>
                                                 @error('zip')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

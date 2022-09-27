@@ -145,7 +145,7 @@
                                         <div class="mt-5 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">First Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ $employee->first_name }}" required>
+                                                <input type="text" name="first_name" maxlength="100" class="form-control @error('first_name') is-invalid @enderror" value="{{ $employee->first_name }}" required>
                                                 @error('first_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -154,7 +154,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" value="{{ $employee->last_name }}" required>
+                                                <input type="text" name="last_name" maxlength="100" class="form-control @error('last_name') is-invalid @enderror" value="{{ $employee->last_name }}" required>
                                                 @error('last_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -173,7 +173,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Password <span class="text-danger">*</span></label>
-                                                <input name="password" type="password" class="form-control @error('password') is-invalid @enderror">
+                                                <input name="password" maxlength="100" type="password" class="form-control @error('password') is-invalid @enderror">
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -184,17 +184,17 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Current Salary <strong>(LPA)</strong></label>
-                                                <input type="number" step="0.01" name="current_salary" @if($employee->profile && $employee->profile->current_salary) value="{{$employee->profile->current_salary}}" @endif class="form-control">
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" step="0.01" name="current_salary" @if($employee->profile && $employee->profile->current_salary) value="{{$employee->profile->current_salary}}" @endif class="form-control">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Expected Salary <strong>(LPA)</strong></label>
-                                                <input type="number" step="0.01" name="expected_salary" @if($employee->profile && $employee->profile->expected_salary) value="{{$employee->profile->expected_salary}}" @endif class="form-control">
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" step="0.01" name="expected_salary" @if($employee->profile && $employee->profile->expected_salary) value="{{$employee->profile->expected_salary}}" @endif class="form-control">
                                             </div>
                                         </div>
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Experience (Yrs)</label>
-                                                <input type="number" step="0.01" name="experience" @if($employee->profile && $employee->profile->experience) value="{{$employee->profile->experience}}" @endif class="form-control">
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" max="40" step="0.01" name="experience" @if($employee->profile && $employee->profile->experience) value="{{$employee->profile->experience}}" @endif class="form-control">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Languages</label>
@@ -213,7 +213,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Address <span class="text-danger">*</span></label>
-                                                <input name="address" type="text" class="form-control @error('address') is-invalid @enderror" value="{{$employee->profile->address}}" required>
+                                                <input name="address" maxlength="100" type="text" class="form-control @error('address') is-invalid @enderror" value="{{$employee->profile->address}}" required>
                                                 @error('address')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -267,7 +267,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Zip <span class="text-danger">*</span></label>
-                                                <input type="number" name="zip" class="form-control @error('zip') is-invalid @enderror" value="{{$employee->profile->zip}}" required>
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7" name="zip" class="form-control @error('zip') is-invalid @enderror" value="{{$employee->profile->zip}}" required>
                                                 @error('zip')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -279,6 +279,9 @@
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Upload Resume </label>
                                                 <input type="file" name="resume" class="form-control">
+                                                @if($employee->profile->resume)
+                                                <small><a class="text-secondary" href="{{asset('image/resume/'.$employee->profile->resume)}}" target="_blank">View Resume</a></small>
+                                                @endif
                                                 @error('resume')
                                                     <span class="text-danger" role="alert">
                                                         <strong style="font-size: 14px;">{{ $message }}</strong>

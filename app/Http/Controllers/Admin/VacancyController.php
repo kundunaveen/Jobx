@@ -27,11 +27,11 @@ class VacancyController extends Controller
         {
             $request->validate([
                 'employer_id' => 'required|numeric',
-                'job_title' => 'required|string|max:129',
-                'location' => 'required|string',
-                'zip' => 'required|numeric',
-                'department' => 'required|string|max:129',
-                'job_role' => 'required|string',
+                'job_title' => 'required|string|max:100',
+                'location' => 'required|string|max:100',
+                'zip' => 'required|numeric|digits_between:5,8',
+                'department' => 'required|string|max:100',
+                'job_role' => 'required|string|max:100',
                 // 'skills' => 'required'
             ]);
             if($request->skills && count($request->skills) > 0){
@@ -94,13 +94,13 @@ class VacancyController extends Controller
             // dd($request);
             $request->validate([
                 // 'employer_id' => 'required|numeric',
-                'job_title' => 'required|string|max:129',
+                'job_title' => 'required|string|max:100',
                 // 'city' => 'required|string|max:50',
                 // 'country' => 'required|string|max:50',
                 'location' => 'required|string',
-                'zip' => 'required|numeric',
-                'department' => 'required|string|max:129',
-                'job_role' => 'required|string',
+                'zip' => 'required|numeric|digits_between:5,8',
+                'department' => 'required|string|max:100',
+                'job_role' => 'required|string|max:100',
                 // 'skills' => 'required'
             ]);
             if($request->skills && count($request->skills) > 0){
