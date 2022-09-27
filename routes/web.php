@@ -63,14 +63,16 @@ Route::get('/', [App\Http\Controllers\FrontEnd\DashboardController::class, 'home
 Route::post('/check-admin-user', [App\Http\Controllers\FrontEnd\ThemeController::class, 'checkAdmin'])->name('check.admin');
 Route::post('/check-user', [App\Http\Controllers\Admin\ThemeController::class, 'checkUser'])->name('check.user');
 
-Route::get('/employee-profile', [App\Http\Controllers\Employee\HomeController::class, 'home'])->name('employee.home');
-Route::get('/employee-dashboard', [App\Http\Controllers\Employee\DashboardController::class, 'home'])->name('employee.dashboard');
 
 Route::get('/admin/job-skills', [App\Http\Controllers\Admin\SkillController::class, 'index'])->name('admin.jobSkills');
 Route::any('/admin/job-skills/add', [App\Http\Controllers\Admin\SkillController::class, 'create'])->name('admin.addSkill');
 Route::any('/admin/job-skills/edit/{id}', [App\Http\Controllers\Admin\SkillController::class, 'edit'])->name('admin.editSkill');
 Route::post('/admin/job-skills/delete', [App\Http\Controllers\Admin\SkillController::class, 'delete'])->name('admin.deleteSkill');
 
+//####################### Employee Routes #########################//
+Route::get('/employee-profile', [App\Http\Controllers\Employee\HomeController::class, 'home'])->name('employee.home');
+Route::get('/employee/job-search', [App\Http\Controllers\Employee\HomeController::class, 'searchJob'])->name('search.job');
+Route::get('/employee-dashboard', [App\Http\Controllers\Employee\DashboardController::class, 'home'])->name('employee.dashboard');
 
 //####################### Employer Routes #########################//
 
@@ -87,3 +89,4 @@ Route::post('/employer/post-job/delete', [App\Http\Controllers\Employer\JobPostC
 Route::get('/employer-dashboard/posted-jobs', [App\Http\Controllers\Employer\DashboardController::class, 'postedJobs'])->name('employer.dashboard.posted.jobs');
 Route::post('/employer-profile/getStates', [App\Http\Controllers\Employer\HomeController::class, 'getStates']);
 Route::post('/employer-profile/getCities', [App\Http\Controllers\Employer\HomeController::class, 'getCities']);
+

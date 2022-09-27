@@ -35,10 +35,10 @@ class EmployerController extends Controller
         if($request->method()=="POST")
         {
             $request->validate([
-                'first_name' => 'required|string|max:129',
-                'last_name' => 'required|string|max:129',
-                'email' => 'required|email|max:129|unique:users',
-                'password' => 'required|max:129|min:8|confirmed',
+                'first_name' => 'required|string|max:100',
+                'last_name' => 'required|string|max:100',
+                'email' => 'required|email|max:100|unique:users',
+                'password' => 'required|max:100|min:8|confirmed',
                 'company_name' => 'required',
                 'contact' => 'required'
             ]);
@@ -110,8 +110,8 @@ class EmployerController extends Controller
         $cities = City::where('state_id', $employer->profile->state)->get();
         if($request->method() == "POST"){
             $request->validate([
-                'first_name' => 'required|string|max:129',
-                'last_name' => 'required|string|max:129',
+                'first_name' => 'required|string|max:100',
+                'last_name' => 'required|string|max:100',
                 'company_name' => 'required',
                 'contact' => 'required'
             ]);
@@ -120,7 +120,7 @@ class EmployerController extends Controller
             
             if($request->password && $request->password != null){
                 $request->validate([
-                    'password' => 'min:8'
+                    'password' => 'min:8|max:100'
                 ]);
                 $user_data['password'] = Hash::make($request->password);
             }

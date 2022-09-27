@@ -12,7 +12,8 @@
                         <h1><span>Innovation</span> Makes <span>Everything</span> Better</h1>
                     </div>
                     <div class="banner-form">
-                        <form>
+                        <form action="{{route('search.job')}}" method="GET">
+
                             <div class="row">
                                 <div class="col-lg-4 mb-4 mb-lg-0">
                                     <label>What kind of work?</label>
@@ -48,7 +49,7 @@
                                         </label>
                                     </div>
 
-                                    <button class="btn btn-lg search-btn"  type="button">Search
+                                    <button class="btn btn-lg search-btn"  type="submit">Search
                                         Vacancies</button>
                                     <div class="search-advance">
                                         <ul class="col-md-auto">

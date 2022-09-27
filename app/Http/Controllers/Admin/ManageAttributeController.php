@@ -23,7 +23,7 @@ class ManageAttributeController extends Controller
         if($request->method() == "POST")
         {
             $request->validate([
-                'value' => 'required'
+                'value' => 'required|max:100'
             ]);
             $attr = MasterAttribute::where('master_attribute_category_id', $request->category)->where('value', $request->value)->first();
             if($attr != null)
@@ -47,7 +47,7 @@ class ManageAttributeController extends Controller
         if($request->method() == "POST")
         {
             $request->validate([
-                'value' => 'required'
+                'value' => 'required|max:100'
             ]);
             $attr = MasterAttribute::where('master_attribute_category_id', $request->category)->whereNot('id', $id)->where('value', $request->value)->first();
             if($attr != null)

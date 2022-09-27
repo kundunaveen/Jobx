@@ -144,7 +144,7 @@
                                         <div class="mt-5 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">First Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ $employer->first_name }}" required>
+                                                <input type="text" maxlength="100" name="first_name" class="form-control @error('first_name') is-invalid @enderror" value="{{ $employer->first_name }}" required>
                                                 @error('first_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -153,7 +153,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Last Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="last_name" class="form-control @error('last_name') is-invalid @enderror" value="{{ $employer->last_name }}" required>
+                                                <input type="text" maxlength="100" name="last_name" class="form-control @error('last_name') is-invalid @enderror" value="{{ $employer->last_name }}" required>
                                                 @error('last_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -164,7 +164,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Contact <span class="text-danger">*</span></label>
-                                                <input type="tel" name="contact" class="form-control @error('contact') is-invalid @enderror" @if($employer->contact) value="{{$employer->contact}}" @endif required>
+                                                <input type="tel" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="15"  name="contact" class="form-control @error('contact') is-invalid @enderror" @if($employer->contact) value="{{$employer->contact}}" @endif required>
                                                 @error('contact')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -173,7 +173,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Password</label>
-                                                <input name="password" type="password" class="form-control @error('password') is-invalid @enderror">
+                                                <input name="password" maxlength="100" type="password" class="form-control @error('password') is-invalid @enderror">
                                                 @error('password')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -184,7 +184,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Company Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="company_name" class="form-control @error('company_name') is-invalid @enderror" @if($employer->profile && $employer->profile->company_name) value="{{$employer->profile->company_name}}" @endif required>
+                                                <input type="text" maxlength="100" name="company_name" class="form-control @error('company_name') is-invalid @enderror" @if($employer->profile && $employer->profile->company_name) value="{{$employer->profile->company_name}}" @endif required>
                                                 @error('company_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -253,7 +253,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Address <span class="text-danger">*</span></label>
-                                                <input name="address" type="text" class="form-control @error('address') is-invalid @enderror" value="{{$employer->profile->address}}" required>
+                                                <input name="address" maxlength="100" type="text" class="form-control @error('address') is-invalid @enderror" value="{{$employer->profile->address}}" required>
                                                 @error('address')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -307,7 +307,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Zip <span class="text-danger">*</span></label>
-                                                <input type="number" name="zip" class="form-control @error('zip') is-invalid @enderror" value="{{$employer->profile->zip}}" required>
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7" name="zip" class="form-control @error('zip') is-invalid @enderror" value="{{$employer->profile->zip}}" required>
                                                 @error('zip')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

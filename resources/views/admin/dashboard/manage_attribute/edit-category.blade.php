@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-    <section class="dashboard-section inner-login-shape">
+    <section class="dashboard-section inner-login-shape" style="min-height:800px">
         <div class="dashboard-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -104,7 +104,7 @@
                                         <div class="row"> 
                                             <div class="form-group">
                                                 <label class="form-label">Category Name <span class="text-danger">*</span></label>
-                                                <input type="text" name="name" value="{{$category->name}}" class="form-control @error('name') is-invalid @enderror" required>
+                                                <input type="text" name="name" maxlength="65" value="{{$category->name}}" class="form-control @error('name') is-invalid @enderror" required>
                                                 @error('name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

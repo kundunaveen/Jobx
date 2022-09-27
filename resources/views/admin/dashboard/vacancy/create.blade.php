@@ -112,7 +112,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Job Title <span class="text-danger">*</span></label>
-                                                <input type="text" name="job_title" class="form-control @error('job_title') is-invalid @enderror" required>
+                                                <input type="text" maxlength="100" name="job_title" class="form-control @error('job_title') is-invalid @enderror" required>
                                                 @error('job_title')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -123,7 +123,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Job Role <span class="text-danger">*</span></label>
-                                                <input type="text" name="job_role" class="form-control @error('job_role') is-invalid @enderror" required>
+                                                <input type="text" maxlength="100" name="job_role" class="form-control @error('job_role') is-invalid @enderror" required>
                                                 @error('job_role')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -132,7 +132,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Department <span class="text-danger">*</span></label>
-                                                <input type="text" name="department" class="form-control @error('department') is-invalid @enderror" required>
+                                                <input type="text" maxlength="100" name="department" class="form-control @error('department') is-invalid @enderror" required>
                                                 @error('department')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -144,7 +144,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Min. Experience Required </label>
-                                                <input type="number" step="0.01" name="min_exp" class="form-control @error('min_exp') is-invalid @enderror" required>
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" step="0.01" name="min_exp" class="form-control @error('min_exp') is-invalid @enderror" required>
                                                 @error('min_exp')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -153,7 +153,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Salary Offer </label>
-                                                <input type="number" step="0.01" name="salary_offer" class="form-control @error('salary_offering') is-invalid @enderror" required>
+                                                <input type="number" step="0.01" name="salary_offer" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" class="form-control @error('salary_offering') is-invalid @enderror" required>
                                                 @error('salary_offer')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -188,7 +188,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Location <span class="text-danger">*</span></label>
-                                                <input type="text" name="location" class="form-control @error('location') is-invalid @enderror" required>
+                                                <input type="text" maxlength="100" name="location" class="form-control @error('location') is-invalid @enderror" required>
                                                 @error('location')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -244,7 +244,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Zip Code</label>
-                                                <input type="text" name="zip" class="form-control">
+                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7" type="text" name="zip" class="form-control">
                                             </div>
                                         </div>
                                         <div class="mt-4 row"> 

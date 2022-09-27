@@ -69,7 +69,7 @@ input:checked + .slider:before {
 }
 
 </style>
-    <section class="dashboard-section inner-login-shape">
+    <section class="dashboard-section inner-login-shape" style="min-height:800px">
         <div class="dashboard-wrapper">
             <div class="container-fluid">
                 <div class="row">
