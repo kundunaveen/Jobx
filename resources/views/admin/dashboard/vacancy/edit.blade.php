@@ -106,7 +106,9 @@
                                                 <label class="form-label">Company Name <span class="text-danger">*</span></label>
                                                 <select class="form-control" disabled required>
                                                     @foreach($employers as $employer)
+                                                    @if($employer->profile->company_name != null)
                                                     <option {{$employer->id == $vacancy->employer_id ? 'selected':''}} value="{{$employer->id}}">{{$employer->profile->company_name}}</option>
+                                                    @endif
                                                     @endforeach
                                                 </select>
                                             </div>
