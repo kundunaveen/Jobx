@@ -104,6 +104,7 @@ class ManageAttributeController extends Controller
                 'name' => 'required|string|max:65|unique:master_attribute_categories'
             ]);
             MasterAttributeCategory::create($request->all());
+            return redirect(route('admin.categories'))->with('success', 'Attribute Category Added Successfully.');
         }
         return view('admin.dashboard.manage_attribute.create-category');
     }

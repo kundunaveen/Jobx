@@ -23,6 +23,10 @@ class DashboardController extends Controller
         // dd($request->job_type);
 
         $jobs = Vacancy::where('employer_id', auth()->user()->id);
+        if($request->search)
+        {
+            $jobs->where('job_title', 'LIKE', '%' . $request->search . '%')->orWhere('job_role', 'LIKE', '%' . $request->search . '%');
+        }
         if($request->job_type && $request->job_type != 'empty')
         {
             // dd($request->job_type);
