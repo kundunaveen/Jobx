@@ -104,7 +104,7 @@
                                         <div class="row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Company Name <span class="text-danger">*</span></label>
-                                                <select class="form-control" name="employer_id" required>
+                                                <select class="form-control company_name" name="employer_id" required>
                                                     @foreach($employers as $employer)
                                                     @if($employer->profile != null && $employer->profile->company_name != null)
                                                     <option value="{{$employer->id}}">{{$employer->profile->company_name}}</option>
@@ -251,7 +251,7 @@
                                         </div>
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-12">
-                                                <label class="form-label">Description</label>
+                                                <label class="form-label">Description <span class="text-danger">*</span></label>
                                                 <textarea class="form-control" name="description"></textarea>
                                             </div>
                                         </div>

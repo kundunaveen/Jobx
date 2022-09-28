@@ -25,9 +25,15 @@
                     </div>
                     
                     <form method="GET" class="search-form">
+                     <div class="row mt-3">
+                        <div class="col-md-12">
+                           <!-- <label class="label">Search</label> -->
+                           <input class="form-control" name="search" @if(isset($_GET['search'])) value="{{$_GET['search']}}" @endif type="text" placeholder="Search for job role or job title">
+                        </div>
+                     </div>
                     <div class="row mb-3 mt-3">
                      <div class="col-md-3" style="padding:10px !important">
-                        <label class="label">Job Type</label>
+                        <!-- <label class="label">Job Type</label> -->
                         <select name="job_type" class="form-control">
                            <option  value="empty">select job type</option>
                            <option @if(isset($_GET['job_type'])) {{$_GET['job_type'] == 'full_time'?'selected':''}} @endif value="full_time">Full Time</option>
@@ -36,7 +42,7 @@
                         </select>
                      </div>
                      <div class="col-md-3" style="padding:10px !important">
-                        <label class="label">Experience</label>
+                        <!-- <label class="label">Experience</label> -->
                         <select name="experience" class="form-control">
                            <option value="empty">select experience</option>
                            <option @if(isset($_GET['experience'])) {{$_GET['experience'] == '0-3'?'selected':''}} @endif value="0-3">0-3 years</option>
@@ -47,7 +53,7 @@
                         </select>
                      </div>
                      <div class="col-md-3" style="padding:10px !important">
-                        <label class="label">Salary</label>
+                        <!-- <label class="label">Salary</label> -->
                         <select name="salary" class="form-control">
                            <option value="empty">select salary</option>
                            <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '0-6'?'selected':''}} @endif value="0-6">0-6 LPA</option>
@@ -57,10 +63,10 @@
                            <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '25'?'selected':''}} @endif value="25">More than 24 LPA</option>
                         </select>
                      </div>
-                     <div class="col-md-3" style="padding:10px !important">
-                        <button type="submit" class="btn btn-primary mt-3" style="padding-left:25px; padding-right:25px">Search</button>
+                     <div class="col-md-3 justify-content-end" style="padding:10px !important">
+                        <button type="submit" class="btn btn-primary" style="padding-left:30px; padding-right:30px">Search</button>
                         <a class="text-dark d-none redirect_to_posted_jobs" href="{{route('employer.dashboard.posted.jobs')}}">Post Job</a>
-                        <button type="" class="btn btn-primary mt-3" onclick="$('.search-form').remove();window.location.href = '{{url('employer-dashboard/posted-jobs')}}'" style="padding-left:25px; padding-right:25px">Reset</button>
+                        <button type="" class="btn btn-primary" onclick="$('.search-form').remove();window.location.href = '{{url('employer-dashboard/posted-jobs')}}'" style="padding-left:30px; padding-right:30px">Reset</button>
                      </div>
                     </div>
                    </form>

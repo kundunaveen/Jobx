@@ -32,6 +32,7 @@ class VacancyController extends Controller
                 'zip' => 'required|numeric|digits_between:5,8',
                 'department' => 'required|string|max:100',
                 'job_role' => 'required|string|max:100',
+                'description' => 'required'
                 // 'skills' => 'required'
             ]);
             if($request->skills && count($request->skills) > 0){
@@ -101,6 +102,7 @@ class VacancyController extends Controller
                 'zip' => 'required|numeric|digits_between:5,8',
                 'department' => 'required|string|max:100',
                 'job_role' => 'required|string|max:100',
+                'description' => 'required'
                 // 'skills' => 'required'
             ]);
             if($request->skills && count($request->skills) > 0){

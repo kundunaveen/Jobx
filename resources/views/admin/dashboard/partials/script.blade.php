@@ -19,6 +19,7 @@
          $('#skills').select2()
          $('.categories').select2()
          $('.industries').select2()
+         $('.company_name').select2()
          // $('#countries').select2()
          // $('#states').select2()
          // $('#cities').select2()
