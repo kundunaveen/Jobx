@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Vacancy extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $fillable = [
         'employer_id',
@@ -23,7 +24,7 @@ class Vacancy extends Model
         'salary_offer',
         'min_exp',
         'skills',
-        'job_type   '
+        'job_type'
     ];
 
     public function user()
@@ -44,5 +45,10 @@ class Vacancy extends Model
     public function citydetail()
     {
         return $this->belongsTo('App\Models\City', 'city');
+    }
+
+    public function jobType()
+    {
+        return $this->belongsTo('App\Models\MasterAttribute', 'job_type');
     }
 }

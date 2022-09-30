@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Models\Vacancy;
 use App\Models\State;
 use App\Models\JobSkill;
+use App\Models\MasterAttribute;
 use Session;
 use App\Models\City;
 
@@ -18,9 +19,44 @@ class JobPostController extends Controller
         $this->middleware(['auth', 'employeraccount']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        return view('employer.profile.posted-jobs');
+        $jobs = Vacancy::where('employer_id', auth()->user()->id);
+        if($request->search)
+        {
+            $jobs->where('job_title', 'LIKE', '%' . $request->search . '%')->orWhere('job_role', 'LIKE', '%' . $request->search . '%');
+        }
+        if($request->job_type && $request->job_type != 'empty')
+        {
+            // dd($request->job_type);
+            $jobs->where('job_type', $request->job_type);
+        }
+        if($request->salary && $request->salary != 'empty')
+        {   
+            if($request->salary == 25)
+            {
+                $jobs->where('salary_offer','>',24);
+            }
+            else{
+                $salaries = explode('-',$request->salary);
+                // dd($salaries);
+                $jobs->where('salary_offer', '>', $salaries[0])->where('salary_offer', '<=', $salaries[1]);
+            }
+        }
+        if($request->experience && $request->experience != 'empty')
+        {   
+            // dd('yes');
+            if($request->experience == 16)
+            {
+                $jobs->where('min_exp','>',15);
+            }
+            else{
+                $exp = explode('-',$request->experience);
+                $jobs->where('min_exp', '>', $exp[0])->where('min_exp', '<=', $exp[1]);
+            }
+        }
+        $jobs = $jobs->simplePaginate(9);
+        return view('employer.dashboard.posted-jobs.posted-jobs', compact('jobs'));
     }
 
     public function create(Request $request)
@@ -58,9 +94,12 @@ class JobPostController extends Controller
                 'job_type' => $request->job_type
 
             ]);
-            return redirect(route('employer.dashboard.posted.jobs'))->with('success', 'Job Posted Successfully');
+            return redirect(route('employer.posted.jobs'))->with('success', 'Job Posted Successfully');
         }
         $skills = JobSkill::all();
+        $job_types = MasterAttribute::whereHas('masterCategory', function($q){
+            $q->where('name', 'Job Type');
+        })->get();
         $countries = Country::all();
         $states = State::where('country_id', 156)->get();
         foreach($states as $state)
@@ -68,7 +107,8 @@ class JobPostController extends Controller
             $cities = City::where('state_id', $state->id)->get();
             break;
         }
-        return view('employer.profile.post-job', compact('countries', 'states', 'cities', 'skills'));
+        return view('employer.dashboard.posted-jobs.post-job', compact('countries', 'states', 'cities', 'skills', 'job_types'));
+        // return view('employer.profile.post-job', compact('countries', 'states', 'cities', 'skills'));
     }
 
     public function edit(Request $request, $id)
@@ -78,6 +118,9 @@ class JobPostController extends Controller
         $states = State::where('country_id',$vacancy->country)->get();
         $cities = City::where('state_id', $vacancy->state)->get();
         $allSkills = JobSkill::all();
+        $job_types = MasterAttribute::whereHas('masterCategory', function($q){
+            $q->where('name', 'Job Type');
+        })->get();
         if($vacancy->skills)
         {
             $skills = explode(',', $vacancy->skills);
@@ -119,9 +162,9 @@ class JobPostController extends Controller
             ]);
             
 
-            return redirect(route('employer.dashboard.posted.jobs'))->with('success', 'Job Post Updated Successfully');
+            return redirect(route('employer.posted.jobs'))->with('success', 'Job Post Updated Successfully');
         }
-        return view('employer.profile.edit-post-job', compact('vacancy','countries', 'states', 'cities', 'skills', 'allSkills'));
+        return view('employer.dashboard.posted-jobs.edit-post-job', compact('vacancy','countries', 'states', 'cities', 'skills', 'allSkills', 'job_types'));
     }
 
     public function delete(Request $request)

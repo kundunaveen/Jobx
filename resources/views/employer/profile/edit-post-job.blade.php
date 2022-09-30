@@ -185,11 +185,11 @@
                             </div>
                         </div>
                         <div class="row btn-form-wrapper">
-                            <div class=" d-grid col-sm-9">
-                                <input type="submit" class="btn  btn-primary btn-form" value="Publish">
+                            <div class="d-grid col-sm-9">
+                                <input type="submit" class="btn btn-primary btn-form" value="Publish">
                             </div>
-                            <div class="col-sm-3  text-center text-sm-end">
-                                <input type="reset" class="btn py-3 px-0 bg-transparent  fw-bold btn-skip" value="Cancel">
+                            <div class="col-sm-3 text-center text-sm-end">
+                                <input type="reset" class="btn py-3 px-0 bg-transparent fw-bold btn-skip" value="Cancel">
                             </div>
                         </div>
                     </form>

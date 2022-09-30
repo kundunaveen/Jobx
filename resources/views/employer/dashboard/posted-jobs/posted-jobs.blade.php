@@ -1,6 +1,6 @@
 @extends('employer.dashboard.partials.layout')
 @section('title')
-    Employer | Dashboard
+    Employer | Posted Jobs
 @endsection
 @section('content')
     <style>
@@ -32,19 +32,19 @@
                         </div>
                      </div>
                     <div class="row mb-3 mt-3">
-                     <div class="col-md-3" style="padding:10px !important">
+                     <div class="col-md-3 mt-2" style="padding:10px !important">
                         <!-- <label class="label">Job Type</label> -->
                         <select name="job_type" class="form-control">
-                           <option  value="empty">select job type</option>
+                           <option  value="">Select job type</option>
                            <option @if(isset($_GET['job_type'])) {{$_GET['job_type'] == 'full_time'?'selected':''}} @endif value="full_time">Full Time</option>
                            <option @if(isset($_GET['job_type'])) {{$_GET['job_type'] == 'part_time'?'selected':''}} @endif value="part_time">Part Time</option>
                            <option @if(isset($_GET['job_type'])) {{$_GET['job_type'] == 'contract_based'?'selected':''}} @endif value="contract_based">Contract Based</option>
                         </select>
                      </div>
-                     <div class="col-md-3" style="padding:10px !important">
+                     <div class="col-md-3 mt-2" style="padding:10px !important">
                         <!-- <label class="label">Experience</label> -->
                         <select name="experience" class="form-control">
-                           <option value="empty">select experience</option>
+                           <option value="">Select experience</option>
                            <option @if(isset($_GET['experience'])) {{$_GET['experience'] == '0-3'?'selected':''}} @endif value="0-3">0-3 years</option>
                            <option @if(isset($_GET['experience'])) {{$_GET['experience'] == '3-6'?'selected':''}} @endif value="3-6">3-6 years</option>
                            <option @if(isset($_GET['experience'])) {{$_GET['experience'] == '6-10'?'selected':''}} @endif value="6-10">6-10 years</option>
@@ -52,10 +52,10 @@
                            <option @if(isset($_GET['experience'])) {{$_GET['experience'] == '16'?'selected':''}} @endif value="16">More than 15 years</option>
                         </select>
                      </div>
-                     <div class="col-md-3" style="padding:10px !important">
+                     <div class="col-md-3 mt-2" style="padding:10px !important">
                         <!-- <label class="label">Salary</label> -->
                         <select name="salary" class="form-control">
-                           <option value="empty">select salary</option>
+                           <option value="">Select salary</option>
                            <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '0-6'?'selected':''}} @endif value="0-6">0-6 LPA</option>
                            <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '6-12'?'selected':''}} @endif value="6-12">6-12 LPA</option>
                            <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '12-18'?'selected':''}} @endif value="12-18">12-18 LPA</option>
@@ -82,12 +82,12 @@
                                  <article class="job-profile-article">
                                     <h5 class="">{{$job->job_role}}</h5>
                                     <ul class="job-type list-group flex-row mb-3">
-                                       <li class="list-group-item">{{$job->job_type == 'part_time'? 'Part Time':($job->job_type == 'full_time'?'Full Time':'Contract Based')}}</li>
+                                       <li class="list-group-item">@if($job->jobType != null){{$job->jobType->value}} @endif</li>
                                        <!-- <li class="list-group-item">Part Time</li> -->
                                     </ul>
                                     <h6 class="d-flex align-items-center" style="font-size: 13px;margin-bottom: 14px;"><i
                                           class="icon-location me-2"></i>{{$job->citydetail->city.', '.$job->countrydetail->name}}</h6>
-                                    <p class="" style="font-size: 13px;padding: 0 0 30px;line-height: 22px;margin-bottom: 0;">{{$job->description}}</p>
+                                    <p class="job_description{{$job->id}}" style="font-size: 13px;padding: 0 0 30px;line-height: 22px;margin-bottom: 0;">@if(strlen($job->description)>60) {{substr($job->description ,0, 60).'...'}} <a class="read_more{{$job->id}}" onclick="readDescription('{{$job->id}}', '{{$job->description}}')" href="javascript:void(0)">Read more</a>@else {{$job->description}} @endif</p>
                                     <div class="job-btn-wrapper d-flex justify-content-between">
                                        <a href="{{route('employer.edit.post.job', $job->id)}}" style="margin-left:-5px;margin-right:10px" class="btn col-6 btn-default ">Edit</a>
                                        <button onclick="deleteVacancy('{{$job->id}}')" type="button" class="btn btn-danger col-6 btn-sm" data-bs-toggle="modal"
@@ -99,9 +99,11 @@
                         </div>
                        @endforeach
                      </div>
+                     <div class="mb-5">{{ $jobs->links() }}</div>
                   </section>
             </div>
         </div>
     
     </section>
 @endsection
+

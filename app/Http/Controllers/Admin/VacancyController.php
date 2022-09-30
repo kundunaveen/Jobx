@@ -10,6 +10,7 @@ use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
 use App\Models\JobSkill;
+use App\Models\MasterAttribute;
 use Session;
 
 class VacancyController extends Controller
@@ -72,7 +73,10 @@ class VacancyController extends Controller
             $cities = City::where('state_id', $state->id)->get();
             break;
         }
-        return view('admin.dashboard.vacancy.create', compact('employers', 'countries', 'states', 'cities', 'skills'));
+        $job_types = MasterAttribute::whereHas('masterCategory', function($q){
+            $q->where('name', 'Job Type');
+        })->get();
+        return view('admin.dashboard.vacancy.create', compact('employers', 'countries', 'states', 'cities', 'skills', 'job_types'));
     }
 
     public function edit(Request $request, $id)
@@ -82,6 +86,9 @@ class VacancyController extends Controller
         $states = State::where('country_id', $vacancy->country)->get();
         $cities = City::where('state_id', $vacancy->state)->get();
         $allSkills = JobSkill::all();
+        $job_types = MasterAttribute::whereHas('masterCategory', function($q){
+            $q->where('name', 'Job Type');
+        })->get();
         if($vacancy->skills)
         {
             $skills = explode(',', $vacancy->skills);
@@ -92,7 +99,6 @@ class VacancyController extends Controller
         }
         if($request->method() == "POST")
         {
-            // dd($request);
             $request->validate([
                 // 'employer_id' => 'required|numeric',
                 'job_title' => 'required|string|max:100',
@@ -111,6 +117,7 @@ class VacancyController extends Controller
             else{
                 $skills = null;
             }
+            // dd($request->job_type);
             $vacancy->update([
                 'job_title' => $request->job_title,
                 'city' => $request->city,
@@ -131,7 +138,7 @@ class VacancyController extends Controller
         $employers = User::whereHas('roleUser', function( $q){
             $q->where('role_id', 2);
         })->get();
-        return view('admin.dashboard.vacancy.edit', compact('vacancy', 'employers', 'countries', 'states', 'cities', 'skills', 'allSkills'));
+        return view('admin.dashboard.vacancy.edit', compact('vacancy', 'employers', 'countries', 'states', 'cities', 'skills', 'allSkills', 'job_types'));
     }
 
     public function delete(Request $request)
