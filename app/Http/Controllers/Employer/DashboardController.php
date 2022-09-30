@@ -57,6 +57,6 @@ class DashboardController extends Controller
             }
         }
         $jobs = $jobs->get();
-        return view('employer.dashboard.posted-jobs', compact('jobs'));
+        return view('employer.dashboard.posted-jobs.posted-jobs', compact('jobs'));
     }
 }

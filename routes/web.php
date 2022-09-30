@@ -86,7 +86,6 @@ Route::any('/employer/edit-post-job/{id}', [App\Http\Controllers\Employer\JobPos
 Route::get('/employer/posted-jobs', [App\Http\Controllers\Employer\JobPostController::class, 'index'])->name('employer.posted.jobs');
 Route::post('/employer/post-job/delete', [App\Http\Controllers\Employer\JobPostController::class, 'delete'])->name('employer.deleteVacancy');
 
-Route::get('/employer-dashboard/posted-jobs', [App\Http\Controllers\Employer\DashboardController::class, 'postedJobs'])->name('employer.dashboard.posted.jobs');
 Route::post('/employer-profile/getStates', [App\Http\Controllers\Employer\HomeController::class, 'getStates']);
 Route::post('/employer-profile/getCities', [App\Http\Controllers\Employer\HomeController::class, 'getCities']);
 

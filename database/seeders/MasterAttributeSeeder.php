@@ -255,6 +255,21 @@ class MasterAttributeSeeder extends Seeder
                 'master_attribute_category_id' => 6,
                 'value' => 'Phd'
             ],
+            [
+                'id' => 49,
+                'master_attribute_category_id' => 9,
+                'value' => 'Full Time'
+            ],
+            [
+                'id' => 50,
+                'master_attribute_category_id' => 9,
+                'value' => 'Part Time'
+            ],
+            [
+                'id' => 51,
+                'master_attribute_category_id' => 9,
+                'value' => 'Contract Based'
+            ],
         ]);
     }
 }

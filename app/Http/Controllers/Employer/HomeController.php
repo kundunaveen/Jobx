@@ -126,7 +126,7 @@ class HomeController extends Controller
             }
 
         }
-        return view('employer.profile.edit', compact('employer', 'industries', 'countries', 'states', 'cities'));
+        return view('employer.dashboard.profile.edit', compact('employer', 'industries', 'countries', 'states', 'cities'));
     }
 
     public function getStates(Request $request)

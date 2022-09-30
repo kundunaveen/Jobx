@@ -179,10 +179,11 @@
                                                 <label class="form-label">Job Type <span class="text-danger">*</span></label>
                                                 <!-- <input type="number" step="0.01" name="min_exp" class="form-control @error('min_exp') is-invalid @enderror" required> -->
                                                 <select class="form-control" name="job_type" id="job_type" >
-                                                   
-                                                    <option value="full_time" >Full Time</option>
-                                                    <option value="part_time" >Part Time</option>
-                                                    <option value="contract_based" >Contract Based</option>
+                                                   @foreach($job_types as $job_type)
+                                                    <option value="{{$job_type->id}}" >{{$job_type->value}}</option>
+                                                    @endforeach
+                                                    <!-- <option value="part_time" >Part Time</option>
+                                                    <option value="contract_based" >Contract Based</option> -->
                                                    
                                                 </select>
                                             </div>
@@ -246,13 +247,23 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Zip Code</label>
-                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7" type="text" name="zip" class="form-control">
+                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7" type="text" name="zip" class="form-control @error('zip') is-invalid @enderror">
+                                                @error('zip')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-12">
                                                 <label class="form-label">Description <span class="text-danger">*</span></label>
-                                                <textarea class="form-control" name="description"></textarea>
+                                                <textarea class="form-control @error('description') is-invalid @enderror" name="description"></textarea>
+                                                @error('description')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="mt-4 row justify-content-between"> 

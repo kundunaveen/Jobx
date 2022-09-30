@@ -8,6 +8,12 @@
    <script src="{{asset('js/select2.min.js')}}"></script>
 
    <script>
+      $(document).ready(function(){
+         $('.skills').select2()
+         $('.country-list').select2()
+         $('.state-list').select2()
+         $('.city-list').select2()
+      })
       function checkPasswordValidation()
       {
          $.ajax({
@@ -120,6 +126,16 @@
                }
             })
          }
+      }
+
+      function readDescription(id, description)
+      {
+         $('.job_description'+id).html(description+` <a onclick="readLess('${id}','${description}')" href="javascript:void(0)">Read less</a>` )
+      }
+
+      function readLess(id, description)
+      {
+         $('.job_description'+id).html(description.substr(0,60)+`... <a onclick="readDescription('${id}','${description}')" href="javascript:void(0)">Read more</a>`)
       }
    </script>
 

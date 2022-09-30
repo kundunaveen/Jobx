@@ -47,6 +47,10 @@ class MasterAttributeCategorySeeder extends Seeder
                 'id' => 8,
                 'name' => 'Notice Period'
             ],
+            [
+                'id' => 9,
+                'name' => 'Job Type'
+            ],
         ]);
     }
 }

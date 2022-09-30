@@ -1,9 +1,13 @@
-@extends('employer.profile.partials.layout')
+@extends('employer.dashboard.partials.layout')
+@section('title')
+    Employer | Edit Post Job
+@endsection
 @section('content')
 <style>
 .select-box-2 span.select2.select2-container.select2-container--default {
-    width: 100%!important;
+    width: 100% !important;
 }
+
 .select-box-2 span.select2-selection.select2-selection--multiple {
     background: #fff;
     border: 1px solid #E1E1E1;
@@ -12,9 +16,32 @@
     -moz-border-radius: 10px;
     padding: 0.5rem 3rem;
     height: 58px;
+    width:100%!important;
+}
+span.select2.select2-container{
+    background: #fff!important;
+    border: 1px solid #E1E1E1!important;
+    border-radius: 10px!important;
+    -webkit-border-radius: 10px!important;
+    -moz-border-radius: 10px!important;
+    padding: .8rem 3rem!important;
+    height: 58px!important; 
+    width:100%!important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 15px!important;
+    right: 30px!important;
+}
+span.select2-selection.select2-selection--single {
+    border: none;
+    width: 100%!important;
+}
+.main-bg {
+    padding:0px !important;
 }
 </style>
-<main class="main-bg inner-login-shape employer-form-page">
+<section class="dashboard-section inner-login-shape">
+<main class="main-bg employer-form-page">
         <section class="form-inner-wrapper">
             <div class="container ">
                 <div class="form-wrapper card">
@@ -24,7 +51,7 @@
                     </div> -->
                     <form class="form-inner" method="POST">
                         @csrf
-                        <h2 class="form-heading">Post New Job</h2>
+                        <h2 class="form-heading">Edit Posted Job</h2>
                         <div class="row form-group">
                             <div class="col-md-6 mb-5 mb-md-0">
                                 <label for="inputName4" class="form-label">First Name*</label>
@@ -47,7 +74,7 @@
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Job Title</label>
                             <div class="col-12">
-                                <input type="text" name="job_title" class="form-control form-input" placeholder="Job Title"
+                                <input type="text" name="job_title" value="{{$vacancy->job_title}}" class="form-control form-input" placeholder="Job Title"
                                     aria-label="Job Title">
                                 @error('job_title')
                                     <span class="invalid-feedback" role="alert">
@@ -59,7 +86,7 @@
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Job Role</label>
                             <div class="col-12">
-                                <input type="text" name="job_role" class="form-control form-input"  placeholder="Job Role"
+                                <input type="text" name="job_role" value="{{$vacancy->job_role}}" class="form-control form-input"  placeholder="Job Role"
                                     aria-label="Job Role">
                                 @error('job_role')
                                     <span class="invalid-feedback" role="alert">
@@ -71,7 +98,7 @@
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Department</label>
                             <div class="col-12">
-                                <input type="text" name="department" class="form-control form-input" placeholder="Department"
+                                <input type="text" name="department" value="{{$vacancy->department}}" class="form-control form-input" placeholder="Department"
                                     aria-label="Department">
                                 @error('department')
                                     <span class="invalid-feedback" role="alert">
@@ -80,15 +107,13 @@
                                 @enderror
                             </div>
                         </div>
-
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Job Type</label>
                             <div class="col-12">
                                 <select name="job_type" class="form-select" aria-label="Default select example">
-                                    <option value="full_time" >Full Time</option>
-                                    <option value="part_time" >Part Time</option>
-                                    <option value="contract_based" >Contract Based</option>
-                                                   
+                                    @foreach($job_types as $job_type)
+                                    <option {{$job_type->id == $vacancy->job_type ? 'selected':''}} value="{{$job_type->id}}" >{{$job_type->value}}</option>
+                                    @endforeach                 
                                 </select>
                             </div>
                         </div>
@@ -96,7 +121,7 @@
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Min. Experience Required</label>
                             <div class="col-12">
-                                <input type="number" step="0.01" name="min_exp" class="form-control form-input" placeholder="Minimum Experience"
+                                <input type="number" step="0.01" value="{{$vacancy->min_exp}}" name="min_exp" class="form-control form-input" placeholder="Minimum Experience"
                                     aria-label="Department">
                             </div>
                         </div>
@@ -104,7 +129,7 @@
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Salary Offer</label>
                             <div class="col-12">
-                                <input type="number" step="0.01" name="salary_offer" class="form-control form-input" placeholder="Salary Offer"
+                                <input type="number" step="0.01" value="{{$vacancy->salary_offer}}" name="salary_offer" class="form-control form-input" placeholder="Salary Offer"
                                     aria-label="Department">
                             </div>
                         </div>
@@ -113,8 +138,8 @@
                             <label for="inputPhone" class="form-label">Skill Required</label>
                             <div class="col-12 select-box-2">
                                 <select name="skills[]" class="form-select skills" multiple aria-label="Default select example">
-                                    @foreach($skills as $skill)
-                                    <option  value="{{$skill->id}}">{{$skill->skill}}</option>
+                                    @foreach($allSkills as $skill)
+                                    <option value="{{ $skill->id }}" @if($skills && in_array($skill->id, $skills)) selected @endif >{{$skill->skill}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -124,7 +149,7 @@
                         <div class="row form-group">
                             <div class="col-12">
                             <label for="exampleFormControlTextarea1" class="form-label">Address*</label>
-                            <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="5"></textarea>
+                            <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="5">{{$vacancy->location}}</textarea>
                             @error('address')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -132,32 +157,32 @@
                             @enderror
                             </div>
                         </div>
-                        <div class="row form-group">
+                        <div class="row form-group select-box-2">
                             <label for="check" class="form-label">Country*</label>
                             <div class="col-12">
                                 <select name="country" class="form-select country-list" aria-label="Default select example">
                                     @foreach($countries as $country)
-                                    <option {{$country->id == 156 ? 'selected': ''}} value="{{$country->id}}">{{$country->name}}</option>
+                                    <option {{$country->id == $vacancy->country ? 'selected':'' }} value="{{$country->id}}">{{$country->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="row form-group">
+                        <div class="row form-group select-box-2">
                             <label for="check" class="form-label">State*</label>
                             <div class="col-12">
                                 <select name="state" class="form-select state-list" aria-label="Default select example">
                                     @foreach($states as $state)
-                                    <option  value="{{$state->id}}">{{$state->name}}</option>
+                                    <option {{$state->id == $vacancy->state ? 'selected':'' }} value="{{$state->id}}">{{$state->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <label for="check" class="form-label ">City*</label>
+                        <div class="row form-group select-box-2">
+                            <label for="check" class="form-label">City*</label>
                             <div class="col-12">
                                 <select name="city" class="form-select city-list" aria-label="Default select example">
                                     @foreach($cities as $city)
-                                    <option  value="{{$city->id}}">{{$city->city}}</option>
+                                    <option {{$city->id == $vacancy->city ? 'selected':'' }} value="{{$city->id}}">{{$city->city}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -165,7 +190,7 @@
                         <div class="row form-group">
                             <label for="check" class="form-label">Zip*</label>
                             <div class="col-12">
-                                <input type="number" name="zip" class="form-control form-input" value="" placeholder="Zip Code"
+                                <input type="number" value="{{$vacancy->zip}}" name="zip" class="form-control form-input" value="" placeholder="Zip Code"
                                     aria-label="Zip Code">
                                 @error('zip')
                                     <span class="invalid-feedback" role="alert">
@@ -177,7 +202,7 @@
                         <div class="row form-group">
                             <label for="check" class="form-label">Describe*</label>
                             <div class="col-12">
-                            <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
+                            <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="5">{{$vacancy->description}}</textarea>
                             @error('description')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -190,8 +215,7 @@
                                 <input type="submit" class="btn  btn-primary btn-form" value="Publish">
                             </div>
                             <div class="col-sm-3  text-center text-sm-end">
-                                <!-- <input type="reset" class="btn py-3 px-0 bg-transparent  fw-bold btn-skip" value="Cancel"> -->
-                                <a href="{{route('employer.posted.jobs')}}" type="reset" class="btn py-3 px-0 bg-transparent  fw-bold btn-skip">Cancel</a>
+                                <input type="reset" class="btn py-3 px-0 bg-transparent  fw-bold btn-skip" value="Cancel">
                             </div>
                         </div>
                     </form>
@@ -199,5 +223,7 @@
             </div>
         </section>
     </main> 
+    </section
 
-@endsection
+
+    @endsection
