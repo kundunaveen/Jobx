@@ -82,12 +82,39 @@ class HomeController extends Controller
                 'city' => 'required',
                 'address' => 'required'
             ]);
-
             User::find(auth()->user()->id)->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'contact' => $request->contact
             ]);
+            
+            if($request->profile_image){
+                $request->validate([
+                    'profile_image' => 'mimes:jpeg,bmp,png,jpg|max:2000'
+                ]);
+                $file = $request->file('profile_image');
+                $fileName = date('YmdHis').$file->getClientOriginalName();
+                $destinationPath = public_path().'/image/company_images';
+                $file->move($destinationPath,$fileName);
+            }
+            // dd($request);
+            else{
+                $fileName = null;
+            }
+
+            if($request->file('profile_video')){
+                $request->validate([
+                    'profile_video' => 'mimes:mp4|max:20000'
+                ]);
+                $fileVideo = $request->file('profile_video');
+                $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
+                $destinationPath = public_path().'/image/company_videos';
+                $fileVideo->move($destinationPath,$videoFileName);
+               
+            }
+            else{
+                $videoFileName = null;
+            }
 
             Profile::where('user_id', auth()->user()->id)->update([
                 'company_name' => $request->company_name,
@@ -97,9 +124,14 @@ class HomeController extends Controller
                 'city' => $request->city,
                 'address' => $request->address,
                 'zip' => $request->zip,
-                'description' => $request->description
+                'company_size' => $request->company_size,
+                'company_role' => $request->company_role,
+                'notification_option' => $request->notification_option,
+                'description' => '',
+                'logo' => $fileName,
+                'intro_video' => $videoFileName
             ]);
-
+            return redirect(route('employer.dashboard'));
 
         }
         $employer = User::find(auth()->user()->id);
@@ -126,7 +158,10 @@ class HomeController extends Controller
             }
 
         }
-        return view('employer.dashboard.profile.edit', compact('employer', 'industries', 'countries', 'states', 'cities'));
+        $genders = MasterAttribute::whereHas('masterCategory', function($q){
+            $q->where('name', 'Gender');
+        })->get();
+        return view('employer.dashboard.profile.edit', compact('employer', 'industries', 'countries', 'states', 'cities', 'genders'));
     }
 
     public function getStates(Request $request)

@@ -66,7 +66,7 @@
                      <div class="col-md-3 justify-content-end" style="padding:10px !important">
                         <button type="submit" class="btn btn-primary" style="padding-left:30px; padding-right:30px">Search</button>
                         <a class="text-dark d-none redirect_to_posted_jobs" href="{{route('employer.posted.jobs')}}">Post Job</a>
-                        <button type="" class="btn btn-primary" onclick="$('.search-form').remove();window.location.href = '{{url('employer-dashboard/posted-jobs')}}'" style="padding-left:30px; padding-right:30px">Reset</button>
+                        <button type="" class="btn btn-primary" onclick="$('.search-form').remove();window.location.href = '{{url('employer/posted-jobs')}}'" style="padding-left:30px; padding-right:30px">Reset</button>
                      </div>
                     </div>
                    </form>
@@ -76,7 +76,11 @@
                            <div class="card">
                               <div class="card-body job-profile-info">
                                  <figure class="job-profile-figure d-flex align-items-center justify-content-between">
-                                    <img src="{{asset('assets/images/apple.png')}}" width="51" height="50" alt="">
+                                    @if($job->user->profile->logo != null)
+                                    <img src="{{asset('image/company_images/'.$job->user->profile->logo)}}" style="border-radius:100%;object-fit:cover" width="51" height="50" alt="">
+                                    @else
+                                    <img src="{{asset('image/company.png')}}" style="border-radius:100%;object-fit:cover" width="51" height="50" alt="">
+                                    @endif
                                     <span class="date" style="font-size:13px">{{date('d F, Y',strtotime($job->created_at))}}</span>
                                  </figure>
                                  <article class="job-profile-article">

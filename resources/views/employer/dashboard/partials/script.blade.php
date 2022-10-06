@@ -137,6 +137,22 @@
       {
          $('.job_description'+id).html(description.substr(0,60)+`... <a onclick="readDescription('${id}','${description}')" href="javascript:void(0)">Read more</a>`)
       }
+
+      function readURL(input) {
+         if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                  $('#profile_image').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+         }
+      }
+
+      $("#profile_image_input").change(function(){
+         readURL(this);
+      });
    </script>
 
    @if(Session('success'))

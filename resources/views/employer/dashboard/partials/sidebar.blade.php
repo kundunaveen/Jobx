@@ -11,8 +11,8 @@
         <!-- Aside Nav Start Here -->
         <ul class="navbar nav d-block aside-menu">
             <li class="nav-item"><a href="{{ url('employer-dashboard') }}" class="nav-link"><i class="navbar-icon icon-dasboard"></i>Dashboard</a></li>
-            <li class="nav-item"><a href="javascript:void(0)" class="nav-link posted-jobs"><i class="navbar-icon icon-recuirment"></i>Recruitment</a></li>
-            <!-- <li class="nav-item"><a href="{{route('employer.posted.jobs')}}" class="nav-link posted-jobs"><i class="navbar-icon icon-recuirment"></i>Recruitment</a></li> -->
+            <!-- <li class="nav-item"><a href="javascript:void(0)" class="nav-link posted-jobs"><i class="navbar-icon icon-recuirment"></i>Recruitment</a></li> -->
+            <li class="nav-item"><a href="{{route('employer.posted.jobs')}}" class="nav-link posted-jobs"><i class="navbar-icon icon-recuirment"></i>Recruitment</a></li>
             <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i class="navbar-icon icon-on-board"></i>On Boarding</a></li>
             <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i class="navbar-icon icon-job-application"></i>Applications</a></li>
             <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i class="navbar-icon icon-team"></i>Team</a></li>

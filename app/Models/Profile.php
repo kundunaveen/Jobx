@@ -28,7 +28,10 @@ class Profile extends Model
         'state',
         'country',
         'zip',
-        'skills'
+        'skills',
+        'company_size',
+        'company_role',
+        'notification_option',
     ];
 
     public function user()

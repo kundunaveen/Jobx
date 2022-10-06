@@ -38,6 +38,17 @@
                                     aria-label="Phone Number">
                             </div>
                         </div>
+                        <div class="row form-group">
+                            <label for="inputPhone" class="form-label">Gender</label>
+                            <div class="col-12">
+                                <select name="industry" class="form-select" aria-label="Default select example">
+                                    <option selected>Gender</option>
+                                    @foreach($genders as $gender)
+                                    <option {{$gender->id == $employer->profile->gender ? 'selected':''}} value="{{$gender->id}}">{{$gender->value}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                         <h2 class="form-heading">Company Details</h2>
                         <div class="row form-group">
                             <label for="inputCompanyName" class="form-label">Company Name*</label>
