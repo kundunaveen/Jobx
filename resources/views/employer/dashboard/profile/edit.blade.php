@@ -4,6 +4,38 @@
 @endsection
 @section('content')
 <style>
+.select-box-2 span.select2.select2-container.select2-container--default {
+    width: 100% !important;
+}
+
+.select-box-2 span.select2-selection.select2-selection--multiple {
+    background: #fff;
+    border: 1px solid #E1E1E1;
+    border-radius: 10px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    padding: 0.5rem 3rem;
+    height: 58px;
+    width:100%!important;
+}
+span.select2.select2-container{
+    background: #fff!important;
+    border: 1px solid #E1E1E1!important;
+    border-radius: 10px!important;
+    -webkit-border-radius: 10px!important;
+    -moz-border-radius: 10px!important;
+    padding: .8rem 3rem!important;
+    height: 58px!important; 
+    width:100%!important;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+    top: 15px!important;
+    right: 30px!important;
+}
+span.select2-selection.select2-selection--single {
+    border: none;
+    width: 100%!important;
+}
 .main-bg {
     padding:0px !important;
 }

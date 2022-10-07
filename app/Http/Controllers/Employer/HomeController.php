@@ -70,7 +70,7 @@ class HomeController extends Controller
     {
         if($request->method()=="POST")
         {
-            // dd($request);
+            dd('1');
             $request->validate([
                 'first_name' => 'required',
                 'last_name' => 'required',
@@ -82,27 +82,30 @@ class HomeController extends Controller
                 'city' => 'required',
                 'address' => 'required'
             ]);
+            dd('2');
             User::find(auth()->user()->id)->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'contact' => $request->contact
             ]);
-            
+            dd('3');
             if($request->profile_image){
+                dd('4');
                 $request->validate([
                     'profile_image' => 'mimes:jpeg,bmp,png,jpg|max:2000'
                 ]);
+
                 $file = $request->file('profile_image');
                 $fileName = date('YmdHis').$file->getClientOriginalName();
                 $destinationPath = public_path().'/image/company_images';
                 $file->move($destinationPath,$fileName);
             }
-            // dd($request);
             else{
                 $fileName = null;
             }
 
             if($request->file('profile_video')){
+                dd('5');
                 $request->validate([
                     'profile_video' => 'mimes:mp4|max:20000'
                 ]);
@@ -116,6 +119,7 @@ class HomeController extends Controller
                 $videoFileName = null;
             }
             $profile = Profile::where('user_id',auth()->user()->id)->first();
+            
             Profile::where('user_id', auth()->user()->id)->update([
                 'company_name' => $request->company_name,
                 'industry_type_id' => $request->industry,
