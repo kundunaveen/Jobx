@@ -69,27 +69,23 @@ class HomeController extends Controller
     public function editProfile(Request $request)
     {
         if($request->method()=="POST")
-        {   dd($request->all());
             $request->validate([
                 'first_name' => 'required',
                 'last_name' => 'required',
                 'contact' => 'required',
                 'company_name' => 'required',
                 'industry' => 'required',
-                'country' => 'required',
-                'state' => 'required',
-                'city' => 'required',
+                // 'country' => 'required',
+                // 'state' => 'required',
+                // 'city' => 'required',
                 'address' => 'required'
             ]);
-            dd('2');
             User::find(auth()->user()->id)->update([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'contact' => $request->contact
             ]);
-            dd('3');
             if($request->profile_image){
-                dd('4');
                 $request->validate([
                     'profile_image' => 'mimes:jpeg,bmp,png,jpg|max:2000'
                 ]);
@@ -104,7 +100,6 @@ class HomeController extends Controller
             }
 
             if($request->file('profile_video')){
-                dd('5');
                 $request->validate([
                     'profile_video' => 'mimes:mp4|max:20000'
                 ]);
