@@ -150,7 +150,7 @@
                         <div class="row form-group">
                             <label for="check" class="form-label">Country*</label>
                             <div class="col-12">
-                                <select name="country" class="form-select" aria-label="Default select example">
+                                <select name="country" class="form-select country-list" aria-label="Default select example">
                                     <option selected> </option>
                                     @foreach($countries as $country)
                                     <option {{$country->id == $employer->profile->country ? 'selected': ''}} value="{{$country->id}}">{{$country->name}}</option>
@@ -161,7 +161,7 @@
                         <div class="row form-group">
                             <label for="check" class="form-label">State*</label>
                             <div class="col-12">
-                                <select name="state" class="form-select " aria-label="Default select example">
+                                <select name="state" class="form-select state-list" aria-label="Default select example">
                                     <option selected> </option>
                                     @foreach($states as $state)
                                     <option {{$state->id == $employer->profile->state ? 'selected': ''}} value="{{$state->id}}">{{$state->name}}</option>
@@ -172,7 +172,7 @@
                         <div class="row form-group">
                             <label for="check" class="form-label">City*</label>
                             <div class="col-12">
-                                <select name="city" class="form-select " aria-label="Default select example">
+                                <select name="city" class="form-select city-list" aria-label="Default select example">
                                     <option selected> </option>
                                     @foreach($cities as $city)
                                     <option {{$city->id == $employer->profile->city ? 'selected' : ''}} value="{{$city->id}}">{{$city->city}}</option>
