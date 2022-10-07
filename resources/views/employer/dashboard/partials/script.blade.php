@@ -45,7 +45,7 @@
 
       $('.country-list').on('change', function(){
         $.ajax({
-            'url':'{{url("/admin/employee/get-states")}}',
+            'url':'{{url("/employer-profile/getStates")}}',
             'type':'POST',
             'data':{
                 '_token':'{{csrf_token()}}',
@@ -69,7 +69,7 @@
     function getCities()
     {
       $.ajax({
-            'url':'{{url("/admin/employee/get-cities")}}',
+            'url':'{{url("/employer-profile/getCities")}}',
             'type':'POST',
             'data':{
                 '_token':'{{csrf_token()}}',
@@ -89,7 +89,7 @@
     
     $('.state-list').on('change', function(){
         $.ajax({
-            'url':'{{url("/admin/employee/get-cities")}}',
+            'url':'{{url("/employer-profile/getCities")}}',
             'type':'POST',
             'data':{
                 '_token':'{{csrf_token()}}',
