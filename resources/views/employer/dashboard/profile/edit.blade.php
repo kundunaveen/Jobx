@@ -116,7 +116,7 @@ span.select2-selection.select2-selection--single {
                         </div>
                         <div class="row form-group">
                             <div class="col-12">
-                                @if($employer->profile->into_video == null)
+                                @if($employer->profile->intro_video == null)
                                 <img src="{{asset('image/video.png')}}" onclick="$('#profile_video_input').click()">
                                 @else
                                 <video class="" controls>
