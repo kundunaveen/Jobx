@@ -7,7 +7,9 @@
 .select-box-2 span.select2.select2-container.select2-container--default {
     width: 100% !important;
 }
-
+.select2-selection{
+    border:none !important;
+}
 .select-box-2 span.select2-selection.select2-selection--multiple {
     background: #fff;
     border: 1px solid #E1E1E1;
@@ -134,7 +136,7 @@ span.select2-selection.select2-selection--single {
                             </div>
                         </div>
 
-                        <div class="row form-group select-box-2">
+                        <div class="row form-group">
                             <label for="inputPhone" class="form-label">Skill Required</label>
                             <div class="col-12 ">
                                 <select name="skills[]" class="form-select skills" multiple aria-label="Default select example">
