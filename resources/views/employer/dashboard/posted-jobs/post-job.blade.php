@@ -138,7 +138,7 @@ span.select2-selection.select2-selection--single {
 
                     <div class="row form-group">
                         <label for="inputPhone" class="form-label">Skill Required</label>
-                        <div class="col-12 select-box-2">
+                        <div class="col-12">
                             <select name="skills[]" class="form-select skills" multiple aria-label="Default select example">
                                 @foreach($skills as $skill)
                                 <option  value="{{$skill->id}}">{{$skill->skill}}</option>
