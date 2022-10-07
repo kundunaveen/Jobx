@@ -160,7 +160,7 @@ span.select2-selection.select2-selection--single {
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="check" class="form-label">Country11*</label>
+                        <label for="check" class="form-label">Country*</label>
                         <div class="col-12">
                             <select name="country" class="form-select country-list" aria-label="Default select example">
                                 @foreach($countries as $country)
