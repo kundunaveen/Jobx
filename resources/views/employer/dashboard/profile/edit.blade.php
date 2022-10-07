@@ -17,9 +17,19 @@
                         <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75"
                             aria-valuemin="0" aria-valuemax="100"></div>
                     </div> -->
-                    <form class="form-inner" method="POST">
+                    <form class="form-inner" method="POST" enctype="multipart/form-data">
                         @csrf
-                        <h2 class="form-heading">Profile Details</h2>
+                        <div class="row justify-content-between">
+                            <div class="col-auto"><h2 class="form-heading mt-4">Profile Details</h2></div>
+                            <div class="col-auto">
+                                @if($employer->profile->logo ==null)
+                                <img src="{{asset('image/user.png')}}" id="profile_image" onclick="$('#profile_image_input').click()" style="height:100px;width:100px;object-fit:cover; border-radius:100%">
+                                @else
+                                <img src="{{asset('image/company_images/'.$employer->profile->logo)}}" id="profile_image" onclick="$('#profile_image_input').click()" style="height:100px;width:100px;object-fit:cover; border-radius:100%">
+                                @endif
+                            </div>
+                            <input type="file" class="d-none" name="profile_image" id="profile_image_input">
+                        </div>
                         <div class="row form-group">
                             <div class="col-md-6 mb-5 mb-md-0">
                                 <label for="inputName4" class="form-label">First Name*</label>
@@ -46,6 +56,45 @@
                                     aria-label="Phone Number">
                             </div>
                         </div>
+                        <div class="row form-group">
+                            <label for="inputPhone" class="form-label">Role in the company</label>
+                            <div class="col-12">
+                                <select name="company_role" class="form-select" aria-label="Default select example">
+                                    
+                                    <option {{ 'HR Manager'== $employer->profile->company_role ? 'selected':''}} value="HR Manager">HR Manager</option>
+                                    <option {{ 'Branch Manager'== $employer->profile->company_role ? 'selected':''}} value="Branch Manager">Branch Manager</option>
+                                    <option {{ 'CEO'== $employer->profile->company_role ? 'selected':''}} value="CEO">CEO</option>
+                                    <option {{ 'CTO'== $employer->profile->company_role ? 'selected':''}} value="CTO">CTO</option>
+                                    <option {{ 'MD'== $employer->profile->company_role ? 'selected':''}} value="MD">MD</option>
+                                    <option {{ 'Company Owner'== $employer->profile->company_role ? 'selected':''}} value="Company Owner">Company Owner</option>
+                                   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="inputPhone" class="form-label">Notification Option</label>
+                            <div class="col-12">
+                                <select name="notification_option" class="form-select" aria-label="Default select example">
+                                    
+                                    <option {{ 'email'== $employer->profile->notification_option ? 'selected':''}} value="email">Email</option>
+                                    <option {{ 'jobax'== $employer->profile->notification_option ? 'selected':''}} value="jobax">Jobax platform notification</option>
+                                   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-12">
+                                @if($employer->profile->into_video == null)
+                                <img src="{{asset('image/video.png')}}" onclick="$('#profile_video_input').click()">
+                                @else
+                                <video class="" controls>
+                                    <source src="{{asset('image/company_videos/'.$employer->profile->intro_video)}}" type="video/mp4">
+                                </video>
+                                @endif
+                            </div>
+                            <input type="file" class="d-none" name="profile_video" id="profile_video_input">
+                        </div>
+                        
                         <h2 class="form-heading">Company Details</h2>
                         <div class="row form-group">
                             <label for="inputCompanyName" class="form-label">Company Name*</label>
@@ -65,6 +114,19 @@
                                 </select>
                             </div>
                         </div>
+                        <div class="row form-group">
+                            <label for="inputPhone" class="form-label">Company Size</label>
+                            <div class="col-12">
+                                <select name="company_size" class="form-select" aria-label="Default select example">
+                                    
+                                    <option {{ '1-10'== $employer->profile->company_size ? 'selected':''}} value="1-10">1-10 (Small Organization)</option>
+                                    <option {{ '11-20'== $employer->profile->company_size ? 'selected':''}} value="11-20">11-20 (Medium Organization)</option>
+                                    <option {{ '21-50'== $employer->profile->company_size ? 'selected':''}} value="21-50">21-50 (Large Organization)</option>
+                                    <option {{ '>50'== $employer->profile->company_size ? 'selected':''}} value=">50">More than 50 (very Large Organization)</option>
+                                   
+                                </select>
+                            </div>
+                        </div>
                         <!-- <div class="row form-group">
                             <label for="inputTitle" class="form-label">Title*</label>
                             <div class="col-12">
@@ -77,12 +139,12 @@
                             </div>
                         </div> -->
 
-                        <div class="row form-group">
+                        <!-- <div class="row form-group">
                             <div class="col-12">
                             <label for="exampleFormControlTextarea1" class="form-label">Describe*</label>
                             <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{$employer->profile->description}}</textarea>
-                        </div>
-                        </div>
+                        </div> -->
+                        <!-- </div> -->
 
                         <h2 class="form-heading">Company Location</h2>
                         <div class="row form-group">
