@@ -69,6 +69,7 @@ class HomeController extends Controller
     public function editProfile(Request $request)
     {
         if($request->method()=="POST")
+        {
             $request->validate([
                 'first_name' => 'required',
                 'last_name' => 'required',
@@ -112,6 +113,7 @@ class HomeController extends Controller
             else{
                 $videoFileName = null;
             }
+
             $profile = Profile::where('user_id',auth()->user()->id)->first();
             
             Profile::where('user_id', auth()->user()->id)->update([
