@@ -115,7 +115,7 @@ class HomeController extends Controller
             else{
                 $videoFileName = null;
             }
-
+            $profile = Profile::where('user_id',auth()->user()->id)->first();
             Profile::where('user_id', auth()->user()->id)->update([
                 'company_name' => $request->company_name,
                 'industry_type_id' => $request->industry,
@@ -128,8 +128,8 @@ class HomeController extends Controller
                 'company_role' => $request->company_role,
                 'notification_option' => $request->notification_option,
                 'description' => '',
-                'logo' => $fileName,
-                'intro_video' => $videoFileName
+                'logo' => $fileName ? $fileName : $profile->logo,
+                'intro_video' => $videoFileName ? $videoFileName : $profile->intro_video
             ]);
             return redirect(route('employer.dashboard'));
 
