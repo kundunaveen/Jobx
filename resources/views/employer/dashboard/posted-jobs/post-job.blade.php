@@ -18,6 +18,9 @@
     height: 58px;
     width:100%!important;
 }
+.select2-selection {
+    border:none !important;
+}
 span.select2.select2-container{
     background: #fff!important;
     border: 1px solid #E1E1E1!important;
