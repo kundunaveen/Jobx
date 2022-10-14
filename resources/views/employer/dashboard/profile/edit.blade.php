@@ -40,6 +40,148 @@ span.select2-selection.select2-selection--single {
     padding:0px !important;
 }
 </style>
+<style>
+        .step-progress label {
+            text-align: left;
+            width: 100%;
+        }
+
+        .card.step-progress {
+            border: none!important;
+            background-color: transparent!important;
+            width: 100%;
+            box-shadow: none!important;
+            padding: 0!important;
+        }
+
+        .step-progress {
+          padding: 16px;
+          background-color: #FAFAFA;
+          margin: 0 auto;
+        }
+
+        .step-progress .step-slider {
+          width: 100%;
+        }
+
+        .step-progress .step-slider .step-slider-item {
+          width: 33%;
+          height: 3px;
+          position: relative;
+          float: left;
+          background-color: #E0E0E0;
+        }
+        .step-slider {
+            position: relative;
+        }
+        .step-slider:before {
+            content: '\f00c';
+            font-family: 'FontAwesome';
+            position: absolute;
+            top: -21px;
+            left: 0;
+            z-index: 2;
+            -webkit-transition: all 0.3s ease-out 0.5s;
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            background-color: #2343F2;
+            border: 2px solid #2343F2;
+            text-align: center;
+            color: #fff;
+            line-height: 34px;
+        }
+        .step-progress .step-slider .step-slider-item:after {
+            content: "";
+            position: absolute;
+            top: -21px;
+            right: 0;
+            z-index: 2;
+            -webkit-transition: all 0.3s ease-out 0.5s;
+            width: 40px;
+            height: 40px;
+            border-radius: 100%;
+            background-color: #fff;
+            border: 2px solid #ddd;
+            color: #fff;
+        }
+
+        .step-progress .step-slider .step-slider-item:before {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 0%;
+          height: 3px;
+          background-color: #ddd;
+          z-index: 1;
+          -webkit-transition: all 0.5s ease-out;
+        }
+
+        .step-progress .step-slider .step-slider-item.active:before {
+          width: 100%;
+          background-color: #2343F2;
+        }
+
+        .step-progress .step-slider .step-slider-item.active:after {
+          content: '\f00c';
+          border-color: #2343F2;
+          background-color: #2343F2;
+          font-family: 'FontAwesome';
+          text-align: center;
+          line-height: 34px;
+          color: #fff;
+        }
+
+        .step-content {
+          padding: 16px 0;
+        }
+
+        .step-content .step-content-foot {
+          text-align: right;
+        }
+
+        .step-content .step-content-foot button {
+          border: 0;
+          padding: 8px 16px;
+          background-color: #CFD8DC;
+          font-size: 14px;
+          border-radius: 6px;
+          outline: 0;
+        }
+
+        .step-content .step-content-foot button:active {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .step-content .step-content-foot button.out {
+          display: none;
+        }
+
+        .step-content .step-content-foot button.disable {
+          background-color: #ECEFF1;
+        }
+
+        .step-content .step-content-foot button.active {
+            background-color: #2343F2;
+            color: #fff;
+            border: 1px solid #2343F2;
+        }
+
+
+        .step-content .step-content-body {
+          padding: 16px 0;
+          text-align: center;
+          font-size: 18px;
+        }
+
+        .step-content .step-content-body.out {
+          display: none;
+        }
+        form.form-inner.step-progress-form {
+            max-width: 100%!important;
+        }
+    </style>
 <section class="dashboard-section inner-login-shape">
     <main class="main-bg employer-form-page">
         <section class="form-inner-wrapper">
@@ -51,6 +193,16 @@ span.select2-selection.select2-selection--single {
                     </div> -->
                     <form class="form-inner" method="POST" enctype="multipart/form-data">
                         @csrf
+
+                    <div class="card step-progress">
+                        <div class="step-slider">
+                            <div data-id="step1" class="step-slider-item"></div>
+                            <div data-id="step2" class="step-slider-item"></div>
+                            <div data-id="step3" class="step-slider-item"></div>                                  
+                        </div>
+                        <div class="step-content">
+                        <div id="step1" class="step-content-body">
+
                         <div class="row justify-content-between">
                             <div class="col-auto"><h2 class="form-heading mt-4">Profile Details</h2></div>
                             <div class="col-auto">
@@ -87,22 +239,7 @@ span.select2-selection.select2-selection--single {
                                 <input type="number" name="contact" class="form-control form-input" value="{{$employer->contact}}" placeholder="Phone Number"
                                     aria-label="Phone Number">
                             </div>
-                        </div>
-                        <div class="row form-group">
-                            <label for="inputPhone" class="form-label">Role in the company</label>
-                            <div class="col-12">
-                                <select name="company_role" class="form-select" aria-label="Default select example">
-                                    
-                                    <option {{ 'HR Manager'== $employer->profile->company_role ? 'selected':''}} value="HR Manager">HR Manager</option>
-                                    <option {{ 'Branch Manager'== $employer->profile->company_role ? 'selected':''}} value="Branch Manager">Branch Manager</option>
-                                    <option {{ 'CEO'== $employer->profile->company_role ? 'selected':''}} value="CEO">CEO</option>
-                                    <option {{ 'CTO'== $employer->profile->company_role ? 'selected':''}} value="CTO">CTO</option>
-                                    <option {{ 'MD'== $employer->profile->company_role ? 'selected':''}} value="MD">MD</option>
-                                    <option {{ 'Company Owner'== $employer->profile->company_role ? 'selected':''}} value="Company Owner">Company Owner</option>
-                                   
-                                </select>
-                            </div>
-                        </div>
+                        </div>  
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Notification Option</label>
                             <div class="col-12">
@@ -114,19 +251,9 @@ span.select2-selection.select2-selection--single {
                                 </select>
                             </div>
                         </div>
-                        <div class="row form-group">
-                            <div class="col-12">
-                                @if($employer->profile->intro_video == null)
-                                <img src="{{asset('image/video.png')}}" onclick="$('#profile_video_input').click()">
-                                @else
-                                <video class="" controls>
-                                    <source src="{{asset('image/company_videos/'.$employer->profile->intro_video)}}" type="video/mp4">
-                                </video>
-                                @endif
-                            </div>
-                            <input type="file" class="d-none" name="profile_video" id="profile_video_input">
-                        </div>
                         
+    </div>
+    <div id="step2" class="step-content-body out">
                         <h2 class="form-heading">Company Details</h2>
                         <div class="row form-group">
                             <label for="inputCompanyName" class="form-label">Company Name*</label>
@@ -159,6 +286,34 @@ span.select2-selection.select2-selection--single {
                                 </select>
                             </div>
                         </div>
+                        <div class="row form-group">
+                            <label for="inputPhone" class="form-label">Role in the company</label>
+                            <div class="col-12">
+                                <select name="company_role" class="form-select" aria-label="Default select example">
+                                    
+                                    <option {{ 'HR Manager'== $employer->profile->company_role ? 'selected':''}} value="HR Manager">HR Manager</option>
+                                    <option {{ 'Branch Manager'== $employer->profile->company_role ? 'selected':''}} value="Branch Manager">Branch Manager</option>
+                                    <option {{ 'CEO'== $employer->profile->company_role ? 'selected':''}} value="CEO">CEO</option>
+                                    <option {{ 'CTO'== $employer->profile->company_role ? 'selected':''}} value="CTO">CTO</option>
+                                    <option {{ 'MD'== $employer->profile->company_role ? 'selected':''}} value="MD">MD</option>
+                                    <option {{ 'Company Owner'== $employer->profile->company_role ? 'selected':''}} value="Company Owner">Company Owner</option>
+                                   
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="inputPhone" class="form-label">Company Introduction</label>
+                            <div class="col-12">
+                                @if($employer->profile->intro_video == null)
+                                <img src="{{asset('image/video.png')}}" onclick="$('#profile_video_input').click()">
+                                @else
+                                <video class="" controls>
+                                    <source src="{{asset('image/company_videos/'.$employer->profile->intro_video)}}" type="video/mp4">
+                                </video>
+                                @endif
+                            </div>
+                            <input type="file" class="d-none" name="profile_video" id="profile_video_input">
+                        </div>
                         <!-- <div class="row form-group">
                             <label for="inputTitle" class="form-label">Title*</label>
                             <div class="col-12">
@@ -177,62 +332,76 @@ span.select2-selection.select2-selection--single {
                             <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{$employer->profile->description}}</textarea>
                         </div> -->
                         <!-- </div> -->
-
+    </div>
+    <div id="step3" class="step-content-body out">
                         <h2 class="form-heading">Company Location</h2>
-                        <div class="row form-group">
-                            <label for="check" class="form-label">Country*</label>
-                            <div class="col-12">
-                                <select name="country" class="form-select country-list" aria-label="Default select example">
-                                    <option selected> </option>
-                                    @foreach($countries as $country)
-                                    <option {{$country->id == $employer->profile->country ? 'selected': ''}} value="{{$country->id}}">{{$country->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <label for="check" class="form-label">State*</label>
-                            <div class="col-12">
-                                <select name="state" class="form-select state-list" aria-label="Default select example">
-                                    <option selected> </option>
-                                    @foreach($states as $state)
-                                    <option {{$state->id == $employer->profile->state ? 'selected': ''}} value="{{$state->id}}">{{$state->name}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <label for="check" class="form-label">City*</label>
-                            <div class="col-12">
-                                <select name="city" class="form-select city-list" aria-label="Default select example">
-                                    <option selected> </option>
-                                    @foreach($cities as $city)
-                                    <option {{$city->id == $employer->profile->city ? 'selected' : ''}} value="{{$city->id}}">{{$city->city}}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                        <div class="row form-group">
-                            <label for="check" class="form-label">Zip*</label>
-                            <div class="col-12">
-                                <input type="number" name="zip" class="form-control form-input" value="{{$employer->profile->zip}}" placeholder="Zip Code"
-                                    aria-label="Zip Code">
-                            </div>
-                        </div>
                         <div class="row form-group">
                             <label for="check" class="form-label">Location*</label>
                             <div class="col-12">
                             <textarea name="address" class="form-control" id="exampleFormControlTextarea1" rows="5">{{$employer->profile->address}}</textarea>
                             </div>
                         </div>
+                        <div class="row form-group">
+                            <div class="col-md-6">
+                                <label for="check" class="form-label">Country*</label>
+                                <!-- <div class=""> -->
+                                    <select name="country" class="form-select country-list" aria-label="Default select example">
+                                        <option selected> </option>
+                                        @foreach($countries as $country)
+                                        <option {{$country->id == $employer->profile->country ? 'selected': ''}} value="{{$country->id}}">{{$country->name}}</option>
+                                        @endforeach
+                                    </select>
+                                <!-- </div> -->
+                            </div>
+                            <div class="col-md-6">
+                                <label for="check" class="form-label">State*</label>
+                                <!-- <div class=""> -->
+                                    <select name="state" class="form-select state-list" aria-label="Default select example">
+                                        <option selected> </option>
+                                        @foreach($states as $state)
+                                        <option {{$state->id == $employer->profile->state ? 'selected': ''}} value="{{$state->id}}">{{$state->name}}</option>
+                                        @endforeach
+                                    </select>
+                                <!-- </div> -->
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                        <div class="col-md-6">
+                            <label for="check" class="form-label">City*</label>
+                            <!-- <div class="col-12"> -->
+                                <select name="city" class="form-select city-list" aria-label="Default select example">
+                                    <option selected> </option>
+                                    @foreach($cities as $city)
+                                    <option {{$city->id == $employer->profile->city ? 'selected' : ''}} value="{{$city->id}}">{{$city->city}}</option>
+                                    @endforeach
+                                </select>
+                            <!-- </div> -->
+                        </div>
+                        <div class="col-md-6">
+                            <label for="check" class="form-label">Zip*</label>
+                            <!-- <div class="col-12"> -->
+                                <input type="number" name="zip" class="form-control form-input" value="{{$employer->profile->zip}}" placeholder="Zip Code"
+                                    aria-label="Zip Code">
+                            <!-- </div> -->
+                        </div>
+                        </div>
                         <div class="row btn-form-wrapper">
                             <div class=" d-grid col-sm-9">
                                 <input type="submit" class="btn  btn-primary btn-form" value="Publish">
                             </div>
                             <div class="col-sm-3  text-center text-sm-end">
-                                <input type="reset" class="btn py-3 px-0 bg-transparent  fw-bold btn-skip" value="Cancel">
+                                <input type="reset" class="btn py-3 px-0 bg-transparent fw-bold btn-skip" value="Cancel">
                             </div>
                         </div>
+                        </div>
+                        <div id="stepLast" class="step-content-body out">Completed</div>    
+                        <div class="step-content-foot">
+                            <button type="button" class="active" name="prev">Prev</button>
+                            <button type="button" class="active" name="next">Next</button>
+                            <!-- <button type="button" class="active out btn btn-primary btn-form" name="finish">Submit</button> -->
+                        </div>
+                    </div>
+                    </div>
                     </form>
                 </div>
             </div>
@@ -240,4 +409,67 @@ span.select2-selection.select2-selection--single {
     </main> 
 </section>
 
+@endsection
+@section('scripts')
+<script type="text/javascript">
+        // see https://css-tricks.com/forums/topic/back-button-on-multistep-form/
+        $(function() {
+          var step = 0;
+          var stepItem = $('.step-progress .step-slider .step-slider-item');
+
+          $('.step-content .step-content-foot button[name="prev"]').addClass('out');
+          
+          // Step Next
+          $('.step-content .step-content-foot button[name="next"]').on('click', function() {
+            var instance = $(this);
+            if (stepItem.length - 1 < step) {
+              return;
+            }
+            $('.step-content .step-content-foot button[name="prev"]').removeClass('out');
+            if (step == (stepItem.length - 2)) {
+              instance.addClass('out');
+              instance.siblings('button[name="finish"]').removeClass('out');
+            }
+            $(stepItem[step]).addClass('active');
+            $('.step-content-body').addClass('out');
+            step++;
+            $('#' + stepItem[step].dataset.id).removeClass('out');
+          });
+
+          // Step Last
+          $('.step-content .step-content-foot button[name="finish"]').on('click', function() {
+            if (step == stepItem.length) {
+              return;
+            }
+            $(stepItem[stepItem.length - 1]).addClass('active');
+            $('.step-content-body').addClass('out');
+            $('#stepLast').removeClass('out');
+            step++;
+          });
+
+          // Step Previous
+          $('.step-content .step-content-foot button[name="prev"]').on('click', function() {
+            if (step - 1 < 0) {
+              return;
+            }
+            step--;
+            var instance = $(this);
+            if (step <= (stepItem.length - 1)) {
+              instance.siblings('button[name="next"]').removeClass('out');
+              instance.siblings('button[name="finish"]').addClass('out');
+            }
+            $('.step-content-body').addClass('out');
+            $('#' + stepItem[step].dataset.id).removeClass('out');
+            if (step === 0) {
+              stepItem.removeClass('active');
+            } else {
+              stepItem.filter(':gt(' + (step - 1) + ')').removeClass('active');
+            }
+            if (step - 1 < 0) {
+              $('.step-content .step-content-foot button[name="prev"]').addClass('out');
+            }
+          });
+        });
+
+    </script>
 @endsection

@@ -4,6 +4,7 @@
       integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
       crossorigin="anonymous"></script>
    <script src="{{asset('assets/js/custom.js')}}"></script>
+   <script src="{{asset('js/datatables.min.js')}}"></script>
    <script src="{{asset('js/toastr.js')}}"></script>
    <script src="{{asset('js/select2.min.js')}}"></script>
 
@@ -13,6 +14,7 @@
          $('.country-list').select2()
          $('.state-list').select2()
          $('.city-list').select2()
+         $('#applicants_table').DataTable()
       })
       function checkPasswordValidation()
       {

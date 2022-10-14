@@ -24,7 +24,9 @@ class Vacancy extends Model
         'salary_offer',
         'min_exp',
         'skills',
-        'job_type'
+        'job_type',
+        'images',
+        'video'
     ];
 
     public function user()

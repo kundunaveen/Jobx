@@ -77,23 +77,34 @@ class JobPostController extends Controller
             else{
                 $skills = null;
             }
-            Vacancy::create([
-                'employer_id' => auth()->user()->id,
-                'job_title' => $request->job_title,
-                'country' => $request->country,
-                'state' => $request->state,
-                'city' => $request->city,
-                'location' => $request->address,
-                'zip' => $request->zip,
-                'department' => $request->department,
-                'job_role' => $request->job_role,
-                'description' => $request->description,
-                'min_exp' => $request->min_exp,
-                'salary_offer' => $request->salary_offer,
-                'skills' => $skills,
-                'job_type' => $request->job_type
 
-            ]);
+            $input = $request->all();
+            $input['employer_id'] = auth()->user()->id;
+            $input['skills'] = $skills;
+            if($request->images_input)
+            {
+                $request->validate([
+                    'images_input' => 'mimes:jpeg,bmp,png,jpg|max:2000'
+                ]);
+
+                $file = $request->file('images_input');
+                $fileName = date('YmdHis').$file->getClientOriginalName();
+                $destinationPath = public_path().'/image/company_images';
+                $file->move($destinationPath,$fileName);
+                $input['images'] = $fileName;
+            }
+            if($request->file('video_input')){
+                $request->validate([
+                    'video_input' => 'mimes:mp4|max:20000'
+                ]);
+                $fileVideo = $request->file('video_input');
+                $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
+                $destinationPath = public_path().'/image/company_videos';
+                $fileVideo->move($destinationPath,$videoFileName);
+                $input['video'] = $videoFileName;
+            }
+            $input['location'] = $request->address;
+            Vacancy::create($input);
             return redirect(route('employer.posted.jobs'))->with('success', 'Job Posted Successfully');
         }
         $skills = JobSkill::all();
@@ -145,21 +156,47 @@ class JobPostController extends Controller
             else{
                 $skills = null;
             }
-            $vacancy->update([
-                'job_title' => $request->job_title,
-                'country' => $request->country,
-                'state' => $request->state,
-                'city' => $request->city,
-                'location' => $request->address,
-                'zip' => $request->zip,
-                'department' => $request->department,
-                'job_role' => $request->job_role,
-                'description' => $request->description,
-                'min_exp' => $request->min_exp,
-                'salary_offer' => $request->salary_offer,
-                'skills' => $skills,
-                'job_type' => $request->job_type
-            ]);
+            $input = $request->all();
+            if($request->images_input)
+            {
+                $request->validate([
+                    'images_input' => 'mimes:jpeg,bmp,png,jpg|max:2000'
+                ]);
+
+                $file = $request->file('images_input');
+                $fileName = date('YmdHis').$file->getClientOriginalName();
+                $destinationPath = public_path().'/image/company_images';
+                $file->move($destinationPath,$fileName);
+                $input['images'] = $fileName;
+            }
+            if($request->file('video_input')){
+                $request->validate([
+                    'video_input' => 'mimes:mp4|max:20000'
+                ]);
+                $fileVideo = $request->file('video_input');
+                $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
+                $destinationPath = public_path().'/image/company_videos';
+                $fileVideo->move($destinationPath,$videoFileName);
+                $input['video'] = $videoFileName;
+            }
+            $input['skills'] = $skills;
+            $input['location'] = $request->address;
+            $vacancy->update($input);
+            // $vacancy->update([
+            //     'job_title' => $request->job_title,
+            //     'country' => $request->country,
+            //     'state' => $request->state,
+            //     'city' => $request->city,
+            //     'location' => $request->address,
+            //     'zip' => $request->zip,
+            //     'department' => $request->department,
+            //     'job_role' => $request->job_role,
+            //     'description' => $request->description,
+            //     'min_exp' => $request->min_exp,
+            //     'salary_offer' => $request->salary_offer,
+            //     'skills' => $skills,
+            //     'job_type' => $request->job_type
+            // ]);
             
 
             return redirect(route('employer.posted.jobs'))->with('success', 'Job Post Updated Successfully');

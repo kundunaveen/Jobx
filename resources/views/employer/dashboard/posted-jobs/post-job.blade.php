@@ -52,7 +52,7 @@ span.select2-selection.select2-selection--single {
                     <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75"
                         aria-valuemin="0" aria-valuemax="100"></div>
                 </div> -->
-                <form class="form-inner" method="POST">
+                <form class="form-inner" method="POST" enctype="multipart/form-data">
                     @csrf
                     <h2 class="form-heading">Post New Job</h2>
                     <div class="row form-group">
@@ -209,6 +209,28 @@ span.select2-selection.select2-selection--single {
                         <div class="col-12">
                         <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="5"></textarea>
                         @error('description')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="check" class="form-label">Images</label>
+                        <div class="col-12">
+                            <input type="file" name="images_input[]" multiple class="form-control">
+                        @error('images')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="check" class="form-label">Video</label>
+                        <div class="col-12">
+                            <input type="file" name="video_input"  class="form-control">
+                        @error('video')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
