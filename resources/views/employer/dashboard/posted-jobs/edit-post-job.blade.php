@@ -215,7 +215,7 @@ span.select2-selection.select2-selection--single {
                         <div class="row form-group">
                             <label for="check" class="form-label">Images</label>
                             <div class="col-12">
-                                <input type="file" name="images_input[]" multiple class="form-control">
+                                <input type="file" name="images_input" class="form-control">
                             @error('images')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -223,9 +223,8 @@ span.select2-selection.select2-selection--single {
                             @enderror
                             </div>
                             @if($vacancy->images !=null)
-                            <div>
-                                    <img src="{{asset('image/company_videos/'.$vacancy->images)}}" type="video/mp4">
-                                
+                            <div class="mt-3">
+                                <img src="{{asset('image/company_images/'.$vacancy->images)}}" style="object-fit:cover;width:100%;height:350px" type="video/mp4">        
                             </div>
                             @endif
                         </div>
@@ -240,7 +239,7 @@ span.select2-selection.select2-selection--single {
                             @enderror
                             </div>
                             @if($vacancy->video !=null)
-                            <div>
+                            <div class="mt-3">
                                 <video class="" controls>
                                     <source src="{{ asset('image/company_videos/'.$vacancy->video) }}" type="video/mp4">
                                 </video>
