@@ -3,12 +3,220 @@
 Job Search
 @endsection
 @section('content')
+<style>
+   .range-price .wrapper{
+      position: relative;
+      width: 100%;
+      background-color: transparent;
+      padding: 0;
+      border-radius: 10px;
+   }
+   .range-price input[type="range"]{
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      width: 100%;
+      outline: none;
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      background-color: transparent;
+      pointer-events: none;
+      left: 0;
+   }
+   .range-price .slider-track {
+      width: 100%;
+      height: 5px;
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      border-radius: 5px;
+      left: 0;
+   }
+   .range-price input[type="range"]::-webkit-slider-runnable-track{
+      -webkit-appearance: none;
+      height: 5px;
+   }
+   .range-price input[type="range"]::-moz-range-track{
+      -moz-appearance: none;
+      height: 5px;
+   }
+   .range-price input[type="range"]::-ms-track{
+      appearance: none;
+      height: 5px;
+   }
+   .range-price input[type="range"]::-webkit-slider-thumb{
+      -webkit-appearance: none;
+      height: 25px;
+      width: 25px;
+      background-color: #fff;
+      cursor: pointer;
+      margin-top: -9px;
+      pointer-events: auto;
+      border-radius: 50%;
+      box-shadow: 1px 1px 4px 2px #ddd;
+   }
+   .range-price input[type="range"]::-moz-range-thumb{
+      -webkit-appearance: none;
+      height: 25px;
+      width: 25px;
+      cursor: pointer;
+      border-radius: 50%;
+      background-color: #fff;
+      pointer-events: auto;
+      box-shadow: 1px 1px 4px 2px #ddd;
+   }
+   .range-price input[type="range"]::-ms-thumb{
+      appearance: none;
+      height: 25px;
+      width: 25px;
+      cursor: pointer;
+      border-radius: 50%;
+      background-color: #fff;
+      pointer-events: auto;
+      box-shadow: 1px 1px 4px 2px #ddd;
+   }
+   .range-price input[type="range"]:active::-webkit-slider-thumb{
+      background-color: #ffffff;
+      border: 3px solid #3264fe;
+   }
+   .range-price .values {
+      background-color: transparent;
+      width: 100%;
+      position: relative;
+      margin: auto;
+      padding: 0;
+      border-radius: 5px;
+      text-align: left;
+      font-weight: 500;
+      font-size: 15px;
+      color: #000;
+      padding-bottom: 60px;
+   }
+   .range-price .range_span:before {
+      position: relative;
+      content: '$';
+      color: #000;
+      left: 0;
+      font-size: 15px;
+      font-weight: bold;
+      padding-right: 4px;
+   }
+   .range-price .range_span {
+      padding-left: 4px;
+   }
+   /*range exp*/
+   .range-price-exp .wrapper{
+      position: relative;
+      width: 100%;
+      background-color: transparent;
+      padding: 0;
+      border-radius: 10px;
+   }
+   .range-price-exp input[type="range"]{
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      width: 100%;
+      outline: none;
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      background-color: transparent;
+      pointer-events: none;
+      left: 0;
+   }
+   .range-price-exp .slider-track-exp {
+      width: 100%;
+      height: 5px;
+      position: absolute;
+      margin: auto;
+      top: 0;
+      bottom: 0;
+      border-radius: 5px;
+      left: 0;
+   }
+   .range-price-exp input[type="range"]::-webkit-slider-runnable-track{
+      -webkit-appearance: none;
+      height: 5px;
+   }
+   .range-price-exp input[type="range"]::-moz-range-track{
+      -moz-appearance: none;
+      height: 5px;
+   }
+   .range-price-exp input[type="range"]::-ms-track{
+      appearance: none;
+      height: 5px;
+   }
+   .range-price-exp input[type="range"]::-webkit-slider-thumb{
+      -webkit-appearance: none;
+      height: 25px;
+      width: 25px;
+      background-color: #fff;
+      cursor: pointer;
+      margin-top: -9px;
+      pointer-events: auto;
+      border-radius: 50%;
+      box-shadow: 1px 1px 4px 2px #ddd;
+   }
+   .range-price-exp input[type="range"]::-moz-range-thumb{
+      -webkit-appearance: none;
+      height: 25px;
+      width: 25px;
+      cursor: pointer;
+      border-radius: 50%;
+      background-color: #fff;
+      pointer-events: auto;
+      box-shadow: 1px 1px 4px 2px #ddd;
+   }
+   .range-price-exp input[type="range"]::-ms-thumb{
+      appearance: none;
+      height: 25px;
+      width: 25px;
+      cursor: pointer;
+      border-radius: 50%;
+      background-color: #fff;
+      pointer-events: auto;
+      box-shadow: 1px 1px 4px 2px #ddd;
+   }
+   .range-price-exp input[type="range"]:active::-webkit-slider-thumb{
+      background-color: #ffffff;
+      border: 3px solid #3264fe;
+   }
+   .range-price-exp .values {
+      background-color: transparent;
+      width: 100%;
+      position: relative;
+      margin: auto;
+      padding: 0;
+      border-radius: 5px;
+      text-align: left;
+      font-weight: 500;
+      font-size: 15px;
+      color: #000;
+      padding-bottom: 60px;
+   }
+   .range-price-exp .range_span:before {
+      position: relative;
+      color: #000;
+      left: 0;
+      font-size: 15px;
+      font-weight: bold;
+      padding-right: 4px;
+   }
+   .range-price-exp .range_span {
+      padding-left: 4px;
+   }
+</style>
 <section class="banner-section job-listing-banner inner-banner main-banner-section">
       <div class="container">
          <div class="row">
             <div class="banner-section-wrapper">
                <div class="banner-form">
-                  <form>
+                  <form action="" method="POST">
                      <div class="row">
                         <div class="col-lg-4 mb-4 mb-lg-0">
                            <label>What kind of work?</label>
@@ -72,73 +280,133 @@ Job Search
             <div class="row">
                <div class="col-lg-2 col-md-4">
                   <aside class="job-listing-aside">
-                     <h4 class="border-bottom">Details</h4>
-                     <div class="aside-filter">
-                        <h5>Schedule</h5>
-                        <ul class="list-group">
-                           <li class="list-group-item">
-                              <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                              <label class="form-check-label" for="exampleCheck1">Full Time</label>
-                           </li>
-                           <li class="list-group-item">
-                              <input type="checkbox" class="form-check-input" id="exampleCheck2">
-                              <label class="form-check-label" for="exampleCheck2">Part Time</label>
-                           </li>
-                           <li class="list-group-item">
-                              <input type="checkbox" class="form-check-input" id="exampleCheck3">
-                              <label class="form-check-label" for="exampleCheck3">Project Work</label>
-                           </li>
-                           <li class="list-group-item">
-                              <input type="checkbox" class="form-check-input" id="exampleCheck4">
-                              <label class="form-check-label" for="exampleCheck4">Volunteering</label>
-                           </li>
-                           <li class="list-group-item">
-                              <input type="checkbox" class="form-check-input" id="exampleCheck5">
-                              <label class="form-check-label" for="exampleCheck5">Internship</label>
-                           </li>
-                        </ul>
-                     </div>
-                     <div class="aside-filter">
-                        <h5>Employment Type</h5>
-                        <ul class="list-group">
-                           <li class="list-group-item">
-                              <input type="checkbox" class="form-check-input" id="exampleCheck6">
-                              <label class="form-check-label" for="exampleCheck6">Full Day</label>
-                           </li>
-                           <li class="list-group-item">
-                              <input type="checkbox" class="form-check-input" id="exampleCheck7">
-                              <label class="form-check-label" for="exampleCheck7">Shift Work</label>
-                           </li>
-                           <li class="list-group-item">
-                              <input type="checkbox" class="form-check-input" id="exampleCheck8">
-                              <label class="form-check-label" for="exampleCheck8">Distant Work</label>
-                           </li>
-                        </ul>
-                     </div>
-                     <div class="aside-filter">
-                        <h5>Professional Level</h5>
-                        <ul class="list-group">
-                           <li class="list-group-item">
-                              <input type="checkbox" class="form-check-input" id="exampleCheck9">
-                              <label class="form-check-label" for="exampleCheck9">Trainee</label>
-                           </li>
-                           <li class="list-group-item">
-                              <input type="checkbox" class="form-check-input" id="exampleCheck10">
-                              <label class="form-check-label" for="exampleCheck10">Senior</label>
-                           </li>
-                           <li class="list-group-item">
-                              <input type="checkbox" class="form-check-input" id="exampleCheck11">
-                              <label class="form-check-label" for="exampleCheck11">Director</label>
-                           </li>
-                        </ul>
-                     </div>
+                     <form id="filter-form" method="GET" action="">                        
+                        <h4 class="border-bottom">Details</h4>
+                        <div class="aside-filter">
+                           <h5>Job Type</h5>
+                           @foreach($job_types as $job_type)
+                           <ul class="list-group">
+                              <li class="list-group-item">
+                                 <input type="checkbox" onclick="filterJobs()" class="form-check-input" id="exampleCheck1" @if(isset($_GET['job_type']) && in_array(strtolower($job_type->id), $_GET['job_type'])) checked @endif name="job_type[]" value="{{ $job_type->id}}">
+                                 <label class="form-check-label" for="exampleCheck1">{{ $job_type->value }}</label>
+                              </li>
+                           </ul>
+                           @endforeach
+                        </div>
+                        <div class="aside-filter">
+                           <h5>Industries</h5>
+                           @foreach($industry as $indus)
+                              <ul class="list-group">
+                                 <li class="list-group-item">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" @if(isset($_GET['industry']) && in_array($indus->id, $_GET['industry'])) checked @endif name="industry[]" value="{{$indus->id}}">
+                                    <label class="form-check-label" title="{{$indus->value}}" for="exampleCheck1">{{Str::limit($indus->value, 15)}}</label>
+                                 </li>
+                              </ul>
+                           @endforeach                                                       
+                        </div>
+                        <div class="aside-filter">
+                           <h5>Skills</h5>
+                           <ul class="list-group">
+                              @foreach($skills as $skill)
+                              <li class="list-group-item">
+                                 <input type="checkbox" class="form-check-input" id="exampleCheck6" @if(isset($_GET['skill']) && in_array($skill->id, $_GET['skill'])) checked @endif  name="skill[]" value="{{$skill->id}}">
+                                 <label class="form-check-label" for="exampleCheck6">{{$skill->skill}}</label>
+                              </li>
+                              @endforeach
+                           </ul>
+                        </div>
+                        <div class="aside-filter">
+                           <h5>Employment Type</h5>
+                           <ul class="list-group">
+                              <li class="list-group-item">
+                                 <input type="checkbox" class="form-check-input" id="exampleCheck6" name="emp_type" value="full_day">
+                                 <label class="form-check-label" for="exampleCheck6">Full Day</label>
+                              </li>
+                              <li class="list-group-item">
+                                 <input type="checkbox" class="form-check-input" id="exampleCheck7" name="emp_type" value="shift_work">
+                                 <label class="form-check-label" for="exampleCheck7">Shift Work</label>
+                              </li>
+                              <li class="list-group-item">
+                                 <input type="checkbox" class="form-check-input" id="exampleCheck8" name="emp_type" value="distant_work">
+                                 <label class="form-check-label" for="exampleCheck8">Distant Work</label>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="aside-filter">
+                           <h5>Professional Level</h5>
+                           <ul class="list-group">
+                              <li class="list-group-item">
+                                 <input type="checkbox" class="form-check-input" id="exampleCheck9" name="professional_level[]" value="trainee">
+                                 <label class="form-check-label" for="exampleCheck9">Trainee</label>
+                              </li>
+                              <li class="list-group-item">
+                                 <input type="checkbox" class="form-check-input" id="exampleCheck10"  name="professional_level[]" value="senior">
+                                 <label class="form-check-label" for="exampleCheck10">Senior</label>
+                              </li>
+                              <li class="list-group-item">
+                                 <input type="checkbox" class="form-check-input" id="exampleCheck11" name="professional_level[]" value="director">
+                                 <label class="form-check-label" for="exampleCheck11">Director</label>
+                              </li>
+                           </ul>
+                        </div>
+                        <div class="aside-filter range-price">
+                           <h5>Salary ($)</h5>
+                           <div class="wrapper">
+                              <div class="values">
+                                 <span id="range1" class="range_span">
+                                    0 
+                                 </span>
+                                 <span> — </span>
+                                 <span id="range2" class="range_span">
+                                    99
+                                 </span>
+                              </div>
+                              <div class="container">
+                                 <div class="slider-track"></div>
+                                 <input type="range" min="0" max="99" value="0" id="slider-1" name="min_salary" oninput="slideOne()">
+                                 <input type="range" min="0" max="99" value="99" id="slider-2" name="max_salary" oninput="slideTwo()">
+                              </div>
+                           </div>
+                        </div>
+                        <div class="aside-filter range-price-exp">
+                           <h5>Experience (Yrs)</h5>
+                           <div class="wrapper">
+                              <div class="values">
+                                 <span id="range-exp1" class="range_span-exp">
+                                    0 
+                                 </span>
+                                 <span> — </span>
+                                 <span id="range-exp2" class="range_span-exp">
+                                    30
+                                 </span>
+                              </div>
+                              <div class="container">
+                                 <div class="slider-track-exp"></div>
+                                 <input type="range" min="0" max="30" value="0" id="slider-exp1" name="min_exp" oninput="slideOneExp()">
+                                 <input type="range" min="0" max="30" value="30" id="slider-exp2" name="max_exp" oninput="slideTwoExp()">
+                              </div>
+                           </div>
+                        </div>
+                        <input type="hidden" id="sortby" name="sortby">
+                        <button type="submit" class="btn btn-primary">Filter</button>
+                     </form>
                   </aside>
                </div>
                <div class="col-lg-10 col-md-8">
-                  <section class="job-listing-section ">
-                     <h4>Recomended Jobs (320)</h4>
+                  <section class="job-listing-section">
+                     <div class="row justify-content-between">
+                        <h4 class="col-auto">Recomended Jobs ({{count($jobs)}})</h4>
+                        <div class="col-md-2"> 
+                           <select onchange="setSortValue()" id="sortdropdown" class="form-control" name="sort_by">
+                              <option >Sort By</option>
+                              <option value="newest">Newest</option>
+                              <option value="highest_salary">Highest Salary</option>
+                              <option value="lowest_experience">Lowest Experience</option>
+                           </select>                                                       
+                        </div>
+                     </div>
                      <div class="row">
-                     @foreach($jobs as $job)
+                        @foreach($jobs as $job)
                         <div class="col-xl-4 col-lg-6">
                            <div class="card">
                               <div class="card-body job-profile-info">
@@ -147,269 +415,29 @@ Job Search
                                     <span class="date" style="font-size:13px">{{date('d F, Y',strtotime($job->created_at))}}</span>
                                  </figure>
                                  <article class="job-profile-article">
-                                    <h5 class="">{{$job->job_role}}</h5>
+                                    <h5 class="">{{ Str::limit($job->job_role, 25)}}</h5>
                                     <ul class="job-type list-group flex-row mb-3">
                                        <li class="list-group-item">{{$job->job_type == 'part_time'? 'Part Time':($job->job_type == 'full_time'?'Full Time':'Contract Based')}}</li>
                                        <!-- <li class="list-group-item">Part Time</li> -->
                                     </ul>
                                     <h6 class="d-flex align-items-center" style="font-size: 13px;margin-bottom: 14px;"><i
                                           class="icon-location me-2"></i>{{$job->citydetail->city.', '.$job->countrydetail->name}}</h6>
-                                    <p class="" style="font-size: 13px;padding: 0 0 30px;line-height: 22px;margin-bottom: 0;">{{$job->description}}</p>
+                                    <p class="job_description{{$job->id}}" style="font-size: 13px;padding: 0 0 30px;line-height: 22px;margin-bottom: 0;">@if(strlen($job->description)>60) {{substr($job->description ,0, 60).'...'}} <a class="read_more{{$job->id}}" onclick="readDescription('{{$job->id}}', '{{$job->description}}')" href="javascript:void(0)">Read more</a>@else {{$job->description}} @endif</p>
                                     <div class="job-btn-wrapper d-flex justify-content-between">
-                                       <a href="{{route('employer.edit.post.job', $job->id)}}" style="margin-left:-5px;margin-right:10px" class="btn col-6 btn-default ">Edit</a>
+                                       <a href="{{route('employee.job.apply', $job->id)}}" class="btn btn-lg">@if( in_array($job->id, $applied_jobs)) Applied @else Apply @endif</a>
+                                       <a href="{{route('employee.job.preview', $job->id)}}" class="btn btn-default btn-md">Preview Job</a>
+                                       <!-- <a href="{{route('employer.edit.post.job', $job->id)}}" style="margin-left:-5px;margin-right:10px" class="btn col-6 btn-default ">Apply</a>
                                        <button onclick="deleteVacancy('{{$job->id}}')" type="button" class="btn btn-danger col-6 btn-sm" data-bs-toggle="modal"
-                                          data-bs-target="#staticBackdrop">Delete</button>
+                                          data-bs-target="#staticBackdrop">Preview Job</button> -->
                                     </div>
                                  </article>
                               </div>
                            </div>
                         </div>
-                       @endforeach
-                        <!-- <div class="col-xl-4 col-lg-6">
-                           <div class="card">
-                              <div class="card-body job-profile-info">
-                                 <figure class="job-profile-figure d-flex align-items-center justify-content-between">
-                                    <img src="assets/images/apple.png" width="51" height="50" alt="">
-                                    <span class="date">20 May, 2022</span>
-                                 </figure>
-                                 <article class="job-profile-article">
-                                    <h5 class="">Front End Developer</h5>
-                                    <ul class="job-type list-group flex-row mb-3">
-                                       <li class="list-group-item">Full Time</li>
-                                       <li class="list-group-item">Part Time</li>
-                                    </ul>
-                                    <h6 class="d-flex align-items-center"><i
-                                          class="icon-location me-2"></i>Amsterdam</h6>
-                                    <p class="">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                       industry. Lorem Ipsum
-                                       has been the industry's standard dummy text ever since the 1500s</p>
-                                    <div class="job-btn-wrapper d-flex justify-content-between">
-                                       <button type="button" class="btn btn-lg">Apply</button>
-                                       <button type="button" class="btn btn-default btn-md" data-bs-toggle="modal"
-                                          data-bs-target="#staticBackdrop">Preview Job</button>
-                                    </div>
-                                 </article>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6">
-                           <div class="card">
-                              <div class="card-body job-profile-info">
-                                 <figure class="job-profile-figure d-flex align-items-center justify-content-between">
-                                    <img src="assets/images/google-circle.png" width="51" height="50" alt="">
-                                    <span class="date">20 May, 2022</span>
-                                 </figure>
-                                 <article class="job-profile-article">
-                                    <h5 class="">Front End Developer</h5>
-                                    <ul class="job-type list-group flex-row mb-3">
-                                       <li class="list-group-item">Full Time</li>
-                                       <li class="list-group-item">Part Time</li>
-                                    </ul>
-                                    <h6 class="d-flex align-items-center"><i
-                                          class="icon-location me-2"></i>Amsterdam</h6>
-                                    <p class="">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                       industry. Lorem Ipsum
-                                       has been the industry's standard dummy text ever since the 1500s</p>
-                                    <div class="job-btn-wrapper d-flex justify-content-between">
-                                       <button type="button" class="btn btn-lg">Apply</button>
-                                       <button type="button" class="btn btn-default btn-md" data-bs-toggle="modal"
-                                          data-bs-target="#staticBackdrop">Preview Job</button>
-                                    </div>
-                                 </article>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6">
-                           <div class="card">
-                              <div class="card-body job-profile-info">
-                                 <figure class="job-profile-figure d-flex align-items-center justify-content-between">
-                                    <img src="assets/images/amazon.png" width="51" height="50" alt="">
-                                    <span class="date">20 May, 2022</span>
-                                 </figure>
-                                 <article class="job-profile-article">
-                                    <h5 class="">Front End Developer</h5>
-                                    <ul class="job-type list-group flex-row mb-3">
-                                       <li class="list-group-item">Full Time</li>
-                                       <li class="list-group-item">Part Time</li>
-                                    </ul>
-                                    <h6 class="d-flex align-items-center"><i
-                                          class="icon-location me-2"></i>Amsterdam</h6>
-                                    <p class="">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                       industry. Lorem Ipsum
-                                       has been the industry's standard dummy text ever since the 1500s</p>
-                                    <div class="job-btn-wrapper d-flex justify-content-between">
-                                       <button type="button" class="btn btn-lg">Apply</button>
-                                       <button type="button" class="btn btn-default btn-md" data-bs-toggle="modal"
-                                          data-bs-target="#staticBackdrop">Preview Job</button>
-                                    </div>
-                                 </article>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6">
-                           <div class="card">
-                              <div class="card-body job-profile-info">
-                                 <figure class="job-profile-figure d-flex align-items-center justify-content-between">
-                                    <img src="assets/images/amazon.png" width="51" height="50" alt="">
-                                    <span class="date">20 May, 2022</span>
-                                 </figure>
-                                 <article class="job-profile-article">
-                                    <h5 class="">Front End Developer</h5>
-                                    <ul class="job-type list-group flex-row mb-3">
-                                       <li class="list-group-item">Full Time</li>
-                                       <li class="list-group-item">Part Time</li>
-                                    </ul>
-                                    <h6 class="d-flex align-items-center"><i
-                                          class="icon-location me-2"></i>Amsterdam</h6>
-                                    <p class="">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                       industry. Lorem Ipsum
-                                       has been the industry's standard dummy text ever since the 1500s</p>
-                                    <div class="job-btn-wrapper d-flex justify-content-between">
-                                       <button type="button" class="btn btn-lg">Apply</button>
-                                       <button type="button" class="btn btn-default btn-md" data-bs-toggle="modal"
-                                          data-bs-target="#staticBackdrop">Preview Job</button>
-                                    </div>
-                                 </article>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6">
-                           <div class="card">
-                              <div class="card-body job-profile-info">
-                                 <figure class="job-profile-figure d-flex align-items-center justify-content-between">
-                                    <img src=" assets/images/google-circle.png" width="51" height="50" alt="">
-                                    <span class="date">20 May, 2022</span>
-                                 </figure>
-                                 <article class="job-profile-article">
-                                    <h5 class="">Front End Developer</h5>
-                                    <ul class="job-type list-group flex-row mb-3">
-                                       <li class="list-group-item">Full Time</li>
-                                       <li class="list-group-item">Part Time</li>
-                                    </ul>
-                                    <h6 class="d-flex align-items-center"><i
-                                          class="icon-location me-2"></i>Amsterdam</h6>
-                                    <p class="">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                       industry. Lorem Ipsum
-                                       has been the industry's standard dummy text ever since the 1500s</p>
-                                    <div class="job-btn-wrapper d-flex justify-content-between">
-                                       <button type="button" class="btn btn-lg">Apply</button>
-                                       <button type="button" class="btn btn-default btn-md" data-bs-toggle="modal"
-                                          data-bs-target="#staticBackdrop">Preview Job</button>
-                                    </div>
-                                 </article>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6">
-                           <div class="card">
-                              <div class="card-body job-profile-info">
-                                 <figure class="job-profile-figure d-flex align-items-center justify-content-between">
-                                    <img src="assets/images/apple.png " width="51" height="50" alt="">
-                                    <span class="date">20 May, 2022</span>
-                                 </figure>
-                                 <article class="job-profile-article">
-                                    <h5 class="">Front End Developer</h5>
-                                    <ul class="job-type list-group flex-row mb-3">
-                                       <li class="list-group-item">Full Time</li>
-                                       <li class="list-group-item">Part Time</li>
-                                    </ul>
-                                    <h6 class="d-flex align-items-center"><i
-                                          class="icon-location me-2"></i>Amsterdam</h6>
-                                    <p class="">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                       industry. Lorem Ipsum
-                                       has been the industry's standard dummy text ever since the 1500s</p>
-                                    <div class="job-btn-wrapper d-flex justify-content-between">
-                                       <button type="button" class="btn btn-lg">Apply</button>
-                                       <button type="button" class="btn btn-default btn-md" data-bs-toggle="modal"
-                                          data-bs-target="#staticBackdrop">Preview Job</button>
-                                    </div>
-                                 </article>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6">
-                           <div class="card">
-                              <div class="card-body job-profile-info">
-                                 <figure class="job-profile-figure d-flex align-items-center justify-content-between">
-                                    <img src="assets/images/google-circle.png" width="51" height="50" alt="">
-                                    <span class="date">20 May, 2022</span>
-                                 </figure>
-                                 <article class="job-profile-article">
-                                    <h5 class="">Front End Developer</h5>
-                                    <ul class="job-type list-group flex-row mb-3">
-                                       <li class="list-group-item">Full Time</li>
-                                       <li class="list-group-item">Part Time</li>
-                                    </ul>
-                                    <h6 class="d-flex align-items-center"><i
-                                          class="icon-location-icon me-2"></i>Amsterdam</h6>
-                                    <p class="">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                       industry. Lorem Ipsum
-                                       has been the industry's standard dummy text ever since the 1500s</p>
-                                    <div class="job-btn-wrapper d-flex justify-content-between">
-                                       <button type="button" class="btn btn-lg">Apply</button>
-                                       <button type="button" class="btn btn-default btn-md" data-bs-toggle="modal"
-                                          data-bs-target="#staticBackdrop">Preview Job</button>
-                                    </div>
-                                 </article>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6">
-                           <div class="card">
-                              <div class="card-body job-profile-info">
-                                 <figure class="job-profile-figure d-flex align-items-center justify-content-between">
-                                    <img src="assets/images/apple.png" width="51" height="50" alt="">
-                                    <span class="date">20 May, 2022</span>
-                                 </figure>
-                                 <article class="job-profile-article">
-                                    <h5 class="">Front End Developer</h5>
-                                    <ul class="job-type list-group flex-row mb-3">
-                                       <li class="list-group-item">Full Time</li>
-                                       <li class="list-group-item">Part Time</li>
-                                    </ul>
-                                    <h6 class="d-flex align-items-center"><i
-                                          class="icon-location-icon me-2"></i>Amsterdam</h6>
-                                    <p class="">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                       industry. Lorem Ipsum
-                                       has been the industry's standard dummy text ever since the 1500s</p>
-                                    <div class="job-btn-wrapper d-flex justify-content-between">
-                                       <button type="button" class="btn btn-lg">Apply</button>
-                                       <button type="button" class="btn btn-default btn-md" data-bs-toggle="modal"
-                                          data-bs-target="#staticBackdrop">Preview Job</button>
-                                    </div>
-                                 </article>
-                              </div>
-                           </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-6">
-                           <div class="card ">
-                              <div class="card-body job-profile-info">
-                                 <figure class="job-profile-figure d-flex align-items-center justify-content-between">
-                                    <img src="assets/images/amazon.png" width="51" height="50" alt="">
-                                    <span class="date">20 May, 2022</span>
-                                 </figure>
-                                 <article class="job-profile-article">
-                                    <h5 class="">Front End Developer</h5>
-                                    <ul class="job-type list-group flex-row mb-3">
-                                       <li class="list-group-item">Full Time</li>
-                                       <li class="list-group-item">Part Time</li>
-                                    </ul>
-                                    <h6 class="d-flex align-items-center"><i
-                                          class="icon-location-icon me-2"></i>Amsterdam</h6>
-                                    <p class="">Lorem Ipsum is simply dummy text of the printing and typesetting
-                                       industry. Lorem Ipsum
-                                       has been the industry's standard dummy text ever since the 1500s</p>
-                                    <div class="job-btn-wrapper d-flex justify-content-between">
-                                       <button type="button" class="btn btn-lg">Apply</button>
-                                       <button type="button" class="btn btn-default btn-md" data-bs-toggle="modal"
-                                          data-bs-target="#staticBackdrop">Preview Job</button>
-                                    </div>
-                                 </article>
-                              </div>
-                           </div>
-                        </div> -->
+                       @endforeach                       
                      </div>
-                  </section>
+                     {{ $jobs->links() }}
+                  </section>                 
                </div>
             </div>
       </section>
@@ -516,4 +544,88 @@ Job Search
       </div>
       <!-- model Start Here-->
    </main>
+@endsection
+
+@section('scripts')
+<script>
+   function setSortValue(){
+      $('#sortby').val($('#sortdropdown').val())
+      $('#filter-form').submit()
+   }
+   window.onload = function(){
+      slideOne();
+      slideTwo();
+      slideOneExp();
+      slideTwoExp();
+   }
+
+   let sliderOne = document.getElementById("slider-1");
+   let sliderTwo = document.getElementById("slider-2");
+   let displayValOne = document.getElementById("range1");
+   let displayValTwo = document.getElementById("range2");
+   let minGap = 0;
+   let sliderTrack = document.querySelector(".slider-track");
+   let sliderMaxValue = document.getElementById("slider-1").max;
+
+   function slideOne(){
+      if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap){
+         sliderOne.value = parseInt(sliderTwo.value) - minGap;
+      }
+      displayValOne.textContent = sliderOne.value;
+      fillColor();
+   }
+   function slideTwo(){
+      if(parseInt(sliderTwo.value) - parseInt(sliderOne.value) <= minGap){
+         sliderTwo.value = parseInt(sliderOne.value) + minGap;
+      }
+      displayValTwo.textContent = sliderTwo.value;
+      fillColor();
+   }
+   function fillColor(){
+      percent1 = (sliderOne.value / sliderMaxValue) * 100;
+      percent2 = (sliderTwo.value / sliderMaxValue) * 100;
+      sliderTrack.style.background = `linear-gradient(to right, #dadae5 ${percent1}% , #3264fe ${percent1}% , #3264fe ${percent2}%, #dadae5 ${percent2}%)`;
+   }
+
+
+   let sliderOneExp = document.getElementById("slider-exp1");
+   let sliderTwoExp = document.getElementById("slider-exp2");
+   let displayValOneExp = document.getElementById("range-exp1");
+   let displayValTwoExp = document.getElementById("range-exp2");
+   let minGapExp = 0;
+   let sliderTrackExp = document.querySelector(".slider-track-exp");
+   let sliderMaxValueExp = document.getElementById("slider-exp1").max;
+
+   function slideOneExp(){
+      if(parseInt(sliderTwoExp.value) - parseInt(sliderOneExp.value) <= minGapExp){
+         sliderOneExp.value = parseInt(sliderTwoExp.value) - minGapExp;
+      }
+      displayValOneExp.textContent = sliderOneExp.value;
+      fillColorExp();
+   }
+   function slideTwoExp(){
+      if(parseInt(sliderTwoExp.value) - parseInt(sliderOneExp.value) <= minGapExp){
+         sliderTwoExp.value = parseInt(sliderOneExp.value) + minGapExp;
+      }
+      displayValTwoExp.textContent = sliderTwoExp.value;
+      fillColorExp();
+   }
+   function fillColorExp(){
+      percentExp1 = (sliderOneExp.value / sliderMaxValueExp) * 100;
+      percentExp2 = (sliderTwoExp.value / sliderMaxValueExp) * 100;
+      sliderTrackExp.style.background = `linear-gradient(to right, #dadae5 ${percentExp1}% , #3264fe ${percentExp1}% , #3264fe ${percentExp2}%, #dadae5 ${percentExp2}%)`;
+   }
+
+   /* read more and less */
+
+   function readDescription(id, description)
+   {
+      $('.job_description'+id).html(description+` <a onclick="readLess('${id}','${description}')" href="javascript:void(0)">Read less</a>` )
+   }
+
+   function readLess(id, description)
+   {
+      $('.job_description'+id).html(description.substr(0,60)+`... <a onclick="readDescription('${id}','${description}')" href="javascript:void(0)">Read more</a>`)
+   }
+</script>
 @endsection

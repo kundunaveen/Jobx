@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Models\Vacancy;
 use App\Models\State;
 use App\Models\JobSkill;
+use App\Models\User;
 use App\Models\MasterAttribute;
 use Session;
 use App\Models\City;
@@ -77,7 +78,6 @@ class JobPostController extends Controller
             else{
                 $skills = null;
             }
-
             $input = $request->all();
             $input['employer_id'] = auth()->user()->id;
             $input['skills'] = $skills;
@@ -182,21 +182,6 @@ class JobPostController extends Controller
             $input['skills'] = $skills;
             $input['location'] = $request->address;
             $vacancy->update($input);
-            // $vacancy->update([
-            //     'job_title' => $request->job_title,
-            //     'country' => $request->country,
-            //     'state' => $request->state,
-            //     'city' => $request->city,
-            //     'location' => $request->address,
-            //     'zip' => $request->zip,
-            //     'department' => $request->department,
-            //     'job_role' => $request->job_role,
-            //     'description' => $request->description,
-            //     'min_exp' => $request->min_exp,
-            //     'salary_offer' => $request->salary_offer,
-            //     'skills' => $skills,
-            //     'job_type' => $request->job_type
-            // ]);
             
 
             return redirect(route('employer.posted.jobs'))->with('success', 'Job Post Updated Successfully');
@@ -212,5 +197,14 @@ class JobPostController extends Controller
             'status' => 'success',
             'message' => 'Job vacancy has been deleted successfully'
         ]);
+    }
+
+    public function jobCandidates(Request $request, $id)
+    {
+        $job = Vacancy::find($id);
+        $requireSkills = $job->skills;
+        $employee = User::where('id',4)->orWhere('id',5)->get();
+        return view('employer.dashboard.posted-jobs.view-candidates', compact('job', 'employee'));
+        
     }
 }

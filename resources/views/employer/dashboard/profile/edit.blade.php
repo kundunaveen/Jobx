@@ -301,37 +301,23 @@ span.select2-selection.select2-selection--single {
                                 </select>
                             </div>
                         </div>
+                        
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Company Introduction</label>
                             <div class="col-12">
-                                @if($employer->profile->intro_video == null)
-                                <img src="{{asset('image/video.png')}}" onclick="$('#profile_video_input').click()">
-                                @else
+                                <input type="file" class="form-control" name="profile_video" id="profile_video_input">
+                            </div>
+                        </div>
+                        @if($employer->profile->intro_video != null)
+                        <div class="row">
+                            <div class="col-12">
                                 <video class="" controls>
                                     <source src="{{asset('image/company_videos/'.$employer->profile->intro_video)}}" type="video/mp4">
                                 </video>
-                                @endif
                             </div>
-                            <input type="file" class="d-none" name="profile_video" id="profile_video_input">
                         </div>
-                        <!-- <div class="row form-group">
-                            <label for="inputTitle" class="form-label">Title*</label>
-                            <div class="col-12">
-                                <select class="form-select" aria-label="Default select example">
-                                    <option selected>Enter your title</option>
-                                    <option value="1">One</option>
-                                    <option value="2">Two</option>
-                                    <option value="3">Three</option>
-                                </select>
-                            </div>
-                        </div> -->
-
-                        <!-- <div class="row form-group">
-                            <div class="col-12">
-                            <label for="exampleFormControlTextarea1" class="form-label">Describe*</label>
-                            <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="5">{{$employer->profile->description}}</textarea>
-                        </div> -->
-                        <!-- </div> -->
+                        @endif
+                       
     </div>
     <div id="step3" class="step-content-body out">
                         <h2 class="form-heading">Company Location</h2>
@@ -394,11 +380,21 @@ span.select2-selection.select2-selection--single {
                             </div>
                         </div>
                         </div>
-                        <div id="stepLast" class="step-content-body out">Completed</div>    
+                        <div id="stepLast" class="step-content-body out">
+                            <div class="form-inner text-center">
+                                <h2>Profile Updated </h2>
+                                <p>Profile updated successfully ! Now you can search suitable job according to your skills.</p>
+                                <div class="mt-5">
+                                    <a type="button" class="btn btn-primary " href="{{route('employer.dashboard')}}">
+                                        Back To Dashboard
+                                    </a>
+                                </div>
+                            </div>
+                        </div>    
                         <div class="step-content-foot">
                             <button type="button" class="active" name="prev">Prev</button>
                             <button type="button" class="active" name="next">Next</button>
-                            <!-- <button type="button" class="active out btn btn-primary btn-form" name="finish">Submit</button> -->
+                            <button type="button" class="active out btn btn-primary btn-form" name="finish">Submit</button>
                         </div>
                     </div>
                     </div>

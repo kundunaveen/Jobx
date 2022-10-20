@@ -56,7 +56,7 @@
                                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="true">&nbsp;&nbsp;&nbsp;</a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" data-popper-placement="bottom-end">
                                         <!-- <li class="nav-link"><a class="dropdown-item nav-item" href="{{ route('admin.setting') }}"><i class="navbar-icon icon-recuirment"></i> Setting</a></li> -->
-                                        <li class="nav-link"><a class="dropdown-item nav-item" href="{{route('employer.profile.edit')}}"> Profile</a></li>
+                                        <li class="nav-link"><a class="dropdown-item nav-item" href="{{route('employee.profile.edit')}}"> Profile</a></li>
                                         <li class="nav-link"><a class="dropdown-item nav-item" data-bs-toggle="modal" data-bs-target="#changePasswordModal" href="javascript:void(0)"> Change Password</a></li>
                                         <li class="nav-link"><a class="dropdown-item nav-item" href="javascript:void(0)" onclick="$('#logout_form').submit()"> Logout</a></li>
                                     </ul>
@@ -73,3 +73,43 @@
         @csrf
     </form>
     <!--========= Header Section End Here =========-->
+        <!-- ========== Change Password Modal ========== -->
+<div class="modal fade" id="changePasswordModal" tabindex="-1" role="dialog" aria-labelledby="changePasswordModalTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content" style="border-radius:10px">
+      <div class="modal-header">
+        <h5 class="modal-title" id="changePasswordModalTitle">Change Password</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="{{ route('employee.change.password') }}" method="POST" class="login-form" id="change_password_form">
+      <div class="modal-body">
+            @csrf
+            <div class="form-group mt-2">
+                <input type="password" name="current_password" class="form-control @error('current_password') is-invalid @enderror" placeholder="Enter Current Password" required id="current_password"/>
+                <span class="text-danger" role="alert">
+                    <strong id="current_password_error_message" class="error_messages"></strong>
+                </span>
+            </div>
+            <div class="form-group mt-4">
+                <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Enter New Password" required id="new_password"/>
+                <span class="text-danger" role="alert">
+                    <strong id="new_password_error_message" class="error_messages"></strong>
+                </span>
+            </div>
+            <div class="form-group mt-4 mb-2">
+                <input type="password" name="password_confirmation" class="form-control @error('password') is-invalid @enderror" placeholder="Confirm Password" required id="confirm_password" />
+            </div>
+            <!-- <div class="d-grid login-button my-4">
+                <button type="submit" class="btn btn-form btn-primary btn-md">Change Password</button>
+            </div> -->
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-sm btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" onclick="checkPasswordValidation()" class="btn btn-sm btn-primary">Update Password</button>
+        </div>
+    </form>
+    </div>
+  </div>
+</div>

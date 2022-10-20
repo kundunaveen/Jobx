@@ -119,7 +119,7 @@
                     <div class="card h-100">
                         <article class="profile-summary card-body">
                         <h4 class="d-flex justify-content-between border-bottom"><strong>Profile Summary
-                            </strong><span><i class="icon-edit"></i></span></h4>
+                            </strong><span><a href="{{route('employee.profile.edit')}}"><i class="icon-edit"></i></a></span></h4>
                         <p class="profile-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat gravida
                             interdum
                             mauris vitae at

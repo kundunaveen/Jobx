@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Employer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AppliedJob;
+use Session;
 
 class ApplicationController extends Controller
 {
@@ -17,7 +18,22 @@ class ApplicationController extends Controller
     {
         $applications = AppliedJob::whereHas('vacancy', function($q){
             $q->where('employer_id', auth()->user()->id);
-        });
+        })->get();
         return view('employer.dashboard.applications.index', compact('applications'));
     }
+
+    public function updateStatus(Request $request)
+    {
+        $appJob =  AppliedJob::find($request->id);
+        $appJob->status = $request->status;
+        $appJob->save();
+        // dd($appJob);
+
+        
+        Session::flash('info', 'Applicant status updated successfully');
+        return response()->json([
+            'status' => 'success'
+        ]);
+    }
+
 }

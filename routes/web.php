@@ -72,7 +72,13 @@ Route::post('/admin/job-skills/delete', [App\Http\Controllers\Admin\SkillControl
 //####################### Employee Routes #########################//
 Route::get('/employee-profile', [App\Http\Controllers\Employee\HomeController::class, 'home'])->name('employee.home');
 Route::get('/employee/job-search', [App\Http\Controllers\Employee\HomeController::class, 'searchJob'])->name('search.job');
+Route::any('/employee-profile/edit', [App\Http\Controllers\Employee\HomeController::class, 'editProfile'])->name('employee.profile.edit');
+Route::post('/employee/change-password', [App\Http\Controllers\Employee\HomeController::class, 'changePassword'])->name('employee.change.password');
+Route::post('/employee/check-password-validation', [App\Http\Controllers\Employee\HomeController::class, 'checkPasswordValidation']);
 Route::get('/employee-dashboard', [App\Http\Controllers\Employee\DashboardController::class, 'home'])->name('employee.dashboard');
+Route::post('/employee/job-filter', [App\Http\Controllers\Employee\JobPostController::class, 'jobsFilterBy'])->name('employee.jobs-filtersBy');
+Route::any('/employee/job-applied/{id}', [App\Http\Controllers\Employee\JobPostController::class, 'applyJob'])->name('employee.job.apply');
+Route::get('/employee/job-preview/{id}', [App\Http\Controllers\Employee\JobPostController::class, 'previewJob'])->name('employee.job.preview');
 
 //####################### Employer Routes #########################//
 
@@ -84,8 +90,10 @@ Route::post('/employer/check-password-validation', [App\Http\Controllers\Employe
 Route::any('/employer/post-job', [App\Http\Controllers\Employer\JobPostController::class, 'create'])->name('employer.post.job');
 Route::any('/employer/edit-post-job/{id}', [App\Http\Controllers\Employer\JobPostController::class, 'edit'])->name('employer.edit.post.job');
 Route::get('/employer/posted-jobs', [App\Http\Controllers\Employer\JobPostController::class, 'index'])->name('employer.posted.jobs');
+Route::get('/employer/job/candidates/{id}', [App\Http\Controllers\Employer\JobPostController::class, 'jobCandidates'])->name('employer.job.candidates');
 Route::post('/employer/post-job/delete', [App\Http\Controllers\Employer\JobPostController::class, 'delete'])->name('employer.deleteVacancy');
 Route::get('/employer/applicants', [App\Http\Controllers\Employer\ApplicationController::class, 'index'])->name('employer.applications');
+Route::post('employer/update-applicant-status', [App\Http\Controllers\Employer\ApplicationController::class, 'updateStatus']);
 
 Route::post('/employer-profile/getStates', [App\Http\Controllers\Employer\HomeController::class, 'getStates']);
 Route::post('/employer-profile/getCities', [App\Http\Controllers\Employer\HomeController::class, 'getCities']);

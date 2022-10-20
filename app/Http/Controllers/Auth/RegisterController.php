@@ -88,8 +88,7 @@ class RegisterController extends Controller
         else{
             RoleUser::create([
                 'user_id' => $user->id,
-                'role_id' => 2
-                // 'role_id' => 3
+                'role_id' => 3
             ]);
         }
 
