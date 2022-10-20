@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\MasterAttribute;
 use Session;
 use App\Models\City;
+use Validator;
 
 class JobPostController extends Controller
 {
@@ -72,39 +73,60 @@ class JobPostController extends Controller
                 'job_role' => 'required|string',
                 'zip' => 'required'
             ]);
-            if($request->skills && count($request->skills) > 0){
-                $skills = implode(',',$request->skills);
-            }
-            else{
-                $skills = null;
-            }
-            $input = $request->all();
-            $input['employer_id'] = auth()->user()->id;
-            $input['skills'] = $skills;
-            if($request->images_input)
-            {
-                $request->validate([
-                    'images_input' => 'mimes:jpeg,bmp,png,jpg|max:2000'
-                ]);
 
-                $file = $request->file('images_input');
-                $fileName = date('YmdHis').$file->getClientOriginalName();
-                $destinationPath = public_path().'/image/company_images';
-                $file->move($destinationPath,$fileName);
-                $input['images'] = $fileName;
+           
+
+            try {
+
+                if($request->skills && count($request->skills) > 0){
+                    $skills = implode(',',$request->skills);
+                }
+                else{
+                    $skills = null;
+                }
+                $input = $request->all();
+                $input['employer_id'] = auth()->user()->id;
+                $input['skills'] = $skills;
+                $imagesarr = [];
+                if(count($request->images_input) > 0)
+                {
+                    // $request->validate([
+                    //     'images_input.*' => 'mimes:jpeg,bmp,png,jpg|max:2000'
+                    // ]);
+                    foreach($request->images_input as $image){
+    
+                        $file = $image;
+                        $fileName = date('YmdHis').$file->getClientOriginalName();
+                        $destinationPath = public_path().'/image/company_images';
+                        $file->move($destinationPath,$fileName);
+                        
+                        array_push($imagesarr, $fileName);
+                    }
+                    $imagesstr = implode(',',$imagesarr);
+                    $input['images'] = $imagesstr;
+                    // dd('Image: error'. $imagesstr);
+                }
+                
+                if($request->file('video_input')){
+                    $request->validate([
+                        'video_input' => 'mimes:mp4|max:20000'
+                    ]);
+                    $fileVideo = $request->file('video_input');
+                    $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
+                    $destinationPath = public_path().'/image/company_videos';
+                    $fileVideo->move($destinationPath,$videoFileName);
+                    $input['video'] = $videoFileName;
+                }
+
+                $input['location'] = $request->address;
+                Vacancy::create($input);
+                
+            } catch (\Exception $e) {
+                dd('Catch: error'.$e->getMessage());
             }
-            if($request->file('video_input')){
-                $request->validate([
-                    'video_input' => 'mimes:mp4|max:20000'
-                ]);
-                $fileVideo = $request->file('video_input');
-                $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
-                $destinationPath = public_path().'/image/company_videos';
-                $fileVideo->move($destinationPath,$videoFileName);
-                $input['video'] = $videoFileName;
-            }
-            $input['location'] = $request->address;
-            Vacancy::create($input);
+
+            
+            
             return redirect(route('employer.posted.jobs'))->with('success', 'Job Posted Successfully');
         }
         $skills = JobSkill::all();

@@ -86,6 +86,7 @@ span.select2-selection.select2-selection--single {
                             @enderror
                         </div>
                     </div>
+                    
                     <div class="row form-group">
                         <label for="inputPhone" class="form-label">Job Role</label>
                         <div class="col-12">
@@ -218,7 +219,7 @@ span.select2-selection.select2-selection--single {
                     <div class="row form-group">
                         <label for="check" class="form-label">Images</label>
                         <div class="col-12">
-                            <input type="file" name="images_input" multiple class="form-control">
+                            <input type="file" name="images_input[]" multiple class="form-control">
                         @error('images')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
