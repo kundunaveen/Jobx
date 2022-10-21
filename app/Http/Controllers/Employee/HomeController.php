@@ -235,4 +235,22 @@ class HomeController extends Controller
             return redirect()->back();
         }
     }
+
+    public function getStates(Request $request)
+    {
+        $states = State::where('country_id', $request->country_id)->get();
+        return response()->json([
+            'status' => 'success',
+            'states' => $states,
+        ]);
+    }
+
+    public function getCities(Request $request)
+    {
+        $cities = city::where('state_id', $request->state_id)->get();
+        return response()->json([
+            'status' => 'success',
+            'cities' => $cities
+        ]);
+    }
 }
