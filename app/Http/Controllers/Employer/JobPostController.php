@@ -166,11 +166,21 @@ class JobPostController extends Controller
         {
             $request->validate([
                 'job_title' => 'required|string|max:129',
-                'address' => 'required|string',
+                'city' => 'nullable',
+                'state' => 'nullable',
+                'country' => 'required',
                 'zip' => 'required|numeric',
+                'address' => 'required|string',
                 'department' => 'required|string|max:129',
                 'job_role' => 'required|string',
-                'zip' => 'required'
+                'description' => 'nullable',
+                'salary_offer' => 'required',
+                'min_exp' => 'required',
+                'skills' => 'required|array',
+                'job_type' => 'required',
+                'images_input' => 'array',
+                'images_input.*' => 'image|max:2000|mimes:'.implode(',', Vacancy::SUPPORTED_IMAGE_MIME_TYPE),
+                'video_input' => 'mimes:mp4|max:20000'
             ]);
             if($request->skills && count($request->skills) > 0){
                 $skills = implode(',',$request->skills);

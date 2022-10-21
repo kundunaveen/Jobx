@@ -57,7 +57,6 @@ Employer | Post Job
                     <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75"
                         aria-valuemin="0" aria-valuemax="100"></div>
                 </div> -->
-                    @include('layouts.messages.error')
                     <form class="form-inner" method="POST" enctype="multipart/form-data">
                         @csrf
                         <h2 class="form-heading">Post New Job</h2>
@@ -82,10 +81,9 @@ Employer | Post Job
                             <div class="col-12">
                                 <input type="text" name="job_title" value="{{ old('job_title') }}" class="form-control form-input" placeholder="Job Title" aria-label="Job Title">
                                 @error('job_title')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
@@ -95,10 +93,9 @@ Employer | Post Job
                             <div class="col-12">
                                 <input type="text" name="job_role" value="{{ old('job_role') }}" class="form-control form-input" placeholder="Job Role" aria-label="Job Role">
                                 @error('job_role')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
@@ -107,10 +104,9 @@ Employer | Post Job
                             <div class="col-12">
                                 <input type="text" name="department" value="{{ old('department') }}" class="form-control form-input" placeholder="Department" aria-label="Department">
                                 @error('department')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
@@ -124,10 +120,9 @@ Employer | Post Job
                                     @endforeach
                                 </select>
                                 @error('job_type')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
@@ -137,10 +132,9 @@ Employer | Post Job
                             <div class="col-12">
                                 <input type="number" step="0.01" name="min_exp" value="{{ old('min_exp') }}" class="form-control form-input" placeholder="Minimum Experience" aria-label="Department">
                                 @error('min_exp')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
@@ -150,10 +144,9 @@ Employer | Post Job
                             <div class="col-12">
                                 <input type="number" step="0.01" name="salary_offer" value="{{ old('salary_offer') }}" class="form-control form-input" placeholder="Salary Offer" aria-label="Department">
                                 @error('salary_offer')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
@@ -167,10 +160,9 @@ Employer | Post Job
                                     @endforeach
                                 </select>
                                 @error('skills')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
@@ -181,10 +173,9 @@ Employer | Post Job
                                 <label for="exampleFormControlTextarea1" class="form-label">Address*</label>
                                 <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="5">{{ old('address') }}</textarea>
                                 @error('address')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
@@ -197,10 +188,9 @@ Employer | Post Job
                                     @endforeach
                                 </select>
                                 @error('country')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
@@ -213,10 +203,9 @@ Employer | Post Job
                                     @endforeach
                                 </select>
                                 @error('state')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
@@ -229,10 +218,9 @@ Employer | Post Job
                                     @endforeach
                                 </select>
                                 @error('city')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
@@ -241,10 +229,9 @@ Employer | Post Job
                             <div class="col-12">
                                 <input type="number" name="zip" class="form-control form-input" value="{{ old('zip') }}" placeholder="Zip Code" aria-label="Zip Code">
                                 @error('zip')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
@@ -253,10 +240,9 @@ Employer | Post Job
                             <div class="col-12">
                                 <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="5">{{ old('description') }}</textarea>
                                 @error('description')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
@@ -264,12 +250,12 @@ Employer | Post Job
                             <label for="check" class="form-label">Images</label>
                             <div class="col-12">
                                 <input type="file" name="images_input[]" multiple class="form-control" id="files">
+                                <small class="text-secondary">Maximum file size 2 MB (.jpeg, .jpg, .png files are accepted)</small>
                                 <div class="row thumbnails"></div>
-                                @error('images_input')                              
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                @error('images_input')
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
@@ -277,11 +263,11 @@ Employer | Post Job
                             <label for="check" class="form-label">Video</label>
                             <div class="col-12">
                                 <input type="file" name="video_input" class="form-control">
+                                <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>
                                 @error('video')
-                                <div class="alert alert-danger alert-dismissible fade show">
-                                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
-                                </div>
+                                </small>
                                 @enderror
                             </div>
                         </div>
