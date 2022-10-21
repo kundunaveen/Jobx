@@ -39,4 +39,68 @@ function checkPasswordValidation()
             }
          })
       }
+
+      $('.country-list').on('change', function(){
+        $.ajax({
+            'url':'{{url("/employee/get-states")}}',
+            'type':'POST',
+            'data':{
+                '_token':'{{csrf_token()}}',
+                'country_id':$('.country-list').val()
+            },
+            success:function(response){
+                let options = ''
+               //  let options1 = ''
+                console.log(response)
+                response.states.forEach(function(item){
+                    options = options + `<option value="${item.id}">${item.name}</option>`
+                })
+                $('.state-list').empty()
+                $('.city-list').empty()
+                $('.state-list').append(options)
+                getCities()
+            }
+        })
+    })
+
+    function getCities()
+    {
+      $.ajax({
+            'url':'{{url("/employee/get-cities")}}',
+            'type':'POST',
+            'data':{
+                '_token':'{{csrf_token()}}',
+                'country_id':$('.country-list').val(),
+                'state_id':$('.state-list').val(),
+            },
+            success:function(response){
+                let options = ''
+                response.cities.forEach(function(item){
+                    options = options + `<option value="${item.id}">${item.city}</option>`
+                })
+                $('.city-list').empty()
+                $('.city-list').append(options)
+            }
+        })
+    }
+    
+    $('.state-list').on('change', function(){
+        $.ajax({
+            'url':'{{url("/employee/get-cities")}}',
+            'type':'POST',
+            'data':{
+                '_token':'{{csrf_token()}}',
+                'country_id':$('.country-list').val(),
+                'state_id':$('.state-list').val(),
+            },
+            success:function(response){
+                let options = ''
+                response.cities.forEach(function(item){
+                    options = options + `<option value="${item.id}">${item.city}</option>`
+                })
+                $('.city-list').empty()
+                $('.city-list').append(options)
+            }
+        })
+    })
 </script>
