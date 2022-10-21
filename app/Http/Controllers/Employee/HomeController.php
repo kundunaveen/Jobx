@@ -147,7 +147,8 @@ class HomeController extends Controller
                 'gender' => 'required'
             ]);
             
-            $user_data = $request->all();
+            try {
+                $user_data = $request->all();
             if($request->password && $request->password != null){
                 $request->validate([
                     'password' => 'min:8|max:100'
@@ -169,7 +170,6 @@ class HomeController extends Controller
                 $resume->move($destinationPath,$resumeName);
                
             }
-
             $profile_data = [];
             $profile_data['gender'] = $request->gender;
             $profile_data['user_id'] = auth()->user()->id;
@@ -205,12 +205,14 @@ class HomeController extends Controller
             }
             if($request->file('employee_image'))
             {
-                $profile_data['logo'] = $fileName;
+                //$profile_data['logo'] = $fileName;
+                $profile_data['logo'] = '';
             }
 
             if($request->file('employee_intro'))
             {
-                $profile_data['intro_video'] = $videoFileName;
+                //$profile_data['intro_video'] = $videoFileName;
+                $profile_data['intro_video'] = '';
             }
 
             if($request->file('resume'))
@@ -219,6 +221,8 @@ class HomeController extends Controller
             }
 
             $profile = Profile::where('user_id', auth()->user()->id)->first();
+            
+            
             if($profile == null)
             {
                 Profile::create($profile_data);
@@ -226,7 +230,14 @@ class HomeController extends Controller
             else{
                 $profile->update($profile_data);
             }
+            
             return redirect(route('employee.profile.edit'))->with('success', 'Employee details updated successfully');
+                
+            } catch (\Exception $e) {
+                dd($e->getMessage());
+            }
+            
+            
         }
         if($employee->roleUser->role->role == 'employee'){
             return view('employee.profile.edit', compact('employee', 'languages', 'allLanguages', 'genders', 'countries', 'states', 'cities', 'skills', 'allSkills'));

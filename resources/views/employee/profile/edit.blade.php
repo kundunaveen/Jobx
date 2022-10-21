@@ -37,6 +37,7 @@ span.select2.select2-container.select2-container--default{
                         <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75"
                             aria-valuemin="0" aria-valuemax="100"></div>
                     </div> -->
+                    @include('layouts.messages.success')
                     <form class="form-inner" method="POST">
                         @csrf
                         <h2 class="form-heading">Profile Details</h2>
