@@ -87,7 +87,9 @@ Route::get('/employer-dashboard', [App\Http\Controllers\Employer\DashboardContro
 Route::any('/employer-profile/edit', [App\Http\Controllers\Employer\HomeController::class, 'editProfile'])->name('employer.profile.edit');
 Route::post('/employer/change-password', [App\Http\Controllers\Employer\HomeController::class, 'changePassword'])->name('employer.change.password');
 Route::post('/employer/check-password-validation', [App\Http\Controllers\Employer\HomeController::class, 'checkPasswordValidation']);
+
 Route::any('/employer/post-job', [App\Http\Controllers\Employer\JobPostController::class, 'create'])->name('employer.post.job');
+
 Route::any('/employer/edit-post-job/{id}', [App\Http\Controllers\Employer\JobPostController::class, 'edit'])->name('employer.edit.post.job');
 Route::get('/employer/posted-jobs', [App\Http\Controllers\Employer\JobPostController::class, 'index'])->name('employer.posted.jobs');
 Route::get('/employer/job/candidates/{id}', [App\Http\Controllers\Employer\JobPostController::class, 'jobCandidates'])->name('employer.job.candidates');

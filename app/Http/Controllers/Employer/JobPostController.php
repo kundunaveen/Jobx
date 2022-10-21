@@ -67,14 +67,22 @@ class JobPostController extends Controller
         {
             $request->validate([
                 'job_title' => 'required|string|max:129',
-                'address' => 'required|string',
+                'city' => 'nullable',
+                'state' => 'nullable',
+                'country' => 'required',
                 'zip' => 'required|numeric',
+                'address' => 'required|string',
                 'department' => 'required|string|max:129',
                 'job_role' => 'required|string',
-                'zip' => 'required'
+                'description' => 'nullable',
+                'salary_offer' => 'required',
+                'min_exp' => 'required',
+                'skills' => 'required|array',
+                'job_type' => 'required',
+                'images_input' => 'required|array',
+                'images_input.*' => 'image|max:2000|mimes:'.implode(',', Vacancy::SUPPORTED_IMAGE_MIME_TYPE),
+                'video_input' => 'mimes:mp4|max:20000'
             ]);
-
-           
 
             try {
 
@@ -87,30 +95,21 @@ class JobPostController extends Controller
                 $input = $request->all();
                 $input['employer_id'] = auth()->user()->id;
                 $input['skills'] = $skills;
-                $imagesarr = [];
-                if(count($request->images_input) > 0)
+
+                $image_files = [];
+                if($request->hasFile('images_input'))
                 {
-                    // $request->validate([
-                    //     'images_input.*' => 'mimes:jpeg,bmp,png,jpg|max:2000'
-                    // ]);
-                    foreach($request->images_input as $image){
-    
-                        $file = $image;
-                        $fileName = date('YmdHis').$file->getClientOriginalName();
-                        $destinationPath = public_path().'/image/company_images';
-                        $file->move($destinationPath,$fileName);
-                        
-                        array_push($imagesarr, $fileName);
-                    }
-                    $imagesstr = implode(',',$imagesarr);
-                    $input['images'] = $imagesstr;
-                    // dd('Image: error'. $imagesstr);
+                    foreach($request->file('images_input') as $file)
+                    {
+                        $name = time().rand(1,100).'.'.$file->extension();
+                        $file->move(public_path('/image/company_images'), $name);  
+                        $image_files[] = $name;  
+                    }                    
                 }
                 
-                if($request->file('video_input')){
-                    $request->validate([
-                        'video_input' => 'mimes:mp4|max:20000'
-                    ]);
+                $input['images'] = implode(',', $image_files);
+                
+                if($request->hasFile('video_input')){
                     $fileVideo = $request->file('video_input');
                     $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
                     $destinationPath = public_path().'/image/company_videos';
@@ -122,12 +121,13 @@ class JobPostController extends Controller
                 Vacancy::create($input);
                 
             } catch (\Exception $e) {
-                dd('Catch: error'.$e->getMessage());
-            }
-
+                dd($e->getMessage());
+                return back()->with([
+                    'error' => $e->getMessage()
+                ]);
+            }            
             
-            
-            return redirect(route('employer.posted.jobs'))->with('success', 'Job Posted Successfully');
+            return redirect()->route('employer.posted.jobs')->with('success', 'Job Posted Successfully');
         }
         $skills = JobSkill::all();
         $job_types = MasterAttribute::whereHas('masterCategory', function($q){

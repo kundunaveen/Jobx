@@ -26,6 +26,8 @@
    <link rel="stylesheet" href="{{asset('assets/scss/main.css')}}" />
    <link rel="stylesheet" href="{{asset('css/toastr.css')}}" />
    <link rel="stylesheet" href="{{asset('css/select2.min.css')}}" />
+   <link rel="stylesheet" href="{{asset('css/custom-dev.css')}}" />
+   @stack('header_scripts')
 </head>
 
 
@@ -40,6 +42,7 @@
     @include('employer.dashboard.partials.footer')
     @include('employer.dashboard.partials.script')
     @yield('scripts')
+    @stack('footer_scripts')
 </body>
 
 </html>
