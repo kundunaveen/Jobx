@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddMediaInVacanciesTable extends Migration
+class UpdateMultipleColumnsTypeInVacanciesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,9 @@ class AddMediaInVacanciesTable extends Migration
     public function up()
     {
         Schema::table('vacancies', function (Blueprint $table) {
-            $table->longText('images')->nullable();
-            $table->longText('video')->nullable();
+            $table->unsignedBigInteger('city')->nullable()->index()->change();
+            $table->unsignedBigInteger('state')->nullable()->index()->change();
+            $table->string('description')->nullable()->change();
         });
     }
 
@@ -27,7 +28,9 @@ class AddMediaInVacanciesTable extends Migration
     public function down()
     {
         Schema::table('vacancies', function (Blueprint $table) {
-            //
+            $table->string('city');
+            $table->longText('description');
+            $table->string('state')->nullable();
         });
     }
 }

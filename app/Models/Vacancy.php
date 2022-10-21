@@ -29,6 +29,12 @@ class Vacancy extends Model
         'video'
     ];
 
+    public CONST SUPPORTED_IMAGE_MIME_TYPE = [
+        'jpeg',
+        'png',
+        'jpg'
+    ];
+
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'employer_id');
@@ -52,5 +58,9 @@ class Vacancy extends Model
     public function jobType()
     {
         return $this->belongsTo('App\Models\MasterAttribute', 'job_type');
+    }
+
+    public function getImagesInArray() :array{
+        return filled($this->images) ? explode(',', $this->images) : [];
     }
 }
