@@ -57,6 +57,7 @@ Employer | Edit Post Job
                         <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75"
                             aria-valuemin="0" aria-valuemax="100"></div>
                     </div> -->
+                    @include('layouts.messages.error')
                     <form class="form-inner" method="POST" enctype="multipart/form-data">
                         @csrf
                         <h2 class="form-heading">Edit Posted Job</h2>
@@ -81,7 +82,7 @@ Employer | Edit Post Job
                             <div class="col-12">
                                 <input type="text" name="job_title" value="{{$vacancy->job_title}}" class="form-control form-input" placeholder="Job Title" aria-label="Job Title">
                                 @error('job_title')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -92,7 +93,7 @@ Employer | Edit Post Job
                             <div class="col-12">
                                 <input type="text" name="job_role" value="{{$vacancy->job_role}}" class="form-control form-input" placeholder="Job Role" aria-label="Job Role">
                                 @error('job_role')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -103,7 +104,7 @@ Employer | Edit Post Job
                             <div class="col-12">
                                 <input type="text" name="department" value="{{$vacancy->department}}" class="form-control form-input" placeholder="Department" aria-label="Department">
                                 @error('department')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -151,7 +152,7 @@ Employer | Edit Post Job
                                 <label for="exampleFormControlTextarea1" class="form-label">Address*</label>
                                 <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="5">{{$vacancy->location}}</textarea>
                                 @error('address')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -192,7 +193,7 @@ Employer | Edit Post Job
                             <div class="col-12">
                                 <input type="number" value="{{$vacancy->zip}}" name="zip" class="form-control form-input" value="" placeholder="Zip Code" aria-label="Zip Code">
                                 @error('zip')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -203,7 +204,7 @@ Employer | Edit Post Job
                             <div class="col-12">
                                 <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="5">{{$vacancy->description}}</textarea>
                                 @error('description')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -212,19 +213,21 @@ Employer | Edit Post Job
                         <div class="row form-group">
                             <label for="check" class="form-label">Images</label>
                             <div class="col-12">
-                                <input type="file" name="images_input" class="form-control">
+                                <input type="file" name="images_input[]" multiple class="form-control" id="files">
                                 <small class="text-secondary">Maximum file size 2 MB (.jpeg, .jpg, .png files are accepted)</small>
-                                <div class="row">
+                                <div class="row thumbnails">
                                     @forelse ($vacancy->getImagesInArray() as $image)
-                                    <div class="col-md-3">
-                                        <img src="{{ asset('image/company_images/'.$image) }}" width="100" height="100" class="">
+                                    <div class="col-3 pip">
+                                        <img class='imageThumb' src="{{ asset('image/company_images/'.$image) }}" width="100" class="">
+                                        <input type="hidden" name="old_images_input[]" value="{{ $image }}">
+                                        <a class='remove remove-button mt-2 btn btn-danger btn-sm' href='javascript:void(0);' width='100'>Remove</a>
                                     </div>
                                     @empty
 
                                     @endforelse
                                 </div>
                                 @error('images')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -236,7 +239,7 @@ Employer | Edit Post Job
                                 <input type="file" name="video_input" class="form-control">
                                 <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>
                                 @error('video')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
