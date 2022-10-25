@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\MasterAttribute;
 use Session;
 use App\Models\City;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 
 class JobPostController extends Controller
@@ -195,7 +196,9 @@ class JobPostController extends Controller
 
                 $input = $request->all();
                 
-                $image_files = [];
+                $image_files = [];                
+                $old_files = [];                
+
                 if($request->hasFile('images_input'))
                 {
                     foreach($request->file('images_input') as $file)
@@ -203,12 +206,22 @@ class JobPostController extends Controller
                         $name = time().rand(1,100).'.'.$file->extension();
                         $file->move(public_path('/image/company_images'), $name);  
                         $image_files[] = $name;  
-                    }                    
+                    }
                 }
 
                 if($request->filled('old_images_input')){
                     foreach($request->old_images_input as $old_file){
                         $image_files[] = $old_file;
+                        $old_files[] = $old_file;
+                    }
+                    if(count($vacancy->getImagesInArray()) > 0){
+                        $delete_files = array_diff($vacancy->getImagesInArray(), $old_files);
+                        if(is_array($delete_files) && count($delete_files) > 0){
+                            foreach ($delete_files as $delete_file) { 
+                                unlink(public_path('image/company_images/'. $delete_file));
+                               //Storage::disk('public')->delete('image/company_images/'. $delete_file);
+                            }
+                        }                        
                     }
                 }
 
