@@ -172,7 +172,44 @@ span.select2.select2-container.select2-container--default{
                                 <input type="number" name="zip" class="form-control form-input" value="{{$employee->profile->zip}}" placeholder="Zip Code"
                                 aria-label="Zip Code">
                             </div>
-                        </div>                       
+                        </div> 
+                        <div class="row form-group">
+                            <label class="form-label">Upload your profile image </label>
+                            <div class="col-md-12">
+                                <input type="file" name="resume" class="form-control">
+                                <small class="text-secondary">Maximum file size 2 MB (.jpeg, .jpg, .png files are accepted)</small>
+                                <div class="row thumbnails">
+                                    @if($employee->profile->resume)
+                                    <small>
+                                        <a class="text-secondary" href="{{asset('image/resume/'.$employee->profile->resume)}}" target="_blank">View Resume</a>
+                                    </small>
+                                    @endif
+                                </div>                                
+                                @error('resume')
+                                    <span class="text-danger" role="alert">
+                                        <strong style="font-size: 14px;">{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="inputPhone" class="form-label">Upload video</label>
+                            <div class="col-12">
+                                <input type="file" class="form-control" name="profile_video" id="profile_video_input">
+                                <small class="text-secondary">Maximum file size 10 MB (.mp4 file only accepted)</small>
+                            </div>
+                        </div>
+                        {{--
+                        @if($employer->profile->intro_video != null)
+                        <div class="row">
+                            <div class="col-12">
+                                <video class="" controls>
+                                    <source src="{{asset('image/company_videos/'.$employer->profile->intro_video)}}" type="video/mp4">
+                                </video>
+                            </div>
+                        </div>
+                        @endif
+                        --}}                       
                         <div class="row btn-form-wrapper">
                             <div class="d-grid col-sm-6">
                                 <input type="submit" class="btn  btn-primary btn-form" value="Publish">
