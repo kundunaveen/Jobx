@@ -17,9 +17,21 @@ $(document).ready(function () {
                 fileReader.readAsDataURL(f);
             }
         });
+
+        $('#single_file').on('change', function (e) {
+            var files = e.target.files;
+            var f = files[0];
+            var fileReader = new FileReader();
+            fileReader.onload = (function (e) {
+                var file = e.target;
+                var html = "<div class='col-4 pip'><img class='imageThumb' src='" + file.result + "' title='" + file.name + "' /></div>";
+                $('.thumbnails').append(html);
+            });
+            fileReader.readAsDataURL(f);
+        });
     } else {
         alert("Your browser not support");
-    }
+    }    
 });
 
 $(document).on('click', '.remove', function () {

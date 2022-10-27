@@ -179,7 +179,7 @@ class JobPostController extends Controller
                 'skills' => 'required|array',
                 'job_type' => 'required',
                 'images_input' => 'array',
-                'images_input.*' => 'image|max:108000|mimes:'.implode(',', Vacancy::SUPPORTED_IMAGE_MIME_TYPE),
+                'images_input.*' => 'image|max:2000|mimes:'.implode(',', Vacancy::SUPPORTED_IMAGE_MIME_TYPE),
                 'old_images_input' => 'nullable',
                 'old_images_input.*' => 'string',
                 'video_input' => 'mimes:mp4|max:20000'
