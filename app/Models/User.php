@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
@@ -60,5 +61,9 @@ class User extends Authenticatable
     {
         $employers = DB::table('role_users')->join('users','users.id','role_users.user_id')->where('role_users.role_id', 2)->where('users.deleted_at', null)->select('users.*')->get();
         return $employers;
+    }
+
+    public function experience():HasMany{
+        return $this->hasMany(Experience::class);
     }
 }

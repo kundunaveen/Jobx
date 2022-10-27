@@ -38,3 +38,24 @@ $(document).ready(function () {
 $(document).on('click', '.remove', function () {
     $(this).closest('div.pip').remove();
 });
+
+// $(document).on('click', '#add_new', function () {
+//     var form_html = $('#copy_form').html();
+//     var delete_html = '<div class="row btn-form-wrapper"><div class=" d-grid col-sm-6"><a href="javascript:void(0);" class="btn btn-danger btn-form delete_form">Delete</a></div></div>';
+//     var html = form_html +''+ delete_html;
+//     $('#append_form').append(html);
+// });
+$(document).ready(function () {
+    if($('.select2_dropdown').length > 0){        
+        $('.select2_dropdown').select2();
+    }
+
+    $("#experience_to").hide();
+    $(".is_work_here").click(function() {
+        if($(this).is(":checked")) {
+            $("#experience_to").show();
+        } else {
+            $("#experience_to").hide();
+        }
+    });
+});

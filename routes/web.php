@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Employee\EmployeeExperienceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -81,6 +82,11 @@ Route::any('/employee/job-applied/{id}', [App\Http\Controllers\Employee\JobPostC
 Route::get('/employee/job-preview/{id}', [App\Http\Controllers\Employee\JobPostController::class, 'previewJob'])->name('employee.job.preview');
 Route::post('/employee/get-states', [App\Http\Controllers\Employee\HomeController::class, 'getStates']);
 Route::post('/employee/get-cities', [App\Http\Controllers\Employee\HomeController::class, 'getCities']);
+
+Route::prefix('employee')->name('employee.')->middleware('auth')->group(function(){
+    Route::get('/experience/create', [EmployeeExperienceController::class, 'create'])->name('experience.create');
+    Route::post('/experience/store', [EmployeeExperienceController::class, 'store'])->name('experience.store');
+});
 
 //####################### Employer Routes #########################//
 

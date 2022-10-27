@@ -83,7 +83,7 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="inputName4" class="form-label">Experience*</label>
+                        <label for="inputName4" class="form-label">Highest Qualification*</label>
                         <div class="col-12">
                             <input type="text" class="form-control form-input" name="experience" placeholder="Experience" value="{{$employee->profile->experience}}" aria-label="Experience">
                         </div>
@@ -194,7 +194,7 @@
                             <small class="text-secondary">Maximum file size 10 MB (.mp4 file only accepted)</small>
                             @if(optional($employee->profile)->profile_video_url)
                             <div class="row">
-                                <div class="col-4">
+                                <div class="col-6">
                                     <video controls>
                                         <source src="{{ optional($employee->profile)->profile_video_url }}" type="video/mp4">
                                     </video>
@@ -207,6 +207,15 @@
                             </span>
                             @enderror
                         </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="inputPhone" class="form-label">Experience</label>
+                        <div class="col-12">
+                            @include('employee.profile.experience.index')
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <a href="{{ route('employee.experience.create') }}" target="_blank">Add your experience</a>
                     </div>
                     <div class="row btn-form-wrapper">
                         <div class="d-grid col-sm-6">
