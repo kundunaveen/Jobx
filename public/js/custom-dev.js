@@ -19,6 +19,7 @@ $(document).ready(function () {
         });
 
         $('#single_file').on('change', function (e) {
+            $(".pip").remove();
             var files = e.target.files;
             var f = files[0];
             var fileReader = new FileReader();

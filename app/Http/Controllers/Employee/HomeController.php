@@ -15,6 +15,7 @@ use App\Models\Profile;
 use Session;
 use Illuminate\Support\Facades\Hash;
 use App\Models\AppliedJob;
+use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
 {
@@ -139,7 +140,7 @@ class HomeController extends Controller
                 'last_name' => 'required|string|max:100',
                 'gender' => 'required',
                 'profile_image' => 'nullable|image|max:2000|mimes:'.implode(',', Profile::SUPPORTED_IMAGE_MIME_TYPE),
-                'profile_video' => 'nullable|max:40000|mimes:'.implode(',', Profile::SUPPORTED_VIDEO_MIME_TYPE)
+                'profile_video' => 'nullable|max:10000|mimes:'.implode(',', Profile::SUPPORTED_VIDEO_MIME_TYPE)
             ]);
 
             try {
@@ -211,18 +212,29 @@ class HomeController extends Controller
                 }
 
                 if ($request->hasFile('profile_image')) {
-                    $file = $request->file('profile_image');
-                    $name = time() . rand(1, 100) . '.' . $file->extension();
-                    $file->move(public_path('/image/employee_images'), $name);
-                    $profile_data['logo'] = $name;
+                    $image_file = $request->file('profile_image');
+                    $status = $image_file->storeAs(
+                        Profile::IMAGE_PATH,
+                        $image_file->hashName(),
+                        config('settings.file_system_service')
+                    );
+                    if($status && optional($employee->profile)->profile_image_path){
+                        Storage::disk(config('settings.file_system_service'))->delete(optional($employee->profile)->profile_image_path);
+                    }
+                    $profile_data['logo'] = $image_file->hashName();
                 }
 
                 if($request->hasFile('profile_video')){
-                    $fileVideo = $request->file('profile_video');
-                    $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
-                    $destinationPath = public_path().'/image/employee_videos';
-                    $fileVideo->move($destinationPath,$videoFileName);
-                    $profile_data['intro_video'] = $videoFileName;
+                    $video_file = $request->file('profile_video');
+                    $status = $video_file->storeAs(
+                        Profile::VIDEO_PATH,
+                        $video_file->hashName(),
+                        config('settings.file_system_service')
+                    );
+                    if($status && optional($employee->profile)->profile_video_path){
+                        Storage::disk(config('settings.file_system_service'))->delete(optional($employee->profile)->profile_video_path);
+                    }
+                    $profile_data['intro_video'] = $video_file->hashName();
                 }
 
                 $profile = Profile::where('user_id', auth()->user()->id)->first();

@@ -14,11 +14,14 @@ class Profile extends Model
         'jpeg',
         'png',
         'jpg'
-    ];
+    ];    
 
     public CONST SUPPORTED_VIDEO_MIME_TYPE = [
         'mp4'
     ];
+
+    public CONST IMAGE_PATH = 'image/employee_images';
+    public CONST VIDEO_PATH = 'image/employee_videos';
 
     protected $fillable = [
         'user_id',
@@ -47,7 +50,9 @@ class Profile extends Model
 
     protected $appends = [
         'profile_image_url',
+        'profile_image_path',
         'profile_video_url',
+        'profile_video_path',
     ];
 
     public function user()
@@ -57,11 +62,21 @@ class Profile extends Model
 
     public function getProfileImageUrlAttribute(): string
     {
-        return filled($this->logo) ? asset('image/employee_images/' . $this->logo) : '';
+        return filled($this->logo) ? Storage::disk(config('settings.file_system_service'))->url(self::IMAGE_PATH.'/'.$this->logo) : '';
+    }
+
+    public function getProfileImagePathAttribute(): string
+    {
+        return filled($this->logo) ? self::IMAGE_PATH.'/'.$this->logo : '';
     }
 
     public function getProfileVideoUrlAttribute(): string
     {
-        return filled($this->intro_video) ? asset('image/employee_videos/' . $this->intro_video) : '';
+        return filled($this->intro_video) ? Storage::disk(config('settings.file_system_service'))->url(self::VIDEO_PATH.'/'.$this->intro_video) : '';
+    }
+
+    public function getProfileVideoPathAttribute(): string
+    {
+        return filled($this->intro_video) ? self::VIDEO_PATH.'/'.$this->intro_video : '';
     }
 }

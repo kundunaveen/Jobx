@@ -193,7 +193,7 @@
                             <input type="file" class="form-control" name="profile_video" id="profile_video" accept="video/mp4">
                             <small class="text-secondary">Maximum file size 10 MB (.mp4 file only accepted)</small>
                             @if(optional($employee->profile)->profile_video_url)
-                            <div class="row thumbnails">
+                            <div class="row">
                                 <div class="col-4">
                                     <video controls>
                                         <source src="{{ optional($employee->profile)->profile_video_url }}" type="video/mp4">
