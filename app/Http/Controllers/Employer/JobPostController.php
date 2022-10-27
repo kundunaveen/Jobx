@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\MasterAttribute;
 use Session;
 use App\Models\City;
+use Illuminate\Support\Facades\Storage;
 use Validator;
 
 class JobPostController extends Controller
@@ -119,15 +120,14 @@ class JobPostController extends Controller
 
                 $input['location'] = $request->address;
                 Vacancy::create($input);
+
+                return redirect()->route('employer.posted.jobs')->with('success', 'Job Posted Successfully');
                 
             } catch (\Exception $e) {
-                dd($e->getMessage());
                 return back()->with([
                     'error' => $e->getMessage()
                 ]);
-            }            
-            
-            return redirect()->route('employer.posted.jobs')->with('success', 'Job Posted Successfully');
+            }
         }
         $skills = JobSkill::all();
         $job_types = MasterAttribute::whereHas('masterCategory', function($q){
@@ -180,43 +180,72 @@ class JobPostController extends Controller
                 'job_type' => 'required',
                 'images_input' => 'array',
                 'images_input.*' => 'image|max:2000|mimes:'.implode(',', Vacancy::SUPPORTED_IMAGE_MIME_TYPE),
+                'old_images_input' => 'nullable',
+                'old_images_input.*' => 'string',
                 'video_input' => 'mimes:mp4|max:20000'
             ]);
-            if($request->skills && count($request->skills) > 0){
-                $skills = implode(',',$request->skills);
-            }
-            else{
-                $skills = null;
-            }
-            $input = $request->all();
-            if($request->images_input)
-            {
-                $request->validate([
-                    'images_input' => 'mimes:jpeg,bmp,png,jpg|max:2000'
-                ]);
 
-                $file = $request->file('images_input');
-                $fileName = date('YmdHis').$file->getClientOriginalName();
-                $destinationPath = public_path().'/image/company_images';
-                $file->move($destinationPath,$fileName);
-                $input['images'] = $fileName;
+            try{
+
+                if($request->skills && count($request->skills) > 0){
+                    $skills = implode(',',$request->skills);
+                }
+                else{
+                    $skills = null;
+                }
+
+                $input = $request->all();
+                
+                $image_files = [];                
+                $old_files = [];                
+
+                if($request->hasFile('images_input'))
+                {
+                    foreach($request->file('images_input') as $file)
+                    {
+                        $name = time().rand(1,100).'.'.$file->extension();
+                        $file->move(public_path('/image/company_images'), $name);  
+                        $image_files[] = $name;  
+                    }
+                }
+
+                if($request->filled('old_images_input')){
+                    foreach($request->old_images_input as $old_file){
+                        $image_files[] = $old_file;
+                        $old_files[] = $old_file;
+                    }
+                    if(count($vacancy->getImagesInArray()) > 0){
+                        $delete_files = array_diff($vacancy->getImagesInArray(), $old_files);
+                        if(is_array($delete_files) && count($delete_files) > 0){
+                            foreach ($delete_files as $delete_file) { 
+                                unlink(public_path('image/company_images/'. $delete_file));
+                               //Storage::disk('public')->delete('image/company_images/'. $delete_file);
+                            }
+                        }                        
+                    }
+                }
+
+                $input['images'] = implode(',', $image_files);
+    
+                if($request->file('video_input')){
+
+                    $fileVideo = $request->file('video_input');
+                    $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
+                    $destinationPath = public_path().'/image/company_videos';
+                    $fileVideo->move($destinationPath,$videoFileName);
+                    $input['video'] = $videoFileName;
+                }
+                $input['skills'] = $skills;
+                $input['location'] = $request->address;
+                $vacancy->update($input);                
+    
+                return redirect()->route('employer.posted.jobs')->with('success', 'Job Post Updated Successfully');
+
+            }catch(\Exception $e){
+                return back()->with('error', $e->getMessage())->withInput();
             }
-            if($request->file('video_input')){
-                $request->validate([
-                    'video_input' => 'mimes:mp4|max:20000'
-                ]);
-                $fileVideo = $request->file('video_input');
-                $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
-                $destinationPath = public_path().'/image/company_videos';
-                $fileVideo->move($destinationPath,$videoFileName);
-                $input['video'] = $videoFileName;
-            }
-            $input['skills'] = $skills;
-            $input['location'] = $request->address;
-            $vacancy->update($input);
+
             
-
-            return redirect(route('employer.posted.jobs'))->with('success', 'Job Post Updated Successfully');
         }
         return view('employer.dashboard.posted-jobs.edit-post-job', compact('vacancy','countries', 'states', 'cities', 'skills', 'allSkills', 'job_types'));
     }

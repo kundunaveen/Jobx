@@ -79,9 +79,9 @@ Employer | Edit Post Job
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Job Title</label>
                             <div class="col-12">
-                                <input type="text" name="job_title" value="{{$vacancy->job_title}}" class="form-control form-input" placeholder="Job Title" aria-label="Job Title">
+                                <input type="text" name="job_title" value="{{old('job_title', $vacancy->job_title)}}" class="form-control form-input" placeholder="Job Title" aria-label="Job Title">
                                 @error('job_title')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -90,9 +90,9 @@ Employer | Edit Post Job
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Job Role</label>
                             <div class="col-12">
-                                <input type="text" name="job_role" value="{{$vacancy->job_role}}" class="form-control form-input" placeholder="Job Role" aria-label="Job Role">
+                                <input type="text" name="job_role" value="{{old('job_role', $vacancy->job_role)}}" class="form-control form-input" placeholder="Job Role" aria-label="Job Role">
                                 @error('job_role')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -101,9 +101,9 @@ Employer | Edit Post Job
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Department</label>
                             <div class="col-12">
-                                <input type="text" name="department" value="{{$vacancy->department}}" class="form-control form-input" placeholder="Department" aria-label="Department">
+                                <input type="text" name="department" value="{{old('department', $vacancy->department)}}" class="form-control form-input" placeholder="Department" aria-label="Department">
                                 @error('department')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -114,7 +114,7 @@ Employer | Edit Post Job
                             <div class="col-12">
                                 <select name="job_type" class="form-select" aria-label="Default select example">
                                     @foreach($job_types as $job_type)
-                                    <option {{$job_type->id == $vacancy->job_type ? 'selected':''}} value="{{$job_type->id}}">{{$job_type->value}}</option>
+                                    <option {{$job_type->id == old('job_type', $vacancy->job_type) ? 'selected':''}} value="{{$job_type->id}}">{{$job_type->value}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -123,14 +123,24 @@ Employer | Edit Post Job
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Min. Experience Required</label>
                             <div class="col-12">
-                                <input type="number" step="0.01" value="{{$vacancy->min_exp}}" name="min_exp" class="form-control form-input" placeholder="Minimum Experience" aria-label="Department">
+                                <input type="number" step="0.01" value="{{old('min_exp', $vacancy->min_exp)}}" name="min_exp" class="form-control form-input" placeholder="Minimum Experience" aria-label="Department">
+                                @error('min_exp')
+                                <span class="text-danger mt-1" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Salary Offer</label>
                             <div class="col-12">
-                                <input type="number" step="0.01" value="{{$vacancy->salary_offer}}" name="salary_offer" class="form-control form-input" placeholder="Salary Offer" aria-label="Department">
+                                <input type="number" step="0.01" value="{{ old('salary_offer', $vacancy->salary_offer) }}" name="salary_offer" class="form-control form-input" placeholder="Salary Offer" aria-label="Department">
+                                @error('salary_offer')
+                                <span class="text-danger mt-1" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -139,9 +149,14 @@ Employer | Edit Post Job
                             <div class="col-12 ">
                                 <select name="skills[]" class="form-select skills" multiple aria-label="Default select example">
                                     @foreach($allSkills as $skill)
-                                    <option value="{{ $skill->id }}" @if($skills && in_array($skill->id, $skills)) selected @endif >{{$skill->skill}}</option>
+                                    <option value="{{ $skill->id }}" @if($skills && in_array($skill->id, old('skills', $skills))) selected @endif >{{$skill->skill}}</option>
                                     @endforeach
                                 </select>
+                                @error('skills')
+                                <span class="text-danger mt-1" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <h2 class="form-heading">Location</h2>
@@ -149,9 +164,9 @@ Employer | Edit Post Job
                         <div class="row form-group">
                             <div class="col-12">
                                 <label for="exampleFormControlTextarea1" class="form-label">Address*</label>
-                                <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="5">{{$vacancy->location}}</textarea>
+                                <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="5">{{old('address', $vacancy->location)}}</textarea>
                                 @error('address')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -162,9 +177,14 @@ Employer | Edit Post Job
                             <div class="col-12">
                                 <select name="country" class="form-select country-list" aria-label="Default select example">
                                     @foreach($countries as $country)
-                                    <option {{$country->id == $vacancy->country ? 'selected':'' }} value="{{$country->id}}">{{$country->name}}</option>
+                                    <option {{$country->id == old('country', $vacancy->country) ? 'selected':'' }} value="{{$country->id}}">{{$country->name}}</option>
                                     @endforeach
                                 </select>
+                                @error('country')
+                                <span class="text-danger mt-1" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row form-group select-box-2">
@@ -172,9 +192,14 @@ Employer | Edit Post Job
                             <div class="col-12">
                                 <select name="state" class="form-select state-list" aria-label="Default select example">
                                     @foreach($states as $state)
-                                    <option {{$state->id == $vacancy->state ? 'selected':'' }} value="{{$state->id}}">{{$state->name}}</option>
+                                    <option {{$state->id == old('state', $vacancy->state) ? 'selected':'' }} value="{{$state->id}}">{{$state->name}}</option>
                                     @endforeach
                                 </select>
+                                @error('state')
+                                <span class="text-danger mt-1" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row form-group select-box-2">
@@ -182,17 +207,22 @@ Employer | Edit Post Job
                             <div class="col-12">
                                 <select name="city" class="form-select city-list" aria-label="Default select example">
                                     @foreach($cities as $city)
-                                    <option {{$city->id == $vacancy->city ? 'selected':'' }} value="{{$city->id}}">{{$city->city}}</option>
+                                    <option {{$city->id == old('city', $vacancy->city) ? 'selected':'' }} value="{{$city->id}}">{{$city->city}}</option>
                                     @endforeach
                                 </select>
+                                @error('city')
+                                <span class="text-danger mt-1" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
                             </div>
                         </div>
                         <div class="row form-group">
                             <label for="check" class="form-label">Zip*</label>
                             <div class="col-12">
-                                <input type="number" value="{{$vacancy->zip}}" name="zip" class="form-control form-input" value="" placeholder="Zip Code" aria-label="Zip Code">
+                                <input type="number" value="{{ old('zip', $vacancy->zip) }}" name="zip" class="form-control form-input" value="" placeholder="Zip Code" aria-label="Zip Code">
                                 @error('zip')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -201,9 +231,9 @@ Employer | Edit Post Job
                         <div class="row form-group">
                             <label for="check" class="form-label">Describe*</label>
                             <div class="col-12">
-                                <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="5">{{$vacancy->description}}</textarea>
+                                <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="5">{{ old('description', $vacancy->description) }}</textarea>
                                 @error('description')
-                                <span class="invalid-feedback" role="alert">
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -212,19 +242,21 @@ Employer | Edit Post Job
                         <div class="row form-group">
                             <label for="check" class="form-label">Images</label>
                             <div class="col-12">
-                                <input type="file" name="images_input" class="form-control">
+                                <input type="file" name="images_input[]" multiple class="form-control" id="files">
                                 <small class="text-secondary">Maximum file size 2 MB (.jpeg, .jpg, .png files are accepted)</small>
-                                <div class="row">
+                                <div class="row thumbnails">
                                     @forelse ($vacancy->getImagesInArray() as $image)
-                                    <div class="col-md-3">
-                                        <img src="{{ asset('image/company_images/'.$image) }}" width="100" height="100" class="">
+                                    <div class="col-3 pip">
+                                        <img class='imageThumb' src="{{ asset('image/company_images/'.$image) }}" width="100" class="">
+                                        <input type="hidden" name="old_images_input[]" value="{{ $image }}">
+                                        <a class='remove remove-button mt-2 btn btn-danger btn-sm' href='javascript:void(0);' width='100'>Remove</a>
                                     </div>
                                     @empty
 
                                     @endforelse
                                 </div>
-                                @error('images')
-                                <span class="invalid-feedback" role="alert">
+                                @error('images_input')
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror
@@ -235,8 +267,8 @@ Employer | Edit Post Job
                             <div class="col-12">
                                 <input type="file" name="video_input" class="form-control">
                                 <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>
-                                @error('video')
-                                <span class="invalid-feedback" role="alert">
+                                @error('video_input')
+                                <span class="text-danger mt-1" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
                                 @enderror

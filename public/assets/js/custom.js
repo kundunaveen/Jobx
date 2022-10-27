@@ -30,31 +30,78 @@ $(document).ready(function () {
     });
 
     // featured_carousel
-    $('.featured-emp-carousel .owl-carousel').owlCarousel({
-        rtl: true,
-        loop: true,
-        margin: 20,
-        nav: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 2
-            },
-            1000: {
-                items: 4
+    if ($('.featured-emp-carousel .owl-carousel').length > 0) {
+        $('.featured-emp-carousel .owl-carousel').owlCarousel({
+            rtl: true,
+            loop: true,
+            margin: 20,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 4
+                }
             }
-        }
-    })
+        })
+    }
 
     // owl-carousel Carousel
+    if ($('.featured-carousel .owl-carousel').length > 0) {
+        $('.featured-carousel .owl-carousel').owlCarousel({
+            rtl: true,
+            loop: true,
+            margin: 20,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 3
+                }
+            }
+        })
+    }
 
-    $('.featured-carousel .owl-carousel').owlCarousel({
+
+
+    // owl-carousel Carousel
+    if ($('.owl-carousel').length > 0) {
+        $('.owl-carousel').owlCarousel({
+            rtl: true,
+            loop: true,
+            margin: 20,
+            nav: true,
+            responsive: {
+                0: {
+                    items: 1
+                },
+                600: {
+                    items: 2
+                },
+                1000: {
+                    items: 5
+                }
+            }
+        });
+    }
+});
+
+// tools-section
+if ($('.tools-section .owl-carousel').length > 0) {
+    $('.tools-section .owl-carousel').owlCarousel({
         rtl: true,
         loop: true,
-        margin: 20,
         nav: true,
+        margin: 20,
         responsive: {
             0: {
                 items: 1
@@ -67,50 +114,7 @@ $(document).ready(function () {
             }
         }
     })
-
-
-
-
-    // owl-carousel Carousel
-
-    $('.owl-carousel').owlCarousel({
-        rtl: true,
-        loop: true,
-        margin: 20,
-        nav: true,
-        responsive: {
-            0: {
-                items: 1
-            },
-            600: {
-                items: 2
-            },
-            1000: {
-                items: 5
-            }
-        }
-    })
-
-        ;
-})
-  // tools-section
-  $('.tools-section .owl-carousel').owlCarousel({
-    rtl: true,
-    loop: true,
-    nav: true,
-    margin:20,
-    responsive: {
-       0: {
-          items: 1
-       },
-       600: {
-          items: 2
-       },
-       1000: {
-          items: 3
-       }
-    }
- })
+}
 
 
 
