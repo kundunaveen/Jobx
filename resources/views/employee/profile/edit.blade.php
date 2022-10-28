@@ -1,36 +1,5 @@
 @extends('employee.profile.partials.layout')
 @section('content')
-<style>
-    .select-box-2 span.select2.select2-container.select2-container--default {
-        width: 100% !important;
-    }
-
-    /* .select-box-2 span.select2-selection.select2-selection--multiple {
-    background: #fff;
-    border: 1px solid #E1E1E1;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    padding: 0.5rem 3rem;
-    height: 58px;
-} */
-    span.select2.select2-container.select2-container--default {
-        background: #fff !important;
-        border: 1px solid #E1E1E1 !important;
-        border-radius: 10px !important;
-        -webkit-border-radius: 10px !important;
-        -moz-border-radius: 10px !important;
-        padding: .6rem 3rem !important;
-        width: 100% !important;
-        height: 58px !important;
-    }
-
-    .select2-container--default .select2-selection--multiple {
-        background-color: white;
-        border: none !important;
-    }
-</style>
-
 <main class="main-bg inner-login-shape employer-form-page">
     <section class="form-inner-wrapper">
         <div class="container ">
@@ -54,13 +23,41 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label class="form-label">Gender <span class="text-danger">*</span></label>
+                        <label class="form-label">Gender*</label>
                         <div class="col-12">
                             <select class="form-control" name="gender">
                                 @foreach($genders as $gender)
-                                <option $value="{{$gender->id}}" @if($employee->profile && $employee->profile->gender == $gender->id) selected @endif >{{$gender->value}}</option>
+                                <option value="{{ $gender->id }}" @if($gender->id == old('gender', optional($employee->profile)->gender)) selected @endif>{{$gender->value}}                                    
+                                </option>
                                 @endforeach
                             </select>
+                            @error('gender')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="inputName4" class="form-label">Date of Birth*</label>
+                        <div class="col-12">
+                            <input type="date" class="form-control form-input" name="date_of_birth" value="{{ old('date_of_birth', optional($employee->profile)->date_of_birth) }}" aria-label="Expected Salary">
+                            @error('date_of_birth')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="inputName4" class="form-label">Current Job Title*</label>
+                        <div class="col-12">
+                            <input type="text" class="form-control form-input" name="current_job_title" value="{{ old('current_job_title', optional($employee->profile)->current_job_title) }}" aria-label="Expected Salary">
+                            @error('current_job_title')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <!-- <div class="row form-group">
@@ -73,53 +70,89 @@
                     <div class="row form-group">
                         <label for="inputName4" class="form-label">Current Salary*</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="current_salary" value="{{$employee->profile->current_salary}}" placeholder="Current Salary" aria-label="Current Salary">
+                            <input type="text" class="form-control form-input" name="current_salary" value="{{ old('current_salary', optional($employee->profile)->current_salary) }}" placeholder="Current Salary" aria-label="Current Salary">
+                            <small>Amount in Lpa</small>
+                            @error('current_salary')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row form-group">
                         <label for="inputName4" class="form-label">Expected Salary*</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="expected_salary" value="{{$employee->profile->expected_salary}}" placeholder="Expected Salary" aria-label="Expected Salary">
+                            <input type="text" class="form-control form-input" name="expected_salary" value="{{ old('expected_salary', optional($employee->profile)->expected_salary) }}" placeholder="Expected Salary" aria-label="Expected Salary">
+                            <small>Amount in Lpa</small>
+                            @error('current_salary')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="inputName4" class="form-label">Highest Qualification*</label>
+                        <label for="inputName4" class="form-label">Total year of experience*</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="experience" placeholder="Experience" value="{{$employee->profile->experience}}" aria-label="Experience">
+                            <input type="text" class="form-control form-input" name="experience" placeholder="Total year of experience*" value="{{ old('experience', optional($employee->profile)->experience) }}" aria-label="experience">
+                            @error('experience')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row form-group">
                         <label class="form-label">Languages</label>
                         <div class="col-12">
-                            <select class="form-control languages" name="languages[]" id="languages" multiple>
+                            <select class="form-control languages select2_dropdown" name="languages[]" multiple="multiple">
+                                <option value="">Select multiple languages</option>
                                 @foreach($allLanguages as $lang)
-                                <option value="{{ $lang->id }} @if($languages && in_array($lang->id, $languages)) selected @endif ">{{$lang->value}}</option>
+                                <option value="{{ $lang->id }} @if($languages && in_array($lang->id, old('languages', $languages))) selected @endif ">{{$lang->value}}</option>
                                 @endforeach
                             </select>
+                            @error('languages')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row form-group">
                         <label for="inputName4" class="form-label">Address*</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="address" placeholder="Address" value="{{$employee->profile->address}}" aria-label="Address">
+                            <input type="text" class="form-control form-input" name="address" placeholder="Address" value="{{ old('address', optional($employee->profile)->address) }}" aria-label="Address">
+                            @error('address')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label class="form-label">Job Skills</label>
+                        <label class="form-label">Job Skills*</label>
                         <div class="col-md-12">
-                            <select name="skills[]" class="form-select skills" multiple aria-label="Default select example">
+                            <select name="skills[]" class="form-select skills select2_dropdown" multiple aria-label="Default select example">
+                            <option value="">Select multiple skills</option>
                                 @foreach($allSkills as $skill)
-                                <option value="{{$skill->id}}">{{$skill->skill}}</option>
+                                <option value="{{ $skill->id }}" @if(is_array(explode(',', optional($employee->profile)->skills)) && in_array($skill->id, explode(',', optional($employee->profile)->skills))) @endif> {{ $skill->skill }} </option>
                                 @endforeach
                             </select>
+                            @error('skills')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row form-group">
                         <label class="form-label">Upload Resume </label>
                         <div class="col-md-12">
                             <input type="file" name="resume" class="form-control">
-                            @if($employee->profile->resume)
-                            <small><a class="text-secondary" href="{{asset('image/resume/'.$employee->profile->resume)}}" target="_blank">View Resume</a></small>
+                            @if($resume = optional($employee->profile)->profile_resume_url)
+                            <small>
+                                <a class="text-secondary" href="{{ $resume }}" target="_blank">View Resume</a>
+                            </small>
                             @endif
                             @error('resume')
                             <span class="text-danger" role="alert">
@@ -132,40 +165,60 @@
                     <div class="row form-group">
                         <label for="check" class="form-label">Country*</label>
                         <div class="col-12">
-                            <select name="country" class="form-select country-list" aria-label="Default select example">
-                                <option selected> </option>
+                            <select name="country" require class="form-select country-list select2_dropdown" aria-label="Default select example">
+                                <option option="">Select country</option>
                                 @foreach($countries as $country)
-                                <option {{$country->id == $employee->profile->country ? 'selected': ''}} value="{{$country->id}}">{{$country->name}}</option>
+                                <option value="{{$country->id}}" {{$country->id == old('country', optional($employee->profile)->country) ? 'selected': ''}}>{{$country->name}}</option>
                                 @endforeach
                             </select>
+                            @error('country')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="check" class="form-label">State*</label>
+                        <label for="check" class="form-label">State</label>
                         <div class="col-12">
-                            <select name="state" class="form-select state-list" aria-label="Default select example">
-                                <option selected> </option>
+                            <select name="state" class="form-select state-list select2_dropdown" aria-label="Default select example">
+                                <option option="">Select state</option>
                                 @foreach($states as $state)
-                                <option {{$state->id == $employee->profile->state ? 'selected': ''}} value="{{$state->id}}">{{$state->name}}</option>
+                                <option value="{{$state->id}}" {{$state->id == old('state', optional($employee->profile)->state) ? 'selected': ''}}>{{$state->name}}</option>
                                 @endforeach
                             </select>
+                            @error('country')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="check" class="form-label">City*</label>
+                        <label for="check" class="form-label">City</label>
                         <div class="col-12">
-                            <select name="city" class="form-select city-list" aria-label="Default select example">
-                                <option selected> </option>
+                            <select name="city" class="form-select city-list select2_dropdown" aria-label="Default select example">
+                                <option value="">Select city</option>
                                 @foreach($cities as $city)
-                                <option {{$city->id == $employee->profile->city ? 'selected' : ''}} value="{{$city->id}}">{{$city->city}}</option>
+                                <option value="{{$city->id}}" {{$city->id == old('city', optional($employee->profile)->city) ? 'selected' : ''}}>{{$city->city}}</option>
                                 @endforeach
                             </select>
+                            @error('city')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="check" class="form-label">Zip*</label>
+                        <label for="check" class="form-label">Zip</label>
                         <div class="col-12">
-                            <input type="number" name="zip" class="form-control form-input" value="{{$employee->profile->zip}}" placeholder="Zip Code" aria-label="Zip Code">
+                            <input type="number" name="zip" class="form-control form-input" value="{{ old('zip', optional($employee->profile)->zip) }}" placeholder="Zip Code" aria-label="Zip Code">
+                            @error('zip')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
                         </div>
                     </div>
                     <div class="row form-group">
@@ -188,14 +241,14 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="inputPhone" class="form-label">Upload video</label>
+                        <label for="inputPhone" class="form-label">Upload introduction video</label>
                         <div class="col-12">
                             <input type="file" class="form-control" name="profile_video" id="profile_video" accept="video/mp4">
                             <small class="text-secondary">Maximum file size 10 MB (.mp4 file only accepted)</small>
                             @if(optional($employee->profile)->profile_video_url)
                             <div class="row">
-                                <div class="col-6">
-                                    <video controls>
+                                <div class="col-12">
+                                    <video width="100%" controls>
                                         <source src="{{ optional($employee->profile)->profile_video_url }}" type="video/mp4">
                                     </video>
                                 </div>
@@ -209,13 +262,44 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="inputPhone" class="form-label">Experience</label>
+                        <label for="inputVideoLink" class="form-label">Add your youtube link</label>
+                        <div class="col-12">
+                            <input type="text" class="form-control form-input" name="video_link" placeholder="Add your youtube link" value="{{ old('video_link', optional($employee->profile)->video_link) }}" aria-label="VideoLink">
+                            @error('video_link')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="inputVideoLink" class="form-label">Add your website link</label>
+                        <div class="col-12">
+                            <input type="text" class="form-control form-input" name="website_link" placeholder="Add your youtube link" value="{{ old('website_link', optional($employee->profile)->website_link) }}" aria-label="VideoLink">
+                            @error('website_link')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="inputPhone" class="form-label">Experiences</label>
                         <div class="col-12">
                             @include('employee.profile.experience.index')
                         </div>
                     </div>
                     <div class="row form-group">
                         <a href="{{ route('employee.experience.create') }}" target="_blank">Add your experience</a>
+                    </div>
+                    <div class="row form-group">
+                        <label for="inputPhone" class="form-label">Educations</label>
+                        <div class="col-12">
+                            @include('employee.profile.education.index')
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <a href="{{ route('employee.education.create') }}" target="_blank">Add your education</a>
                     </div>
                     <div class="row btn-form-wrapper">
                         <div class="d-grid col-sm-6">

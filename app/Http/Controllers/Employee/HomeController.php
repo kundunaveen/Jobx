@@ -26,7 +26,14 @@ class HomeController extends Controller
 
     public function home()
     {
-        return view('employee.profile.home');
+        $employee = User::with([
+            'profile',
+            'educations',
+            'experience'
+        ])->where('id', auth()->id())->firstOrFail();
+        return view('employee.profile.home', [
+            'employee' => $employee
+        ]);
     }
 
     public function changePassword(Request $request)
@@ -120,8 +127,8 @@ class HomeController extends Controller
         $genders = MasterAttribute::join('master_attribute_categories', 'master_attribute_categories.id', 'master_attributes.master_attribute_category_id')->where('master_attribute_categories.name', 'Gender')->select('master_attributes.*')->get();
         $allLanguages = MasterAttribute::join('master_attribute_categories', 'master_attribute_categories.id', 'master_attributes.master_attribute_category_id')->where('master_attribute_categories.name', 'Languages')->select('master_attributes.*')->get();
         $countries = Country::all();
-        $states = State::where('country_id', $employee->profile->country)->get();
-        $cities = City::where('state_id', $employee->profile->state)->get();
+        $states = State::where('country_id', optional($employee->profile)->country)->get();
+        $cities = City::where('state_id', optional($employee->profile)->state)->get();
         $allSkills = JobSkill::all();
 
         if ($employee->profile && $employee->profile->skills) {
@@ -139,8 +146,23 @@ class HomeController extends Controller
                 'first_name' => 'required|string|max:100',
                 'last_name' => 'required|string|max:100',
                 'gender' => 'required',
-                'profile_image' => 'nullable|image|max:2000|mimes:'.implode(',', Profile::SUPPORTED_IMAGE_MIME_TYPE),
-                'profile_video' => 'nullable|max:10000|mimes:'.implode(',', Profile::SUPPORTED_VIDEO_MIME_TYPE)
+                'resume' => 'max:2000|mimes:' . implode(',', Profile::SUPPORTED_RESUME_MIME_TYPE),
+                'profile_image' => 'nullable|image|max:2000|mimes:' . implode(',', Profile::SUPPORTED_IMAGE_MIME_TYPE),
+                'profile_video' => 'nullable|max:40000|mimes:' . implode(',', Profile::SUPPORTED_VIDEO_MIME_TYPE),
+                'video_link' => 'nullable|url',
+                'current_salary' => 'required|numeric',
+                'expected_salary' => 'required|numeric',
+                'skills' => 'required|array',
+                'languages' => 'nullable',
+                'address' => 'required',
+                'country' => 'required',
+                'state' => 'nullable',
+                'city' => 'nullable',
+                'zip' => 'nullable',
+                'experience' => 'required|numeric',
+                'date_of_birth' => 'required|date|before:today',
+                'current_job_title' => 'required',
+                'website_link' => 'required|url'
             ]);
 
             try {
@@ -153,18 +175,39 @@ class HomeController extends Controller
                 } else {
                     unset($user_data['password']);
                 }
+                unset($user_data['resume']);
+                unset($user_data['profile_image']);
+                unset($user_data['profile_video']);
+                unset($user_data['video_link']);
+                unset($user_data['current_salary']);
+                unset($user_data['languages']);
+                unset($user_data['address']);
+                unset($user_data['skills']);
+                unset($user_data['country']);
+                unset($user_data['state']);
+                unset($user_data['city']);
+                unset($user_data['zip']);
+                unset($user_data['experience']);
+                unset($user_data['date_of_birth']);
+                unset($user_data['current_job_title']);
+                unset($user_data['website_link']);
+
                 $employee->update($user_data);
 
-                if ($request->file('resume')) {
-                    $request->validate([
-                        'resume' => 'mimes:pdf,docx|max:2000'
-                    ]);
-                    $resume = $request->file('resume');
-                    $resumeName = date('YmdHis') . $resume->getClientOriginalName();
-                    $destinationPath = public_path() . '/image/resume';
-                    $resume->move($destinationPath, $resumeName);
-                }
                 $profile_data = [];
+                if ($request->hasFile('resume')) {
+                    $resume_file = $request->file('resume');
+                    $status = $resume_file->storeAs(
+                        Profile::RESUME_PATH,
+                        $resume_file->hashName(),
+                        config('settings.file_system_service')
+                    );
+                    if ($status && optional($employee->profile)->profile_resume_path) {
+                        Storage::disk(config('settings.file_system_service'))->delete(optional($employee->profile)->profile_resume_path);
+                    }
+                    $profile_data['resume'] = $resume_file->hashName();
+                }
+
                 $profile_data['gender'] = $request->gender;
                 $profile_data['user_id'] = auth()->user()->id;
                 if ($request->current_salary) {
@@ -172,9 +215,6 @@ class HomeController extends Controller
                 }
                 if ($request->expected_salary) {
                     $profile_data['expected_salary'] = $request->expected_salary;
-                }
-                if ($request->experience) {
-                    $profile_data['experience'] = $request->experience;
                 }
                 if ($request->languages && count($request->languages) > 0) {
                     $profile_data['languages'] = implode(',', $request->languages);
@@ -197,19 +237,11 @@ class HomeController extends Controller
                 if ($request->zip) {
                     $profile_data['zip'] = $request->zip;
                 }
-                if ($request->file('employee_image')) {
-                    //$profile_data['logo'] = $fileName;
-                    $profile_data['logo'] = '';
-                }
 
-                if ($request->file('employee_intro')) {
-                    //$profile_data['intro_video'] = $videoFileName;
-                    $profile_data['intro_video'] = '';
-                }
-
-                if ($request->file('resume')) {
-                    $profile_data['resume'] = $resumeName;
-                }
+                $profile_data['experience'] = $request->experience;
+                $profile_data['date_of_birth'] = $request->date_of_birth;
+                $profile_data['current_job_title'] = $request->current_job_title;
+                $profile_data['website_link'] = $request->website_link;
 
                 if ($request->hasFile('profile_image')) {
                     $image_file = $request->file('profile_image');
@@ -218,24 +250,26 @@ class HomeController extends Controller
                         $image_file->hashName(),
                         config('settings.file_system_service')
                     );
-                    if($status && optional($employee->profile)->profile_image_path){
+                    if ($status && optional($employee->profile)->profile_image_path) {
                         Storage::disk(config('settings.file_system_service'))->delete(optional($employee->profile)->profile_image_path);
                     }
                     $profile_data['logo'] = $image_file->hashName();
                 }
 
-                if($request->hasFile('profile_video')){
+                if ($request->hasFile('profile_video')) {
                     $video_file = $request->file('profile_video');
                     $status = $video_file->storeAs(
                         Profile::VIDEO_PATH,
                         $video_file->hashName(),
                         config('settings.file_system_service')
                     );
-                    if($status && optional($employee->profile)->profile_video_path){
+                    if ($status && optional($employee->profile)->profile_video_path) {
                         Storage::disk(config('settings.file_system_service'))->delete(optional($employee->profile)->profile_video_path);
                     }
                     $profile_data['intro_video'] = $video_file->hashName();
                 }
+
+                $profile_data['video_link'] = $request->video_link ?? null;
 
                 $profile = Profile::where('user_id', auth()->user()->id)->first();
 
