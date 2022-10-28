@@ -46,6 +46,7 @@ class Profile extends Model
         'company_size',
         'company_role',
         'notification_option',
+        'video_link',
     ];
 
     protected $appends = [

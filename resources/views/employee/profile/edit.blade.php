@@ -1,36 +1,5 @@
 @extends('employee.profile.partials.layout')
 @section('content')
-<style>
-    .select-box-2 span.select2.select2-container.select2-container--default {
-        width: 100% !important;
-    }
-
-    /* .select-box-2 span.select2-selection.select2-selection--multiple {
-    background: #fff;
-    border: 1px solid #E1E1E1;
-    border-radius: 10px;
-    -webkit-border-radius: 10px;
-    -moz-border-radius: 10px;
-    padding: 0.5rem 3rem;
-    height: 58px;
-} */
-    span.select2.select2-container.select2-container--default {
-        background: #fff !important;
-        border: 1px solid #E1E1E1 !important;
-        border-radius: 10px !important;
-        -webkit-border-radius: 10px !important;
-        -moz-border-radius: 10px !important;
-        padding: .6rem 3rem !important;
-        width: 100% !important;
-        height: 58px !important;
-    }
-
-    .select2-container--default .select2-selection--multiple {
-        background-color: white;
-        border: none !important;
-    }
-</style>
-
 <main class="main-bg inner-login-shape employer-form-page">
     <section class="form-inner-wrapper">
         <div class="container ">
@@ -83,12 +52,6 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="inputName4" class="form-label">Highest Qualification*</label>
-                        <div class="col-12">
-                            <input type="text" class="form-control form-input" name="experience" placeholder="Experience" value="{{$employee->profile->experience}}" aria-label="Experience">
-                        </div>
-                    </div>
-                    <div class="row form-group">
                         <label class="form-label">Languages</label>
                         <div class="col-12">
                             <select class="form-control languages" name="languages[]" id="languages" multiple>
@@ -132,7 +95,7 @@
                     <div class="row form-group">
                         <label for="check" class="form-label">Country*</label>
                         <div class="col-12">
-                            <select name="country" class="form-select country-list" aria-label="Default select example">
+                            <select name="country" class="form-select country-list select2_dropdown" aria-label="Default select example">
                                 <option selected> </option>
                                 @foreach($countries as $country)
                                 <option {{$country->id == $employee->profile->country ? 'selected': ''}} value="{{$country->id}}">{{$country->name}}</option>
@@ -143,7 +106,7 @@
                     <div class="row form-group">
                         <label for="check" class="form-label">State*</label>
                         <div class="col-12">
-                            <select name="state" class="form-select state-list" aria-label="Default select example">
+                            <select name="state" class="form-select state-list select2_dropdown" aria-label="Default select example">
                                 <option selected> </option>
                                 @foreach($states as $state)
                                 <option {{$state->id == $employee->profile->state ? 'selected': ''}} value="{{$state->id}}">{{$state->name}}</option>
@@ -154,7 +117,7 @@
                     <div class="row form-group">
                         <label for="check" class="form-label">City*</label>
                         <div class="col-12">
-                            <select name="city" class="form-select city-list" aria-label="Default select example">
+                            <select name="city" class="form-select city-list select2_dropdown" aria-label="Default select example">
                                 <option selected> </option>
                                 @foreach($cities as $city)
                                 <option {{$city->id == $employee->profile->city ? 'selected' : ''}} value="{{$city->id}}">{{$city->city}}</option>
@@ -188,7 +151,7 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="inputPhone" class="form-label">Upload video</label>
+                        <label for="inputPhone" class="form-label">Upload introduction video</label>
                         <div class="col-12">
                             <input type="file" class="form-control" name="profile_video" id="profile_video" accept="video/mp4">
                             <small class="text-secondary">Maximum file size 10 MB (.mp4 file only accepted)</small>
@@ -202,6 +165,17 @@
                             </div>
                             @endif
                             @error('profile_video')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="inputVideoLink" class="form-label">Add your youtube link</label>
+                        <div class="col-12">
+                            <input type="text" class="form-control form-input" name="video_link" placeholder="Add your youtube link" value="{{ old('video_link', optional($employee->profile)->video_link) }}" aria-label="VideoLink">
+                            @error('video_link')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
                             </span>

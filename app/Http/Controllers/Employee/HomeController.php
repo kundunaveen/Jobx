@@ -140,7 +140,8 @@ class HomeController extends Controller
                 'last_name' => 'required|string|max:100',
                 'gender' => 'required',
                 'profile_image' => 'nullable|image|max:2000|mimes:'.implode(',', Profile::SUPPORTED_IMAGE_MIME_TYPE),
-                'profile_video' => 'nullable|max:10000|mimes:'.implode(',', Profile::SUPPORTED_VIDEO_MIME_TYPE)
+                'profile_video' => 'nullable|max:10000|mimes:'.implode(',', Profile::SUPPORTED_VIDEO_MIME_TYPE),
+                'video_link' => 'nullable|url',
             ]);
 
             try {
@@ -153,6 +154,10 @@ class HomeController extends Controller
                 } else {
                     unset($user_data['password']);
                 }
+                unset($user_data['profile_image']);
+                unset($user_data['profile_video']);
+                unset($user_data['video_link']);
+
                 $employee->update($user_data);
 
                 if ($request->file('resume')) {
@@ -172,9 +177,6 @@ class HomeController extends Controller
                 }
                 if ($request->expected_salary) {
                     $profile_data['expected_salary'] = $request->expected_salary;
-                }
-                if ($request->experience) {
-                    $profile_data['experience'] = $request->experience;
                 }
                 if ($request->languages && count($request->languages) > 0) {
                     $profile_data['languages'] = implode(',', $request->languages);
@@ -196,15 +198,6 @@ class HomeController extends Controller
                 }
                 if ($request->zip) {
                     $profile_data['zip'] = $request->zip;
-                }
-                if ($request->file('employee_image')) {
-                    //$profile_data['logo'] = $fileName;
-                    $profile_data['logo'] = '';
-                }
-
-                if ($request->file('employee_intro')) {
-                    //$profile_data['intro_video'] = $videoFileName;
-                    $profile_data['intro_video'] = '';
                 }
 
                 if ($request->file('resume')) {
@@ -236,6 +229,8 @@ class HomeController extends Controller
                     }
                     $profile_data['intro_video'] = $video_file->hashName();
                 }
+
+                $profile_data['video_link'] = $request->video_link ?? null;
 
                 $profile = Profile::where('user_id', auth()->user()->id)->first();
 
