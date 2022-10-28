@@ -3,15 +3,25 @@
 namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Employee\Experience\CreateRequest;
+use App\Http\Requests\Employee\Education\CreateRequest;
 use App\Models\Country;
-use App\Models\Experience;
+use App\Models\Education;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
 
-class EmployeeExperienceController extends Controller
+class EducationController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        //
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -21,7 +31,7 @@ class EmployeeExperienceController extends Controller
     {
         $countries = Country::orderBy('name')->get();
 
-        return view('employee.profile.experience.create', [
+        return view('employee.profile.education.create', [
             'countries' => $countries
         ]);
     }
@@ -35,18 +45,20 @@ class EmployeeExperienceController extends Controller
     public function store(CreateRequest $request)
     {
         $data = $request->validated();
-
         try {
 
             $data['uuid'] = Str::uuid();
             $data['user_id'] = auth()->id();
 
-            if(isset($data['is_work_here']) && filled($data['is_work_here']) && (filled($data['to_month']) || filled($data['to_year']))){
-                $data['is_work_here'] = null;
+            if(isset($data['is_pursuing_here']) && filled($data['is_pursuing_here']) && (filled($data['to_month']) || filled($data['to_year']))){
+                $data['is_pursuing_here'] = null;
                 $data['to_month'] = null;
                 $data['to_year'] = null;
             }
-            Experience::create($data);
+
+            
+            
+            Education::create($data);
 
             return Redirect::route('employee.profile.edit')->with('success', 'Data saved successful');
 

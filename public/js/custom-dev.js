@@ -50,12 +50,11 @@ $(document).ready(function () {
         $('.select2_dropdown').select2();
     }
 
-    $("#experience_to").hide();
     $(".is_work_here").click(function() {
         if($(this).is(":checked")) {
-            $("#experience_to").show();
-        } else {
             $("#experience_to").hide();
+        } else {
+            $("#experience_to").show();
         }
     });
 });

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Employee\EducationController;
 use App\Http\Controllers\Employee\EmployeeExperienceController;
 use Illuminate\Support\Facades\Route;
 
@@ -84,8 +85,14 @@ Route::post('/employee/get-states', [App\Http\Controllers\Employee\HomeControlle
 Route::post('/employee/get-cities', [App\Http\Controllers\Employee\HomeController::class, 'getCities']);
 
 Route::prefix('employee')->name('employee.')->middleware('auth')->group(function(){
-    Route::get('/experience/create', [EmployeeExperienceController::class, 'create'])->name('experience.create');
-    Route::post('/experience/store', [EmployeeExperienceController::class, 'store'])->name('experience.store');
+    Route::prefix('experience')->name('experience.')->middleware('auth')->group(function(){
+        Route::get('/create', [EmployeeExperienceController::class, 'create'])->name('create');
+        Route::post('/store', [EmployeeExperienceController::class, 'store'])->name('store');
+    });
+    Route::prefix('education')->name('education.')->middleware('auth')->group(function(){
+        Route::get('/create', [EducationController::class, 'create'])->name('create');
+        Route::post('/store', [EducationController::class, 'store'])->name('store');
+    });
 });
 
 //####################### Employer Routes #########################//

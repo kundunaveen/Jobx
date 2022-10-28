@@ -209,13 +209,22 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="inputPhone" class="form-label">Experience</label>
+                        <label for="inputPhone" class="form-label">Experiences</label>
                         <div class="col-12">
                             @include('employee.profile.experience.index')
                         </div>
                     </div>
                     <div class="row form-group">
                         <a href="{{ route('employee.experience.create') }}" target="_blank">Add your experience</a>
+                    </div>
+                    <div class="row form-group">
+                        <label for="inputPhone" class="form-label">Educations</label>
+                        <div class="col-12">
+                            @include('employee.profile.education.index')
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <a href="{{ route('employee.education.create') }}" target="_blank">Add your education</a>
                     </div>
                     <div class="row btn-form-wrapper">
                         <div class="d-grid col-sm-6">

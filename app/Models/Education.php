@@ -6,23 +6,28 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Experience extends Model
+class Education extends Model
 {
     use HasFactory;
 
     protected $fillable = [
         'uuid',
         'user_id',
-        'job_title',
-        'company',
+        
+        'qualification',
+        'institution_name',
+
         'country_id',
         'state_id',
         'city_id',
+
         'from_month',
         'from_year',
         'to_month',
         'to_year',
-        'is_work_here',
+
+        'is_pursuing_here',
+
         'describe',
     ];
 
