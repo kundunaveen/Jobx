@@ -41,6 +41,10 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected $appends = [
+        'full_name'
+    ];
+
     public function roleUser()
     {
         return $this->hasOne('App\Models\RoleUser', 'user_id');
@@ -69,5 +73,9 @@ class User extends Authenticatable
 
     public function educations():HasMany{
         return $this->hasMany(Education::class);
+    }
+
+    public function getFullNameAttribute():string{
+        return $this->first_name .' '.$this->last_name;
     }
 }
