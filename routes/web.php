@@ -88,10 +88,16 @@ Route::prefix('employee')->name('employee.')->middleware('auth')->group(function
     Route::prefix('experience')->name('experience.')->middleware('auth')->group(function(){
         Route::get('/create', [EmployeeExperienceController::class, 'create'])->name('create');
         Route::post('/store', [EmployeeExperienceController::class, 'store'])->name('store');
+        Route::get('/edit/{uuid}', [EmployeeExperienceController::class, 'edit'])->name('edit');
+        Route::put('/update/{uuid}', [EmployeeExperienceController::class, 'update'])->name('update');
+        Route::get('/destroy/{uuid}', [EmployeeExperienceController::class, 'destroy'])->name('destroy');
     });
     Route::prefix('education')->name('education.')->middleware('auth')->group(function(){
         Route::get('/create', [EducationController::class, 'create'])->name('create');
         Route::post('/store', [EducationController::class, 'store'])->name('store');
+        Route::get('/edit/{uuid}', [EducationController::class, 'edit'])->name('edit');
+        Route::put('/update/{uuid}', [EducationController::class, 'update'])->name('update');
+        Route::get('/destroy/{uuid}', [EducationController::class, 'destroy'])->name('destroy');
     });
 });
 

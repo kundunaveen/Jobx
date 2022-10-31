@@ -50,11 +50,27 @@ $(document).ready(function () {
         $('.select2_dropdown').select2();
     }
 
-    $(".is_work_here").click(function() {
+    $(".is_work_here, .is_work_here").click(function() {
         if($(this).is(":checked")) {
             $("#experience_to").hide();
         } else {
             $("#experience_to").show();
+            $("#experience_to").removeClass('d-none');
         }
     });
+
+    $('.delete_prompt').click(function() {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover !",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        }).then((willDelete) => {
+            if (willDelete) {
+                window.location.href=$(this).attr('data-action');
+            }
+        });
+    });
 });
+
