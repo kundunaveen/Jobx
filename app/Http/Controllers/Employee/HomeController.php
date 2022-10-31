@@ -124,6 +124,7 @@ class HomeController extends Controller
     public function editProfile(Request $request)
     {
         $employee = User::with('profile')->where('id', auth()->user()->id)->firstOrFail();
+        
         $genders = MasterAttribute::join('master_attribute_categories', 'master_attribute_categories.id', 'master_attributes.master_attribute_category_id')->where('master_attribute_categories.name', 'Gender')->select('master_attributes.*')->get();
         $allLanguages = MasterAttribute::join('master_attribute_categories', 'master_attribute_categories.id', 'master_attributes.master_attribute_category_id')->where('master_attribute_categories.name', 'Languages')->select('master_attributes.*')->get();
         $countries = Country::all();
@@ -162,7 +163,9 @@ class HomeController extends Controller
                 'experience' => 'required|numeric',
                 'date_of_birth' => 'required|date|before:today',
                 'current_job_title' => 'required',
-                'website_link' => 'required|url'
+                'website_link' => 'required|url',
+                'social_media_link' => 'nullable|array',
+                'social_media_link.*' => 'url',
             ]);
 
             try {
@@ -191,6 +194,7 @@ class HomeController extends Controller
                 unset($user_data['date_of_birth']);
                 unset($user_data['current_job_title']);
                 unset($user_data['website_link']);
+                unset($user_data['social_media_link']);
 
                 $employee->update($user_data);
 
@@ -242,6 +246,7 @@ class HomeController extends Controller
                 $profile_data['date_of_birth'] = $request->date_of_birth;
                 $profile_data['current_job_title'] = $request->current_job_title;
                 $profile_data['website_link'] = $request->website_link;
+                $profile_data['social_media_link'] = $request->social_media_link;
 
                 if ($request->hasFile('profile_image')) {
                     $image_file = $request->file('profile_image');

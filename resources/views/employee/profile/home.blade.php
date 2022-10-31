@@ -93,18 +93,27 @@ Profile
                                 <a href="{{ $resume }}" class="btn btn-md" download="" target="_blank">Download CV</a>
                                 @endif
                                 <hr class="hr" />
-
+                                @if ($social_media_link = optional($employee->profile)->social_media_link)
                                 <div class="social-wrapper">
 
                                     <h4>Connect with Social</h4>
-
                                     <ul class="list-group social-list">
-                                        <li class="list-group-item border-0"><a href="javascript:void(0)"><i class="profile-icon icon-facebook"></i></a></li>
-                                        <li class="list-group-item border-0"><a href="javascript:void(0)"><i class="profile-icon icon-linkdin"></i></a></li>
-                                        <li class="list-group-item border-0"><a href="javascript:void(0)"><i class="profile-icon icon-twitter"></i></a></li>
-                                        <li class="list-group-item border-0"><a href="javascript:void(0)"><i class="profile-icon icon-instagram"></i></a></li>
+                                        @if($facebook = data_get($social_media_link, 'facebook', false))
+                                        <li class="list-group-item border-0"><a href="{{ $facebook }}" target="_blank"><i class="profile-icon icon-facebook"></i></a></li>
+                                        @endif
+                                        @if($linkedin = data_get($social_media_link, 'linkedin', false))
+                                        <li class="list-group-item border-0"><a href="{{ $linkedin }}" target="_blank"><i class="profile-icon icon-linkdin"></i></a></li>
+                                        @endif
+                                        @if($twitter = data_get($social_media_link, 'twitter', false))
+                                        <li class="list-group-item border-0"><a href="{{ $twitter }}" target="_blank"><i class="profile-icon icon-twitter"></i></a></li>
+                                        @endif
+                                        @if($instagram = data_get($social_media_link, 'instagram', false))
+                                        <li class="list-group-item border-0"><a href="{{ $instagram }}" target="_blank"><i class="profile-icon icon-instagram"></i></a></li>
+                                        @endif
                                     </ul>
                                 </div>
+                                @endif
+
                             </article>
                         </div>
                     </div>
@@ -135,11 +144,11 @@ Profile
                                             <article>
                                                 <h5>Experience</h5>
                                                 <p class="mb-0">
-                                                @if ($experience = optional($employee->profile)->experience)
+                                                    @if ($experience = optional($employee->profile)->experience)
                                                     {{ $experience }} years
-                                                @else
-                                                --
-                                                @endif
+                                                    @else
+                                                    --
+                                                    @endif
                                                 </p>
                                             </article>
                                         </div>
@@ -267,29 +276,29 @@ Profile
             <h4 class="">Education</h4>
             @if ($educations = $employee->educations)
             <ul class="list-group">
-                @forelse ($educations as $education)                    
+                @forelse ($educations as $education)
                 <li class="list-group-item border-0 d-flex  pb-4">
                     <figure class="me-4 mb-0"><i class="profile-icon icon-education"></i></figure>
                     <article>
                         <span class="mb-2 d-inline-block exp-period">
-                            {{ $education->from_year }} 
+                            {{ $education->from_year }}
                             -
-                            @if ($education->is_pursuing_here)                                 
-                                Pursuing
-                             @else
-                                {{ $education->to_year }}
-                             @endif
+                            @if ($education->is_pursuing_here)
+                            Pursuing
+                            @else
+                            {{ $education->to_year }}
+                            @endif
                         </span>
                         <h5>{{ $education->institution_name }}, {{ optional($education->loadMissing('country')->country)->name }}</h5>
                         <p class="mb-0">{{ $education->describe }}</p>
                     </article>
                 </li>
                 @empty
-                    --
-                @endforelse
-            </ul>                
-            @else
                 --
+                @endforelse
+            </ul>
+            @else
+            --
             @endif
         </div>
     </section>
@@ -305,16 +314,16 @@ Profile
                         <h5>{{ $experience->job_title }} <span class="ms-2 d-inline-block text-secondary">{{ $experience->company }}</span></h5>
                         <span class="mb-2 d-inline-block exp-period">
                             {{ $experience->from_year }}
-                             - 
-                             @if ($experience->is_work_here)                                 
-                                NOW
-                             @else
-                                {{ $experience->to_year }}
-                             @endif
+                            -
+                            @if ($experience->is_work_here)
+                            NOW
+                            @else
+                            {{ $experience->to_year }}
+                            @endif
                         </span>
                         <p class="mb-0">{{ $experience->describe }}</p>
                     </article>
-                </li>                    
+                </li>
                 @empty
                 --
                 @endforelse
@@ -335,7 +344,7 @@ Profile
                 @forelse ($profile_skills as $profile_skill)
                 <li class="list-group-item border-0">
                     <p class="mb-0">{{ $profile_skill }}</p>
-                </li>                    
+                </li>
                 @empty
                 --
                 @endforelse
