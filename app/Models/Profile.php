@@ -60,6 +60,10 @@ class Profile extends Model
         'social_media_link',
     ];
 
+    protected $casts = [
+        'social_media_link' => 'array'
+    ];
+
     protected $appends = [
         'profile_resume_url',
         'profile_resume_path',

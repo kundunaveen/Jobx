@@ -283,6 +283,50 @@
                             </span>
                             @enderror
                         </div>
+                    </div>                   
+                    <div class="row form-group">
+                        <label for="inputFacebookLink" class="form-label">Your Facebook link</label>
+                        <div class="col-12">
+                            <input type="text" class="form-control form-input" name="social_media_link[facebook]" placeholder="Your Facebook link" value="{{ old('social_media_link.facebook', rescue(function() use($employee){ return $employee->profile->social_media_link['facebook']; }, '')) }}" aria-label="inputLinkedinLink">
+                            @error('social_media_link.facebook')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="inputLinkedinLink" class="form-label">Your Linkedin link</label>
+                        <div class="col-12">
+                            <input type="text" class="form-control form-input" name="social_media_link[linkedin]" placeholder="Your Linkedin link" value="{{ old('social_media_link.linkedin', rescue(function() use($employee){ return $employee->profile->social_media_link['linkedin']; }, '')) }}" aria-label="inputLinkedinLink">
+                            @error('social_media_link.linkedin')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="inputTwitterLink" class="form-label">Your Twitter link</label>
+                        <div class="col-12">
+                            <input type="text" class="form-control form-input" name="social_media_link[twitter]" placeholder="Your Twitter link" value="{{ old('social_media_link.twitter', rescue(function() use($employee){ return $employee->profile->social_media_link['twitter']; }, '')) }}" aria-label="inputTwitterLink">
+                            @error('social_media_link.twitter')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="inputInstagramLink" class="form-label">Your Instagram link</label>
+                        <div class="col-12">
+                            <input type="text" class="form-control form-input" name="social_media_link[instagram]" placeholder="Your Instagram link" value="{{ old('social_media_link.instagram', rescue(function() use($employee){ return $employee->profile->social_media_link['instagram']; }, '')) }}" aria-label="inputInstagramLink">
+                            @error('social_media_link.instagram')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
                     </div>
                     <div class="row form-group">
                         <label for="inputPhone" class="form-label">Experiences</label>
@@ -315,5 +359,4 @@
         </div>
     </section>
 </main>
-
 @endsection
