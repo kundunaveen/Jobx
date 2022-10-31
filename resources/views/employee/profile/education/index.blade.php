@@ -6,6 +6,7 @@
             <th>Address</th>
             <th>Duration</th>
             <th>Description</th>
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
@@ -34,6 +35,14 @@
                 @endif
             </td>
             <td>{{ $education->describe }}</td>
+            <td>
+                <div>
+                <a href="{{ route('employee.education.edit', $education->uuid) }}">Edit</a>
+                </div>
+                <div>
+                <a href="javascript:void(0);" class="text-danger delete_prompt" data-action="{{ route('employee.education.destroy', $education->uuid) }}">Delete</a>                    
+                </div>
+            </td>
         </tr>
         @empty
         <tr>

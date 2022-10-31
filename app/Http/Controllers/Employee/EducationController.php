@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Employee\Education\CreateRequest;
+use App\Http\Requests\Employee\Education\UpdateRequest;
+use App\Models\City;
 use App\Models\Country;
 use App\Models\Education;
+use App\Models\State;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Str;
@@ -54,9 +57,7 @@ class EducationController extends Controller
                 $data['is_pursuing_here'] = null;
                 $data['to_month'] = null;
                 $data['to_year'] = null;
-            }
-
-            
+            }            
             
             Education::create($data);
 
@@ -81,34 +82,87 @@ class EducationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(string $uuid)
     {
-        //
+        $countries = Country::orderBy('name')->get();
+        $education = Education::where([
+            ['uuid', '=', $uuid],
+            ['user_id', '=', auth()->id()]
+            ])->firstOrFail();
+
+        $states = State::where('country_id', $education->country_id)->get();
+        $cities = City::where('state_id', $education->state_id)->get();
+
+        return view('employee.profile.education.edit', [
+            'countries' => $countries,
+            'education' => $education,
+            'states' => $states,
+            'cities' => $cities
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $uuid)
     {
-        //
+        $data = $request->validated();
+
+        $education = Education::where([
+            ['uuid', '=', $uuid],
+            ['user_id', '=', auth()->id()]
+            ])->firstOrFail();
+
+        try {
+                
+            if(isset($data['is_pursuing_here']) && filled($data['is_pursuing_here'])){
+                $data['to_month'] = null;
+                $data['to_year'] = null;
+            }else{
+                $data['is_pursuing_here'] = null;
+            }
+
+            $education->update($data);
+
+            return Redirect::route('employee.profile.edit')->with('success', 'Data saved successful');
+            
+        } catch (\Exception $e) {
+            return back()->withInput()->with([
+                'error' => $e->getMessage()
+            ]);
+        }
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  string  $uuid
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(string $uuid)
     {
-        //
+        $education = Education::where([
+            ['uuid', '=', $uuid],
+            ['user_id', '=', auth()->id()]
+            ])->firstOrFail();
+
+        try {           
+            
+            $education->delete();
+
+            return Redirect::route('employee.profile.edit')->with('success', 'Data delete successful');
+
+        } catch (\Exception $e) {
+            return back()->withInput()->with([
+                'error' => $e->getMessage()
+            ]);
+        }
     }
 }

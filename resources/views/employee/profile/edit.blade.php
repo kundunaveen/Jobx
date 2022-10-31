@@ -9,6 +9,7 @@
                             aria-valuemin="0" aria-valuemax="100"></div>
                     </div> -->
                 @include('layouts.messages.success')
+                @include('layouts.messages.error')
                 <form class="form-inner" method="POST" enctype="multipart/form-data">
                     @csrf
                     <h2 class="form-heading">Profile Details</h2>
