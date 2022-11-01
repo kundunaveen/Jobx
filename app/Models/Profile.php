@@ -81,32 +81,32 @@ class Profile extends Model
         return $this->belongsTo('App\Models\User', 'user_id');
     }
 
-    public function getProfileResumeUrlAttribute(): string
+    public function getProfileResumeUrlAttribute()
     {
         return filled($this->resume) ? Storage::disk(config('settings.file_system_service'))->url(self::RESUME_PATH.'/'.$this->resume) : '';
     }
 
-    public function getProfileResumePathAttribute(): string
+    public function getProfileResumePathAttribute()
     {
         return filled($this->resume) ? self::RESUME_PATH.'/'.$this->resume : '';
     }
 
-    public function getProfileImageUrlAttribute(): string
+    public function getProfileImageUrlAttribute()
     {
         return filled($this->logo) ? Storage::disk(config('settings.file_system_service'))->url(self::IMAGE_PATH.'/'.$this->logo) : '';
     }
 
-    public function getProfileImagePathAttribute(): string
+    public function getProfileImagePathAttribute()
     {
         return filled($this->logo) ? self::IMAGE_PATH.'/'.$this->logo : '';
     }
 
-    public function getProfileVideoUrlAttribute(): string
+    public function getProfileVideoUrlAttribute()
     {
         return filled($this->intro_video) ? Storage::disk(config('settings.file_system_service'))->url(self::VIDEO_PATH.'/'.$this->intro_video) : '';
     }
 
-    public function getProfileVideoPathAttribute(): string
+    public function getProfileVideoPathAttribute()
     {
         return filled($this->intro_video) ? self::VIDEO_PATH.'/'.$this->intro_video : '';
     }
@@ -121,7 +121,7 @@ class Profile extends Model
         return filled($this->skills) ? JobSkill::whereIn('id', explode(',', $this->skills))->pluck('skill') : '';
     }
 
-    public function getProfileGenderAttribute():string
+    public function getProfileGenderAttribute()
     {
         return filled($this->gender) ? MasterAttribute::where('id', $this->gender)->value('value') : '';
     }
