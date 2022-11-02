@@ -42,7 +42,7 @@ class User extends Authenticatable
     ];
 
     protected $appends = [
-        'full_name'
+        'full_name', 'profile_image_url', 'profile_current_job_title'
     ];
 
     public function roleUser()
@@ -77,5 +77,13 @@ class User extends Authenticatable
 
     public function getFullNameAttribute():string{
         return $this->first_name .' '.$this->last_name;
+    }
+
+    public function getProfileImageUrlAttribute(): string{
+        return $this->profile->profile_image_url;
+    }
+
+    public function getProfileCurrentJobTitleAttribute(): ?string{
+        return filled(optional($this->profile)->current_job_title) ? optional($this->profile)->current_job_title : null;
     }
 }

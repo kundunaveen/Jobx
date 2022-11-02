@@ -91,9 +91,9 @@ class Profile extends Model
         return filled($this->resume) ? self::RESUME_PATH.'/'.$this->resume : '';
     }
 
-    public function getProfileImageUrlAttribute()
+    public function getProfileImageUrlAttribute(): string
     {
-        return filled($this->logo) ? Storage::disk(config('settings.file_system_service'))->url(self::IMAGE_PATH.'/'.$this->logo) : '';
+        return filled($this->logo) ? Storage::disk(config('settings.file_system_service'))->url(self::IMAGE_PATH.'/'.$this->logo) : asset('image/user.png');
     }
 
     public function getProfileImagePathAttribute()

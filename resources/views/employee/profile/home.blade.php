@@ -87,7 +87,13 @@ Profile
                                 <div class="mail-id"><a href="mailto:{{ $employee->email }}"><i class="icon-email me-2"></i>{{ $employee->email }}</a>
                                 </div>
                                 @if($website_link = optional($employee->profile)->website_link)
-                                <div class="website-link mb-5"><a href="{{ $website_link }}" target="_blank"><i class="icon-website me-2"></i>Website</a></div>
+                                    <div class="website-link mb-5"><a href="{{ $website_link }}" target="_blank"><i class="icon-website me-2"></i>Website</a></div>
+                                @else
+                                <div class="website-link mb-5">
+                                    <a href="{{route('employee.profile.edit')}}" target="_blank">
+                                    <i class="icon-edit"></i> Add your website link
+                                    </a>
+                                </div>
                                 @endif
                                 @if($resume = optional($employee->profile)->profile_resume_url)
                                 <a href="{{ $resume }}" class="btn btn-md" download="" target="_blank">Download CV</a>
@@ -147,7 +153,7 @@ Profile
                                                     @if ($experience = optional($employee->profile)->experience)
                                                     {{ $experience }} years
                                                     @else
-                                                    --
+                                                    NA
                                                     @endif
                                                 </p>
                                             </article>
@@ -162,7 +168,7 @@ Profile
                                                     @if ($date_of_birth = optional($employee->profile)->date_of_birth)
                                                     {{ \Illuminate\Support\Carbon::parse($date_of_birth)->age }} years
                                                     @else
-                                                    --
+                                                    NA
                                                     @endif
                                                 </p>
                                             </article>
@@ -177,7 +183,7 @@ Profile
                                                     @if ($gender = optional($employee->profile)->profile_gender)
                                                     {{ $gender }}
                                                     @else
-                                                    --
+                                                    NA
                                                     @endif
                                                 </p>
                                             </article>
@@ -192,7 +198,7 @@ Profile
                                                     @if ($current_salary = optional($employee->profile)->current_salary)
                                                     {{ $current_salary }} Lac
                                                     @else
-                                                    --
+                                                    NA
                                                     @endif
                                                 </p>
                                             </article>
@@ -207,7 +213,7 @@ Profile
                                                     @if ($expected_salary = optional($employee->profile)->expected_salary)
                                                     {{ $expected_salary }} Lac
                                                     @else
-                                                    --
+                                                    NA
                                                     @endif
                                                 </p>
                                             </article>
@@ -222,7 +228,7 @@ Profile
                                                     @if ($profile_languages = optional($employee->profile)->profile_languages)
                                                     {{ $profile_languages->implode(', ') }}
                                                     @else
-                                                    --
+                                                    NA
                                                     @endif
                                                 </p>
                                             </article>
