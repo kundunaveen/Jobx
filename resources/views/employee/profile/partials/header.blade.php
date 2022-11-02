@@ -43,12 +43,14 @@
                             </li>
                             <li class="list-group-item d-flex flex-row  bg-transparent border-0 p-0">
                                <figure class="me-3 me-sm-1 mb-0">
-                                  <img src="{{asset('assets/images/user-img.png')}}" height="51" width="51" alt=""
+                                  <img src="{{ auth()->user()->profile_image_url }}" height="51" width="51" alt=""
                                      class="img-fluid" />
                                </figure>
                                <article class="text-left">
-                                  <h5 class="mb-0">John Doe</h5>
-                                  <p class="mb-0 user-designation">Front End Developer</p>
+                                  <h5 class="mb-0">{{ auth()->user()->full_name }}</h5>
+                                  @if($profile_current_job_title = auth()->user()->profile_current_job_title)
+                                  <p class="mb-0 user-designation">{{ $profile_current_job_title }}</p>
+                                  @endif
                                </article>
                             </li>
                             <li class="list-group-item bg-transparent d-flex border-0 p-0 custom-dropdown-menu">
