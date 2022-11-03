@@ -120,7 +120,9 @@
                             <select class="select2_dropdown select2_multiple_dropdown_languages drop_arrow" name="languages[]" multiple="multiple">
                                 <option value="">Select multiple languages*</option>
                                 @foreach($allLanguages as $lang)
-                                <option value="{{ $lang->id }} @if($languages && in_array($lang->id, old('languages', $languages))) selected @endif ">{{$lang->value}}</option>
+                                <option value="{{ $lang->id }}" @if($languages && in_array($lang->id, old('languages', $languages))) selected @endif>
+                                    {{$lang->value}}
+                                </option>
                                 @endforeach
                             </select>
                             @error('languages')
@@ -134,9 +136,11 @@
                         <label class="form-label">Job Skills*</label>
                         <div class="col-md-12">
                             <select name="skills[]" class="select2_dropdown select2_multiple_dropdown_skills drop_arrow" multiple="multiple" aria-label="Default select example">
-                                <option value="" disabled>Select multiple skills</option>
+                                <option value="">Select multiple skills</option>
                                 @foreach($allSkills as $skill)
-                                <option value="{{ $skill->id }}" @if(is_array(explode(',', optional($employee->profile)->skills)) && in_array($skill->id, explode(',', optional($employee->profile)->skills))) @endif> {{ $skill->skill }} </option>
+                                <option value="{{ $skill->id }}" @if(is_array(explode(',', optional($employee->profile)->skills)) && in_array($skill->id, explode(',', optional($employee->profile)->skills))) @endif> 
+                                    {{ $skill->skill }} 
+                                </option>
                                 @endforeach
                             </select>
                             @error('skills')
@@ -359,8 +363,7 @@
                             <a href="{{ route('employee.education.create') }}" target="_blank">Add your education</a>
                         </div>
                     </div>
-            </div>
-            {{--
+                    {{--
                     <div class="row form-group">
                         <label for="inputPhone" class="form-label">Educations</label>
                         <div class="col-12">
