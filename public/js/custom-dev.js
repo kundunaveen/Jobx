@@ -49,6 +49,16 @@ $(document).ready(function () {
     if($('.select2_dropdown').length > 0){        
         $('.select2_dropdown').select2();
     }
+    if($('.select2_multiple_dropdown_skills').length > 0){        
+        $('.select2_multiple_dropdown_skills').select2({
+            placeholder: "Select multiple skills"
+        });
+    }
+    if($('.select2_multiple_dropdown_languages').length > 0){        
+        $('.select2_multiple_dropdown_languages').select2({
+            placeholder: "Select multiple languages"
+        });
+    }
 
     $(".is_work_here, .is_work_here").click(function() {
         if($(this).is(":checked")) {
@@ -72,5 +82,68 @@ $(document).ready(function () {
             }
         });
     });
-});
 
+    // just for the demos, avoids form submit
+    $( "#jquery-employee-profile-form-validation" ).validate({
+        rules: {
+            first_name: {
+                required: true
+            },
+            last_name: {
+                required: true
+            },
+            gender: {
+                required: true
+            },
+            date_of_birth: {
+                required: true,
+            },
+            current_job_title: {
+                required: true
+            },
+            current_salary: {
+                number: true
+            },
+            expected_salary: {
+                required: true,
+                number: true
+            },
+            experience:{
+                number: true
+            },
+            'languages[]':{
+                required: true
+            },
+            address:{
+                required: true
+            },
+            'skills[]':{
+                required: true
+            },
+            resume:{
+                required: true
+            },
+            'country':{
+                min: 1
+            },
+            video_link:{
+                url: true
+            },
+            website_link:{
+                url: true
+            },
+            'social_media_link[facebook]':{
+                url: true
+            },
+            'social_media_link[linkedin]':{
+                url: true
+            },
+            'social_media_link[twitter]':{
+                url: true
+            },
+            'social_media_link[instagram]':{
+                url: true
+            }
+        }
+    });
+});
