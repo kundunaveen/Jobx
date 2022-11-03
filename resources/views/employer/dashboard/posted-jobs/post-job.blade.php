@@ -79,7 +79,7 @@ Employer | Post Job
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Job Title</label>
                             <div class="col-12">
-                                <input type="text" name="job_title" value="{{ old('job_title') }}" class="form-control form-input" placeholder="Job Title" aria-label="Job Title">
+                                <input type="text" name="job_title" value="{{ old('job_title') }}" class="form-control form-input" placeholder="e.g - Business Manager" aria-label="Job Title">
                                 @error('job_title')
                                 <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
@@ -91,7 +91,7 @@ Employer | Post Job
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Job Role</label>
                             <div class="col-12">
-                                <input type="text" name="job_role" value="{{ old('job_role') }}" class="form-control form-input" placeholder="Job Role" aria-label="Job Role">
+                                <input type="text" name="job_role" value="{{ old('job_role') }}" class="form-control form-input" placeholder="e.g - Business Analyst" aria-label="Job Role">
                                 @error('job_role')
                                 <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
@@ -102,7 +102,7 @@ Employer | Post Job
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Department</label>
                             <div class="col-12">
-                                <input type="text" name="department" value="{{ old('department') }}" class="form-control form-input" placeholder="Department" aria-label="Department">
+                                <input type="text" name="department" value="{{ old('department') }}" class="form-control form-input" placeholder="e.g - Business Management" aria-label="Department">
                                 @error('department')
                                 <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
@@ -128,9 +128,9 @@ Employer | Post Job
                         </div>
 
                         <div class="row form-group">
-                            <label for="inputPhone" class="form-label">Min. Experience Required</label>
+                            <label for="inputPhone" class="form-label">Min. Experience Required <small>(Yrs)</small></label>
                             <div class="col-12">
-                                <input type="number" step="0.01" name="min_exp" value="{{ old('min_exp') }}" class="form-control form-input" placeholder="Minimum Experience" aria-label="Department">
+                                <input type="number" step="0.01" name="min_exp" value="{{ old('min_exp') }}" class="form-control form-input" placeholder="e.g - 5.6" aria-label="Department">
                                 @error('min_exp')
                                 <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
@@ -140,9 +140,9 @@ Employer | Post Job
                         </div>
 
                         <div class="row form-group">
-                            <label for="inputPhone" class="form-label">Salary Offer</label>
+                            <label for="inputPhone" class="form-label">Salary Offer <small>(kpa)</small></label>
                             <div class="col-12">
-                                <input type="number" step="0.01" name="salary_offer" value="{{ old('salary_offer') }}" class="form-control form-input" placeholder="Salary Offer" aria-label="Department">
+                                <input type="number" step="0.01" name="salary_offer" value="{{ old('salary_offer') }}" class="form-control form-input" placeholder="e.g - 33" aria-label="Department">
                                 @error('salary_offer')
                                 <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
@@ -171,7 +171,7 @@ Employer | Post Job
                         <div class="row form-group">
                             <div class="col-12">
                                 <label for="exampleFormControlTextarea1" class="form-label">Address*</label>
-                                <textarea class="form-control" name="address" id="exampleFormControlTextarea1" rows="5">{{ old('address') }}</textarea>
+                                <textarea class="form-control" name="address" placeholder="e.g - #123 main street" id="exampleFormControlTextarea1" rows="5">{{ old('address') }}</textarea>
                                 @error('address')
                                 <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
@@ -227,7 +227,7 @@ Employer | Post Job
                         <div class="row form-group">
                             <label for="check" class="form-label">Zip*</label>
                             <div class="col-12">
-                                <input type="number" name="zip" class="form-control form-input" value="{{ old('zip') }}" placeholder="Zip Code" aria-label="Zip Code">
+                                <input type="number" name="zip" class="form-control form-input" value="{{ old('zip') }}" placeholder="e.g - 10101" aria-label="Zip Code">
                                 @error('zip')
                                 <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
@@ -238,7 +238,7 @@ Employer | Post Job
                         <div class="row form-group">
                             <label for="check" class="form-label">Describe*</label>
                             <div class="col-12">
-                                <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="5">{{ old('description') }}</textarea>
+                                <textarea name="description" class="form-control" placeholder="e.g - We are seeking for a awesome business manager." id="exampleFormControlTextarea1" rows="5">{{ old('description') }}</textarea>
                                 @error('description')
                                 <small class="text-danger mt-1">
                                     <strong>{{ $message }}</strong>
