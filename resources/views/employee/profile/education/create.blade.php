@@ -10,7 +10,10 @@
                     <div class="">
                         @include('layouts.messages.error')
                         <form class="form-inner" action="{{ route('employee.education.store') }}" method="POST">
-                            @csrf
+                            @csrf                            
+                            <a href="{{ route('employee.profile.edit') }}" title="Back to profile" class="text-primary">
+                                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                            </a>
                             <h2 class="form-heading">Educations</h2>
                             <div id="copy_form">
                                 <div class="row  form-group">

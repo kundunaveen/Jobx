@@ -11,6 +11,9 @@
                         @include('layouts.messages.error')
                         <form class="form-inner" action="{{ route('employee.experience.store') }}" method="POST">
                             @csrf
+                            <a href="{{ route('employee.profile.edit') }}" title="Back to profile" class="text-primary">
+                                <i class="fa fa-arrow-left" aria-hidden="true"></i>
+                            </a>
                             <h2 class="form-heading">Job description</h2>
                             <div id="copy_form">
                                 <div class="row  form-group">

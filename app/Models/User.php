@@ -80,7 +80,7 @@ class User extends Authenticatable
     }
 
     public function getProfileImageUrlAttribute(): string{
-        return $this->profile->profile_image_url;
+        return filled(optional($this->profile)->profile_image_url) ? optional($this->profile)->profile_image_url : asset('image/user.png');
     }
 
     public function getProfileCurrentJobTitleAttribute(): ?string{

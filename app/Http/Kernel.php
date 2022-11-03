@@ -65,5 +65,6 @@ class Kernel extends HttpKernel
         'adminaccount' => \App\Http\Middleware\AdminAccount::class,
         'employeraccount' => \App\Http\Middleware\EmployerAccount::class,
         'employeeaccount' => \App\Http\Middleware\EmployeeAccount::class,
+        'employee.check-profile-fill-or-not' => \App\Http\Middleware\Employee\CheckProfileFillOrNot::class,
     ];
 }
