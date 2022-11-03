@@ -22,3 +22,14 @@ span.select2.select2-container.select2-container--default {
     background-color: white;
     border: none !important;
 }
+
+ul.list-group.flex-row.align-items-center.justify-content-end li article {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    max-width: 160px;
+}
+
+span.select2.select2-container.select2-container--default span.select2-selection.select2-selection--single {
+    border: none;
+}

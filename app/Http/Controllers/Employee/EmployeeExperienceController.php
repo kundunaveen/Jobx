@@ -50,7 +50,7 @@ class EmployeeExperienceController extends Controller
             }
             Experience::create($data);
 
-            return Redirect::route('employee.profile.edit')->with('success', 'Data saved successful');
+            return Redirect::route('employee.profile.edit')->with('success', 'Your experience data saved successful');
 
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage())->withInput();
@@ -120,7 +120,7 @@ class EmployeeExperienceController extends Controller
 
             $experience->update($data);
 
-            return Redirect::route('employee.profile.edit')->with('success', 'Data saved successful');
+            return Redirect::route('employee.profile.edit')->with('success', 'Your experience data saved successful');
             
         } catch (\Exception $e) {
             return back()->withInput()->with([
@@ -146,7 +146,7 @@ class EmployeeExperienceController extends Controller
             
             $experience->delete();
 
-            return Redirect::route('employee.profile.edit')->with('success', 'Data delete successful');
+            return Redirect::route('employee.profile.edit')->with('success', 'Your experience data delete successful');
 
         } catch (\Exception $e) {
             return back()->withInput()->with([

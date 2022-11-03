@@ -9,6 +9,7 @@ use App\Models\JobSkill;
 use App\Models\MasterAttribute;
 use App\Models\AppliedJob;
 use App\Models\Profile;
+use Illuminate\Support\Facades\Redirect;
 
 class JobPostController extends Controller
 {
@@ -29,6 +30,15 @@ class JobPostController extends Controller
     /*apply for job*/
     public function applyJob(Request $request, $id)
     {
+
+        $have_profile = Profile::where('user_id', $request->user()->id)
+        ->where('gender', '>', 0)
+        ->count();
+
+        if($have_profile == 0){
+            return Redirect::route('employee.profile.edit')->with('error', 'Before you applied the profile you need to fill up the profile.');
+        }
+
         AppliedJob::create([
             'user_id' => auth()->user()->id,
             'vacancy_id' => $id

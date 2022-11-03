@@ -74,7 +74,7 @@ Profile
                 <div class="col-lg-4 mb-5 mb-lg-0  ">
                     <div class="card mb-5 mb-lg-0 h-100">
                         <div class="profile-wrapper card-body   text-center">
-                            @if($profile_image = optional($employee->profile)->profile_image_url)
+                            @if($profile_image = auth()->user()->profile_image_url)
                             <figure class="">
                                 <img src="{{ $profile_image }}" width="230" height="230" alt="Profile Img" class="img-fluid">
                             </figure>
@@ -279,13 +279,28 @@ Profile
     <!-- Education Section Start Here-->
     <section class="education-section">
         <div class="container">
-            <h4 class="">Education</h4>
+            <h4 class="">Education &nbsp;&nbsp;<a href="{{ route('employee.education.create') }}" title="add your professional skills"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></h4>
+            
             @if ($educations = $employee->educations)
             <ul class="list-group">
                 @forelse ($educations as $education)
                 <li class="list-group-item border-0 d-flex  pb-4">
                     <figure class="me-4 mb-0"><i class="profile-icon icon-education"></i></figure>
                     <article>
+                        <div class="row justify-content-between">
+                            <div class="col-auto">
+                                <h5>{{ $education->institution_name }}, {{ optional($education->loadMissing('country')->country)->name }}</h5>                              
+                            </div>
+                            <div class="col-auto">
+                                <a href="{{ route('employee.education.edit', $education->uuid) }}" title="Edit">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                                &nbsp; &nbsp;
+                                <a href="javascript:void(0);" class="text-danger delete_prompt" data-action="{{ route('employee.education.destroy', $education->uuid) }}">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a> 
+                            </div>                            
+                        </div>            
                         <span class="mb-2 d-inline-block exp-period">
                             {{ $education->from_year }}
                             -
@@ -295,29 +310,42 @@ Profile
                             {{ $education->to_year }}
                             @endif
                         </span>
-                        <h5>{{ $education->institution_name }}, {{ optional($education->loadMissing('country')->country)->name }}</h5>
                         <p class="mb-0">{{ $education->describe }}</p>
                     </article>
                 </li>
                 @empty
-                --
+                No education has been added.
                 @endforelse
             </ul>
             @else
-            --
+                No education has been added.
             @endif
         </div>
     </section>
     <!-- Experience Section End Here-->
     <section class="experience-section">
         <div class="container">
-            <h4 class="">Work & Experience</h4>
+            <h4 class="">Work & Experience &nbsp;&nbsp;<a href="{{ route('employee.experience.create') }}" title="add your experience"><i class="fa fa-plus-circle" aria-hidden="true"></i></a></h4>
+            
             @if($experiences = $employee->experience)
             <ul class="list-group">
                 @forelse ($experiences as $experience)
                 <li class="list-group-item border-0 pb-4">
                     <article>
-                        <h5>{{ $experience->job_title }} <span class="ms-2 d-inline-block text-secondary">{{ $experience->company }}</span></h5>
+                        <div class="row justify-content-between">
+                            <div class="col-auto">
+                                <h5>{{ $experience->job_title }} <span class="ms-2 d-inline-block text-secondary">{{ $experience->company }}</span>  </h5>                              
+                            </div>
+                            <div class="col-auto">
+                                <a href="{{ route('employee.experience.edit', [$experience->uuid]) }}">
+                                    <i class="fa fa-pencil" aria-hidden="true"></i>
+                                </a>
+                                &nbsp;&nbsp;
+                                <a href="javascript:void(0);" class="text-danger delete_prompt" data-action="{{ route('employee.experience.destroy', [$experience->uuid]) }}" data-id="{{ $experience->uuid }}">
+                                    <i class="fa fa-trash" aria-hidden="true"></i>
+                                </a>
+                            </div>                            
+                        </div>
                         <span class="mb-2 d-inline-block exp-period">
                             {{ $experience->from_year }}
                             -
@@ -331,11 +359,11 @@ Profile
                     </article>
                 </li>
                 @empty
-                --
+                No work & experience has been added.
                 @endforelse
             </ul>
             @else
-            --
+            No work & experience has been added.
             @endif
         </div>
     </section>
@@ -352,11 +380,11 @@ Profile
                     <p class="mb-0">{{ $profile_skill }}</p>
                 </li>
                 @empty
-                --
+                No professional skills has been added.
                 @endforelse
             </ul>
             @else
-            --
+            No professional skills has been added.
             @endif
         </div>
     </section>
