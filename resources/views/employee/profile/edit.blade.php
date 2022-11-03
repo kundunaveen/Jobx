@@ -10,7 +10,7 @@
                     </div> -->
                 @include('layouts.messages.success')
                 @include('layouts.messages.error')
-                <form class="form-inner" method="POST" enctype="multipart/form-data">
+                <form class="form-inner" method="POST" enctype="multipart/form-data" id="jquery-employee-profile-form-validation">
                     @csrf
                     <div class="row justify-content-between">
                         <div class="col-auto">
@@ -39,6 +39,7 @@
                         <label class="form-label">Gender*</label>
                         <div class="col-12">
                             <select class="form-control" name="gender">
+                                <option value="">Select gender</option>
                                 @foreach($genders as $gender)
                                 <option value="{{ $gender->id }}" @if($gender->id == old('gender', optional($employee->profile)->gender)) selected @endif>{{$gender->value}}                                    
                                 </option>
@@ -65,7 +66,7 @@
                     <div class="row form-group">
                         <label for="inputName4" class="form-label">Current Job Title*</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="current_job_title" value="{{ old('current_job_title', optional($employee->profile)->current_job_title) }}" aria-label="Expected Salary">
+                            <input type="text" class="form-control form-input" name="current_job_title" value="{{ old('current_job_title', optional($employee->profile)->current_job_title) }}" aria-label="Expected Salary" placeholder="Ex: Senior account manager">
                             @error('current_job_title')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
@@ -81,9 +82,9 @@
                             </div>                            
                         </div> -->
                     <div class="row form-group">
-                        <label for="inputName4" class="form-label">Current Salary <small>(Kpa only)</small>*</label>
+                        <label for="inputName4" class="form-label">Current Salary <small>(Kpa only)</small></label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="current_salary" value="{{ old('current_salary', optional($employee->profile)->current_salary) }}" placeholder="Current Salary" aria-label="Current Salary">
+                            <input type="text" class="form-control form-input" name="current_salary" value="{{ old('current_salary', optional($employee->profile)->current_salary) }}" aria-label="Current Salary" placeholder="Ex: 5">
                             @error('current_salary')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
@@ -94,7 +95,7 @@
                     <div class="row form-group">
                         <label for="inputName4" class="form-label">Expected Salary <small>(Kpa only)</small>*</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="expected_salary" value="{{ old('expected_salary', optional($employee->profile)->expected_salary) }}" placeholder="Expected Salary" aria-label="Expected Salary">
+                            <input type="text" class="form-control form-input" name="expected_salary" value="{{ old('expected_salary', optional($employee->profile)->expected_salary) }}" aria-label="Expected Salary"placeholder="Ex: 9">
                             @error('current_salary')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
@@ -103,9 +104,9 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="inputName4" class="form-label">Total year of experience*</label>
+                        <label for="inputName4" class="form-label">Total year of experience</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="experience" placeholder="Total year of experience*" value="{{ old('experience', optional($employee->profile)->experience) }}" aria-label="experience">
+                            <input type="text" class="form-control form-input" name="experience" value="{{ old('experience', optional($employee->profile)->experience) }}" aria-label="experience" placeholder="Ex: 15">
                             @error('experience')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
@@ -116,8 +117,8 @@
                     <div class="row form-group">
                         <label class="form-label">Languages</label>
                         <div class="col-12">
-                            <select class="form-control languages select2_dropdown" name="languages[]" multiple="multiple">
-                                <option value="">Select multiple languages</option>
+                            <select class="select2_dropdown select2_multiple_dropdown_languages drop_arrow" name="languages[]" multiple="multiple">
+                                <option value="">Select multiple languages*</option>
                                 @foreach($allLanguages as $lang)
                                 <option value="{{ $lang->id }} @if($languages && in_array($lang->id, old('languages', $languages))) selected @endif ">{{$lang->value}}</option>
                                 @endforeach
@@ -132,7 +133,7 @@
                     <div class="row form-group">
                         <label for="inputName4" class="form-label">Address*</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="address" placeholder="Address" value="{{ old('address', optional($employee->profile)->address) }}" aria-label="Address">
+                            <input type="text" class="form-control form-input" name="address" value="{{ old('address', optional($employee->profile)->address) }}" aria-label="Address" placeholder="Ex: #123 Street">
                             @error('address')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
@@ -143,8 +144,8 @@
                     <div class="row form-group">
                         <label class="form-label">Job Skills*</label>
                         <div class="col-md-12">
-                            <select name="skills[]" class="form-select skills select2_dropdown" multiple aria-label="Default select example">
-                            <option value="">Select multiple skills</option>
+                            <select name="skills[]" class="select2_dropdown select2_multiple_dropdown_skills drop_arrow" multiple="multiple" aria-label="Default select example">
+                            <option value="" disabled>Select multiple skills</option>
                                 @foreach($allSkills as $skill)
                                 <option value="{{ $skill->id }}" @if(is_array(explode(',', optional($employee->profile)->skills)) && in_array($skill->id, explode(',', optional($employee->profile)->skills))) @endif> {{ $skill->skill }} </option>
                                 @endforeach
@@ -157,7 +158,7 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label class="form-label">Upload Resume </label>
+                        <label class="form-label">Upload Resume</label>
                         <div class="col-md-12">
                             <input type="file" name="resume" class="form-control">
                             @if($resume = optional($employee->profile)->profile_resume_url)
@@ -176,7 +177,7 @@
                     <div class="row form-group">
                         <label for="check" class="form-label">Country*</label>
                         <div class="col-12">
-                            <select name="country" require class="form-select country-list select2_dropdown" aria-label="Default select example">
+                            <select name="country" require class="country-list select2_dropdown" aria-label="Default select example">
                                 <option option="">Select country</option>
                                 @foreach($countries as $country)
                                 <option value="{{$country->id}}" {{$country->id == old('country', optional($employee->profile)->country) ? 'selected': ''}}>{{$country->name}}</option>
@@ -224,7 +225,7 @@
                     <div class="row form-group">
                         <label for="check" class="form-label">Zip</label>
                         <div class="col-12">
-                            <input type="number" name="zip" class="form-control form-input" value="{{ old('zip', optional($employee->profile)->zip) }}" placeholder="Zip Code" aria-label="Zip Code">
+                            <input type="text" name="zip" class="form-control form-input" value="{{ old('zip', optional($employee->profile)->zip) }}" aria-label="Zip Code" placeholder="Ex: 3F27A5">
                             @error('zip')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
@@ -255,7 +256,7 @@
                         <label for="inputPhone" class="form-label">Upload introduction video</label>
                         <div class="col-12">
                             <input type="file" class="form-control" name="profile_video" id="profile_video" accept="video/mp4">
-                            <small class="text-secondary">Maximum file size 10 MB (.mp4 file only accepted)</small>
+                            <small class="text-secondary">Maximum file size 40 MB (.mp4 file only accepted)</small>
                             @if(optional($employee->profile)->profile_video_url)
                             <div class="row">
                                 <div class="col-12">
@@ -275,7 +276,7 @@
                     <div class="row form-group">
                         <label for="inputVideoLink" class="form-label">Add your youtube link</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="video_link" placeholder="Add your youtube link" value="{{ old('video_link', optional($employee->profile)->video_link) }}" aria-label="VideoLink">
+                            <input type="text" class="form-control form-input" name="video_link" value="{{ old('video_link', optional($employee->profile)->video_link) }}" aria-label="VideoLink" placeholder="Ex: https://www.youtube.com/watch?v=4KVIFNJ7mDQ">
                             @error('video_link')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
@@ -286,7 +287,7 @@
                     <div class="row form-group">
                         <label for="inputVideoLink" class="form-label">Add your website link</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="website_link" placeholder="Add your youtube link" value="{{ old('website_link', optional($employee->profile)->website_link) }}" aria-label="VideoLink">
+                            <input type="text" class="form-control form-input" name="website_link" value="{{ old('website_link', optional($employee->profile)->website_link) }}" aria-label="VideoLink" placeholder="Ex: https://www.mywebsite.com">
                             @error('website_link')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
@@ -297,7 +298,7 @@
                     <div class="row form-group">
                         <label for="inputFacebookLink" class="form-label">Your Facebook link</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="social_media_link[facebook]" placeholder="Your Facebook link" value="{{ old('social_media_link.facebook', rescue(function() use($employee){ return $employee->profile->social_media_link['facebook']; }, '')) }}" aria-label="inputLinkedinLink">
+                            <input type="text" class="form-control form-input" name="social_media_link[facebook]" value="{{ old('social_media_link.facebook', rescue(function() use($employee){ return $employee->profile->social_media_link['facebook']; }, '')) }}" aria-label="inputLinkedinLink" placeholder="Ex: https://www.facebook.com">
                             @error('social_media_link.facebook')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
@@ -308,7 +309,7 @@
                     <div class="row form-group">
                         <label for="inputLinkedinLink" class="form-label">Your Linkedin link</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="social_media_link[linkedin]" placeholder="Your Linkedin link" value="{{ old('social_media_link.linkedin', rescue(function() use($employee){ return $employee->profile->social_media_link['linkedin']; }, '')) }}" aria-label="inputLinkedinLink">
+                            <input type="text" class="form-control form-input" name="social_media_link[linkedin]" value="{{ old('social_media_link.linkedin', rescue(function() use($employee){ return $employee->profile->social_media_link['linkedin']; }, '')) }}" aria-label="inputLinkedinLink" placeholder="Ex: https://www.linkedin.com">
                             @error('social_media_link.linkedin')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
@@ -319,7 +320,7 @@
                     <div class="row form-group">
                         <label for="inputTwitterLink" class="form-label">Your Twitter link</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="social_media_link[twitter]" placeholder="Your Twitter link" value="{{ old('social_media_link.twitter', rescue(function() use($employee){ return $employee->profile->social_media_link['twitter']; }, '')) }}" aria-label="inputTwitterLink">
+                            <input type="text" class="form-control form-input" name="social_media_link[twitter]" value="{{ old('social_media_link.twitter', rescue(function() use($employee){ return $employee->profile->social_media_link['twitter']; }, '')) }}" aria-label="inputTwitterLink" placeholder="Ex: https://www.twiiter.com">
                             @error('social_media_link.twitter')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
@@ -330,7 +331,7 @@
                     <div class="row form-group">
                         <label for="inputInstagramLink" class="form-label">Your Instagram link</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="social_media_link[instagram]" placeholder="Your Instagram link" value="{{ old('social_media_link.instagram', rescue(function() use($employee){ return $employee->profile->social_media_link['instagram']; }, '')) }}" aria-label="inputInstagramLink">
+                            <input type="text" class="form-control form-input" name="social_media_link[instagram]" value="{{ old('social_media_link.instagram', rescue(function() use($employee){ return $employee->profile->social_media_link['instagram']; }, '')) }}" aria-label="inputInstagramLink" placeholder="Ex: https://www.instagram.com">
                             @error('social_media_link.instagram')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
