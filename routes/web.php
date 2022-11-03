@@ -79,7 +79,7 @@ Route::post('/employee/change-password', [App\Http\Controllers\Employee\HomeCont
 Route::post('/employee/check-password-validation', [App\Http\Controllers\Employee\HomeController::class, 'checkPasswordValidation']);
 Route::get('/employee-dashboard', [App\Http\Controllers\Employee\DashboardController::class, 'home'])->name('employee.dashboard');
 Route::post('/employee/job-filter', [App\Http\Controllers\Employee\JobPostController::class, 'jobsFilterBy'])->name('employee.jobs-filtersBy');
-Route::any('/employee/job-applied/{id}', [App\Http\Controllers\Employee\JobPostController::class, 'applyJob'])->name('employee.job.apply');
+Route::any('/employee/job-applied/{id}', [App\Http\Controllers\Employee\JobPostController::class, 'applyJob'])->name('employee.job.apply')->middleware('employee.check-profile-fill-or-not');
 Route::get('/employee/job-preview/{id}', [App\Http\Controllers\Employee\JobPostController::class, 'previewJob'])->name('employee.job.preview');
 Route::post('/employee/get-states', [App\Http\Controllers\Employee\HomeController::class, 'getStates']);
 Route::post('/employee/get-cities', [App\Http\Controllers\Employee\HomeController::class, 'getCities']);
