@@ -69,10 +69,9 @@
                             </div>                            
                         </div> -->
                     <div class="row form-group">
-                        <label for="inputName4" class="form-label">Current Salary*</label>
+                        <label for="inputName4" class="form-label">Current Salary <small>(Kpa only)</small>*</label>
                         <div class="col-12">
                             <input type="text" class="form-control form-input" name="current_salary" value="{{ old('current_salary', optional($employee->profile)->current_salary) }}" placeholder="Current Salary" aria-label="Current Salary">
-                            <small>Amount in Lpa</small>
                             @error('current_salary')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
@@ -81,10 +80,9 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="inputName4" class="form-label">Expected Salary*</label>
+                        <label for="inputName4" class="form-label">Expected Salary <small>(Kpa only)</small>*</label>
                         <div class="col-12">
                             <input type="text" class="form-control form-input" name="expected_salary" value="{{ old('expected_salary', optional($employee->profile)->expected_salary) }}" placeholder="Expected Salary" aria-label="Expected Salary">
-                            <small>Amount in Lpa</small>
                             @error('current_salary')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
@@ -328,21 +326,25 @@
                             @enderror
                         </div>
                     </div>
+                    {{--
                     <div class="row form-group">
                         <label for="inputPhone" class="form-label">Experiences</label>
                         <div class="col-12">
                             @include('employee.profile.experience.index')
                         </div>
                     </div>
+                    --}}
                     <div class="row form-group">
                         <a href="{{ route('employee.experience.create') }}" target="_blank">Add your experience</a>
                     </div>
+                    {{--
                     <div class="row form-group">
                         <label for="inputPhone" class="form-label">Educations</label>
                         <div class="col-12">
                             @include('employee.profile.education.index')
                         </div>
                     </div>
+                    --}}
                     <div class="row form-group">
                         <a href="{{ route('employee.education.create') }}" target="_blank">Add your education</a>
                     </div>
