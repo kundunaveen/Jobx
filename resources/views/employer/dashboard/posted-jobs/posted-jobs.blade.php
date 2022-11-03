@@ -63,10 +63,12 @@
                            <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '25'?'selected':''}} @endif value="25">More than 24 LPA</option>
                         </select>
                      </div>
-                     <div class="col-md-3 justify-content-end" style="padding:10px !important">
-                        <button type="submit" class="btn btn-primary" style="padding-left:30px; padding-right:30px">Search</button>
-                        <a class="text-dark d-none redirect_to_posted_jobs" href="{{route('employer.posted.jobs')}}">Post Job</a>
-                        <button type="" class="btn btn-primary" onclick="$('.search-form').remove();window.location.href = '{{url('employer/posted-jobs')}}'" style="padding-left:30px; padding-right:30px">Reset</button>
+                     <div class="col-md-3" style="padding:10px !important">
+                        <div class="row"> 
+                           <div class="col-6"> <button type="submit" class="col-12 btn btn-primary" style="padding-left:30px; padding-right:30px">Search</button></div>
+                           <!-- <a class="text-dark d-none redirect_to_posted_jobs" href="{{route('employer.posted.jobs')}}">Post Job</a> -->
+                           <div class="col-6"><button type="" class="col-12 btn btn-primary" onclick="$('.search-form').remove();window.location.href = '{{url('employer/posted-jobs')}}'" style="padding-left:30px; padding-right:30px">Reset</button></div>
+                        </div>
                      </div>
                     </div>
                    </form>
