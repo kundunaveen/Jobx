@@ -92,27 +92,24 @@ $(document).ready(function () {
             last_name: {
                 required: true
             },
-            gender: {
-                required: true
-            },
-            date_of_birth: {
+            contact: {
                 required: true,
+                number:true
             },
-            current_job_title: {
-                required: true
+            notification_option: {
+                required:true
             },
-            current_salary: {
-                number: true
+            company_name:{
+                required:true
             },
-            expected_salary: {
-                required: true,
-                number: true
+            industry:{
+                required:true
             },
-            experience:{
-                number: true
+            company_size:{
+                required:true
             },
-            'languages[]':{
-                required: true
+            company_role:{
+                required:true
             },
             address:{
                 required: true
@@ -126,24 +123,102 @@ $(document).ready(function () {
             'country':{
                 min: 1
             },
-            video_link:{
-                url: true
+            zip : {
+                required:true,
+                number:true
+            }
+            
+        }
+    });
+
+    $( "#jquery-employer-profile-form-validation" ).validate({
+        rules: {
+            first_name: {
+                required: true
             },
-            website_link:{
-                url: true
+            last_name: {
+                required: true
             },
-            'social_media_link[facebook]':{
-                url: true
+            contact: {
+                required: true,
+                number:true
             },
-            'social_media_link[linkedin]':{
-                url: true
+            notification_option: {
+                required:true
             },
-            'social_media_link[twitter]':{
-                url: true
+            company_name:{
+                required:true
             },
-            'social_media_link[instagram]':{
-                url: true
+            industry:{
+                required:true
+            },
+            company_size:{
+                required:true
+            },
+            company_role:{
+                required:true
+            },
+            address:{
+                required: true
+            },
+            'skills[]':{
+                required: true
+            },
+            resume:{
+                required: true
+            },
+            'country':{
+                min: 1
+            },
+            zip : {
+                required:true,
+                number:true
+            }
+            
+        }
+    });
+    
+     $( "#jquery-post-job-form-validation" ).validate({
+        rules: {
+            job_title: {
+                required: true
+            },
+            job_role: {
+                required: true
+            },
+            department: {
+                required: true
+            },
+            job_type: {
+                required:true
+            },
+            min_exp:{
+                required:true,
+                number:true
+            },
+            salary_offer:{
+                required:true,
+                number:true
+            },
+            address:{
+                required:true
+            },
+            'country':{
+                required:true
+            },
+            zip:{
+                required: true,
+                number:true
+            },
+            'skills[]':{
+                required: true
+            },
+            'images_input[]':{
+                required: true
             }
         }
     });
+    
+
+    
 });
