@@ -60,6 +60,11 @@ class Vacancy extends Model
         return $this->belongsTo('App\Models\MasterAttribute', 'job_type');
     }
 
+    public function applicants()
+    {
+        return $this->hasMany('App\Models\AppliedJob','vacancy_id');
+    }
+
     public function getImagesInArray() :array{
         return filled($this->images) ? explode(',', $this->images) : [];
     }

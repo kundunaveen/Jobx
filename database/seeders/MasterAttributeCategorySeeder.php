@@ -51,6 +51,10 @@ class MasterAttributeCategorySeeder extends Seeder
                 'id' => 9,
                 'name' => 'Job Type'
             ],
+            [
+                'id' => 10,
+                'name' => 'Candidate Status'
+            ]
         ]);
     }
 }

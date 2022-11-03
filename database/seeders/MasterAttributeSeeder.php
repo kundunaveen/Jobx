@@ -270,6 +270,31 @@ class MasterAttributeSeeder extends Seeder
                 'master_attribute_category_id' => 9,
                 'value' => 'Contract Based'
             ],
+            [
+                'id' => 52,
+                'master_attribute_category_id' => 10,
+                'value' => 'PENDING'
+            ],
+            [
+                'id' => 52,
+                'master_attribute_category_id' => 10,
+                'value' => 'APPLIED'
+            ],
+            [
+                'id' => 52,
+                'master_attribute_category_id' => 10,
+                'value' => 'IN REVIEW'
+            ],
+            [
+                'id' => 52,
+                'master_attribute_category_id' => 10,
+                'value' => 'ACCEPTED'
+            ],
+            [
+                'id' => 52,
+                'master_attribute_category_id' => 10,
+                'value' => 'REJECTED'
+            ],
         ]);
     }
 }

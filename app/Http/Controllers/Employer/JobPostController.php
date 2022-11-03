@@ -19,7 +19,7 @@ class JobPostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'employeraccount']);
+        $this->middleware(['auth', 'employeraccount', 'verified']);
     }
 
     public function index(Request $request)

@@ -39,6 +39,23 @@ span.select2-selection.select2-selection--single {
 .main-bg {
     padding:0px !important;
 }
+
+button.btn.btn-custom-posted-jobs.btn-primary.active {
+    border: 1px solid transparent!important;
+    font-size: 16px!important;
+    font-family: "cooper_hewittmedium";
+    border-radius: 10px;
+    background: #04050A;
+    color: #fff;
+    border-color: #04050A;
+    transition: all .3s ease;
+}
+button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
+    background: transparent;
+    color: #2343F2;
+    border-color: #2343F2!important;
+    transition: all .3s ease;
+}
 </style>
 <style>
         .step-progress label {
@@ -138,7 +155,7 @@ span.select2-selection.select2-selection--single {
         }
 
         .step-content .step-content-foot {
-          text-align: right;
+          text-align: center;
         }
 
         .step-content .step-content-foot button {
@@ -217,12 +234,12 @@ span.select2-selection.select2-selection--single {
                         <div class="row form-group">
                             <div class="col-md-6 mb-5 mb-md-0">
                                 <label for="inputName4" class="form-label">First Name*</label>
-                                <input type="text" class="form-control form-input" name="first_name" value="{{$employer->first_name}}" placeholder="First name"
+                                <input type="text" class="form-control form-input" name="first_name" value="{{$employer->first_name}}" placeholder="e.g - Mark"
                                     aria-label="First name">
                             </div>
                             <div class="col-md-6">
                                 <label for="inputName4" class="form-label">Last Name*</label>
-                                <input type="text" class="form-control form-input" name="last_name" value="{{$employer->last_name}}" placeholder="Last name"
+                                <input type="text" class="form-control form-input" name="last_name" value="{{$employer->last_name}}" placeholder="e.g - Davis"
                                     aria-label="Last name">
                             </div>
                         </div>
@@ -236,7 +253,7 @@ span.select2-selection.select2-selection--single {
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Phone Number</label>
                             <div class="col-12">
-                                <input type="number" name="contact" class="form-control form-input" value="{{$employer->contact}}" placeholder="Phone Number"
+                                <input type="number" name="contact" class="form-control form-input" value="{{$employer->contact}}" placeholder="e.g - 99xxxxx999"
                                     aria-label="Phone Number">
                             </div>
                         </div>  
@@ -258,7 +275,7 @@ span.select2-selection.select2-selection--single {
                         <div class="row form-group">
                             <label for="inputCompanyName" class="form-label">Company Name*</label>
                             <div class="col-12">
-                                <input type="text" name="company_name" class="form-control form-input" value="{{$employer->profile->company_name}}" placeholder="Enter your Company Name"
+                                <input type="text" name="company_name" class="form-control form-input" value="{{$employer->profile->company_name}}" placeholder="e.g - Google"
                                     aria-label="Company Name">
                             </div>
                         </div>
@@ -318,13 +335,13 @@ span.select2-selection.select2-selection--single {
                         </div>
                         @endif
                        
-    </div>
-    <div id="step3" class="step-content-body out">
+                    </div>
+                    <div id="step3" class="step-content-body out">
                         <h2 class="form-heading">Company Location</h2>
                         <div class="row form-group">
                             <label for="check" class="form-label">Location*</label>
                             <div class="col-12">
-                            <textarea name="address" class="form-control" id="exampleFormControlTextarea1" rows="5">{{$employer->profile->address}}</textarea>
+                            <textarea name="address" placeholder="e.g - #123 main street" class="form-control" id="exampleFormControlTextarea1" rows="5">{{$employer->profile->address}}</textarea>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -366,7 +383,7 @@ span.select2-selection.select2-selection--single {
                         <div class="col-md-6">
                             <label for="check" class="form-label">Zip*</label>
                             <!-- <div class="col-12"> -->
-                                <input type="number" name="zip" class="form-control form-input" value="{{$employer->profile->zip}}" placeholder="Zip Code"
+                                <input type="number" name="zip" class="form-control form-input" value="{{$employer->profile->zip}}" placeholder="e.g - 10101"
                                     aria-label="Zip Code">
                             <!-- </div> -->
                         </div>
@@ -376,7 +393,7 @@ span.select2-selection.select2-selection--single {
                                 <input type="submit" class="btn  btn-primary btn-form" value="Publish">
                             </div>
                             <div class="col-sm-3  text-center text-sm-end">
-                                <input type="reset" class="btn py-3 px-0 bg-transparent fw-bold btn-skip" value="Cancel">
+                                <input type="reset" class="btn py-3 px-0 bg-transparent fw-bold btn-skip" value="Back" onclick="$('#prevBtn').click()">
                             </div>
                         </div>
                         </div>
@@ -392,9 +409,9 @@ span.select2-selection.select2-selection--single {
                             </div>
                         </div>    
                         <div class="step-content-foot">
-                            <button type="button" class="active" name="prev">Prev</button>
-                            <button type="button" class="active" name="next">Next</button>
-                            <button type="button" class="active out btn btn-primary btn-form" name="finish">Submit</button>
+                            <button type="button" class="btn btn-custom-posted-jobs btn-primary active" id="prevBtn" name="prev">Prev</button>
+                            <button type="button" class="btn btn-custom-posted-jobs btn-primary active" name="next">Next</button>
+                            <button type="button" class="active out btn btn-primary btn-custom-posted-jobs btn-form" id="submitBtn" name="finish">Submit</button>
                         </div>
                     </div>
                     </div>
@@ -420,6 +437,11 @@ span.select2-selection.select2-selection--single {
             var instance = $(this);
             if (stepItem.length - 1 < step) {
               return;
+            }
+            if(step == 1)
+            {
+                $('#prevBtn').addClass('d-none')
+                $('#submitBtn').addClass('d-none')
             }
             $('.step-content .step-content-foot button[name="prev"]').removeClass('out');
             if (step == (stepItem.length - 2)) {

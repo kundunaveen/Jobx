@@ -13,6 +13,14 @@
             border: none;
             color: #376311;
         }
+        .btn-custom-posted-jobs{
+         padding-left: 10px;
+         text-align: center;
+         padding-top:6px;
+         padding-bottom:6px;
+         padding-right: 10px;
+         margin-top: 7px;
+        }
     </style>
     <section class="dashboard-section inner-login-shape">
        
@@ -65,9 +73,9 @@
                      </div>
                      <div class="col-md-3" style="padding:10px !important">
                         <div class="row"> 
-                           <div class="col-6"> <button type="submit" class="col-12 btn btn-primary" style="padding-left:30px; padding-right:30px">Search</button></div>
+                           <div class="col-6"> <button type="submit" class="col-12 btn btn-custom-posted-jobs btn-primary">Search</button></div>
                            <!-- <a class="text-dark d-none redirect_to_posted_jobs" href="{{route('employer.posted.jobs')}}">Post Job</a> -->
-                           <div class="col-6"><button type="" class="col-12 btn btn-primary" onclick="$('.search-form').remove();window.location.href = '{{url('employer/posted-jobs')}}'" style="padding-left:30px; padding-right:30px">Reset</button></div>
+                           <div class="col-6"><button type="" class="col-12 btn btn-primary btn-custom-posted-jobs" onclick="$('.search-form').remove();window.location.href = '{{url('employer/posted-jobs')}}'">Reset</button></div>
                         </div>
                      </div>
                     </div>
@@ -103,6 +111,10 @@
                                     </ul>
                                     <h6 class="d-flex align-items-center" style="font-size: 13px;margin-bottom: 14px;"><i
                                           class="icon-location me-2"></i>{{$job->citydetail->city.', '.$job->countrydetail->name}}</h6>
+                                    <div class="row">
+                                       <div class="col-auto"><h6 class="d-flex align-items-center" style="font-size:13px;">Total Applicants :</h6></div>
+                                       <div class="col-auto"><h6 class="d-flex align-items-center" style="font-size:13px;">{{count($job->applicants)}}</h6></div>
+                                    </div>
                                     <p class="job_description{{$job->id}}" style="font-size: 13px;padding: 0 0 30px;line-height: 22px;margin-bottom: 0;">@if(strlen($job->description)>60) {{substr($job->description ,0, 60).'...'}} <a class="read_more{{$job->id}}" onclick="readDescription('{{$job->id}}', '{{$job->description}}')" href="javascript:void(0)">Read more</a>@else {{$job->description}} @endif</p>
                                     <div class="job-btn-wrapper d-flex justify-content-between">
                                        <a href="{{route('employer.edit.post.job', $job->id)}}" style="margin-left:-5px;margin-right:10px" class="btn col-6 btn-default ">Edit</a>
