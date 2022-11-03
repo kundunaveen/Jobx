@@ -20,8 +20,8 @@
                         </div>
                         <div class="col-auto mt-2">
                             <!-- <a href="{{ route('employee.home') }}" title="Back to dashboard" class="text-primary"> -->
-                                <!-- <i class="fa fa-arrow-left" aria-hidden="true"></i> -->
-                                <span class="col-auto"><u><a class="text-dark" href="{{ route('employee.home') }}">Back</a></u></span>
+                            <!-- <i class="fa fa-arrow-left" aria-hidden="true"></i> -->
+                            <span class="col-auto"><u><a class="text-dark" href="{{ route('employee.home') }}">Back</a></u></span>
                             <!-- </a> -->
                         </div>
                     </div>
@@ -41,7 +41,7 @@
                             <select class="form-control" name="gender">
                                 <option value="">Select gender</option>
                                 @foreach($genders as $gender)
-                                <option value="{{ $gender->id }}" @if($gender->id == old('gender', optional($employee->profile)->gender)) selected @endif>{{$gender->value}}                                    
+                                <option value="{{ $gender->id }}" @if($gender->id == old('gender', optional($employee->profile)->gender)) selected @endif>{{$gender->value}}
                                 </option>
                                 @endforeach
                             </select>
@@ -95,7 +95,7 @@
                     <div class="row form-group">
                         <label for="inputName4" class="form-label">Expected Salary <small>(Kpa only)</small>*</label>
                         <div class="col-12">
-                            <input type="text" class="form-control form-input" name="expected_salary" value="{{ old('expected_salary', optional($employee->profile)->expected_salary) }}" aria-label="Expected Salary"placeholder="Ex: 9">
+                            <input type="text" class="form-control form-input" name="expected_salary" value="{{ old('expected_salary', optional($employee->profile)->expected_salary) }}" aria-label="Expected Salary" placeholder="Ex: 9">
                             @error('current_salary')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
@@ -131,21 +131,10 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="inputName4" class="form-label">Address*</label>
-                        <div class="col-12">
-                            <input type="text" class="form-control form-input" name="address" value="{{ old('address', optional($employee->profile)->address) }}" aria-label="Address" placeholder="Ex: #123 Street">
-                            @error('address')
-                            <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
-                            </span>
-                            @enderror
-                        </div>
-                    </div>
-                    <div class="row form-group">
                         <label class="form-label">Job Skills*</label>
                         <div class="col-md-12">
                             <select name="skills[]" class="select2_dropdown select2_multiple_dropdown_skills drop_arrow" multiple="multiple" aria-label="Default select example">
-                            <option value="" disabled>Select multiple skills</option>
+                                <option value="" disabled>Select multiple skills</option>
                                 @foreach($allSkills as $skill)
                                 <option value="{{ $skill->id }}" @if(is_array(explode(',', optional($employee->profile)->skills)) && in_array($skill->id, explode(',', optional($employee->profile)->skills))) @endif> {{ $skill->skill }} </option>
                                 @endforeach
@@ -174,6 +163,19 @@
                         </div>
                     </div>
                     <h2 class="form-heading">Location</h2>
+                    <div class="row form-group">
+                        <label for="inputName4" class="form-label">Address*</label>
+                        <div class="col-12">
+                            <textarea class="form-control" name="address" aria-label="Address" placeholder="Ex: #123 Street" rows="5">
+                            {{ old('address', optional($employee->profile)->address) }}
+                            </textarea>
+                            @error('address')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
                     <div class="row form-group">
                         <label for="check" class="form-label">Country*</label>
                         <div class="col-12">
@@ -294,7 +296,7 @@
                             </span>
                             @enderror
                         </div>
-                    </div>                   
+                    </div>
                     <div class="row form-group">
                         <label for="inputFacebookLink" class="form-label">Your Facebook link</label>
                         <div class="col-12">
@@ -347,10 +349,18 @@
                         </div>
                     </div>
                     --}}
-                    <div class="row form-group">
-                        <a href="{{ route('employee.experience.create') }}" target="_blank">Add your experience</a>
+                    <div class="row justify-content-between">
+                        <div class="col-md-6 form-group">
+
+                            <a href="{{ route('employee.experience.create') }}" target="_blank">Add your experience</a>
+                        </div>
+                        <div class="col-md-6 form-group">
+
+                            <a href="{{ route('employee.education.create') }}" target="_blank">Add your education</a>
+                        </div>
                     </div>
-                    {{--
+            </div>
+            {{--
                     <div class="row form-group">
                         <label for="inputPhone" class="form-label">Educations</label>
                         <div class="col-12">
@@ -358,19 +368,16 @@
                         </div>
                     </div>
                     --}}
-                    <div class="row form-group">
-                        <a href="{{ route('employee.education.create') }}" target="_blank">Add your education</a>
-                    </div>
-                    <div class="row btn-form-wrapper">
-                        <div class="d-grid col-sm-6">
-                            <input type="submit" class="btn  btn-primary btn-form" value="Publish">
-                        </div>
-                        <div class="d-grid col-sm-6 text-center">
-                            <input type="reset" class="btn py-3 px-0 bg-transparent  fw-bold btn-skip" value="Cancel">
-                        </div>
-                    </div>
-                </form>
+            <div class="row btn-form-wrapper">
+                <div class="d-grid col-sm-6">
+                    <input type="submit" class="btn  btn-primary btn-form" value="Publish">
+                </div>
+                <div class="d-grid col-sm-6 text-center">
+                    <input type="reset" class="btn py-3 px-0 bg-transparent  fw-bold btn-skip" value="Cancel">
+                </div>
             </div>
+            </form>
+        </div>
         </div>
     </section>
 </main>
