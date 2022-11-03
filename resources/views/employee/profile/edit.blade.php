@@ -12,12 +12,19 @@
                 @include('layouts.messages.error')
                 <form class="form-inner" method="POST" enctype="multipart/form-data">
                     @csrf
-                    <a href="{{ route('employee.home') }}" title="Back to dashboard" class="text-primary">
-                        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-                    </a>
-                    <h2 class="form-heading">
-                        Profile Details
-                    </h2>
+                    <div class="row justify-content-between">
+                        <div class="col-auto">
+                            <h2 class="form-heading">
+                                Profile Details
+                            </h2>
+                        </div>
+                        <div class="col-auto mt-2">
+                            <!-- <a href="{{ route('employee.home') }}" title="Back to dashboard" class="text-primary"> -->
+                                <!-- <i class="fa fa-arrow-left" aria-hidden="true"></i> -->
+                                <span class="col-auto"><u><a class="text-dark" href="{{ route('employee.home') }}">Back</a></u></span>
+                            <!-- </a> -->
+                        </div>
+                    </div>
                     <div class="row form-group">
                         <div class="col-md-6 mb-5 mb-md-0">
                             <label for="inputName4" class="form-label">First Name*</label>
