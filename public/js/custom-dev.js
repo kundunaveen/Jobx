@@ -117,9 +117,6 @@ $(document).ready(function () {
             'skills[]':{
                 required: true
             },
-            resume:{
-                required: true
-            },
             'country':{
                 min: 1
             },
