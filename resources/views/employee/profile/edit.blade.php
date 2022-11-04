@@ -115,7 +115,7 @@
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label class="form-label">Languages</label>
+                        <label class="form-label">Languages*</label>
                         <div class="col-12">
                             <select class="select2_dropdown select2_multiple_dropdown_languages drop_arrow" name="languages[]" multiple="multiple">
                                 <option value="">Select multiple languages*</option>
@@ -156,7 +156,8 @@
                             <input type="file" name="resume" class="form-control">
                             @if($resume = optional($employee->profile)->profile_resume_url)
                             <small>
-                                <a class="text-secondary" href="{{ $resume }}" target="_blank">View Resume</a>
+                                <a class="text-primary" href="{{ $resume }}" target="_blank">Download resume <i class="fa fa-file" aria-hidden="true"></i>
+</a>
                             </small>
                             @endif
                             @error('resume')
@@ -170,9 +171,7 @@
                     <div class="row form-group">
                         <label for="inputName4" class="form-label">Address*</label>
                         <div class="col-12">
-                            <textarea class="form-control" name="address" aria-label="Address" placeholder="Ex: #123 Street" rows="5">
-                            {{ old('address', optional($employee->profile)->address) }}
-                            </textarea>
+                            <textarea class="form-control" name="address" aria-label="Address" placeholder="Ex: #123 Street" rows="5">{{ old('address', optional($employee->profile)->address) }}</textarea>
                             @error('address')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
