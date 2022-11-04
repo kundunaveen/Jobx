@@ -8,6 +8,23 @@
     padding:0px !important;
 }
 
+.dataTables_filter {
+    text-align: right;
+    margin-bottom: 30px;
+}
+.dataTables_length {
+    display: none;
+}
+ul.pagination {
+    float: right;
+}
+.dataTables_filter input {
+    margin-left: 10px;
+}
+.dataTables_filter label {
+    display: inline-flex;
+    align-items: center;
+}
 </style>
     <section class="dashboard-section inner-login-shape" style="min-height:800px">
         <section class="form-inner-wrapper">
@@ -23,11 +40,12 @@
                                                 <div class="row justify-content-between">
                                                     <h3 class="card-title col-auto mt-2">Applicants</h3>
                                                     <div class="col-auto">
-                                                        <a class="col-auto btn btn-primary" href="{{ route('employer.dashboard') }}" style="margin-right:10px !important">Back</a>
+                                                        <!-- <a class="col-auto btn btn-primary" href="{{ route('employer.dashboard') }}" style="margin-right:10px !important">Back</a> -->
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="card-body">
+                                                
                                                 <table class="table table-striped" id="applicants_table">
                                                     <thead>
                                                         <tr>

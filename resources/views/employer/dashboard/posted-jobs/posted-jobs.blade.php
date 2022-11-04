@@ -113,7 +113,7 @@
                                           class="icon-location me-2"></i>{{$job->citydetail->city.', '.$job->countrydetail->name}}</h6>
                                     <div class="row">
                                        <div class="col-auto"><h6 class="d-flex align-items-center" style="font-size:13px;">Total Applicants :</h6></div>
-                                       <div class="col-auto"><h6 class="d-flex align-items-center" style="font-size:13px;">{{count($job->applicants)}}</h6></div>
+                                       <div class="col-auto"><h6 class="d-flex align-items-center" style="font-size:13px;"><a href="{{url('/employer/job-applicants', base64_encode($job->id))}}">{{count($job->applicants)}}</a></h6></div>
                                     </div>
                                     <p class="job_description{{$job->id}}" style="font-size: 13px;padding: 0 0 30px;line-height: 22px;margin-bottom: 0;">@if(strlen($job->description)>60) {{substr($job->description ,0, 60).'...'}} <a class="read_more{{$job->id}}" onclick="readDescription('{{$job->id}}', '{{$job->description}}')" href="javascript:void(0)">Read more</a>@else {{$job->description}} @endif</p>
                                     <div class="job-btn-wrapper d-flex justify-content-between">

@@ -8,6 +8,7 @@
    <script src="{{asset('js/select2.min.js')}}"></script>
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
    <script src="{{asset('js/custom-dev.js')}}"></script>
+   <script src="{{asset('js/datatables.min.js')}}"></script>
 
    <script>
       $(document).ready(function(){
@@ -15,6 +16,13 @@
          $('.country-list').select2()
          $('.state-list').select2()
          $('.city-list').select2()
+         $('#applicants_table').DataTable({
+            // searching: true,
+            // paging:false,
+            info:false,
+            iDisplayLength:25,
+            // dom:'rtip'
+         })
       })
       function checkPasswordValidation()
       {
