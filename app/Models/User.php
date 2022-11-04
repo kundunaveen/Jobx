@@ -10,7 +10,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable, SoftDeletes;
 
@@ -80,7 +80,7 @@ class User extends Authenticatable
     }
 
     public function getProfileImageUrlAttribute(): string{
-        return filled(optional($this->profile)->profile_image_url) ? optional($this->profile)->profile_image_url : asset('image/user.png');
+        return $this->profile->profile_image_url;
     }
 
     public function getProfileCurrentJobTitleAttribute(): ?string{

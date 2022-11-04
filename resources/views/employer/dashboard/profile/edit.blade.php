@@ -208,7 +208,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                         <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75"
                             aria-valuemin="0" aria-valuemax="100"></div>
                     </div> -->
-                    <form class="form-inner" method="POST" enctype="multipart/form-data">
+                    <form class="form-inner" method="POST" enctype="multipart/form-data" id="jquery-employer-profile-form-validation">
                         @csrf
 
                     <div class="card step-progress">
@@ -234,12 +234,12 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                         <div class="row form-group">
                             <div class="col-md-6 mb-5 mb-md-0">
                                 <label for="inputName4" class="form-label">First Name*</label>
-                                <input type="text" class="form-control form-input" name="first_name" value="{{$employer->first_name}}" placeholder="e.g - Mark"
+                                <input type="text" class="form-control form-input" name="first_name" value="{{$employer->first_name}}" placeholder="Ex: Mark"
                                     aria-label="First name">
                             </div>
                             <div class="col-md-6">
                                 <label for="inputName4" class="form-label">Last Name*</label>
-                                <input type="text" class="form-control form-input" name="last_name" value="{{$employer->last_name}}" placeholder="e.g - Davis"
+                                <input type="text" class="form-control form-input" name="last_name" value="{{$employer->last_name}}" placeholder="Ex: - Davis"
                                     aria-label="Last name">
                             </div>
                         </div>
@@ -253,7 +253,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Phone Number</label>
                             <div class="col-12">
-                                <input type="number" name="contact" class="form-control form-input" value="{{$employer->contact}}" placeholder="e.g - 99xxxxx999"
+                                <input type="number" name="contact" class="form-control form-input" value="{{$employer->contact}}" placeholder="Ex: 99xxxxx999"
                                     aria-label="Phone Number">
                             </div>
                         </div>  
@@ -275,7 +275,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                         <div class="row form-group">
                             <label for="inputCompanyName" class="form-label">Company Name*</label>
                             <div class="col-12">
-                                <input type="text" name="company_name" class="form-control form-input" value="{{$employer->profile->company_name}}" placeholder="e.g - Google"
+                                <input type="text" name="company_name" class="form-control form-input" value="{{$employer->profile->company_name}}" placeholder="Ex: Google"
                                     aria-label="Company Name">
                             </div>
                         </div>
@@ -341,7 +341,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                         <div class="row form-group">
                             <label for="check" class="form-label">Location*</label>
                             <div class="col-12">
-                            <textarea name="address" placeholder="e.g - #123 main street" class="form-control" id="exampleFormControlTextarea1" rows="5">{{$employer->profile->address}}</textarea>
+                            <textarea name="address" placeholder="Ex: #123 main street" class="form-control" id="exampleFormControlTextarea1" rows="5">{{$employer->profile->address}}</textarea>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -383,7 +383,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                         <div class="col-md-6">
                             <label for="check" class="form-label">Zip*</label>
                             <!-- <div class="col-12"> -->
-                                <input type="number" name="zip" class="form-control form-input" value="{{$employer->profile->zip}}" placeholder="e.g - 10101"
+                                <input type="number" name="zip" class="form-control form-input" value="{{$employer->profile->zip}}" placeholder="Ex: 10101"
                                     aria-label="Zip Code">
                             <!-- </div> -->
                         </div>
@@ -393,7 +393,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                                 <input type="submit" class="btn  btn-primary btn-form" value="Publish">
                             </div>
                             <div class="col-sm-3  text-center text-sm-end">
-                                <input type="reset" class="btn py-3 px-0 bg-transparent fw-bold btn-skip" value="Back" onclick="$('#prevBtn').click()">
+                                <input type="reset" class="btn py-3 px-0 bg-transparent fw-bold btn-skip" value="Back" onclick="$('#prevBtn').click();$('#prevBtn').removeClass('d-none')">
                             </div>
                         </div>
                         </div>

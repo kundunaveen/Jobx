@@ -5,13 +5,14 @@ namespace App\Http\Controllers\Employer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AppliedJob;
+use App\Models\User;
 use Session;
 
 class ApplicationController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'employeraccount', 'verified']);
+        $this->middleware(['auth', 'employeraccount']);
     }
 
     public function index()
@@ -34,6 +35,12 @@ class ApplicationController extends Controller
         return response()->json([
             'status' => 'success'
         ]);
+    }
+
+    public function viewEmployeeProfile($id)
+    {
+        $user = User::find(base64_decode($id));
+        return view('employer.dashboard.applications.employee_profile', compact('user'));
     }
 
 }
