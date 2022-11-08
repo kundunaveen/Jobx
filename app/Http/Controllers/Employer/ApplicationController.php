@@ -31,6 +31,14 @@ class ApplicationController extends Controller
         return view('employer.dashboard.applications.index', compact('applications'));
     }
 
+    public function newApplicants()
+    {
+        $applications = AppliedJob::whereHas('vacancy', function($q){
+            $q->where('employer_id', auth()->user()->id);
+        })->where('status', 0)->get();
+        return view('employer.dashboard.applications.index', compact('applications'));
+    }
+
     public function updateStatus(Request $request)
     {
         $appJob =  AppliedJob::find($request->id);
