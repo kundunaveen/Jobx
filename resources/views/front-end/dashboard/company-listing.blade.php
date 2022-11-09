@@ -274,6 +274,8 @@
                                     </tr>
                                  </thead>
                                  <tbody>
+                                    @foreach($employers as $employer)
+                                    @if($employer->profile && isset($employer->profile->company_name))
                                     <tr>
                                        <td>
                                           <div class="form-check">
@@ -288,12 +290,12 @@
                                                    class="img-fluid" alt="">
                                              </figure>
                                              <article>
-                                                <p class="mb-0">Google</p>
+                                                <p class="mb-0">{{$employer->profile->company_name}}</p>
                                                 <span>Google.com</span>
                                              </article>
                                           </a>
                                        </td>
-                                       <td>Savannah Nguyen</td>
+                                       <td>{{ucwords($employer->first_name.' '.$employer->last_name)}}</td>
                                        <td>710.68</td>
                                        <td>
                                           <div class="d-flex  align-items-center">
@@ -316,7 +318,9 @@
                                        </td>
                                        <td><a href="javascript:void(0)"><i class="icon-view-eye"></i></a></td>
                                     </tr>
-                                    <tr>
+                                    @endif
+                                    @endforeach
+                                    <!-- <tr>
                                        <td>
                                           <div class="form-check">
                                              <input class="form-check-input" type="checkbox" value=""
@@ -525,7 +529,7 @@
                                           </div>
                                        </td>
                                        <td><a href="javascript:void(0)"><i class="icon-view-eye"></i></a></td>
-                                    </tr>
+                                    </tr> -->
                                  </tbody>
                               </table>
                            </div>

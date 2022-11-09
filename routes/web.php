@@ -125,4 +125,5 @@ Route::post('/employer-profile/getStates', [App\Http\Controllers\Employer\HomeCo
 Route::post('/employer-profile/getCities', [App\Http\Controllers\Employer\HomeController::class, 'getCities']);
 
 Route::get('/companies', [App\Http\Controllers\FrontEnd\DashboardController::class, 'companies']);
+Route::get('/jobs', [App\Http\Controllers\FrontEnd\DashboardController::class, 'jobs']);
 

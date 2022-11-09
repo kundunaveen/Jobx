@@ -88,7 +88,7 @@
                                 </div>
                             </div>
                             <div class="all-vacancie">
-                                <a href="job-listing.html"> <small>All Vacancies <i class="icon-right-select-icon"></i></small></a>
+                                <a href="{{url('jobs')}}"> <small>All Vacancies <i class="icon-right-select-icon"></i></small></a>
                             </div>
                             <div class="mx-auto my-auto justify-content-center">
                                 <div class="owl-carousel owl-theme">
