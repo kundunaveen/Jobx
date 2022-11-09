@@ -250,6 +250,42 @@ $(document).ready(function () {
             to_year: "To year field is required",
         }
     });
+
+    $("#jqueryValidatorEditExperienceForm").validate({
+        rules: {
+            job_title: {
+                required: true
+            },
+            company: {
+                required: true
+            },
+            country_id: {
+                required: true
+            },
+            from_month: {
+                required: true
+            },
+            from_year: {
+                required: true
+            },
+            to_month: {
+                required: true
+            },
+            to_year: {
+                required: true
+            },
+            
+        },
+        messages: {
+            job_title: "Job title field required",
+            company: "Company field is required",
+            country_id: "Country field is required",
+            from_month: "Form month field is required",
+            from_year: "Form year field is required",
+            to_month: "To month field is required",
+            to_year: "To year field is required",
+        }
+    });
     
     $("#jqueryValidatorAddEducationForm").validate({
         rules: {
