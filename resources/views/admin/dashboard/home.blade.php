@@ -113,7 +113,7 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                 <h4>Posted Vacancies</h4>
-                                <a href="javascript:void(0)">See all</a>
+                                <a href="{{url('/admin/manage-vacancy')}}">See all</a>
                                 </div>
                                 <ul class="list-group posted-list">
     
@@ -260,7 +260,7 @@
                             </div>
                         </div>
     
-                        <div class="card activity-wrapper">
+                        <!-- <div class="card activity-wrapper">
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                 <h4>Activity</h4>
@@ -303,7 +303,7 @@
                                 </li>
                                 </ul>
                             </div>
-                        </div>
+                        </div> -->
                     </aside>
                     </div>
                 </div>

@@ -9,6 +9,8 @@
    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
    <script src="{{asset('js/custom-dev.js')}}"></script>
    <script src="{{asset('js/datatables.min.js')}}"></script>
+   <script src="{{asset('js/intlTelInput.js')}}"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
 
    <script>
       $(document).ready(function(){
@@ -23,7 +25,12 @@
             iDisplayLength:25,
             // dom:'rtip'
          })
+         var input = document.querySelector("#phone");
+         window.intlTelInput(input, {
+            // any initialisation options go here
+         });
       })
+
       function checkPasswordValidation()
       {
          $.ajax({

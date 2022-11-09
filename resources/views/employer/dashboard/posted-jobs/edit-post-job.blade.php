@@ -77,6 +77,12 @@ Employer | Edit Post Job
                             </div>
                         </div>
                         <div class="row form-group">
+                            <div class="col-12">
+                                <label for="inputEmail4" class="form-label">Company Branch</label>
+                                <input value="{{old('job_title', $vacancy->branch)}}" type="text" name="company_branch" placeholder="Ex: New York" class="form-control form-input"  >
+                            </div>
+                        </div>
+                        <div class="row form-group">
                             <label for="inputPhone" class="form-label">Job Title</label>
                             <div class="col-12">
                                 <input type="text" name="job_title" value="{{old('job_title', $vacancy->job_title)}}" class="form-control form-input" placeholder="Ex: Business Manager" aria-label="Job Title">

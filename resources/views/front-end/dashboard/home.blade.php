@@ -56,7 +56,7 @@
                                             Vacancies</button>
                                         <div class="search-advance">
                                             <ul class="col-md-auto">
-                                                <li><a href="company-listing.html">Company Listing</a></li>
+                                                <li><a href="{{url('/companies')}}">Company Listing</a></li>
                                                 <li class="text-end"><a hre="#!">Advance Search </a></li>
                                             </ul>
                                         </div>

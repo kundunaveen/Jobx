@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Employer;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Vacancy;
+use App\Models\AppliedJob;
+use DB;
 
 class DashboardController extends Controller
 {
@@ -14,8 +16,40 @@ class DashboardController extends Controller
     }
 
     public function home()
-    {
-        return view('employer.dashboard.home');
+    {   
+        $allApp = AppliedJob::whereHas('vacancy', function($q){
+            $q->where('employer_id', auth()->user()->id);
+        })->count();
+        $applications = AppliedJob::whereHas('vacancy', function($q){
+            $q->where('employer_id', auth()->user()->id);
+        })->where('status', 0)->get();
+        $shortlisted = AppliedJob::whereHas('vacancy', function($q){
+            $q->where('employer_id', auth()->user()->id);
+        })->where('status', 1)->count();
+        $rejected = AppliedJob::whereHas('vacancy', function($q){
+            $q->where('employer_id', auth()->user()->id);
+        })->where('status', 2)->count();
+        $hired = AppliedJob::whereHas('vacancy', function($q){
+            $q->where('employer_id', auth()->user()->id);
+        })->where('status', 3)->count();
+        $hold = AppliedJob::whereHas('vacancy', function($q){
+            $q->where('employer_id', auth()->user()->id);
+        })->where('status', 4)->count();
+        $datee = Date('Y-m-d', strtotime(Date('Y-m-d').' -6 days'));
+
+        for($i=0;$i<=6;$i++)
+        {
+            $newdate = Date('Y-m-d', strtotime($datee.'+ '.$i.' days'));
+            $date_arr [$newdate] = 0;
+        }
+        $app_day = DB::select(DB::raw('SELECT COUNT(id) as total, DATE(created_at) as date_at FROM applied_jobs GROUP BY date_at'));
+        
+        foreach($app_day as $data)
+        {
+            $date_arr[$data->date_at] = $data->total;
+        }
+        $postedJobs = Vacancy::where('employer_id', auth()->user()->id)->orderBy('created_at', 'desc')->get();
+        return view('employer.dashboard.home', compact('applications', 'postedJobs', 'shortlisted', 'rejected', 'hold', 'hired', 'date_arr', 'allApp'));
     }
 
     public function postedJobs(Request $request)

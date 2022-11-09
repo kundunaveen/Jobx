@@ -11,4 +11,9 @@ class DashboardController extends Controller
     {
         return view('front-end.dashboard.home');
     }
+
+    public function companies()
+    {
+        return view('front-end.dashboard.company-listing');
+    }
 }

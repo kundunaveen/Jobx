@@ -198,6 +198,9 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
         form.form-inner.step-progress-form {
             max-width: 100%!important;
         }
+        .iti.iti--allow-dropdown {
+            width: 100%;
+        }
     </style>
 <section class="dashboard-section inner-login-shape">
     <main class="main-bg employer-form-page">
@@ -253,7 +256,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Phone Number</label>
                             <div class="col-12">
-                                <input type="number" name="contact" class="form-control form-input" value="{{$employer->contact}}" placeholder="Ex: 99xxxxx999"
+                                <input type="tel" name="contact" id="phone" class="form-control form-input" value="{{$employer->contact}}" placeholder="Ex: 99xxxxx999"
                                     aria-label="Phone Number">
                             </div>
                         </div>  

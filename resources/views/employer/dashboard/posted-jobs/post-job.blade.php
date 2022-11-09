@@ -73,7 +73,13 @@ Employer | Post Job
                         <div class="row form-group">
                             <div class="col-12">
                                 <label for="inputEmail4" class="form-label">Company Name</label>
-                                <input value="{{ auth()->user()->profile->company_name }}" type="text" class="form-control form-input" readonly disabled value="" id="inputEmail4">
+                                <input value="{{ auth()->user()->profile->company_name }}" type="text" class="form-control form-input" readonly disabled id="inputEmail4">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <div class="col-12">
+                                <label for="inputEmail4" class="form-label">Company Branch</label>
+                                <input value="" type="text" name="company_branch" placeholder="Ex: New York" class="form-control form-input"  >
                             </div>
                         </div>
                         <div class="row form-group">

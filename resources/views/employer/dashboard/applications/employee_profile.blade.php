@@ -7,9 +7,8 @@
 .main-bg {
     padding:0px !important;
 }
-
 </style>
-<section class="dashboard-section inner-login-shape" style="min-height:800px">
+<section class="dashboard-section inner-login-shape profile-section" style="min-height:800px">
     <section class="form-inner-wrapper">
         <div class="dashboard-wrapper">
             <div class="container-fluid">

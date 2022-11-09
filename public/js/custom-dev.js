@@ -94,7 +94,6 @@ $(document).ready(function () {
             },
             contact: {
                 required: true,
-                number:true
             },
             notification_option: {
                 required:true
@@ -138,7 +137,7 @@ $(document).ready(function () {
             },
             contact: {
                 required: true,
-                number:true
+                
             },
             notification_option: {
                 required:true
