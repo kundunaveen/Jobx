@@ -166,6 +166,8 @@ class HomeController extends Controller
                 'website_link' => 'required|url',
                 'social_media_link' => 'nullable|array',
                 'social_media_link.*' => 'nullable|url',
+                'description' => 'nullable',
+                'profile_summary' => 'nullable',
             ]);
 
             try {
@@ -195,6 +197,8 @@ class HomeController extends Controller
                 unset($user_data['current_job_title']);
                 unset($user_data['website_link']);
                 unset($user_data['social_media_link']);
+                unset($user_data['description']);
+                unset($user_data['profile_summary']);
 
                 $employee->update($user_data);
 
@@ -247,6 +251,8 @@ class HomeController extends Controller
                 $profile_data['current_job_title'] = $request->current_job_title;
                 $profile_data['website_link'] = $request->website_link;
                 $profile_data['social_media_link'] = $request->social_media_link;
+                $profile_data['description'] = $request->description;
+                $profile_data['profile_summary'] = $request->profile_summary;
 
                 if ($request->hasFile('profile_image')) {
                     $image_file = $request->file('profile_image');

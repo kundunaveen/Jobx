@@ -129,16 +129,13 @@ Profile
                         <article class="profile-summary card-body">
                             <h4 class="d-flex justify-content-between border-bottom"><strong>Profile Summary
                                 </strong><span><a href="{{route('employee.profile.edit')}}"><i class="icon-edit"></i></a></span></h4>
-                            <p class="profile-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Volutpat gravida
-                                interdum
-                                mauris vitae at
-                                rhoncus aliquam arcu quis. Egestas elit nulla ipsum consequat cursus non. Luctus netus urna a
-                                id
-                                ac. Turpis pellentesque consequat scelerisque sit amet sed tristique ante proin. Nibh tellus
-                                vulputate nam dui ipsum arcu suspendisse sagittis. Fermentum laoreet feugiat adipiscing id
-                                dignissim justo. Odio enim amet fermentum leo faucibus. Turpis nibh scelerisque elit rhoncus
-                                venenatis. Ornare dui quis eget etiam. Vulputate nunc in aliquet enim lectus ornare sed donec
-                                egestas.</p>
+                            <p class="profile-text">
+                                @if ($profile_summary = optional($employee->profile)->profile_summary)
+                                    {{ $profile_summary }}
+                                @else
+                                    No profile summary data added.
+                                @endif
+                            </p>
                             <h4 class="d-flex justify-content-between border-bottom"><strong>Professional
                                     Details
                                 </strong><span><a href="{{route('employee.profile.edit')}}"><i class="icon-edit"></i></a></span></h4>
@@ -265,12 +262,11 @@ Profile
             <h4 class="">Candidate About</h4>
             <div>
                 <p>
-                    Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
-                    industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                    scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
-                    into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
-                    release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
-                    software like Aldus PageMaker including versions of Lorem Ipsum.
+                    @if ($description = optional($employee->profile)->description)                        
+                        {{ $description }}
+                    @else
+                        No about data has been added.
+                    @endif
                 </p>
             </div>
         </div>

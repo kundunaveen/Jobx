@@ -167,6 +167,28 @@
                             @enderror
                         </div>
                     </div>
+                    <div class="row form-group">
+                        <label for="profile_summary" class="form-label">Profile Summary</label>
+                        <div class="col-12">
+                            <textarea class="form-control" name="profile_summary" placeholder="Please write something about your summary" rows="5">{{ old('profile_summary', optional($employee->profile)->profile_summary) }}</textarea>
+                            @error('profile_summary')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="candidateAbout" class="form-label">Candidate About</label>
+                        <div class="col-12">
+                            <textarea class="form-control" name="description" placeholder="Please write something about your self" rows="5">{{ old('description', optional($employee->profile)->description) }}</textarea>
+                            @error('description')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
                     <h2 class="form-heading">Location</h2>
                     <div class="row form-group">
                         <label for="inputName4" class="form-label">Address*</label>
