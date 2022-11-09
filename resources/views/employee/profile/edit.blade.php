@@ -138,7 +138,7 @@
                             <select name="skills[]" class="select2_dropdown select2_multiple_dropdown_skills drop_arrow" multiple="multiple" aria-label="Default select example">
                                 <option value="">Select multiple skills</option>
                                 @foreach($allSkills as $skill)
-                                <option value="{{ $skill->id }}" @if(is_array(explode(',', optional($employee->profile)->skills)) && in_array($skill->id, explode(',', optional($employee->profile)->skills))) @endif> 
+                                <option value="{{ $skill->id }}" @if(is_array(explode(',', optional($employee->profile)->skills)) && in_array($skill->id, explode(',', optional($employee->profile)->skills))) selected @endif> 
                                     {{ $skill->skill }} 
                                 </option>
                                 @endforeach

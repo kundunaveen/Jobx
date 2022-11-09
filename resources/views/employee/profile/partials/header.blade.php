@@ -34,7 +34,7 @@
                     <div class="order-3 order-md-3">
                         <ul class="list-group flex-row align-items-center justify-content-end">
                             <li class="list-group-item bg-transparent border-0 p-0  me-3">
-                                <a type="button" class="btn btn-default"  href="javascript:void(0)">
+                                <a type="button" class="btn btn-default" href="{{ route('employee.profile.edit') }}">
                                     <span class="me-2">
                                         <i class="icon icon-resume"></i>
                                     </span>
