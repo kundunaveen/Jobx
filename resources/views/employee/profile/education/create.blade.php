@@ -9,7 +9,7 @@
                 <div class="card-body">
                     <div class="">
                         @include('layouts.messages.error')
-                        <form class="form-inner" action="{{ route('employee.education.store') }}" method="POST">
+                        <form class="form-inner" action="{{ route('employee.education.store') }}" method="POST" id="jqueryValidatorAddEducationForm">
                             @csrf                            
                             <a href="{{ route('employee.profile.edit') }}" title="Back to profile" class="text-primary">
                                 <i class="fa fa-arrow-left" aria-hidden="true"></i>
@@ -19,7 +19,7 @@
                                 <div class="row  form-group">
                                     <label for="inputQualification" class="form-label">Qualification*</label>
                                     <div class="col-12">
-                                        <input type="text" name="qualification" value="{{ old('qualification') }}" required class="form-control form-input" placeholder="" aria-label="Qualification">
+                                        <input type="text" name="qualification" value="{{ old('qualification') }}" required class="form-control form-input" placeholder="Ex: Msc in mathematics" aria-label="Qualification">
                                         @error('qualification')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -30,7 +30,7 @@
                                 <div class="row form-group">
                                     <label for="inputInstitution" class="form-label">Institution Name*</label>
                                     <div class="col-12">
-                                        <input type="text" name="institution_name" value="{{ old('institution_name') }}" required class="form-control form-input" placeholder="" aria-label="inputInstitution">
+                                        <input type="text" name="institution_name" value="{{ old('institution_name') }}" required class="form-control form-input" placeholder="Ex: Abc institution" aria-label="inputInstitution">
                                         @error('institution_name')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -160,7 +160,7 @@
                                 <div class="row form-group">
                                     <div class="col-12">
                                         <label for="exampleFormControlTextarea1" class="form-label">Describe</label>
-                                        <textarea name="describe" class="form-control" id="exampleFormControlTextarea1" rows="5">{{ old('describe') }}</textarea>
+                                        <textarea name="describe" class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Write a something about your journey">{{ old('describe') }}</textarea>
                                         @error('describe')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
