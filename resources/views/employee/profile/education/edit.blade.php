@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="">
                         @include('layouts.messages.error')
-                        <form class="form-inner" action="{{ route('employee.education.update', [$education->uuid]) }}" method="POST">
+                        <form class="form-inner" action="{{ route('employee.education.update', [$education->uuid]) }}" method="POST"  id="jqueryValidatorEditEducationForm">
                             @csrf
                             @method('PUT')
                             <h2 class="form-heading">Educations</h2>
@@ -16,7 +16,7 @@
                                 <div class="row  form-group">
                                     <label for="inputQualification" class="form-label">Qualification*</label>
                                     <div class="col-12">
-                                        <input type="text" name="qualification" value="{{ old('qualification', $education->qualification) }}" required class="form-control form-input" placeholder="" aria-label="Qualification">
+                                        <input type="text" name="qualification" value="{{ old('qualification', $education->qualification) }}" required class="form-control form-input" placeholder="Ex: Msc in mathematics" aria-label="Qualification">
                                         @error('qualification')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -27,7 +27,7 @@
                                 <div class="row form-group">
                                     <label for="inputInstitution" class="form-label">Institution Name*</label>
                                     <div class="col-12">
-                                        <input type="text" name="institution_name" value="{{ old('institution_name', $education->institution_name) }}" required class="form-control form-input" placeholder="" aria-label="inputInstitution">
+                                        <input type="text" name="institution_name" value="{{ old('institution_name', $education->institution_name) }}" required class="form-control form-input" placeholder="Ex: Abc institution" aria-label="inputInstitution">
                                         @error('institution_name')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -165,7 +165,7 @@
                                 <div class="row form-group">
                                     <div class="col-12">
                                         <label for="exampleFormControlTextarea1" class="form-label">Describe</label>
-                                        <textarea name="describe" class="form-control" id="exampleFormControlTextarea1" rows="5">{{ old('describe', $education->describe) }}</textarea>
+                                        <textarea name="describe" class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Write a something about your journey">{{ old('describe', $education->describe) }}</textarea>
                                         @error('describe')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>

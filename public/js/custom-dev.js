@@ -322,4 +322,40 @@ $(document).ready(function () {
             to_year: "To year field is required",
         }
     });
+
+    $("#jqueryValidatorEditEducationForm").validate({
+        rules: {
+            qualification: {
+                required: true
+            },
+            institution_name: {
+                required: true
+            },
+            country_id: {
+                required: true
+            },
+            from_month: {
+                required: true
+            },
+            from_year: {
+                required: true
+            },
+            to_month: {
+                required: true
+            },
+            to_year: {
+                required: true
+            },
+            
+        },
+        messages: {
+            qualification: "Qualification field required",
+            institution_name: "Institution name field is required",
+            country_id: "Country field is required",
+            from_month: "Form month field is required",
+            from_year: "Form year field is required",
+            to_month: "To month field is required",
+            to_year: "To year field is required",
+        }
+    });
 });
