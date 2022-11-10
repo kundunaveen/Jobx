@@ -286,7 +286,7 @@
                                        <td>
                                           <a href="javascript:void(0)" class="d-flex align-items-center">
                                              <figure>
-                                                <img src="assets/images/google-circle.png" width="51" height="50"
+                                                <img src="{{ asset('image/company_images/'.$employer->profile->logo)}}" width="51" height="50"
                                                    class="img-fluid" alt="">
                                              </figure>
                                              <article>
