@@ -1,140 +1,159 @@
-<aside class="company-listing-aside">
-<form id="filter-form" method="GET" action="">
-    <h4 class="">Companies List</h4>
+<aside class="job-listing-aside">
     <div class="aside-filter">
-        <div class="accordion" id="accordionPanelsStayOpenExample">
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
-                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                        Job Type
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
-                    <div class="accordion-body p-0">
-                        <ul class="list-group">
-                        @foreach($job_types as $job_type)
-                            <li class="list-group-item">
-                                <input type="checkbox" class="form-check-input" id="Check1" onclick="filterJobs()" @if(isset($_GET['job_type']) && in_array(strtolower($job_type->id), $_GET['job_type'])) checked @endif name="job_type[]" value="{{ $job_type->id}}">
-                                <label class="form-check-label" for="Check1">{{ $job_type->value }}</label>
-                            </li>
-                        @endforeach
-                        </ul>
+        <form id="filter-form" method="GET" action="">
+            <div class="accordion" id="accordionPanelsStayOpenExample">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                            Job Type
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingOne">
+                        <div class="accordion-body p-0">
+                            @foreach($job_types as $job_type)
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <input type="checkbox" onclick="filterJobs()" class="form-check-input" id="exampleCheck1" @if(isset($_GET['job_type']) && in_array(strtolower($job_type->id), $_GET['job_type'])) checked @endif name="job_type[]" value="{{ $job_type->id}}">
+                                    <label class="form-check-label" for="exampleCheck1">{{ $job_type->value }}</label>
+                                </li>
+                            </ul>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                            Industries
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                        <div class="accordion-body p-0">
+                            @foreach($industry as $indus)
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck1" @if(isset($_GET['industry']) && in_array($indus->id, $_GET['industry'])) checked @endif name="industry[]" value="{{$indus->id}}">
+                                    <label class="form-check-label" title="{{$indus->value}}" for="exampleCheck1">{{Str::limit($indus->value, 15)}}</label>
+                                </li>
+                            </ul>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
+                            Skills
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingThree">
+                        <div class="accordion-body p-0">
+                            @forelse($skills as $skill)
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck{{ $skill->id }}" name="skill[]" value="{{ $skill->id }}" @if(isset($_GET['skill']) && in_array($skill->id, $_GET['skill'])) checked @endif>
+                                    <label class="form-check-label" title="{{ $skill->skill }}" for="exampleCheck{{ $skill->id }}">{{ $skill->skill }}</label>
+                                </li>
+                            </ul>
+                            @empty
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <label class="form-check-label">No skills found</label>
+                                </li>
+                            </ul>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="panelsStayOpen-headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseFour" aria-expanded="false" aria-controls="panelsStayOpen-collapseFour">
+                            Professional Level
+                        </button>
+                    </h2>
+                    <div id="panelsStayOpen-collapseFour" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingFour">
+                        <div class="accordion-body p-0">
+                            @forelse(get_experience_levels_model()->get() as $experience_level)
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <input type="checkbox" class="form-check-input" id="exampleCheck{{ $experience_level->id }}" name="professional_level[]" value="{{ $experience_level->id }}" @if(request()->has('professional_level') && in_array($experience_level->id, request()->professional_level)) checked @endif>
+                                    <label class="form-check-label" title="{{ $experience_level->value }}" for="exampleCheck{{ $experience_level->id }}">{{ $experience_level->value }}</label>
+                                </li>
+                            </ul>
+                            @empty
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <label class="form-check-label">No data found</label>
+                                </li>
+                            </ul>
+                            @endforelse
+                        </div>
+                    </div>
+                </div>
+                <div class="aside-filter range-price">
+                    <h5>Salary ($)</h5>
+                    <div class="wrapper">
+                        <div class="values">
+                            <span id="range1" class="range_span">
+                                {{ $salaries->MinSalary }}
+                            </span>
+                            <span> — </span>
+                            <span id="range2" class="range_span">
+                                {{ $salaries->MaxSalary }}
+                            </span>
+                        </div>
+                        <div class="container">
+                            <div class="slider-track"></div>
+                            <input type="range" min="{{ $salaries->MinSalary }}" max="{{ $salaries->MaxSalary }}" value="{{ $salaries->MinSalary }}" id="slider-1" name="min_salary" oninput="slideOne()">
+                            <input type="range" min="{{ $salaries->MinSalary }}" max="{{ $salaries->MaxSalary }}" value="{{ $salaries->MaxSalary }}" id="slider-2" name="max_salary" oninput="slideTwo()">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="aside-filter range-price-exp">
+                    <h5>Experience (Yrs)</h5>
+                    <div class="wrapper">
+                        <div class="values">
+                            <span id="range-exp1" class="range_span-exp">
+                                0
+                            </span>
+                            <span> — </span>
+                            <span id="range-exp2" class="range_span-exp">
+                                40
+                            </span>
+                        </div>
+                        <div class="container">
+                            <div class="slider-track-exp"></div>
+                            <input type="range" min="0" max="40" value="0" id="slider-exp1" name="min_exp" oninput="slideOneExp()">
+                            <input type="range" min="0" max="40" value="40" id="slider-exp2" name="max_exp" oninput="slideTwoExp()">
+                        </div>
                     </div>
                 </div>
             </div>
-
-            <div class="accordion-item">
-                <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
-                        Star Value
-                    </button>
-                </h2>
-                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
-                    <div class="accordion-body p-0">
-                        <ul class="list-group list-style-none">
-                            <li class="list-group-item">
-                                <div class="d-flex">
-                                    <div class="star-rating me-2">
-                                        <input type="radio" id="5-stars1" name="rating" value="5" />
-                                        <label for="5-stars1" class="star">&#9733;</label>
-                                        <input type="radio" id="4-stars2" name="rating" value="4" />
-                                        <label for="4-stars2" class="star">&#9733;</label>
-                                        <input type="radio" id="3-stars3" name="rating" value="3" />
-                                        <label for="3-stars3" class="star">&#9733;</label>
-                                        <input type="radio" id="2-stars4" name="rating" value="2" />
-                                        <label for="2-stars4" class="star">&#9733;</label>
-                                        <input type="radio" id="1-star5" name="rating" value="1" />
-                                        <label for="1-star5" class="star">&#9733;</label>
-                                    </div>
-                                    <div>
-                                        <span>4 Stars</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex">
-                                    <div class="star-rating me-2">
-                                        <input type="radio" id="5-stars6" name="rating" value="5" />
-                                        <label for="5-stars6" class="star">&#9733;</label>
-                                        <input type="radio" id="4-stars7" name="rating" value="4" />
-                                        <label for="4-stars7" class="star">&#9733;</label>
-                                        <input type="radio" id="3-stars8" name="rating" value="3" />
-                                        <label for="3-stars8" class="star">&#9733;</label>
-                                        <input type="radio" id="2-stars9" name="rating" value="2" />
-                                        <label for="2-stars9" class="star">&#9733;</label>
-                                        <input type="radio" id="1-star10" name="rating" value="1" />
-                                        <label for="1-star10" class="star">&#9733;</label>
-                                    </div>
-                                    <div>
-                                        <span>4 Stars</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex">
-                                    <div class="star-rating me-2">
-                                        <input type="radio" id="5-stars11" name="rating" value="5" />
-                                        <label for="5-stars11" class="star">&#9733;</label>
-                                        <input type="radio" id="4-stars12" name="rating" value="4" />
-                                        <label for="4-stars12" class="star">&#9733;</label>
-                                        <input type="radio" id="3-stars13" name="rating" value="3" />
-                                        <label for="3-stars13" class="star">&#9733;</label>
-                                        <input type="radio" id="2-stars14" name="rating" value="2" />
-                                        <label for="2-stars14" class="star">&#9733;</label>
-                                        <input type="radio" id="1-star15" name="rating" value="1" />
-                                        <label for="1-star15" class="star">&#9733;</label>
-                                    </div>
-                                    <div>
-                                        <span>4 Stars</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex">
-                                    <div class="star-rating me-2">
-                                        <input type="radio" id="5-stars16" name="rating" value="5" />
-                                        <label for="5-stars16" class="star">&#9733;</label>
-                                        <input type="radio" id="4-stars17" name="rating" value="4" />
-                                        <label for="4-stars17" class="star">&#9733;</label>
-                                        <input type="radio" id="3-stars18" name="rating" value="3" />
-                                        <label for="3-stars18" class="star">&#9733;</label>
-                                        <input type="radio" id="2-stars19" name="rating" value="2" />
-                                        <label for="2-stars19" class="star">&#9733;</label>
-                                        <input type="radio" id="1-star20" name="rating" value="1" />
-                                        <label for="1-star20" class="star">&#9733;</label>
-                                    </div>
-                                    <div>
-                                        <span>4 Stars</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="d-flex">
-                                    <div class="star-rating me-2">
-                                        <input type="radio" id="5-stars21" name="rating" value="5" />
-                                        <label for="5-stars21" class="star">&#9733;</label>
-                                        <input type="radio" id="4-stars22" name="rating" value="4" />
-                                        <label for="4-stars22" class="star">&#9733;</label>
-                                        <input type="radio" id="3-stars23" name="rating" value="3" />
-                                        <label for="3-stars23" class="star">&#9733;</label>
-                                        <input type="radio" id="2-stars24" name="rating" value="2" />
-                                        <label for="2-stars24" class="star">&#9733;</label>
-                                        <input type="radio" id="1-star25" name="rating" value="1" />
-                                        <label for="1-star25" class="star">&#9733;</label>
-                                    </div>
-                                    <div>
-                                        <span>4 Stars</span>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+            {{--
+            <div class="aside-filter">
+                <h5>Employment Type</h5>
+                <ul class="list-group">
+                    <li class="list-group-item">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck6" name="emp_type" value="full_day">
+                        <label class="form-check-label" for="exampleCheck6">Full Day</label>
+                    </li>
+                    <li class="list-group-item">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck7" name="emp_type" value="shift_work">
+                        <label class="form-check-label" for="exampleCheck7">Shift Work</label>
+                    </li>
+                    <li class="list-group-item">
+                        <input type="checkbox" class="form-check-input" id="exampleCheck8" name="emp_type" value="distant_work">
+                        <label class="form-check-label" for="exampleCheck8">Distant Work</label>
+                    </li>
+                </ul>
             </div>
-
-        </div>
+            --}}
+            <input type="hidden" id="sortby" name="sortby">
+            <button type="submit" class="btn btn-primary">Filter</button>
+        </form>
     </div>
-        <input type="hidden" id="sortby" name="sortby">
-        <button type="submit" class="btn btn-primary">Filter</button>
-    </form>
 </aside>
