@@ -27,7 +27,7 @@
                     class="d-flex flex-column flex-md-row align-items-center justify-content-between position-relative">
                     <a href="#" class="nav-link link-secondary order-2 order-md-1 mb-3 mb-md-0 "></a>
 
-                    <a href="{{ route('employee.home') }}" class="logo-image d-inline-block  order-1 order-md-2  mb-3 mb-md-0">
+                    <a href="{{ url('/') }}" class="logo-image d-inline-block  order-1 order-md-2  mb-3 mb-md-0">
                         <img src="{{asset('assets/images/jobax-logo.png')}}" width="248" alt="" class="img-fluid" />
                     </a>
 

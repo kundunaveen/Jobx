@@ -98,17 +98,17 @@
                     <div class="wrapper">
                         <div class="values">
                             <span id="range1" class="range_span">
-                                {{ $salaries->MinSalary }}
+                                {{ data_get(get_min_max_salary(), 'MinSalary', 0) }}
                             </span>
                             <span> — </span>
                             <span id="range2" class="range_span">
-                                {{ $salaries->MaxSalary }}
+                                {{ data_get(get_min_max_salary(), 'MaxSalary', 0) }}
                             </span>
                         </div>
                         <div class="container">
                             <div class="slider-track"></div>
-                            <input type="range" min="{{ $salaries->MinSalary }}" max="{{ $salaries->MaxSalary }}" value="{{ $salaries->MinSalary }}" id="slider-1" name="min_salary" oninput="slideOne()">
-                            <input type="range" min="{{ $salaries->MinSalary }}" max="{{ $salaries->MaxSalary }}" value="{{ $salaries->MaxSalary }}" id="slider-2" name="max_salary" oninput="slideTwo()">
+                            <input type="range" min="{{ data_get(get_min_max_salary(), 'MinSalary', 0) }}" max="{{ data_get(get_min_max_salary(), 'MaxSalary', 0) }}" value="{{ data_get(get_min_max_salary(), 'MinSalary', 0) }}" id="slider-1" name="min_salary" oninput="slideOne()">
+                            <input type="range" min="{{ data_get(get_min_max_salary(), 'MinSalary', 0) }}" max="{{ data_get(get_min_max_salary(), 'MaxSalary', 0) }}" value="{{ data_get(get_min_max_salary(), 'MaxSalary', 0) }}" id="slider-2" name="max_salary" oninput="slideTwo()">
                         </div>
                     </div>
                 </div>

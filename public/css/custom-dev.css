@@ -298,3 +298,6 @@ label.error {
     border: none;
     background-color: #f4f4f4;
 }
+.iti.iti--allow-dropdown {
+    width: 100%;
+}
