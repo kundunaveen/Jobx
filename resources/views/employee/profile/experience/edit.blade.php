@@ -8,7 +8,7 @@
                 <div class="card-body">
                     <div class="">
                         @include('layouts.messages.error')
-                        <form class="form-inner" action="{{ route('employee.experience.update', [$experience->uuid]) }}" method="POST">
+                        <form class="form-inner" action="{{ route('employee.experience.update', [$experience->uuid]) }}" method="POST" id="jqueryValidatorEditExperienceForm">
                             @csrf
                             @method('put')
                             <h2 class="form-heading">Job description</h2>
@@ -16,7 +16,7 @@
                                 <div class="row  form-group">
                                     <label for="inputJobTitle" class="form-label">Job Title*</label>
                                     <div class="col-12">
-                                        <input type="text" name="job_title" value="{{ old('job_title', $experience->job_title) }}" required class="form-control form-input" placeholder="" aria-label="Job Title">
+                                        <input type="text" name="job_title" value="{{ old('job_title', $experience->job_title) }}" required class="form-control form-input" placeholder="Ex: Project Manager" aria-label="Job Title">
                                         @error('job_title')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -27,7 +27,7 @@
                                 <div class="row form-group">
                                     <label for="inputCompany" class="form-label">Company*</label>
                                     <div class="col-12">
-                                        <input type="text" name="company" value="{{ old('company', $experience->company) }}" required class="form-control form-input" placeholder="" aria-label="inputCompany">
+                                        <input type="text" name="company" value="{{ old('company', $experience->company) }}" required class="form-control form-input" placeholder="Ex: Abc Company Pvt. Ltd." aria-label="inputCompany">
                                         @error('company')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -165,7 +165,7 @@
                                 <div class="row form-group">
                                     <div class="col-12">
                                         <label for="exampleFormControlTextarea1" class="form-label">Describe</label>
-                                        <textarea name="describe" class="form-control" id="exampleFormControlTextarea1" rows="5">{{ old('describe', $experience->describe) }}</textarea>
+                                        <textarea name="describe" class="form-control" id="exampleFormControlTextarea1" rows="5" placeholder="Write some 2 or 3 lines in your achievements in this company.">{{ old('describe', $experience->describe) }}</textarea>
                                         @error('describe')
                                         <span class="text-danger" role="alert">
                                             <strong>{{ $message }}</strong>

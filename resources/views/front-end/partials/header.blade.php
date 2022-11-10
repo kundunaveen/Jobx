@@ -4,9 +4,13 @@
             <div class="header-wrapper py-4">
                 <div
                     class="d-flex flex-column flex-md-row align-items-center justify-content-between position-relative">
-                    <a href="#" class="nav-link link-secondary order-2 order-md-1 mb-3 mb-md-0 ">Post a
-                        Vacancy</a>
-
+                    @if (Auth::check() && auth()->user()->roleUser->role->role == 'employer')
+                        <a href="{{ route('employer.home') }}" class="nav-link link-secondary order-2 order-md-1 mb-3 mb-md-0 ">
+                            Post a Vacancy
+                        </a>
+                    @else
+                        <a href="javascript:void(0);" class="nav-link link-secondary order-2 order-md-1 mb-3 mb-md-0 "></a>
+                    @endif
                     <a href="{{ route('front-end.home') }}" class="logo-image d-inline-block  order-1 order-md-2  mb-3 mb-md-0">
                         <img src="{{ asset('assets/images/jobax-logo.png') }}" width="248" alt="" class="img-fluid" />
                     </a>

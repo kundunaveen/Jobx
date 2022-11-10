@@ -36,6 +36,17 @@
                         </div>
                     </div>
                     <div class="row form-group">
+                        <label for="inputPhone" class="form-label">Phone Number*</label>
+                        <div class="col-12">
+                            <input type="tel" class="form-control form-input" name="contact" value="{{ old('contact', $employee->contact) }}" aria-label="Phone Number" placeholder="Ex: 9876543210" id="phone">
+                            @error('contact')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
                         <label class="form-label">Gender*</label>
                         <div class="col-12">
                             <select class="form-control" name="gender">
@@ -138,8 +149,8 @@
                             <select name="skills[]" class="select2_dropdown select2_multiple_dropdown_skills drop_arrow" multiple="multiple" aria-label="Default select example">
                                 <option value="">Select multiple skills</option>
                                 @foreach($allSkills as $skill)
-                                <option value="{{ $skill->id }}" @if(is_array(explode(',', optional($employee->profile)->skills)) && in_array($skill->id, explode(',', optional($employee->profile)->skills))) @endif> 
-                                    {{ $skill->skill }} 
+                                <option value="{{ $skill->id }}" @if(is_array(explode(',', optional($employee->profile)->skills)) && in_array($skill->id, explode(',', optional($employee->profile)->skills))) selected @endif>
+                                    {{ $skill->skill }}
                                 </option>
                                 @endforeach
                             </select>
@@ -151,16 +162,57 @@
                         </div>
                     </div>
                     <div class="row form-group">
+                        <label for="check" class="form-label">Do you have Driving License?</label>
+                        <div class="col-12">
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="have_driving_license" id="inlineRadio1" value="1" @if(old('have_driving_license') == 1) checked @endif>
+                                <label class="form-check-label" for="inlineRadio1">Yes</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="have_driving_license" id="inlineRadio2" value="2" @if(old('have_driving_license') == 2) checked @endif>
+                                <label class="form-check-label" for="inlineRadio2">No</label>
+                            </div>
+                            @error('have_driving_license')
+                            <span class="text-danger" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
                         <label class="form-label">Upload Resume</label>
                         <div class="col-md-12">
                             <input type="file" name="resume" class="form-control">
                             @if($resume = optional($employee->profile)->profile_resume_url)
                             <small>
                                 <a class="text-primary" href="{{ $resume }}" target="_blank">Download resume <i class="fa fa-file" aria-hidden="true"></i>
-</a>
+                                </a>
                             </small>
                             @endif
                             @error('resume')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="profile_summary" class="form-label">Profile Summary</label>
+                        <div class="col-12">
+                            <textarea class="form-control" name="profile_summary" placeholder="Please write something about your summary" rows="5">{{ old('profile_summary', optional($employee->profile)->profile_summary) }}</textarea>
+                            @error('profile_summary')
+                            <span class="text-danger" role="alert">
+                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="candidateAbout" class="form-label">Candidate About</label>
+                        <div class="col-12">
+                            <textarea class="form-control" name="description" placeholder="Please write something about your self" rows="5">{{ old('description', optional($employee->profile)->description) }}</textarea>
+                            @error('description')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>
                             </span>
@@ -370,16 +422,16 @@
                         </div>
                     </div>
                     --}}
-            <div class="row btn-form-wrapper">
-                <div class="d-grid col-sm-6">
-                    <input type="submit" class="btn  btn-primary btn-form" value="Publish">
-                </div>
-                <div class="d-grid col-sm-6 text-center">
-                    <input type="reset" class="btn py-3 px-0 bg-transparent  fw-bold btn-skip" value="Cancel">
-                </div>
+                    <div class="row btn-form-wrapper">
+                        <div class="d-grid col-sm-6">
+                            <input type="submit" class="btn  btn-primary btn-form" value="Publish">
+                        </div>
+                        <div class="d-grid col-sm-6 text-center">
+                            <input type="reset" class="btn py-3 px-0 bg-transparent  fw-bold btn-skip" value="Cancel">
+                        </div>
+                    </div>
+                </form>
             </div>
-            </form>
-        </div>
         </div>
     </section>
 </main>

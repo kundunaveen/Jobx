@@ -32,7 +32,7 @@ $(document).ready(function () {
         });
     } else {
         alert("Your browser not support");
-    }    
+    }
 });
 
 $(document).on('click', '.remove', function () {
@@ -46,22 +46,33 @@ $(document).on('click', '.remove', function () {
 //     $('#append_form').append(html);
 // });
 $(document).ready(function () {
-    if($('.select2_dropdown').length > 0){        
+
+    if($('#phone').length > 0){
+        var input = document.querySelector("#phone");
+        var phone_number = window.intlTelInput(input, {
+            separateDialCode: true,
+        });
+
+        // mobile_number = $("#phone").intlTelInput("getSelectedCountryData").dialCode;
+        // $("#phone").val(mobile_number);
+    }    
+
+    if ($('.select2_dropdown').length > 0) {
         $('.select2_dropdown').select2();
     }
-    if($('.select2_multiple_dropdown_skills').length > 0){        
+    if ($('.select2_multiple_dropdown_skills').length > 0) {
         $('.select2_multiple_dropdown_skills').select2({
             placeholder: "Select multiple skills"
         });
     }
-    if($('.select2_multiple_dropdown_languages').length > 0){        
+    if ($('.select2_multiple_dropdown_languages').length > 0) {
         $('.select2_multiple_dropdown_languages').select2({
             placeholder: "Select multiple languages"
         });
     }
 
-    $(".is_work_here, .is_work_here").click(function() {
-        if($(this).is(":checked")) {
+    $(".is_work_here, .is_work_here").click(function () {
+        if ($(this).is(":checked")) {
             $("#experience_to").hide();
         } else {
             $("#experience_to").show();
@@ -69,7 +80,7 @@ $(document).ready(function () {
         }
     });
 
-    $('.delete_prompt').click(function() {
+    $('.delete_prompt').click(function () {
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover !",
@@ -78,143 +89,301 @@ $(document).ready(function () {
             dangerMode: true,
         }).then((willDelete) => {
             if (willDelete) {
-                window.location.href=$(this).attr('data-action');
+                window.location.href = $(this).attr('data-action');
             }
         });
     });
 
     // just for the demos, avoids form submit
-    $( "#jquery-employee-profile-form-validation" ).validate({
-        rules: {
-            first_name: {
-                required: true
-            },
-            last_name: {
-                required: true
-            },
-            contact: {
-                required: true,
-            },
-            notification_option: {
-                required:true
-            },
-            company_name:{
-                required:true
-            },
-            industry:{
-                required:true
-            },
-            company_size:{
-                required:true
-            },
-            company_role:{
-                required:true
-            },
-            address:{
-                required: true
-            },
-            'skills[]':{
-                required: true
-            },
-            'country':{
-                min: 1
-            },
-            zip : {
-                required:true,
-                number:true
-            }
-            
-        }
-    });
+    if ($("#jquery-employee-profile-form-validation").length > 0) {
+        $("#jquery-employee-profile-form-validation").validate({
+            rules: {
+                first_name: {
+                    required: true
+                },
+                last_name: {
+                    required: true
+                },
+                contact: {
+                    required: true,
+                },
+                notification_option: {
+                    required: true
+                },
+                company_name: {
+                    required: true
+                },
+                industry: {
+                    required: true
+                },
+                company_size: {
+                    required: true
+                },
+                company_role: {
+                    required: true
+                },
+                address: {
+                    required: true
+                },
+                'skills[]': {
+                    required: true
+                },
+                'have_driving_license': {
+                    required: true
+                },
+                'country': {
+                    min: 1
+                },
+                zip: {
+                    required: true,
+                    number: true
+                }
 
-    $( "#jquery-employer-profile-form-validation" ).validate({
-        rules: {
-            first_name: {
-                required: true
-            },
-            last_name: {
-                required: true
-            },
-            contact: {
-                required: true,
-                
-            },
-            notification_option: {
-                required:true
-            },
-            company_name:{
-                required:true
-            },
-            industry:{
-                required:true
-            },
-            company_size:{
-                required:true
-            },
-            company_role:{
-                required:true
-            },
-            address:{
-                required: true
-            },
-            'skills[]':{
-                required: true
-            },
-            resume:{
-                required: true
-            },
-            'country':{
-                min: 1
-            },
-            zip : {
-                required:true,
-                number:true
             }
-            
-        }
-    });
-    
-     $( "#jquery-post-job-form-validation" ).validate({
-        rules: {
-            job_title: {
-                required: true
-            },
-            job_role: {
-                required: true
-            },
-            department: {
-                required: true
-            },
-            job_type: {
-                required:true
-            },
-            min_exp:{
-                required:true,
-                number:true
-            },
-            salary_offer:{
-                required:true,
-                number:true
-            },
-            address:{
-                required:true
-            },
-            'country':{
-                required:true
-            },
-            zip:{
-                required: true,
-                number:true
-            },
-            'skills[]':{
-                required: true
-            },
-            'images_input[]':{
-                required: true
-            }
-        }
-    });
-    
+        });
+    }
 
-    
+    if ($("#jquery-employer-profile-form-validation").length > 0) {
+        $("#jquery-employer-profile-form-validation").validate({
+            rules: {
+                first_name: {
+                    required: true
+                },
+                last_name: {
+                    required: true
+                },
+                contact: {
+                    required: true,
+
+                },
+                notification_option: {
+                    required: true
+                },
+                company_name: {
+                    required: true
+                },
+                industry: {
+                    required: true
+                },
+                company_size: {
+                    required: true
+                },
+                company_role: {
+                    required: true
+                },
+                address: {
+                    required: true
+                },
+                'skills[]': {
+                    required: true
+                },
+                resume: {
+                    required: true
+                },
+                'country': {
+                    min: 1
+                },
+                zip: {
+                    required: true,
+                    number: true
+                }
+
+            }
+        });
+    }
+
+    if ($("#jquery-post-job-form-validation").length > 0) {
+        $("#jquery-post-job-form-validation").validate({
+            rules: {
+                job_title: {
+                    required: true
+                },
+                job_role: {
+                    required: true
+                },
+                department: {
+                    required: true
+                },
+                job_type: {
+                    required: true
+                },
+                min_exp: {
+                    required: true,
+                    number: true
+                },
+                salary_offer: {
+                    required: true,
+                    number: true
+                },
+                address: {
+                    required: true
+                },
+                'country': {
+                    required: true
+                },
+                zip: {
+                    required: true,
+                    number: true
+                },
+                'skills[]': {
+                    required: true
+                },
+                'images_input[]': {
+                    required: true
+                }
+            }
+        });
+    }
+
+    if ($("#jqueryValidatorAddExperienceForm").length > 0) {
+        $("#jqueryValidatorAddExperienceForm").validate({
+            rules: {
+                job_title: {
+                    required: true
+                },
+                company: {
+                    required: true
+                },
+                country_id: {
+                    required: true
+                },
+                from_month: {
+                    required: true
+                },
+                from_year: {
+                    required: true
+                },
+                to_month: {
+                    required: true
+                },
+                to_year: {
+                    required: true
+                },
+
+            },
+            messages: {
+                job_title: "Job title field required",
+                company: "Company field is required",
+                country_id: "Country field is required",
+                from_month: "Form month field is required",
+                from_year: "Form year field is required",
+                to_month: "To month field is required",
+                to_year: "To year field is required",
+            }
+        });
+    }
+
+    if ($("#jqueryValidatorEditExperienceForm").length > 0) {
+        $("#jqueryValidatorEditExperienceForm").validate({
+            rules: {
+                job_title: {
+                    required: true
+                },
+                company: {
+                    required: true
+                },
+                country_id: {
+                    required: true
+                },
+                from_month: {
+                    required: true
+                },
+                from_year: {
+                    required: true
+                },
+                to_month: {
+                    required: true
+                },
+                to_year: {
+                    required: true
+                },
+
+            },
+            messages: {
+                job_title: "Job title field required",
+                company: "Company field is required",
+                country_id: "Country field is required",
+                from_month: "Form month field is required",
+                from_year: "Form year field is required",
+                to_month: "To month field is required",
+                to_year: "To year field is required",
+            }
+        });
+    }
+
+    if ($("#jqueryValidatorAddEducationForm").length > 0) {
+        $("#jqueryValidatorAddEducationForm").validate({
+            rules: {
+                qualification: {
+                    required: true
+                },
+                institution_name: {
+                    required: true
+                },
+                country_id: {
+                    required: true
+                },
+                from_month: {
+                    required: true
+                },
+                from_year: {
+                    required: true
+                },
+                to_month: {
+                    required: true
+                },
+                to_year: {
+                    required: true
+                },
+
+            },
+            messages: {
+                qualification: "Qualification field required",
+                institution_name: "Institution name field is required",
+                country_id: "Country field is required",
+                from_month: "Form month field is required",
+                from_year: "Form year field is required",
+                to_month: "To month field is required",
+                to_year: "To year field is required",
+            }
+        });
+    }
+
+    if ($("#jqueryValidatorEditEducationForm").length > 0) {
+        $("#jqueryValidatorEditEducationForm").validate({
+            rules: {
+                qualification: {
+                    required: true
+                },
+                institution_name: {
+                    required: true
+                },
+                country_id: {
+                    required: true
+                },
+                from_month: {
+                    required: true
+                },
+                from_year: {
+                    required: true
+                },
+                to_month: {
+                    required: true
+                },
+                to_year: {
+                    required: true
+                },
+
+            },
+            messages: {
+                qualification: "Qualification field required",
+                institution_name: "Institution name field is required",
+                country_id: "Country field is required",
+                from_month: "Form month field is required",
+                from_year: "Form year field is required",
+                to_month: "To month field is required",
+                to_year: "To year field is required",
+            }
+        });
+    }
 });
