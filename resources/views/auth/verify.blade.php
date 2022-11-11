@@ -1,28 +1,33 @@
-@extends('layouts.app')
-
+@extends('front-end.partials.layout')
+@section('title')
+Jobax
+@endsection
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Verify Your Email Address') }}</div>
-
-                <div class="card-body">
+<main class="login-shape main-banner-section login-form-page">
+    <!-- login Section Start Here-->
+    <section class="login-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
                     @if (session('resent'))
-                        <div class="alert alert-success" role="alert">
-                            {{ __('A fresh verification link has been sent to your email address.') }}
-                        </div>
+                    <div class="alert alert-success" role="alert">
+                        {{ __('A fresh verification link has been sent to your email address.') }}
+                    </div>
                     @endif
-
                     {{ __('Before proceeding, please check your email for a verification link.') }}
                     {{ __('If you did not receive the email') }},
-                    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+                    <form method="POST" action="{{ route('verification.resend') }}" class="login-form">
                         @csrf
-                        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
+                        <div class="d-grid login-button my-4">
+                            <button type="submit" class="btn btn-form btn-primary btn-md">{{ __('click here to request another') }}</button>
+                        </div>
                     </form>
                 </div>
+                <div class="col-md-3"></div>
             </div>
         </div>
-    </div>
-</div>
+    </section>
+    <!-- login Section End Here-->
+</main>
 @endsection

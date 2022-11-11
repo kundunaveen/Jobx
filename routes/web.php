@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Employee\EducationController;
 use App\Http\Controllers\Employee\EmployeeExperienceController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
 Route::get('/admin/login', [App\Http\Controllers\Admin\ThemeController::class, 'login'])->name('admin.login');
 Route::get('/admin', [App\Http\Controllers\Admin\DashboardController::class, 'home'])->name('admin.dashboard');
@@ -48,10 +49,10 @@ Route::get('/admin/manage-attribute', [App\Http\Controllers\Admin\ManageAttribut
 Route::any('/admin/manage-attribute/add', [App\Http\Controllers\Admin\ManageAttributeController::class, 'create'])->name('admin.addManageAttribute');
 Route::any('/admin/manage-attribute/edit/{id}', [App\Http\Controllers\Admin\ManageAttributeController::class, 'edit'])->name('admin.editManageAttribute');
 Route::post('/admin/manage-attribute/delete', [App\Http\Controllers\Admin\ManageAttributeController::class, 'delete'])->name('admin.deleteAttribute');
-Route::get('/admin/manage-attribute/category', [App\Http\Controllers\Admin\ManageAttributeController::class,'manageCategory'])->name('admin.categories');
-Route::any('/admin/manage-attribute/category/add', [App\Http\Controllers\Admin\ManageAttributeController::class,'createCategory'])->name('admin.categories.create');
-Route::any('/admin/manage-attribute/category/edit/{id}', [App\Http\Controllers\Admin\ManageAttributeController::class,'editCategory'])->name('admin.editAttributeCategory');
-Route::post('/admin/manage-attribute/category/delete', [App\Http\Controllers\Admin\ManageAttributeController::class,'deleteCategory'])->name('admin.categories.delete');
+Route::get('/admin/manage-attribute/category', [App\Http\Controllers\Admin\ManageAttributeController::class, 'manageCategory'])->name('admin.categories');
+Route::any('/admin/manage-attribute/category/add', [App\Http\Controllers\Admin\ManageAttributeController::class, 'createCategory'])->name('admin.categories.create');
+Route::any('/admin/manage-attribute/category/edit/{id}', [App\Http\Controllers\Admin\ManageAttributeController::class, 'editCategory'])->name('admin.editAttributeCategory');
+Route::post('/admin/manage-attribute/category/delete', [App\Http\Controllers\Admin\ManageAttributeController::class, 'deleteCategory'])->name('admin.categories.delete');
 Route::post('/admin/manage-attribute/getValues', [App\Http\Controllers\Admin\ManageAttributeController::class, 'getValues']);
 
 Route::get('/admin/manage-vacancy', [App\Http\Controllers\Admin\VacancyController::class, 'index'])->name('admin.manageVacancy');
@@ -72,27 +73,30 @@ Route::any('/admin/job-skills/edit/{id}', [App\Http\Controllers\Admin\SkillContr
 Route::post('/admin/job-skills/delete', [App\Http\Controllers\Admin\SkillController::class, 'delete'])->name('admin.deleteSkill');
 
 //####################### Employee Routes #########################//
-Route::get('/employee-profile', [App\Http\Controllers\Employee\HomeController::class, 'home'])->name('employee.home');
-Route::get('/employee/job-search', [App\Http\Controllers\Employee\HomeController::class, 'searchJob'])->name('search.job');
-Route::any('/employee-profile/edit', [App\Http\Controllers\Employee\HomeController::class, 'editProfile'])->name('employee.profile.edit');
-Route::post('/employee/change-password', [App\Http\Controllers\Employee\HomeController::class, 'changePassword'])->name('employee.change.password');
-Route::post('/employee/check-password-validation', [App\Http\Controllers\Employee\HomeController::class, 'checkPasswordValidation']);
-Route::get('/employee-dashboard', [App\Http\Controllers\Employee\DashboardController::class, 'home'])->name('employee.dashboard');
-Route::post('/employee/job-filter', [App\Http\Controllers\Employee\JobPostController::class, 'jobsFilterBy'])->name('employee.jobs-filtersBy');
-Route::any('/employee/job-applied/{id}', [App\Http\Controllers\Employee\JobPostController::class, 'applyJob'])->name('employee.job.apply')->middleware('employee.check-profile-fill-or-not');
-Route::get('/employee/job-preview/{id}', [App\Http\Controllers\Employee\JobPostController::class, 'previewJob'])->name('employee.job.preview');
-Route::post('/employee/get-states', [App\Http\Controllers\Employee\HomeController::class, 'getStates']);
-Route::post('/employee/get-cities', [App\Http\Controllers\Employee\HomeController::class, 'getCities']);
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/employee-profile', [App\Http\Controllers\Employee\HomeController::class, 'home'])->name('employee.home');
+    Route::get('/employee/job-search', [App\Http\Controllers\Employee\HomeController::class, 'searchJob'])->name('search.job');
+    Route::any('/employee-profile/edit', [App\Http\Controllers\Employee\HomeController::class, 'editProfile'])->name('employee.profile.edit');
+    Route::post('/employee/change-password', [App\Http\Controllers\Employee\HomeController::class, 'changePassword'])->name('employee.change.password');
+    Route::post('/employee/check-password-validation', [App\Http\Controllers\Employee\HomeController::class, 'checkPasswordValidation']);
+    Route::get('/employee-dashboard', [App\Http\Controllers\Employee\DashboardController::class, 'home'])->name('employee.dashboard');
+    Route::post('/employee/job-filter', [App\Http\Controllers\Employee\JobPostController::class, 'jobsFilterBy'])->name('employee.jobs-filtersBy');
+    Route::any('/employee/job-applied/{id}', [App\Http\Controllers\Employee\JobPostController::class, 'applyJob'])->name('employee.job.apply')->middleware('employee.check-profile-fill-or-not');
+    Route::get('/employee/job-preview/{id}', [App\Http\Controllers\Employee\JobPostController::class, 'previewJob'])->name('employee.job.preview');
+    Route::post('/employee/get-states', [App\Http\Controllers\Employee\HomeController::class, 'getStates']);
+    Route::post('/employee/get-cities', [App\Http\Controllers\Employee\HomeController::class, 'getCities']);
+});
 
-Route::prefix('employee')->name('employee.')->middleware('auth')->group(function(){
-    Route::prefix('experience')->name('experience.')->middleware('auth')->group(function(){
+
+Route::prefix('employee')->name('employee.')->middleware(['auth', 'verified'])->group(function () {
+    Route::prefix('experience')->name('experience.')->middleware('auth')->group(function () {
         Route::get('/create', [EmployeeExperienceController::class, 'create'])->name('create');
         Route::post('/store', [EmployeeExperienceController::class, 'store'])->name('store');
         Route::get('/edit/{uuid}', [EmployeeExperienceController::class, 'edit'])->name('edit');
         Route::put('/update/{uuid}', [EmployeeExperienceController::class, 'update'])->name('update');
         Route::get('/destroy/{uuid}', [EmployeeExperienceController::class, 'destroy'])->name('destroy');
     });
-    Route::prefix('education')->name('education.')->middleware('auth')->group(function(){
+    Route::prefix('education')->name('education.')->middleware('auth')->group(function () {
         Route::get('/create', [EducationController::class, 'create'])->name('create');
         Route::post('/store', [EducationController::class, 'store'])->name('store');
         Route::get('/edit/{uuid}', [EducationController::class, 'edit'])->name('edit');
@@ -102,28 +106,29 @@ Route::prefix('employee')->name('employee.')->middleware('auth')->group(function
 });
 
 //####################### Employer Routes #########################//
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/employer-profile', [App\Http\Controllers\Employer\HomeController::class, 'home'])->name('employer.home');
+    Route::get('/employer-dashboard', [App\Http\Controllers\Employer\DashboardController::class, 'home'])->name('employer.dashboard');
+    Route::any('/employer-profile/edit', [App\Http\Controllers\Employer\HomeController::class, 'editProfile'])->name('employer.profile.edit');
+    Route::post('/employer/change-password', [App\Http\Controllers\Employer\HomeController::class, 'changePassword'])->name('employer.change.password');
+    Route::post('/employer/check-password-validation', [App\Http\Controllers\Employer\HomeController::class, 'checkPasswordValidation']);
 
-Route::get('/employer-profile', [App\Http\Controllers\Employer\HomeController::class, 'home'])->name('employer.home');
-Route::get('/employer-dashboard', [App\Http\Controllers\Employer\DashboardController::class, 'home'])->name('employer.dashboard');
-Route::any('/employer-profile/edit', [App\Http\Controllers\Employer\HomeController::class, 'editProfile'])->name('employer.profile.edit');
-Route::post('/employer/change-password', [App\Http\Controllers\Employer\HomeController::class, 'changePassword'])->name('employer.change.password');
-Route::post('/employer/check-password-validation', [App\Http\Controllers\Employer\HomeController::class, 'checkPasswordValidation']);
+    Route::any('/employer/post-job', [App\Http\Controllers\Employer\JobPostController::class, 'create'])->name('employer.post.job');
 
-Route::any('/employer/post-job', [App\Http\Controllers\Employer\JobPostController::class, 'create'])->name('employer.post.job');
+    Route::any('/employer/edit-post-job/{id}', [App\Http\Controllers\Employer\JobPostController::class, 'edit'])->name('employer.edit.post.job');
+    Route::get('/employer/posted-jobs', [App\Http\Controllers\Employer\JobPostController::class, 'index'])->name('employer.posted.jobs');
+    Route::get('/employer/job/candidates/{id}', [App\Http\Controllers\Employer\JobPostController::class, 'jobCandidates'])->name('employer.job.candidates');
+    Route::post('/employer/post-job/delete', [App\Http\Controllers\Employer\JobPostController::class, 'delete'])->name('employer.deleteVacancy');
+    Route::get('/employer/applicants', [App\Http\Controllers\Employer\ApplicationController::class, 'index'])->name('employer.applications');
+    Route::get('/employer/new-applicants', [App\Http\Controllers\Employer\ApplicationController::class, 'newApplicants']);
+    Route::get('/employer/job-applicants/{id}', [App\Http\Controllers\Employer\ApplicationController::class, 'jobApplicants']);
+    Route::post('/employer/update-applicant-status', [App\Http\Controllers\Employer\ApplicationController::class, 'updateStatus']);
+    Route::get('/employer/view-employee-profile/{id}', [App\Http\Controllers\Employer\ApplicationController::class, 'viewEmployeeProfile']);
 
-Route::any('/employer/edit-post-job/{id}', [App\Http\Controllers\Employer\JobPostController::class, 'edit'])->name('employer.edit.post.job');
-Route::get('/employer/posted-jobs', [App\Http\Controllers\Employer\JobPostController::class, 'index'])->name('employer.posted.jobs');
-Route::get('/employer/job/candidates/{id}', [App\Http\Controllers\Employer\JobPostController::class, 'jobCandidates'])->name('employer.job.candidates');
-Route::post('/employer/post-job/delete', [App\Http\Controllers\Employer\JobPostController::class, 'delete'])->name('employer.deleteVacancy');
-Route::get('/employer/applicants', [App\Http\Controllers\Employer\ApplicationController::class, 'index'])->name('employer.applications');
-Route::get('/employer/new-applicants', [App\Http\Controllers\Employer\ApplicationController::class, 'newApplicants']);
-Route::get('/employer/job-applicants/{id}', [App\Http\Controllers\Employer\ApplicationController::class, 'jobApplicants']);
-Route::post('/employer/update-applicant-status', [App\Http\Controllers\Employer\ApplicationController::class, 'updateStatus']);
-Route::get('/employer/view-employee-profile/{id}', [App\Http\Controllers\Employer\ApplicationController::class, 'viewEmployeeProfile']);
+    Route::post('/employer-profile/getStates', [App\Http\Controllers\Employer\HomeController::class, 'getStates']);
+    Route::post('/employer-profile/getCities', [App\Http\Controllers\Employer\HomeController::class, 'getCities']);
+});
 
-Route::post('/employer-profile/getStates', [App\Http\Controllers\Employer\HomeController::class, 'getStates']);
-Route::post('/employer-profile/getCities', [App\Http\Controllers\Employer\HomeController::class, 'getCities']);
 
 Route::get('/companies', [App\Http\Controllers\FrontEnd\DashboardController::class, 'companies']);
 Route::get('/jobs', [App\Http\Controllers\FrontEnd\DashboardController::class, 'jobs']);
-
