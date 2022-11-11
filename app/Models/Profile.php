@@ -59,6 +59,7 @@ class Profile extends Model
         'current_job_title',
         'website_link',
         'social_media_link',
+        'have_driving_license'
     ];
 
     protected $casts = [
