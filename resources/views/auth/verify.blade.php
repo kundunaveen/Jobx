@@ -1,7 +1,5 @@
-@extends('front-end.partials.layout')
-@section('title')
-Jobax
-@endsection
+@extends('auth.partials.layout')
+@section('title', 'Jobax')
 @section('content')
 <main class="login-shape main-banner-section login-form-page">
     <!-- login Section Start Here-->
