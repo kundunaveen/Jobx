@@ -33,10 +33,10 @@
 </head>
 
 <body>
-    @include('front-end.partials.header')
+    @include('auth.partials.header')
     @yield('content')
-    @include('front-end.partials.footer')
-    @include('front-end.partials.script')
+    @include('auth.partials.footer')
+    @include('auth.partials.script')
     @yield('scripts')
 </body>
 

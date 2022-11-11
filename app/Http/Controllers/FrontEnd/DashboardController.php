@@ -58,6 +58,7 @@ class DashboardController extends Controller
         }
 
         $salaries = Vacancy::selectRaw("MIN(salary_offer) AS MinSalary, MAX(salary_offer) AS MaxSalary")->first();
+        
         $industry = MasterAttribute::where('master_attribute_category_id', '4')->get();
         $job_types = MasterAttribute::whereHas('masterCategory', function ($q) {
             $q->where('name', 'Job Type');

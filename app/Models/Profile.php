@@ -39,6 +39,7 @@ class Profile extends Model
         'languages',
         'company_name',
         'industry_type_id',
+        'profile_summary',
         'description',
         'logo',
         'intro_video',
