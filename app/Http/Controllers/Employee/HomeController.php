@@ -257,7 +257,7 @@ class HomeController extends Controller
                 $profile_data['description'] = $request->description;
                 $profile_data['profile_summary'] = $request->profile_summary;
                 $profile_data['have_driving_license'] = $request->have_driving_license;
-
+                
                 if ($request->hasFile('profile_image')) {
                     $image_file = $request->file('profile_image');
                     $status = $image_file->storeAs(
