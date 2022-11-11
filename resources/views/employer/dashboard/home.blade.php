@@ -76,7 +76,7 @@
                                         <span class="candidate-count">{{$shortlisted}}</span>
                                     </article>
                                     <figure>
-                                    <div role="progressbar" aria-valuenow="{{$allApp == 0 ? 0 : ($shortlisted/$allApp)*100}}" aria-valuemin="0" aria-valuemax="100" style="--value:{{($shortlisted/$allApp)*100}}"></div>
+                                    <div role="progressbar" aria-valuenow="{{$allApp > 0 ? (($shortlisted/$allApp)*100) : 0}}" aria-valuemin="0" aria-valuemax="100" style="--value:{{($shortlisted/$allApp)*100}}"></div>
                                     <!--<img src="{{asset('assets/images/progress-1.png')}}" width="85" height="85" alt=""
                                             class="img-fluid" />-->
                                     </figure>
@@ -92,7 +92,7 @@
                                         <span class="candidate-count">{{$hold}}</span>
                                     </article>
                                     <figure>
-                                    <div style="--fg:orange" role="progressbar" aria-valuenow="{{$allApp == 0 ? 0 : ($hold/$allApp)*100}}" aria-valuemin="0" aria-valuemax="100" style="--value:{{($hold/$allApp)*100}}"></div>
+                                    <div style="--fg:orange" role="progressbar" aria-valuenow="{{$allApp > 0 ? (($hold/$allApp)*100) : 0}}" aria-valuemin="0" aria-valuemax="100" style="--value:{{($hold/$allApp)*100}}"></div>
                                     <!--<img src="{{asset('assets/images/progress-2.png')}}" width="85" height="85" alt="" />-->
                                     </figure>
                                 </div>
@@ -107,7 +107,7 @@
                                         <span class="candidate-count">{{$hired}}</span>
                                     </article>
                                     <figure>
-                                        <div role="progressbar" style="--fg:green" aria-valuenow="{{$allApp == 0 ? 0 : ($hired/$allApp)*100}}" aria-valuemin="0" aria-valuemax="100" style="--value:{{($hired/$allApp)*100}}"></div>
+                                        <div role="progressbar" style="--fg:green" aria-valuenow="{{$allApp > 0 ? (($hired/$allApp)*100) : 0}}" aria-valuemin="0" aria-valuemax="100" style="--value:{{($hired/$allApp)*100}}"></div>
                                         <!--<img src="{{asset('assets/images/progress-3.png')}}" width="85" height="85" alt="" />-->
                                     </figure>
                                 </div>
@@ -122,7 +122,7 @@
                                         <span class="candidate-count">{{$rejected}}</span>
                                     </article>
                                     <figure>
-                                    <div role="progressbar" style="--fg:teal" aria-valuenow="{{$allApp == 0 ? 0 : ($rejected/$allApp)*100}}" aria-valuemin="0" aria-valuemax="100" style="--value:{{($rejected/$allApp)*100}}"></div>
+                                    <div role="progressbar" style="--fg:teal" aria-valuenow="{{$allApp > 0 ? (($rejected/$allApp)*100) : 0}}" aria-valuemin="0" aria-valuemax="100" style="--value:{{($rejected/$allApp)*100}}"></div>
                                     <!--<img src="{{asset('assets/images/progress-1.png')}}" width="85" height="85" alt="" />-->
                                     </figure>
                                 </div>
