@@ -20,6 +20,9 @@ class DashboardController extends Controller
         $allApp = AppliedJob::whereHas('vacancy', function($q){
             $q->where('employer_id', auth()->user()->id);
         })->count();
+        if($allApp == 0 || $allApp == null){
+            $allApp = 1;
+        }
         $applications = AppliedJob::whereHas('vacancy', function($q){
             $q->where('employer_id', auth()->user()->id);
         })->where('status', 0)->get();
