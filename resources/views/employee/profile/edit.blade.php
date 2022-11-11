@@ -38,7 +38,7 @@
                     <div class="row form-group">
                         <label for="inputPhone" class="form-label">Phone Number*</label>
                         <div class="col-12">
-                            <input type="tel" class="form-control form-input" name="contact" value="{{ old('contact', $employee->contact) }}" aria-label="Phone Number" placeholder="Ex: 9876543210" id="phone">
+                            <input type="tel" class="form-control form-input" name="contact" value="{{ old('contact', $employee->contact) }}" aria-label="Phone Number" placeholder="Ex: 9876543210" id="contact_number">
                             @error('contact')
                             <span class="text-danger" role="alert">
                                 <strong style="font-size: 14px;">{{ $message }}</strong>

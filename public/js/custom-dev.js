@@ -47,14 +47,15 @@ $(document).on('click', '.remove', function () {
 // });
 $(document).ready(function () {
 
-    if($('#phone').length > 0){
-        var input = document.querySelector("#phone");
-        var phone_number = window.intlTelInput(input, {
-            separateDialCode: true,
+    if($('#contact_number').length > 0){
+        var input_number = document.querySelector("#contact_number");
+        window.intlTelInput(input_number, {
+            defaultCountry: "auto",
         });
-
+        var iti = intlTelInput(input_number);
+        var mobile_number = iti.getNumber();
         // mobile_number = $("#phone").intlTelInput("getSelectedCountryData").dialCode;
-        // $("#phone").val(mobile_number);
+        $("#phone").val(mobile_number);
     }    
 
     if ($('.select2_dropdown').length > 0) {
