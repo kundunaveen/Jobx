@@ -165,11 +165,11 @@
                         <label for="check" class="form-label">Do you have Driving License?</label>
                         <div class="col-12">
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="have_driving_license" id="inlineRadio1" value="1" @if(old('have_driving_license') == 1) checked @endif>
+                                <input class="form-check-input" type="radio" name="have_driving_license" id="inlineRadio1" value="1" @if(old('have_driving_license', optional($employee->profile)->have_driving_license) == 1) checked @endif>
                                 <label class="form-check-label" for="inlineRadio1">Yes</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="have_driving_license" id="inlineRadio2" value="2" @if(old('have_driving_license') == 2) checked @endif>
+                                <input class="form-check-input" type="radio" name="have_driving_license" id="inlineRadio2" value="2" @if(old('have_driving_license', optional($employee->profile)->have_driving_license) == 2) checked @endif>
                                 <label class="form-check-label" for="inlineRadio2">No</label>
                             </div>
                             @error('have_driving_license')
