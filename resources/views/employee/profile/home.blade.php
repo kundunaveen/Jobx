@@ -7,6 +7,8 @@ Profile
 <section class="banner-section inner-banner main-banner-section">
     <div class="container">
         <div class="row">
+            @include('layouts.messages.success')
+            @include('layouts.messages.error')
             <div class="banner-section-wrapper">
                 <div class="banner-content">
                     <h1><span>Innovation</span> Makes <span>Everything</span> Better</h1>

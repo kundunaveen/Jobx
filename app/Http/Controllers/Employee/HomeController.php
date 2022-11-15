@@ -15,6 +15,7 @@ use App\Models\Profile;
 use Session;
 use Illuminate\Support\Facades\Hash;
 use App\Models\AppliedJob;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
@@ -46,8 +47,8 @@ class HomeController extends Controller
         }
 
         $request->validate([
-            'current_password' => 'bail|required|max:129',
-            'password' => 'bail|required|min:8|max:129|confirmed'
+            'current_password' => 'bail|required|max:15',
+            'password' => 'bail|required|min:6|max:15|confirmed'
         ]);
 
         User::find(auth()->user()->id)->update(['password' => Hash::make($request->password)]);
@@ -295,7 +296,10 @@ class HomeController extends Controller
                     $profile->update($profile_data);
                 }
 
-                return redirect(route('employee.profile.edit'))->with('success', 'Employee details updated successfully');
+                //return redirect(route('employee.profile.edit'))->with('', '');
+
+                return Redirect::route('employee.home')->with('success', 'Employee details updated successfully');
+
             } catch (\Exception $e) {
                 dd($e->getMessage());
             }

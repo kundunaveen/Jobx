@@ -427,7 +427,7 @@
                             <input type="submit" class="btn  btn-primary btn-form" value="Publish">
                         </div>
                         <div class="d-grid col-sm-6 text-center">
-                            <input type="reset" class="btn py-3 px-0 bg-transparent  fw-bold btn-skip" value="Cancel">
+                            <a href="{{ route('employee.profile.edit') }}" class="btn py-3 px-0 bg-transparent fw-bold btn-skip">Cancel</a>
                         </div>
                     </div>
                 </form>

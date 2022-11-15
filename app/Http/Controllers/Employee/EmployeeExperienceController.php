@@ -50,7 +50,7 @@ class EmployeeExperienceController extends Controller
             }
             Experience::create($data);
 
-            return Redirect::route('employee.profile.edit')->with('success', 'Your experience data saved successful');
+            return Redirect::route('employee.experience.create')->with('success', 'Your experience data saved successful');
 
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage())->withInput();
