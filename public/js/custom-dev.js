@@ -387,4 +387,17 @@ $(document).ready(function () {
             }
         });
     }
+    
+});
+
+$(document).ready(function() {
+    if ($('.company_rating').length > 0) {
+        $('div[class^="company_rating"]').each(function() {
+            $('.company_rating').raty({
+                number: 5,
+                score: 4,
+            });
+        });
+
+    }
 });

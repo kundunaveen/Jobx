@@ -27,8 +27,10 @@
    <link rel="stylesheet" href="{{asset('assets/scss/main.css')}}" />
    <link rel="stylesheet" href="{{asset('css/toastr.css')}}" />
    <link rel="stylesheet" href="{{asset('css/select2.min.css')}}" />
-   <link rel="stylesheet" href="{{asset('css/intelTelInput.css')}}" />
+   <link rel="stylesheet" href="{{asset('css/intelTelInput.css')}}" />   
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/jquery.raty.min.css" />
    <link rel="stylesheet" href="{{asset('css/custom-dev.css')}}" />
+   @stack('header_css')
 </head>
 
 <body class="body">
@@ -37,6 +39,7 @@
     @include('employee.profile.partials.footer')
     @include('employee.profile.partials.script')
     @yield('scripts')
+    @stack('footer_script')
 </body>
 
 </html>
