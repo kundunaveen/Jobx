@@ -8,6 +8,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="">
+                        @include('layouts.messages.success')
                         @include('layouts.messages.error')
                         <form class="form-inner" action="{{ route('employee.experience.store') }}" method="POST" id="jqueryValidatorAddExperienceForm">
                             @csrf

@@ -15,6 +15,7 @@ use App\Models\Profile;
 use Session;
 use Illuminate\Support\Facades\Hash;
 use App\Models\AppliedJob;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
 class HomeController extends Controller
@@ -295,7 +296,10 @@ class HomeController extends Controller
                     $profile->update($profile_data);
                 }
 
-                return redirect(route('employee.profile.edit'))->with('success', 'Employee details updated successfully');
+                //return redirect(route('employee.profile.edit'))->with('', '');
+
+                return Redirect::route('employee.home')->with('success', 'Employee details updated successfully');
+
             } catch (\Exception $e) {
                 dd($e->getMessage());
             }

@@ -61,7 +61,7 @@ class EducationController extends Controller
             
             Education::create($data);
 
-            return Redirect::route('employee.profile.edit')->with('success', 'Your education data saved successful');
+            return Redirect::route('employee.education.create')->with('success', 'Your education data saved successful');
 
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage())->withInput();
