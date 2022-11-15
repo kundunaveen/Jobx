@@ -47,8 +47,8 @@ class HomeController extends Controller
         }
 
         $request->validate([
-            'current_password' => 'bail|required|max:129',
-            'password' => 'bail|required|min:8|max:129|confirmed'
+            'current_password' => 'bail|required|max:15',
+            'password' => 'bail|required|min:6|max:15|confirmed'
         ]);
 
         User::find(auth()->user()->id)->update(['password' => Hash::make($request->password)]);
