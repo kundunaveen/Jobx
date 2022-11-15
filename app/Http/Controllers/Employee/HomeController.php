@@ -147,30 +147,31 @@ class HomeController extends Controller
             $request->validate([
                 'first_name' => 'required|string|max:100',
                 'last_name' => 'required|string|max:100',
+                'contact' => 'required',
                 'gender' => 'required',
-                'resume' => 'max:2000|mimes:' . implode(',', Profile::SUPPORTED_RESUME_MIME_TYPE),
-                'profile_image' => 'nullable|image|max:2000|mimes:' . implode(',', Profile::SUPPORTED_IMAGE_MIME_TYPE),
-                'profile_video' => 'nullable|max:40000|mimes:' . implode(',', Profile::SUPPORTED_VIDEO_MIME_TYPE),
-                'video_link' => 'nullable|url',
+                'date_of_birth' => 'required|date|before:today',
+                'current_job_title' => 'required',
                 'current_salary' => 'nullable|numeric',
                 'expected_salary' => 'required|numeric',
-                'skills' => 'required|array',
+                'experience' => 'nullable|numeric',
                 'languages' => 'required|array',
+                'skills' => 'required|array',
+                'have_driving_license' => 'required',
+                'resume' => 'max:2000|mimes:' . implode(',', Profile::SUPPORTED_RESUME_MIME_TYPE),
+                'profile_summary' => 'nullable',
+                'description' => 'nullable',
                 'address' => 'required',
                 'country' => 'required',
                 'state' => 'nullable',
                 'city' => 'nullable',
                 'zip' => 'nullable',
-                'experience' => 'nullable|numeric',
-                'date_of_birth' => 'required|date|before:today',
-                'current_job_title' => 'required',
+                'profile_image' => 'nullable|image|max:2000|mimes:' . implode(',', Profile::SUPPORTED_IMAGE_MIME_TYPE),
+                'profile_video' => 'nullable|max:40000|mimes:' . implode(',', Profile::SUPPORTED_VIDEO_MIME_TYPE),
+                'video_link' => 'nullable|url',
                 'website_link' => 'nullable|url',
                 'social_media_link' => 'nullable|array',
                 'social_media_link.*' => 'nullable|url',
-                'description' => 'nullable',
-                'profile_summary' => 'nullable',
-                'have_driving_license' => 'required',
-                'contact' => 'required',
+                'notification_option' => 'required',
             ]);
 
             try {
@@ -203,6 +204,7 @@ class HomeController extends Controller
                 unset($user_data['description']);
                 unset($user_data['profile_summary']);
                 unset($user_data['have_driving_license']);
+                unset($user_data['notification_option']);
 
                 $employee->update($user_data);
 
@@ -258,6 +260,7 @@ class HomeController extends Controller
                 $profile_data['description'] = $request->description;
                 $profile_data['profile_summary'] = $request->profile_summary;
                 $profile_data['have_driving_license'] = $request->have_driving_license;
+                $profile_data['notification_option'] = $request->notification_option;
                 
                 if ($request->hasFile('profile_image')) {
                     $image_file = $request->file('profile_image');

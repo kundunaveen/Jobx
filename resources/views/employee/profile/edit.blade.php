@@ -39,9 +39,10 @@
                         <label for="inputPhone" class="form-label">Phone Number*</label>
                         <div class="col-12">
                             <input type="tel" class="form-control form-input" name="contact" value="{{ old('contact', $employee->contact) }}" aria-label="Phone Number" placeholder="Ex: 9876543210" id="contact_number">
+                            <small class="text-secondary">Phone number include country code</small>
                             @error('contact')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -58,7 +59,7 @@
                             </select>
                             @error('gender')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -69,7 +70,7 @@
                             <input type="date" class="form-control form-input" name="date_of_birth" value="{{ old('date_of_birth', optional($employee->profile)->date_of_birth) }}" aria-label="Expected Salary">
                             @error('date_of_birth')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -80,7 +81,7 @@
                             <input type="text" class="form-control form-input" name="current_job_title" value="{{ old('current_job_title', optional($employee->profile)->current_job_title) }}" aria-label="Expected Salary" placeholder="Ex: Senior account manager">
                             @error('current_job_title')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -98,7 +99,7 @@
                             <input type="text" class="form-control form-input" name="current_salary" value="{{ old('current_salary', optional($employee->profile)->current_salary) }}" aria-label="Current Salary" placeholder="Ex: 5">
                             @error('current_salary')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -109,7 +110,7 @@
                             <input type="text" class="form-control form-input" name="expected_salary" value="{{ old('expected_salary', optional($employee->profile)->expected_salary) }}" aria-label="Expected Salary" placeholder="Ex: 9">
                             @error('current_salary')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -120,7 +121,7 @@
                             <input type="text" class="form-control form-input" name="experience" value="{{ old('experience', optional($employee->profile)->experience) }}" aria-label="experience" placeholder="Ex: 15">
                             @error('experience')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -138,7 +139,7 @@
                             </select>
                             @error('languages')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -156,13 +157,13 @@
                             </select>
                             @error('skills')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
                     </div>
                     <div class="row form-group">
-                        <label for="check" class="form-label">Do you have Driving License?</label>
+                        <label for="check" class="form-label">Do you have Driving License?*</label>
                         <div class="col-12">
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="have_driving_license" id="inlineRadio1" value="1" @if(old('have_driving_license', optional($employee->profile)->have_driving_license) == 1) checked @endif>
@@ -192,7 +193,7 @@
                             @endif
                             @error('resume')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -203,7 +204,7 @@
                             <textarea class="form-control" name="profile_summary" placeholder="Please write something about your summary" rows="5">{{ old('profile_summary', optional($employee->profile)->profile_summary) }}</textarea>
                             @error('profile_summary')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -214,7 +215,7 @@
                             <textarea class="form-control" name="description" placeholder="Please write something about your self" rows="5">{{ old('description', optional($employee->profile)->description) }}</textarea>
                             @error('description')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -226,7 +227,7 @@
                             <textarea class="form-control" name="address" aria-label="Address" placeholder="Ex: #123 Street" rows="5">{{ old('address', optional($employee->profile)->address) }}</textarea>
                             @error('address')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -242,7 +243,7 @@
                             </select>
                             @error('country')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -258,7 +259,7 @@
                             </select>
                             @error('country')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -274,7 +275,7 @@
                             </select>
                             @error('city')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -285,7 +286,7 @@
                             <input type="text" name="zip" class="form-control form-input" value="{{ old('zip', optional($employee->profile)->zip) }}" aria-label="Zip Code" placeholder="Ex: 3F27A5">
                             @error('zip')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -304,7 +305,7 @@
                             </div>
                             @error('profile_image')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -325,7 +326,7 @@
                             @endif
                             @error('profile_video')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -336,7 +337,7 @@
                             <input type="text" class="form-control form-input" name="video_link" value="{{ old('video_link', optional($employee->profile)->video_link) }}" aria-label="VideoLink" placeholder="Ex: https://www.youtube.com/watch?v=4KVIFNJ7mDQ">
                             @error('video_link')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -347,7 +348,7 @@
                             <input type="text" class="form-control form-input" name="website_link" value="{{ old('website_link', optional($employee->profile)->website_link) }}" aria-label="VideoLink" placeholder="Ex: https://www.mywebsite.com">
                             @error('website_link')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -358,7 +359,7 @@
                             <input type="text" class="form-control form-input" name="social_media_link[facebook]" value="{{ old('social_media_link.facebook', rescue(function() use($employee){ return $employee->profile->social_media_link['facebook']; }, '')) }}" aria-label="inputLinkedinLink" placeholder="Ex: https://www.facebook.com">
                             @error('social_media_link.facebook')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -369,7 +370,7 @@
                             <input type="text" class="form-control form-input" name="social_media_link[linkedin]" value="{{ old('social_media_link.linkedin', rescue(function() use($employee){ return $employee->profile->social_media_link['linkedin']; }, '')) }}" aria-label="inputLinkedinLink" placeholder="Ex: https://www.linkedin.com">
                             @error('social_media_link.linkedin')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -380,7 +381,7 @@
                             <input type="text" class="form-control form-input" name="social_media_link[twitter]" value="{{ old('social_media_link.twitter', rescue(function() use($employee){ return $employee->profile->social_media_link['twitter']; }, '')) }}" aria-label="inputTwitterLink" placeholder="Ex: https://www.twiiter.com">
                             @error('social_media_link.twitter')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>
@@ -391,7 +392,24 @@
                             <input type="text" class="form-control form-input" name="social_media_link[instagram]" value="{{ old('social_media_link.instagram', rescue(function() use($employee){ return $employee->profile->social_media_link['instagram']; }, '')) }}" aria-label="inputInstagramLink" placeholder="Ex: https://www.instagram.com">
                             @error('social_media_link.instagram')
                             <span class="text-danger" role="alert">
-                                <strong style="font-size: 14px;">{{ $message }}</strong>
+                                <strong class="class_font_size">{{ $message }}</strong>
+                            </span>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="row form-group">
+                        <label for="check" class="form-label">Notification Option*</label>
+                        <div class="col-12">
+                            <select name="notification_option" class="form-control" aria-label="Select notification">
+                                <option value="">Select notification</option>
+                                @forelse(\App\Models\Profile::NOTIFICATION_OPTION_ARRAY as $key => $value)
+                                <option value="{{ $key }}" {{ $key == old('notification_option', optional($employee->profile)->notification_option) ? 'selected': '' }}>{{ $value }}</option>
+                                @empty
+                                @endforelse
+                            </select>
+                            @error('notification_option')
+                            <span class="text-danger" role="alert">
+                                <strong class="class_font_size">{{ $message }}</strong>
                             </span>
                             @enderror
                         </div>

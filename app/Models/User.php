@@ -80,7 +80,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function getProfileImageUrlAttribute(): string{
-        return $this->profile->profile_image_url;
+        return optional($this->profile)->profile_image_url ?? asset('image/user.png');
     }
 
     public function getProfileCurrentJobTitleAttribute(): ?string{

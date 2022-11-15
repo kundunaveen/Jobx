@@ -108,37 +108,37 @@ $(document).ready(function () {
                 contact: {
                     required: true,
                 },
-                notification_option: {
+                'gender': {
+                    required: true,
+                },
+                'date_of_birth': {
+                    required: true,
+                },
+                current_job_title: {
                     required: true
                 },
-                company_name: {
+                expected_salary: {
                     required: true
                 },
-                industry: {
-                    required: true
+                'languages[]': {
+                    required: true,
                 },
-                company_size: {
-                    required: true
+                'skills[]': {
+                    required: true,
                 },
-                company_role: {
+                'have_driving_license': {
                     required: true
                 },
                 address: {
                     required: true
                 },
-                'skills[]': {
-                    required: true
-                },
-                'have_driving_license': {
-                    required: true
-                },
                 'country': {
+                    required: true,
                     min: 1
                 },
-                zip: {
+                'notification_option': {
                     required: true,
-                    number: true
-                }
+                },
 
             }
         });
