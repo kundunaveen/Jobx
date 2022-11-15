@@ -38,6 +38,10 @@ label.error {
     color: red !important;
 }
 
+.class_font_size{
+    font-size: 14px;
+}
+
 .drop_arrow {
     position: relative !important;
 }

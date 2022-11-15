@@ -29,6 +29,15 @@ class Profile extends Model
     public CONST IMAGE_PATH = 'image/employee_images';
     public CONST VIDEO_PATH = 'image/employee_videos';
 
+    public CONST NOTIFICATION_OPTION_EMAIL = 'email';
+    public CONST NOTIFICATION_OPTION_JOBAX = 'jobax';
+
+    public CONST NOTIFICATION_OPTION_ARRAY = [
+        self::NOTIFICATION_OPTION_EMAIL => 'Email',
+        self::NOTIFICATION_OPTION_JOBAX => 'Jobax platform notification',
+
+    ];
+
     protected $fillable = [
         'user_id',
         'gender',
