@@ -164,7 +164,7 @@ class HomeController extends Controller
                 'experience' => 'nullable|numeric',
                 'date_of_birth' => 'required|date|before:today',
                 'current_job_title' => 'required',
-                'website_link' => 'required|url',
+                'website_link' => 'nullable|url',
                 'social_media_link' => 'nullable|array',
                 'social_media_link.*' => 'nullable|url',
                 'description' => 'nullable',
