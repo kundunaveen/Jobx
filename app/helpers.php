@@ -18,3 +18,11 @@ if (!function_exists('get_min_max_salary')) {
         return Vacancy::selectRaw("MIN(cast(salary_offer as unsigned)) AS MinSalary, MAX(cast(salary_offer as unsigned)) AS MaxSalary")->first();
     }
 }
+
+if (!function_exists('get_industries')) {
+
+    function get_industries()
+    {
+        return MasterAttribute::where('master_attribute_category_id', 4)->get();
+    }
+}
