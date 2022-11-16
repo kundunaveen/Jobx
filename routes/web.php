@@ -127,8 +127,12 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::post('/employer-profile/getStates', [App\Http\Controllers\Employer\HomeController::class, 'getStates']);
     Route::post('/employer-profile/getCities', [App\Http\Controllers\Employer\HomeController::class, 'getCities']);
+
+    Route::get('/company-rating-store-update', [App\Http\Controllers\AjaxController::class, 'companyRatingStoreUpdate'])->name('company-rating-store-update');
 });
 
 
 Route::get('/companies', [App\Http\Controllers\FrontEnd\DashboardController::class, 'companies']);
 Route::get('/jobs', [App\Http\Controllers\FrontEnd\DashboardController::class, 'jobs']);
+
+

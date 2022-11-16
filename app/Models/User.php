@@ -32,6 +32,10 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
+    public CONST ROLE_ADMIN_ID = 1;
+    public CONST ROLE_EMPLOYER_ID = 2;
+    public CONST ROLE_EMPLOYEE_ID = 3;
+
     /**
      * The attributes that should be cast to native types.
      *
@@ -85,5 +89,9 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getProfileCurrentJobTitleAttribute(): ?string{
         return filled(optional($this->profile)->current_job_title) ? optional($this->profile)->current_job_title : null;
+    }
+
+    public function companyRatings() : HasMany{
+        return $this->hasMany(CompanyRating::class, 'company_id');
     }
 }

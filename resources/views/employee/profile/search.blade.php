@@ -105,6 +105,7 @@ Job Search
                                  </ul>
                                  <h6 class="d-flex align-items-center" style="font-size: 13px;margin-bottom: 14px;"><i class="icon-location me-2"></i>{{$job->citydetail->city.', '.$job->countrydetail->name}}</h6>
                                  <p class="job_description{{$job->id}}" style="font-size: 13px;padding: 0 0 30px;line-height: 22px;margin-bottom: 0;">@if(strlen($job->description)>60) {{substr($job->description ,0, 60).'...'}} <a class="read_more{{$job->id}}" onclick="readDescription('{{$job->id}}', '{{$job->description}}')" href="javascript:void(0)">Read more</a>@else {{$job->description}} @endif</p>
+                                 <x-review.company :company-id="optional($job->loadMissing('user')->user)->id"/>
                                  <div class="job-btn-wrapper d-flex justify-content-between">
                                     <a href="{{route('employee.job.apply', $job->id)}}" class="btn btn-lg">@if( in_array($job->id, $applied_jobs)) Applied @else Apply @endif</a>
                                     <a href="{{route('employee.job.preview', $job->id)}}" class="btn btn-default btn-md">Preview Job</a>

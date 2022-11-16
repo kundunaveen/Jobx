@@ -253,52 +253,56 @@
                      </div>
                      <div class="col-lg-10 col-md-9">
                         <section class="Company-listing-section">
+                           {{--
                            <div class="text-end">
                               <button type="button" class="btn btn-primary"><span class="spriteicon"><i class="filter-icon"></i></span>Filter</button>
                            </div>
+                           --}}
                            <div class="table-wrapper table-responsive">
                               <table class="table align-middle">
                                  <thead>
                                     <tr>
+                                       {{--
                                        <th scope="col">
                                           <div class="form-check">
                                              <input class="form-check-input" type="checkbox" value=""
                                                 id="flexCheckDefault">
                                           </div>
-                                       </th>
+                                       </th>                                       
+                                       --}}
                                        <th scope="col">Companies Name</th>
                                        <th scope="col">Owner</th>
-                                       <th scope="col">Score Total</th>
+                                       <th scope="col">Rating Count</th>
                                        <th scope="col">Rate</th>
                                        <th scope="col">More</th>
                                     </tr>
                                  </thead>
                                  <tbody>
-                                    @foreach($employers as $employer)
-                                    @if($employer->profile && isset($employer->profile->company_name))
+                                    @forelse($employers as $employer)
                                     <tr>
+                                       {{--
                                        <td>
                                           <div class="form-check">
-                                             <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
+                                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                           </div>
                                        </td>
+                                       --}}
                                        <td>
                                           <a href="javascript:void(0)" class="d-flex align-items-center">
                                              <figure>
-                                                <img src="{{ optional($employer->profile)->profile_image_url }}" width="51" height="50"
-                                                   class="img-fluid" alt="">
+                                                <img src="{{ optional($employer->profile)->profile_image_url }}" width="51" height="50" class="img-fluid" alt="">
                                              </figure>
                                              <article>
-                                                <p class="mb-0">{{$employer->profile->company_name}}</p>
-                                                <span>Google.com</span>
+                                                <p class="mb-0">{{ optional($employer->profile)->company_name ?? 'NA' }}</p>
+                                                <span>{{ optional($employer->profile)->website_link ?? 'NA' }}</span>
                                              </article>
                                           </a>
                                        </td>
-                                       <td>{{ucwords($employer->first_name.' '.$employer->last_name)}}</td>
-                                       <td>710.68</td>
+                                       <td>{{ ucwords($employer->full_name) }}</td>
+                                       <td class="text-center">{{ $employer->company_ratings_count }}</td>
                                        <td>
                                           <div class="d-flex  align-items-center">
+                                             {{--
                                              <div class="star-rating me-2">
                                                 <input type="radio" id="5-stars" name="rating" value="5" />
                                                 <label for="5-stars" class="star">&#9733;</label>
@@ -311,225 +315,28 @@
                                                 <input type="radio" id="1-star" name="rating" value="1" />
                                                 <label for="1-star" class="star">&#9733;</label>
                                              </div>
+                                             --}}
+                                             <x-review.company :company-id="$employer->id"/>
                                              <div>
-                                                <span>4 Stars</span>
+                                                <span>
+                                                   {{ number_format($employer->company_ratings_avg_rating) }}
+                                                   @if($employer->company_ratings_avg_rating > 1)
+                                                      Stars
+                                                   @else
+                                                      Star
+                                                   @endif
+                                                    
+                                                </span>
                                              </div>
                                           </div>
                                        </td>
                                        <td><a href="javascript:void(0)"><i class="icon-view-eye"></i></a></td>
                                     </tr>
-                                    @endif
-                                    @endforeach
-                                    <!-- <tr>
-                                       <td>
-                                          <div class="form-check">
-                                             <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
-                                          </div>
-                                       </td>
-                                       <td>
-                                          <a href="javascript:void(0)" class="d-flex align-items-center">
-                                             <figure>
-                                                <img src="assets/images/apple.png" width="51" height="50"
-                                                   class="img-fluid" alt="">
-                                             </figure>
-                                             <article>
-                                                <p class="mb-0">Apple</p>
-                                                <span>apple.com</span>
-                                             </article>
-                                          </a>
-                                       </td>
-                                       <td>Theresa Webb</td>
-                                       <td>948.55</td>
-                                       <td>
-                                          <div class="d-flex  align-items-center">
-                                             <div class="star-rating me-2">
-                                                <input type="radio" id="5-stars" name="rating" value="5" />
-                                                <label for="5-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="4-stars" name="rating" value="4" />
-                                                <label for="4-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="3-stars" name="rating" value="3" />
-                                                <label for="3-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="2-stars" name="rating" value="2" />
-                                                <label for="2-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="1-star" name="rating" value="1" />
-                                                <label for="1-star" class="star">&#9733;</label>
-                                             </div>
-                                             <div>
-                                                <span>4 Stars</span>
-                                             </div>
-                                          </div>
-                                       </td>
-                                       <td><a href="javascript:void(0)"><i class="icon-view-eye"></i></a></td>
-                                    </tr>
+                                    @empty
                                     <tr>
-                                       <td>
-                                          <div class="form-check">
-                                             <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
-                                          </div>
-                                       </td>
-                                       <td>
-                                          <a href="javascript:void(0)" class="d-flex align-items-center">
-                                             <figure>
-                                                <img src="assets/images/drop-box.png" width="51" height="50"
-                                                   class="img-fluid" alt="">
-                                             </figure>
-                                             <article>
-                                                <p class="mb-0">Drop Box</p>
-                                                <span>Dropbox.com</span>
-                                             </article>
-                                          </a>
-                                       </td>
-                                       <td>Arlene McCoy</td>
-                                       <td>475.22</td>
-                                       <td>
-                                          <div class="d-flex  align-items-center">
-                                             <div class="star-rating me-2">
-                                                <input type="radio" id="5-stars" name="rating" value="5" />
-                                                <label for="5-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="4-stars" name="rating" value="4" />
-                                                <label for="4-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="3-stars" name="rating" value="3" />
-                                                <label for="3-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="2-stars" name="rating" value="2" />
-                                                <label for="2-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="1-star" name="rating" value="1" />
-                                                <label for="1-star" class="star">&#9733;</label>
-                                             </div>
-                                             <div>
-                                                <span>4 Stars</span>
-                                             </div>
-                                          </div>
-                                       </td>
-                                       <td><a href="javascript:void(0)"><i class="icon-view-eye"></i></a></td>
+                                       <td colspan="100%" class="text-center">No data found</td>
                                     </tr>
-                                    <tr>
-                                       <td>
-                                          <div class="form-check">
-                                             <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
-                                          </div>
-                                       </td>
-                                       <td>
-                                          <a href="javascript:void(0)" class="d-flex align-items-center">
-                                             <figure>
-                                                <img src="assets/images/yahoo.png" width="51" height="50"
-                                                   class="img-fluid" alt="">
-                                             </figure>
-                                             <article>
-                                                <p class="mb-0">Yahoo</p>
-                                                <span>yahoo.com</span>
-                                             </article>
-                                          </a>
-                                       </td>
-                                       <td>Jacob Jones</td>
-                                       <td>739.65</td>
-                                       <td>
-                                          <div class="d-flex  align-items-center">
-                                             <div class="star-rating me-2">
-                                                <input type="radio" id="5-stars" name="rating" value="5" />
-                                                <label for="5-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="4-stars" name="rating" value="4" />
-                                                <label for="4-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="3-stars" name="rating" value="3" />
-                                                <label for="3-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="2-stars" name="rating" value="2" />
-                                                <label for="2-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="1-star" name="rating" value="1" />
-                                                <label for="1-star" class="star">&#9733;</label>
-                                             </div>
-                                             <div>
-                                                <span>4 Stars</span>
-                                             </div>
-                                          </div>
-                                       </td>
-                                       <td><a href="javascript:void(0)"><i class="icon-view-eye"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                       <td>
-                                          <div class="form-check">
-                                             <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
-                                          </div>
-                                       </td>
-                                       <td>
-                                          <a href="javascript:void(0)" class="d-flex align-items-center">
-                                             <figure>
-                                                <img src="assets/images/air-bnb.png" width="51" height="50"
-                                                   class="img-fluid" alt="">
-                                             </figure>
-                                             <article>
-                                                <p class="mb-0">Air BnB</p>
-                                                <span>AirBnB.com</span>
-                                             </article>
-                                          </a>
-                                       </td>
-                                       <td>Jerome Bell</td>
-                                       <td>490.51</td>
-                                       <td>
-                                          <div class="d-flex  align-items-center">
-                                             <div class="star-rating me-2">
-                                                <input type="radio" id="5-stars" name="rating" value="5" />
-                                                <label for="5-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="4-stars" name="rating" value="4" />
-                                                <label for="4-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="3-stars" name="rating" value="3" />
-                                                <label for="3-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="2-stars" name="rating" value="2" />
-                                                <label for="2-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="1-star" name="rating" value="1" />
-                                                <label for="1-star" class="star">&#9733;</label>
-                                             </div>
-                                             <div>
-                                                <span>4 Stars</span>
-                                             </div>
-                                          </div>
-                                       </td>
-                                       <td><a href="javascript:void(0)"><i class="icon-view-eye"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                       <td>
-                                          <div class="form-check">
-                                             <input class="form-check-input" type="checkbox" value=""
-                                                id="flexCheckDefault">
-                                          </div>
-                                       </td>
-                                       <td>
-                                          <a href="javascript:void(0)" class="d-flex align-items-center">
-                                             <figure>
-                                                <img src="assets/images/volks.png" width="51" height="50"
-                                                   class="img-fluid" alt="">
-                                             </figure>
-                                             <article>
-                                                <p class="mb-0">volkswagen</p>
-                                                <span>volkswagen.com</span>
-                                             </article>
-                                          </a>
-                                       </td>
-                                       <td>Theresa Webb</td>
-                                       <td>475.22</td>
-                                       <td>
-                                          <div class="d-flex  align-items-center">
-                                             <div class="star-rating me-2">
-                                                <input type="radio" id="5-stars" name="rating" value="5" />
-                                                <label for="5-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="4-stars" name="rating" value="4" />
-                                                <label for="4-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="3-stars" name="rating" value="3" />
-                                                <label for="3-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="2-stars" name="rating" value="2" />
-                                                <label for="2-stars" class="star">&#9733;</label>
-                                                <input type="radio" id="1-star" name="rating" value="1" />
-                                                <label for="1-star" class="star">&#9733;</label>
-                                             </div>
-                                             <div>
-                                                <span>4 Stars</span>
-                                             </div>
-                                          </div>
-                                       </td>
-                                       <td><a href="javascript:void(0)"><i class="icon-view-eye"></i></a></td>
-                                    </tr> -->
+                                    @endforelse                                    
                                  </tbody>
                               </table>
                            </div>

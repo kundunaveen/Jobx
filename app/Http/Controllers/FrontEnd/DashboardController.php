@@ -8,7 +8,7 @@ use App\Models\Vacancy;
 use App\Models\JobSkill;
 use App\Models\MasterAttribute;
 use App\Models\User;
-
+use Illuminate\Database\Eloquent\Builder;
 
 class DashboardController extends Controller
 {
@@ -19,9 +19,15 @@ class DashboardController extends Controller
 
     public function companies()
     {
-        $employers = User::whereHas('roleUser', function($q){
-            $q->where('role_id', 2);
-        })->get();
+        $employers = User::with('profile')
+        ->whereHas('profile')
+        ->whereHas('roleUser', function(Builder $q){
+            $q->where('role_id', User::ROLE_EMPLOYER_ID);
+        })
+        ->withCount('companyRatings')
+        ->withAvg('companyRatings', 'rating')
+        ->get();
+        //dd($employers);
         return view('front-end.dashboard.company-listing', compact('employers'));
     }
 

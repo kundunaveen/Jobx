@@ -5,10 +5,12 @@ crossorigin="anonymous"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.min.js"></script>
 <script src="{{asset('js/intlTelInput.js')}}"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/jquery.raty.min.js"></script>
 <script src="{{asset('assets/js/custom.js')}}"></script>
 <script src="{{asset('js/custom-dev.js')}}"></script>
 <script src="{{asset('js/toastr.js')}}"></script>
 <script src="{{asset('js/select2.min.js')}}"></script>
+
 <script>
 $(document).ready(function(){
     $('.languages').select2()
