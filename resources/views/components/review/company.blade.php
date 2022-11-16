@@ -6,6 +6,6 @@
 @push('footer_script')
 <script>
     var company_rating_store_update_route = "{{ route('company-rating-store-update') }}";
-    var auth_user_id = "{{ auth()->user()->id }}";
+    var auth_user_id = "{{ optional(auth()->user())->id }}";
 </script>
 @endpush
