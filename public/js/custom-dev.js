@@ -391,13 +391,52 @@ $(document).ready(function () {
 });
 
 $(document).ready(function() {
-    if ($('.company_rating').length > 0) {
-        $('div[class^="company_rating"]').each(function() {
-            $('.company_rating').raty({
-                number: 5,
-                score: 4,
-            });
-        });
+    $('div[class^="company_rating"]').each(function() {
+        var score = $(this).attr('data-score');
+        var company_id = $(this).attr('data-company_id');
+        $(this).raty({
+            number: 5,
+            starOff: "https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/images/star-off.png",
+            starOn: "https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/images/star-on.png",
+            score: function(){
+                return score;
+            },
+            target: "#text-" + company_id,
+            hints: [1, 2, 3, 4, 5],            
+        });        
+    });
 
-    }
+    $(".company_rating").click(function(){
+        var company_id = $(this).attr('data-company_id');
+        var rating_value = $('#text-' + company_id).val();
+        var user_id = auth_user_id;
+
+        if(!company_id){
+            alert('Company is missing!');
+            return false;
+        }
+        if(!rating_value){
+            alert('rating is missing!');
+            return false;
+        }
+        if(!user_id){
+            alert('Please login!');
+            return false;
+        }
+
+        $.ajax({
+            'url': company_rating_store_update_route,
+            'type':'GET',
+            'data':{
+                'rating_value': rating_value,
+                'user_id': user_id,
+                'company_id': company_id
+            },
+            success:function(response){
+                if(response.status == false){
+                    alert(response.message);
+                }                
+            },
+        });
+    });
 });

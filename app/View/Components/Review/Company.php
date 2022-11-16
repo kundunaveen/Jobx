@@ -15,8 +15,9 @@ class Company extends Component
      */
     public function __construct($companyId)
     {
-        $this->avg_rating = CompanyRating::where('company_id', $companyId)
-        ->avg('rating');
+        $avg_rating_fraction = CompanyRating::where('company_id', $companyId)
+        ->avg('rating') ?? 0;
+        $this->avg_rating = (int)$avg_rating_fraction;
         $this->company_id = $companyId;
     }
 
