@@ -1,4 +1,4 @@
-@auth
+
 <div>
     <div class="company_rating" data-company_id="{{ $company_id }}" data-score="{{ $avg_rating }}"></div>
     <input type="text" name="rating_value" value="{{ $avg_rating }}" id="text-{{ $company_id }}" class="d-none">
@@ -9,4 +9,3 @@
     var auth_user_id = "{{ auth()->user()->id }}";
 </script>
 @endpush
-@endauth
