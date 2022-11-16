@@ -73,4 +73,21 @@ class DashboardController extends Controller
         $jobs = $jobs->simplePaginate(3);
         return view('front-end.dashboard.job-listing', compact('salaries', 'job_types', 'jobs', 'industry', 'skills'));
     }
+
+    public function companyShow(int $company_id)
+    {
+        $company = User::where('id', $company_id)
+        ->with('profile')
+        ->whereHas('profile')
+        ->whereHas('roleUser', function(Builder $q){
+            $q->where('role_id', User::ROLE_EMPLOYER_ID);
+        })
+        ->withCount('companyRatings')
+        ->withAvg('companyRatings', 'rating')
+        ->firstOrFail();
+        //dd($employers);
+        return view('front-end.dashboard.company_view', [
+            'company' => $company
+        ]);
+    }
 }
