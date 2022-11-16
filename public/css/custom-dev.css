@@ -38,7 +38,7 @@ label.error {
     color: red !important;
 }
 
-.class_font_size{
+.class_font_size {
     font-size: 14px;
 }
 
@@ -298,10 +298,17 @@ label.error {
     font-family: "cooper_hewittsemibold";
     margin-bottom: 50px;
 }
+
 .job-listing-wrapper .job-listing-aside .accordion-item {
     border: none;
     background-color: #f4f4f4;
 }
+
 .iti.iti--allow-dropdown {
     width: 100%;
+}
+
+.company_rating {
+    margin-top: -10px;
+    margin-bottom: 10px;
 }
