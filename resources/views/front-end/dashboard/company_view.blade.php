@@ -4,12 +4,12 @@
 <main class="profile-main-wrapper employer-profile-page">
 
     <!-- Profile Section Start Here-->
-    <section class="profile-section">
+    <section class="profile-section mt-5">
         <div class="container-xxl">
             <div class="row">
                 <div class="col-lg-4 mb-5 mb-lg-0  ">
                     <div class="card mb-5 mb-lg-0 h-100">
-                        <div class="profile-wrapper card-body   text-center">
+                        <div class="profile-wrapper card-body text-center">
                             <figure class="">
                                 <img src="{{ $company->profile_image_url }}" width="230" height="230" alt="Profile Img" class="img-fluid">
                             </figure>
