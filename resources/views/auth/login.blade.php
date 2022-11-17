@@ -54,6 +54,7 @@
                                                 <i class="form-icon icon-location"></i>
                                             </span>
                                             <input type="text" class="form-control" placeholder="Placename" />
+                                            {{--
                                             <select class="form-select">
                                                 <option value="1">30KM</option>
                                                 <option value="1">40KM</option>
@@ -61,6 +62,7 @@
                                                 <option value="1">60KM</option>
                                                 <option value="1">70KM</option>
                                             </select>
+                                            --}}
                                         </div>
                                     </div>
                                     <div class=" col-lg-4">

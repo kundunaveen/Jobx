@@ -26,6 +26,7 @@ Jobs
                               <i class="form-icon icon-location"></i>
                            </span>
                            <input type="text" class="form-control" placeholder="Location" />
+                           {{--
                            <select class="form-select">
                               <option value="1">30KM</option>
                               <option value="1">40KM</option>
@@ -33,6 +34,7 @@ Jobs
                               <option value="1">60KM</option>
                               <option value="1">70KM</option>
                            </select>
+                           --}}
                         </div>
                      </div>
                      <div class=" col-lg-4">
@@ -40,7 +42,8 @@ Jobs
                            Vacancies</button>
                         <div class="search-advance">
                            <ul class="col-md-auto">
-                              <li class="text-end"><a href="javascript:void(0)">Advance Search </a></li>
+                              {{--<li class="text-end"><a href="javascript:void(0)">Advance Search </a></li>--}}
+                              <li class="text-end"><a href="javascript:void(0)"><u>Clear Filter</u></a></li>
                            </ul>
                         </div>
                      </div>
@@ -49,6 +52,7 @@ Jobs
             </div>
          </div>
       </div>
+      {{--
       <div class="d-flex align-items-center flex-wrap">
          <ul class="form-filter-list list-group d-flex flex-md-row me-md-3">
             <li class="list-group-item border-0"><a href="javascript:void(0)">UX Designer</a></li>
@@ -61,6 +65,7 @@ Jobs
             </li>
          </ul>
       </div>
+      --}}
    </div>
 </section>
 <!-- Main Banner End Here -->
