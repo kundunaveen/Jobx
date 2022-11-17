@@ -27,6 +27,7 @@ Job Search
          </ul>
       </div>
       --}}
+      {{--
       @if(request()->except('credit_card'))
       <div class="d-flex align-items-center flex-wrap">
          <ul class="form-filter-list list-group d-flex flex-md-row me-md-3">
@@ -38,6 +39,7 @@ Job Search
          </ul>
       </div>
       @endif
+      --}}
    </div>
 </section>
 <!-- Main Banner End Here -->

@@ -27,7 +27,7 @@
                                     --}}
             </div>
         </div>
-        <div class="col-lg-4 mt-44-class">
+        <div class="col-lg-4">
             {{--
             <div class="form-check float-md-end">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
@@ -36,15 +36,14 @@
                 </label>
             </div>
             --}}
-            <button class="btn btn-lg search-btn" type="submit">Search
-                Vacancies</button>
-            {{--
-                <div class="search-advance">
-                                        <ul class="col-md-auto">
-                                            <li class="text-end"><a href="javascript:void(0)">Advance Search </a></li>
-                                        </ul>
-                                    </div>
-                                    --}}
+            <button class="btn btn-lg search-btn" type="submit">Search Vacancies</button>
+                @if(request()->except('credit_card'))
+                    <div class="search-advance">
+                        <ul class="col-md-auto">
+                            <li class="text-end"><a href="{{ route('search.job') }}"><u>Clear Filter</u></a></li>
+                        </ul>
+                    </div>
+                @endif
         </div>
     </div>
 </form>

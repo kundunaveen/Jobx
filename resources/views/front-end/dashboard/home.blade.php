@@ -16,7 +16,7 @@
                             </h2>
                         </div>
                         <div class="banner-form">
-                            <form>
+                            <form method="GET" action="{{ route('search.job') }}">
                                 <div class="row">
                                     <div class="col-lg-4 mb-4 mb-lg-0">
                                         <label>What kind of work?</label>
@@ -46,13 +46,15 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 mt-44-class">
-                                        <div class="form-check float-md-end d-none">
+                                        {{--
+                                        <div class="form-check float-md-end">
                                             <input class="form-check-input" type="checkbox" value=""
                                                 id="flexCheckChecked" checked>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 Send me Newsletter
                                             </label>
                                         </div>
+                                        --}}
                                         <button class="btn btn-lg search-btn">Search
                                             Vacancies</button>
                                         <div class="search-advance">
