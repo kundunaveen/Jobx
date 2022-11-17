@@ -30,7 +30,6 @@
                     <a href="{{ url('/') }}" class="logo-image d-inline-block  order-1 order-md-2  mb-3 mb-md-0">
                         <img src="{{asset('assets/images/jobax-logo.png')}}" width="248" alt="" class="img-fluid" />
                     </a>
-
                     <div class="order-3 order-md-3">
                         <ul class="list-group flex-row align-items-center justify-content-end">
                             <li class="list-group-item bg-transparent border-0 p-0  me-3">
@@ -41,14 +40,15 @@
                                     Post Resume
                                 </a>
                             </li>
+                    @auth
                             <li class="list-group-item d-flex flex-row  bg-transparent border-0 p-0">
                                <figure class="me-3 me-sm-1 mb-0">
-                                  <img src="{{ auth()->user()->profile_image_url }}" height="51" width="51" alt=""
+                                  <img src="{{ optional(auth()->user())->profile_image_url }}" height="51" width="51" alt=""
                                      class="img-fluid" />
                                </figure>
                                <article class="text-left">
-                                  <h5 class="mb-0">{{ auth()->user()->full_name }}</h5>
-                                  @if($profile_current_job_title = auth()->user()->profile_current_job_title)
+                                  <h5 class="mb-0">{{ optional(auth()->user())->full_name }}</h5>
+                                  @if($profile_current_job_title = optional(auth()->user())->profile_current_job_title)
                                   <p class="mb-0 user-designation">{{ $profile_current_job_title }}</p>
                                   @endif
                                </article>
@@ -64,9 +64,10 @@
                                     </ul>
                                 </div>
                                                     
-                            </li>
-                         </ul>
-                    </div>
+                            </li>                      
+                    @endauth
+                         </ul> 
+                    </div> 
                 </div>
             </div>
         </div>
