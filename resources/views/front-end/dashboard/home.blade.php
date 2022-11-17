@@ -84,10 +84,10 @@
                     <div class="col-md-8 order-2 order-md-1">
                         <div class="featured-carousel">
                             <div class="vacancies-number d-flex">
-                                <div class="col-md-6 d-flex flex-column"><span class="mb-2">640 </span>
+                                <div class="col-md-6 d-flex flex-column"><span class="mb-2">{{ total_vacancies() }} </span>
                                     <span>Vacancies</span>
                                 </div>
-                                <div class="col-md-6 d-flex flex-column"><span class="mb-2">22 </span>
+                                <div class="col-md-6 d-flex flex-column"><span class="mb-2">{{ total_industries() }} </span>
                                     <span>Industries</span>
                                 </div>
                             </div>
