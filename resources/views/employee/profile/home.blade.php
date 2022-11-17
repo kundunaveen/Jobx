@@ -33,6 +33,7 @@ Profile
                                         <i class="form-icon icon-location"></i>
                                     </span>
                                     <input type="text" class="form-control" placeholder="Location" />
+                                    {{--
                                     <select class="form-select">
                                         <option value="1">30KM</option>
                                         <option value="1">40KM</option>
@@ -40,6 +41,7 @@ Profile
                                         <option value="1">60KM</option>
                                         <option value="1">70KM</option>
                                     </select>
+                                    --}}
                                 </div>
                             </div>
                             <div class="col-lg-4 mt-44-class">
@@ -51,11 +53,13 @@ Profile
                                 </div>
                                 <button class="btn btn-lg search-btn" type="submit">Search
                                     Vacancies</button>
-                                <div class="search-advance">
-                                    <ul class="col-md-auto">
-                                        <li class="text-end"><a href="javascript:void(0)">Advance Search </a></li>
-                                    </ul>
-                                </div>
+                                    {{--
+                                    <div class="search-advance">
+                                        <ul class="col-md-auto">
+                                            <li class="text-end"><a href="javascript:void(0)">Advance Search </a></li>
+                                        </ul>
+                                    </div>
+                                --}}
                             </div>
                         </div>
                     </form>

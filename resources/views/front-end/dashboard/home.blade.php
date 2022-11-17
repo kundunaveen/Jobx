@@ -34,6 +34,7 @@
                                                 <i class="form-icon icon-location"></i>
                                             </span>
                                             <input type="text" class="form-control" placeholder="Location" />
+                                            {{--
                                             <select class="form-select">
                                                 <option value="1">30KM</option>
                                                 <option value="1">40KM</option>
@@ -41,6 +42,7 @@
                                                 <option value="1">60KM</option>
                                                 <option value="1">70KM</option>
                                             </select>
+                                            --}}
                                         </div>
                                     </div>
                                     <div class="col-lg-4 mt-44-class">
@@ -55,8 +57,9 @@
                                             Vacancies</button>
                                         <div class="search-advance">
                                             <ul class="col-md-auto">
-                                                <li><a href="{{url('/companies')}}">Company Listing</a></li>
-                                                <li class="text-end"><a hre="#!">Advance Search </a></li>
+                                              {{-- <li><a href="ur }}l('/companies')}}">Company Listing</a></li> --}}
+                                                <li><a href="#">&nbsp;</a></li>
+                                                <li class="text-end"><a href="{{url('/companies')}}">Company Listing </a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -83,7 +86,7 @@
                                     <span>Vacancies</span>
                                 </div>
                                 <div class="col-md-6 d-flex flex-column"><span class="mb-2">22 </span>
-                                    <span>Categories</span>
+                                    <span>Industries</span>
                                 </div>
                             </div>
                             <div class="all-vacancie">
