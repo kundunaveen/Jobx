@@ -75,7 +75,6 @@ Route::post('/admin/job-skills/delete', [App\Http\Controllers\Admin\SkillControl
 //####################### Employee Routes #########################//
 Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/employee-profile', [App\Http\Controllers\Employee\HomeController::class, 'home'])->name('employee.home');
-    Route::get('/employee/job-search', [App\Http\Controllers\Employee\HomeController::class, 'searchJob'])->name('search.job');
     Route::any('/employee-profile/edit', [App\Http\Controllers\Employee\HomeController::class, 'editProfile'])->name('employee.profile.edit');
     Route::post('/employee/change-password', [App\Http\Controllers\Employee\HomeController::class, 'changePassword'])->name('employee.change.password');
     Route::post('/employee/check-password-validation', [App\Http\Controllers\Employee\HomeController::class, 'checkPasswordValidation']);
@@ -135,5 +134,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
 Route::get('/companies', [App\Http\Controllers\FrontEnd\DashboardController::class, 'companies']);
 Route::get('/company/show/{company_id}', [App\Http\Controllers\FrontEnd\DashboardController::class, 'companyShow'])->name('company-show');
 Route::get('/jobs', [App\Http\Controllers\FrontEnd\DashboardController::class, 'jobs']);
+Route::get('/employee/job-search', [App\Http\Controllers\Employee\HomeController::class, 'searchJob'])->name('search.job');
 
 

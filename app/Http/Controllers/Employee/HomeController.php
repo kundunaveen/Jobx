@@ -23,7 +23,7 @@ class HomeController extends Controller
 {
     public function __construct()
     {
-        $this->middleware(['auth', 'employeeaccount']);
+        $this->middleware(['auth', 'employeeaccount'])->except('searchJob');
     }
 
     public function home()
@@ -183,7 +183,7 @@ class HomeController extends Controller
         $job_types = MasterAttribute::whereHas('masterCategory', function ($q) {
             $q->where('name', 'Job Type');
         })->get();
-        $applied_jobs = AppliedJob::where('user_id', auth()->user()->id)->pluck('vacancy_id')->toArray();
+        $applied_jobs = AppliedJob::where('user_id', optional(auth()->user())->id)->pluck('vacancy_id')->toArray();
         $skills = JobSkill::all();
 
         //$jobs = $jobs->simplePaginate(3);
