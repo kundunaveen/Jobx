@@ -394,7 +394,7 @@ $(document).ready(function() {
     $('div[class^="company_rating_readonly"]').each(function() {
         var score = $(this).attr('data-score');
         $(this).raty({
-            readonly: true,
+            readOnly: true,
             number: 5,
             starOff: "https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/images/star-off.png",
             starOn: "https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/images/star-on.png",
@@ -416,7 +416,7 @@ $(document).ready(function() {
     //     hints: [1, 2, 3, 4, 5],            
     // });
 
-    $('div[class^="company_rating"]').each(function() {
+    $('div[class^="company_rating_writeonly"]').each(function() {
         var score = $(this).attr('data-score');
         var company_id = $(this).attr('data-company_id');
         $(this).raty({
@@ -431,7 +431,7 @@ $(document).ready(function() {
         });        
     });     
 
-    $(".company_rating").click(function(){
+    $(".company_rating_writeonly").click(function(){
         var company_id = $(this).attr('data-company_id');
         var rating_value = $('#text-' + company_id).val();
         var user_id = auth_user_id;
