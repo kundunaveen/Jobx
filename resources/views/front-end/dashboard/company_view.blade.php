@@ -28,9 +28,7 @@
                                 <hr class="hr" />
                                 @if ($social_media_link = optional($company->profile)->social_media_link)
                                 <div class="social-wrapper">
-
                                     <h4>Connect with Social</h4>
-
                                     <ul class="list-group social-list">
                                         @if ($facebook = data_get($social_media_link, 'facebook', false))
                                         <li class="list-group-item border-0"><a href="{{ $facebook }}"><i class="profile-icon icon-facebook"></i></a></li>
@@ -47,7 +45,7 @@
                                     </ul>
                                 </div>
                                 @endif
-                                <x-review.company :company-id="$company->id"/>
+                                <x-review.company :company-id="$company->id" :writeonly=true/>
                             </article>
                         </div>
                     </div>

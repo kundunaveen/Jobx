@@ -391,6 +391,31 @@ $(document).ready(function () {
 });
 
 $(document).ready(function() {
+    $('div[class^="company_rating_readonly"]').each(function() {
+        var score = $(this).attr('data-score');
+        $(this).raty({
+            readonly: true,
+            number: 5,
+            starOff: "https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/images/star-off.png",
+            starOn: "https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/images/star-on.png",
+            score: function(){
+                return score;
+            },
+            hints: [1, 2, 3, 4, 5],            
+        });        
+    });
+
+    // $('.company_rating_readonly').raty({
+    //     readonly: true,
+    //     number: 5,
+    //     starOff: "https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/images/star-off.png",
+    //     starOn: "https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/images/star-on.png",
+    //     score: function(){
+    //         return $(this).attr('data-score');
+    //     },
+    //     hints: [1, 2, 3, 4, 5],            
+    // });
+
     $('div[class^="company_rating"]').each(function() {
         var score = $(this).attr('data-score');
         var company_id = $(this).attr('data-company_id');
@@ -404,7 +429,7 @@ $(document).ready(function() {
             target: "#text-" + company_id,
             hints: [1, 2, 3, 4, 5],            
         });        
-    });
+    });     
 
     $(".company_rating").click(function(){
         var company_id = $(this).attr('data-company_id');
@@ -434,7 +459,22 @@ $(document).ready(function() {
             },
             success:function(response){
                 if(response.status == false){
-                    alert(response.message);
+                    $.toast({
+                        heading: 'Error',
+                        text: response.message,
+                        showHideTransition: 'slide',
+                        icon: 'error',
+                        position: 'top-right',
+                    })
+                }
+                if(response.status == true){
+                    $.toast({
+                        heading: 'Success',
+                        text: 'You rating successfully saved.',
+                        showHideTransition: 'slide',
+                        icon: 'success',
+                        position: 'top-right',
+                    })
                 }                
             },
         });
