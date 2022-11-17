@@ -43,15 +43,14 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class=" col-lg-4">
-                                        <div class="form-check float-md-end">
+                                    <div class="col-lg-4 mt-44-class">
+                                        <div class="form-check float-md-end d-none">
                                             <input class="form-check-input" type="checkbox" value=""
                                                 id="flexCheckChecked" checked>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 Send me Newsletter
                                             </label>
                                         </div>
-
                                         <button class="btn btn-lg search-btn">Search
                                             Vacancies</button>
                                         <div class="search-advance">
