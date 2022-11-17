@@ -15,6 +15,7 @@ use App\Models\Profile;
 use Session;
 use Illuminate\Support\Facades\Hash;
 use App\Models\AppliedJob;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 
@@ -78,44 +79,114 @@ class HomeController extends Controller
 
     public function searchJob(Request $request)
     {
-        $jobs = Vacancy::latest();
-        if ($request->job_type) {
-            $jobs->whereIn('job_type', $request->job_type);
-        }
-        if ($request->industry) {
-            $jobs->whereHas('user', function ($q) use ($request) {
-                $q->whereHas('profile', function ($query) use ($request) {
-                    $query->whereIn('industry_type_id', $request->industry);
+
+        $search_keyword = $request->get('search_keyword');
+        $search_location = $request->get('search_location');
+        $job_type = $request->get('job_type');
+        $industry = $request->get('industry');
+        $skill = $request->get('skill');
+        $min_salary = $request->get('min_salary');
+        $max_salary = $request->get('max_salary');
+        $min_exp = $request->get('min_exp');
+        $max_exp = $request->get('max_exp');
+        $sort_by = $request->get('sort_by');
+
+        $jobs = Vacancy::query();
+
+        $jobs->when($search_keyword, function (Builder $builder, $value) {
+            return $builder->where(function (Builder $builder) use ($value) {
+                return $builder->where(function (Builder $builder) use ($value) {
+                    return $builder->where('job_title', 'like', "%{$value}%")
+                        ->orWhere('job_role', 'like', "%{$value}%")
+                        ->orWhere('department', 'like', "%{$value}%");
                 });
             });
-        }
-        if ($request->skill) {
-            $jobs->whereRaw("FIND_IN_SET(?, skills)", $request->skill);
-        }
-        if ($request->sortby == "newest") {
-            $jobs = Vacancy::orderBy('created_at', 'DESC');
-        }
-        if ($request->sortby == "highest_salary") {
-            $jobs = Vacancy::orderBy('salary_offer', 'DESC');
-        }
-        if ($request->sortby == "lowest_experience") {
-            $jobs = Vacancy::orderBy('min_exp');
-        }
-        if ($request->min_salary && $request->max_salary) {
-            $jobs->whereBetween('salary_offer', [$request->min_salary, $request->max_salary])->get();
-        }
-        if ($request->min_exp && $request->max_exp) {
-            $jobs->whereBetween('min_exp', [$request->min_exp, $request->max_exp])->get();
+        });
+        $jobs->when($search_location, function (Builder $builder, $value) {
+            return $builder->where(function (Builder $builder) use ($value) {
+                return $builder->where(function (Builder $builder) use ($value) {
+                    return $builder->where('location', 'like', "%{$value}%")
+                        ->orWhereHas('countrydetail', function (Builder $builder) use ($value) {
+                            return $builder->where('name', 'like', "%{$value}%");
+                        })
+                        ->orWhereHas('statedetail', function (Builder $builder) use ($value) {
+                            return $builder->where('name', 'like', "%{$value}%");
+                        })
+                        ->orWhereHas('citydetail', function (Builder $builder) use ($value) {
+                            return $builder->where('city', 'like', "%{$value}%");
+                        });
+                });
+            });
+        });
+        $jobs->when($job_type, function (Builder $builder, $value) {
+            return $builder->whereIn('job_type', $value);
+        });
+        $jobs->when($industry, function (Builder $builder, $value) {
+            return $builder->whereHas('user.profile', function (Builder $builder) use ($value) {
+                return $builder->whereIn('industry_type_id', $value);
+            });
+        });
+        $jobs->when($skill, function (Builder $builder, $value) {
+            return $builder->whereRaw("FIND_IN_SET(?, skills)", $value);
+        });
+        $jobs->when($sort_by == 'newest', function (Builder $builder, $value) {
+            return $builder->orderBy('updated_at', 'DESC');
+        });
+        $jobs->when($sort_by == 'highest_salary', function (Builder $builder, $value) {
+            return $builder->orderByRaw('cast(salary_offer as decimal(10,2)) DESC');
+        });
+        $jobs->when($sort_by == 'lowest_experience', function (Builder $builder, $value) {
+            return $builder->orderByRaw('cast(min_exp as decimal(10,2)) ASC');
+        });
+        if($request->has(['min_salary', 'max_salary'])){
+            $jobs->whereRaw('cast(salary_offer as decimal(10,2)) >= '.$min_salary.' AND cast(salary_offer as decimal(10,2)) <= ' .$max_salary);
         }
 
+        if($request->has(['min_exp', 'max_exp'])){
+            $jobs->whereRaw('cast(min_exp as decimal(10,2)) >= '.$min_exp.' AND cast(min_exp as decimal(10,2)) <= ' .$max_exp);
+        }
+
+        $jobs = $jobs->latest()->paginate(config('setting.pagination_no'));
+
+
+        // if ($request->job_type) {
+        //     $jobs->whereIn('job_type', $request->job_type);
+        // }
+        // if ($request->industry) {
+        //     $jobs->whereHas('user', function ($q) use ($request) {
+        //         $q->whereHas('profile', function ($query) use ($request) {
+        //             $query->whereIn('industry_type_id', $request->industry);
+        //         });
+        //     });
+        // }
+        // if ($request->skill) {
+        //     $jobs->whereRaw("FIND_IN_SET(?, skills)", $request->skill);
+        // }
+        // if ($request->sortby == "newest") {
+        //     $jobs = Vacancy::orderBy('created_at', 'DESC');
+        // }
+        // if ($request->sortby == "highest_salary") {
+        //     $jobs = Vacancy::orderBy('salary_offer', 'DESC');
+        // }
+        // if ($request->sortby == "lowest_experience") {
+        //     $jobs = Vacancy::orderBy('min_exp');
+        // }
+        // if ($request->min_salary && $request->max_salary) {
+        //     $jobs->whereBetween('salary_offer', [$request->min_salary, $request->max_salary])->get();
+        // }
+        // if ($request->min_exp && $request->max_exp) {
+        //     $jobs->whereBetween('min_exp', [$request->min_exp, $request->max_exp])->get();
+        // }
+
         $salaries = Vacancy::selectRaw("MIN(salary_offer) AS MinSalary, MAX(salary_offer) AS MaxSalary")->first();
-        $industry = MasterAttribute::where('master_attribute_category_id', '4')->get();        
+        $industry = MasterAttribute::where('master_attribute_category_id', '4')->get();
         $job_types = MasterAttribute::whereHas('masterCategory', function ($q) {
             $q->where('name', 'Job Type');
         })->get();
         $applied_jobs = AppliedJob::where('user_id', auth()->user()->id)->pluck('vacancy_id')->toArray();
         $skills = JobSkill::all();
-        $jobs = $jobs->simplePaginate(3);
+
+        //$jobs = $jobs->simplePaginate(3);
 
         return view('employee.profile.search', compact('salaries', 'job_types', 'jobs', 'industry', 'applied_jobs', 'skills'));
     }
@@ -125,7 +196,7 @@ class HomeController extends Controller
     public function editProfile(Request $request)
     {
         $employee = User::with('profile')->where('id', auth()->user()->id)->firstOrFail();
-        
+
         $genders = MasterAttribute::join('master_attribute_categories', 'master_attribute_categories.id', 'master_attributes.master_attribute_category_id')->where('master_attribute_categories.name', 'Gender')->select('master_attributes.*')->get();
         $allLanguages = MasterAttribute::join('master_attribute_categories', 'master_attribute_categories.id', 'master_attributes.master_attribute_category_id')->where('master_attribute_categories.name', 'Languages')->select('master_attributes.*')->get();
         $countries = Country::all();
@@ -261,7 +332,7 @@ class HomeController extends Controller
                 $profile_data['profile_summary'] = $request->profile_summary;
                 $profile_data['have_driving_license'] = $request->have_driving_license;
                 $profile_data['notification_option'] = $request->notification_option;
-                
+
                 if ($request->hasFile('profile_image')) {
                     $image_file = $request->file('profile_image');
                     $status = $image_file->storeAs(
@@ -302,7 +373,6 @@ class HomeController extends Controller
                 //return redirect(route('employee.profile.edit'))->with('', '');
 
                 return Redirect::route('employee.home')->with('success', 'Employee details updated successfully');
-
             } catch (\Exception $e) {
                 dd($e->getMessage());
             }
