@@ -26,3 +26,19 @@ if (!function_exists('get_industries')) {
         return MasterAttribute::where('master_attribute_category_id', 4)->get();
     }
 }
+
+if (!function_exists('total_vacancies')) {
+
+    function total_vacancies()
+    {
+        return Vacancy::count();
+    }
+}
+
+if (!function_exists('total_industries')) {
+
+    function total_industries()
+    {
+        return MasterAttribute::where('master_attribute_category_id', '4')->count();
+    }
+}

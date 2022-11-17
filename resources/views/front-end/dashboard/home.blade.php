@@ -16,7 +16,7 @@
                             </h2>
                         </div>
                         <div class="banner-form">
-                            <form>
+                            <form method="GET" action="{{ route('search.job') }}">
                                 <div class="row">
                                     <div class="col-lg-4 mb-4 mb-lg-0">
                                         <label>What kind of work?</label>
@@ -24,7 +24,7 @@
                                             <span class="input-group-text">
                                                 <i class="form-icon icon-keywords"></i>
                                             </span>
-                                            <input type="text" class="form-control" placeholder="Keywords" />
+                                            <input type="text" class="form-control" placeholder="Keywords" name="search_keyword" value="{{ request()->get('search_keyword') }}"/>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 mb-4 mb-lg-0">
@@ -33,7 +33,7 @@
                                             <span class="input-group-text">
                                                 <i class="form-icon icon-location"></i>
                                             </span>
-                                            <input type="text" class="form-control" placeholder="Location" />
+                                            <input type="text" class="form-control" placeholder="Location" name="search_location" value="{{ request()->get('search_location') }}"/>
                                             {{--
                                             <select class="form-select">
                                                 <option value="1">30KM</option>
@@ -46,13 +46,15 @@
                                         </div>
                                     </div>
                                     <div class="col-lg-4 mt-44-class">
-                                        <div class="form-check float-md-end d-none">
+                                        {{--
+                                        <div class="form-check float-md-end">
                                             <input class="form-check-input" type="checkbox" value=""
                                                 id="flexCheckChecked" checked>
                                             <label class="form-check-label" for="flexCheckChecked">
                                                 Send me Newsletter
                                             </label>
                                         </div>
+                                        --}}
                                         <button class="btn btn-lg search-btn">Search
                                             Vacancies</button>
                                         <div class="search-advance">
@@ -82,10 +84,10 @@
                     <div class="col-md-8 order-2 order-md-1">
                         <div class="featured-carousel">
                             <div class="vacancies-number d-flex">
-                                <div class="col-md-6 d-flex flex-column"><span class="mb-2">640 </span>
+                                <div class="col-md-6 d-flex flex-column"><span class="mb-2">{{ total_vacancies() }} </span>
                                     <span>Vacancies</span>
                                 </div>
-                                <div class="col-md-6 d-flex flex-column"><span class="mb-2">22 </span>
+                                <div class="col-md-6 d-flex flex-column"><span class="mb-2">{{ total_industries() }} </span>
                                     <span>Industries</span>
                                 </div>
                             </div>
