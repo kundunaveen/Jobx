@@ -68,7 +68,7 @@ Job Search
                         </div>
                      </div>
                      <div class="row">
-                        @foreach($jobs as $job)
+                        @forelse($jobs as $job)
                         <div class="col-xl-4 col-lg-6">
                            <div class="card">
                               <div class="card-body job-profile-info">
@@ -97,7 +97,11 @@ Job Search
                               </div>
                            </div>
                         </div>
-                        @endforeach
+                        @empty
+                        <div class="col-xl-12 col-lg-12">
+                           <p class="text-center">Sorry no job found!</p>
+                        </div>
+                        @endforelse
                      </div>
                      {{ $jobs->links() }}
                   </section>

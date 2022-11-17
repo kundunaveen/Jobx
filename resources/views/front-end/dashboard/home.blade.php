@@ -24,7 +24,7 @@
                                             <span class="input-group-text">
                                                 <i class="form-icon icon-keywords"></i>
                                             </span>
-                                            <input type="text" class="form-control" placeholder="Keywords" />
+                                            <input type="text" class="form-control" placeholder="Keywords" name="search_keyword" value="{{ request()->get('search_keyword') }}"/>
                                         </div>
                                     </div>
                                     <div class="col-lg-4 mb-4 mb-lg-0">
@@ -33,7 +33,7 @@
                                             <span class="input-group-text">
                                                 <i class="form-icon icon-location"></i>
                                             </span>
-                                            <input type="text" class="form-control" placeholder="Location" />
+                                            <input type="text" class="form-control" placeholder="Location" name="search_location" value="{{ request()->get('search_location') }}"/>
                                             {{--
                                             <select class="form-select">
                                                 <option value="1">30KM</option>
