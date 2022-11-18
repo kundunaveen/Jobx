@@ -211,6 +211,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                         <div class="progress-bar" role="progressbar" style="width: 75%;" aria-valuenow="75"
                             aria-valuemin="0" aria-valuemax="100"></div>
                     </div> -->
+                    @include('layouts.messages.error')
                     <form class="form-inner" method="POST" enctype="multipart/form-data" id="jquery-employer-profile-form-validation">
                         @csrf
 

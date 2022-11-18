@@ -35,7 +35,7 @@
                         @if(auth()->user()->profile->logo == null)
                         <img src="{{asset('assets/images/user-img.png')}}" height="51" width="51" alt="" class="img-fluid" />
                         @else
-                        <img src="{{asset('image/company_images/'.auth()->user()->profile->logo)}}" style="object-fit:cover;border-radius:100%" height="51" width="51" alt="" class="img-fluid" />
+                        <img src="{{asset('image/company_images/'.auth()->user()->profile->logo)}}" style="object-fit:cover;border-radius:100%;width:51px;height:51px" height="51" width="51" alt="" class="img-fluid" />
                         @endif
                     </figure>
                     <article class="text-left">
