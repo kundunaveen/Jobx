@@ -33,7 +33,7 @@ Profile
                         <div class="profile-wrapper card-body   text-center">
                             @if($profile_image = auth()->user()->profile_image_url)
                             <figure class="">
-                                <img src="{{ $profile_image }}" width="230" height="230" alt="Profile Img" class="img-fluid">
+                                <img src="{{ $profile_image }}" width="210" height="210" alt="Profile Img" class="img-fluid" style="object-fit:cover;border-radius:100%;width:210px;height:210px">
                             </figure>
                             @endif
                             <article>

@@ -43,7 +43,7 @@
                     @auth
                             <li class="list-group-item d-flex flex-row  bg-transparent border-0 p-0">
                                <figure class="me-3 me-sm-1 mb-0">
-                                  <img src="{{ optional(auth()->user())->profile_image_url }}" height="51" width="51" alt=""
+                                  <img src="{{ optional(auth()->user())->profile_image_url }}" style="object-fit:cover;border-radius:100%;width:51px;height:51px" height="51" width="51" alt=""
                                      class="img-fluid" />
                                </figure>
                                <article class="text-left">
