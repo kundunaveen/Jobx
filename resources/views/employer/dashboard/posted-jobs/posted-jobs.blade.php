@@ -86,8 +86,8 @@
                            <div class="card">
                               <div class="card-body job-profile-info">
                                  <figure class="job-profile-figure d-flex align-items-center justify-content-between">
-                                    @if($job->user->profile->logo != null)
-                                    <img src="{{asset('image/company_images/'.$job->user->profile->logo)}}" style="border-radius:100%;object-fit:cover" width="51" height="50" alt="">
+                                    @if(filled($job->images))
+                                    <img src="{{asset('image/company_images/'.explode(',',$job->images)[0])}}" style="border-radius:100%;object-fit:cover" width="51" height="50" alt="">
                                     @else
                                     <img src="{{asset('image/company.png')}}" style="border-radius:100%;object-fit:cover" width="51" height="50" alt="">
                                     @endif
