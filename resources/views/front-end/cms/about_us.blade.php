@@ -86,7 +86,7 @@
                      </div>
                      <div class="col-lg-5 col-md-6">
                         <div class="image-box">
-                           <img src="assets/images/about-img.png" width="671" height="687" class="image-fluid" />
+                           <img src="{{ asset('assets/images/about-img.png') }}" width="671" height="687" class="image-fluid" />
                         </div>
                      </div>
                   </div>
@@ -109,31 +109,31 @@
                            <div class="owl-carousel owl-theme">
                               <div class="item">
                                  <div class="brands-wrapper">
-                                    <img src="./assets/images/google.png" alt="vacancies-1.jpg" width="290" height="227"
+                                    <img src="{{ asset('assets/images/google.png') }}" alt="vacancies-1.jpg" width="290" height="227"
                                        class="img-fluid" />
                                  </div>
                               </div>
                               <div class="item">
                                  <div class="brands-wrapper">
-                                    <img src="assets/images/Adobe-Corporate-Logo.png" alt="vacancies-1.jpg" width="290"
+                                    <img src="{{ asset('assets/images/Adobe-Corporate-Logo.png') }}" alt="vacancies-1.jpg" width="290"
                                        height="227" class="img-fluid" />
                                  </div>
                               </div>
                               <div class="item">
                                  <div class="brands-wrapper">
-                                    <img src="assets/images/Infosys-logo.png" alt="vacancies-1.jpg" width="290"
+                                    <img src="{{ asset('assets/images/Infosys-logo.png') }}" alt="vacancies-1.jpg" width="290"
                                        height="227" class="img-fluid" />
                                  </div>
                               </div>
                               <div class="item">
                                  <div class="brands-wrapper">
-                                    <img src="assets/images/Lufthansa-Logo.png" alt="vacancies-1.jpg" width="290"
+                                    <img src="{{ asset('assets/images/Lufthansa-Logo.png') }}" alt="vacancies-1.jpg" width="290"
                                        height="227" class="img-fluid" />
                                  </div>
                               </div>
                               <div class="item">
                                  <div class="brands-wrapper">
-                                    <img src="assets/images/FedEx-logo-orange-purple.png" alt="vacancies-1.jpg"
+                                    <img src="{{ asset('assets/images/FedEx-logo-orange-purple.png') }}" alt="vacancies-1.jpg"
                                        width="290" height="227" class="img-fluid" />
                                  </div>
                               </div>
@@ -161,7 +161,7 @@
                                  <img src="{{ asset('assets/images/property.png') }}" alt="vacancies-1.jpg" width="290"
                                     height="227" class="img-fluid" />
                                  <a href="#!">
-                                    <div class="play-btn"><img src="assets/images/play-btn.png" alt="play button"
+                                    <div class="play-btn"><img src="{{ asset('assets/images/play-btn.png') }}" alt="play button"
                                           width="" height="" class="img-fluid" /></div>
                                  </a>
                               </div>
@@ -177,10 +177,10 @@
                      <div class="item">
                            <div class="card shadow">
                               <div class="vacancies-img">
-                                 <img src="assets/images/property.png" alt="vacancies-1.jpg" width="290"
+                                 <img src="{{ asset('assets/images/property.png') }}" alt="vacancies-1.jpg" width="290"
                                     height="227" class="img-fluid" />
                                  <a href="#!">
-                                    <div class="play-btn"><img src="assets/images/play-btn.png" alt="play button"
+                                    <div class="play-btn"><img src="{{ asset('assets/images/play-btn.png') }}" alt="play button"
                                           width="" height="" class="img-fluid" /></div>
                                  </a>
                               </div>
@@ -196,10 +196,10 @@
                      <div class="item">
                         <div class="card shadow">
                            <div class="vacancies-img">
-                              <img src="assets/images/sports.png" alt="vacancies-1.jpg" width="290"
+                              <img src="{{ asset('assets/images/sports.png') }}" alt="vacancies-1.jpg" width="290"
                                  height="227" class="img-fluid" />
                               <a href="#!">
-                                 <div class="play-btn"><img src="assets/images/play-btn.png" alt="play button"
+                                 <div class="play-btn"><img src="{{ asset('assets/images/play-btn.png') }}" alt="play button"
                                        width="" height="" class="img-fluid" /></div>
                               </a>
                            </div>
@@ -215,10 +215,10 @@
                         <div class="item">
                               <div class="card shadow">
                                  <div class="vacancies-img">
-                                    <img src="assets/images/butician.png" alt="vacancies-1.jpg" width="326"
+                                    <img src="{{ asset('assets/images/butician.png') }}" alt="vacancies-1.jpg" width="326"
                                        height="271" class="img-fluid" />
                                     <a href="#!">
-                                       <div class="play-btn"><img src="assets/images/play-btn.png" alt="play button"
+                                       <div class="play-btn"><img src="{{ asset('assets/images/play-btn.png') }}" alt="play button"
                                              width="" height="" class="img-fluid" /></div>
                                     </a>
                                  </div>
@@ -244,7 +244,7 @@
      <section class="video-section section-space">
       <div class="container">
          <div class="video-wrapper position-relative">
-            <img src="assets/images/video-full-img.png" width="1502" height="664" alt="video img"
+            <img src="{{ asset('assets/images/video-full-img.png') }}" width="1502" height="664" alt="video img"
                class="img-fluid" />
             <div class="video-btn position-absolute top-50 start-50 translate-middle">
                <a href="javascript:void(0)" class="d-inline-block"><span

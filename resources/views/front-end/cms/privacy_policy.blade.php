@@ -6,8 +6,6 @@
         <div class="container">
             <div class="card">
                 <div class="card-body p-0">
-
-
                     <div class="row">
                         <div class="col-xl-12 col-md-12">
 
