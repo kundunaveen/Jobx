@@ -30,6 +30,7 @@ class UpdateRequest extends FormRequest
             'team_size' => ['required', 'numeric'],
             'description' => ['nullable'],
             'images' => ['nullable', 'array'],
+            'old_images' => ['nullable', 'array'],
             'images.*' => ['max:2000', 'image', 'mimes:' . implode(',', ProjectImage::SUPPORTED_IMAGE_MIME_TYPE)],
         ];
     }
