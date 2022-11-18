@@ -38,14 +38,14 @@
                     </a>
                     <div class="order-3 order-md-3">
                         <div class="banner-form">
-                            <form>
+                            <form action="{{ route('search.job') }}" method="GET">
                                 <div class="row">
                                     <div class="col-lg-4 mb-lg-0 mb-5">
                                         <div class="input-group">
                                             <span class="input-group-text">
                                                 <i class="form-icon icon-keywords"></i>
                                             </span>
-                                            <input type="text" class="form-control" placeholder="Keywords" />
+                                            <input type="text" name="search_keyword" value="{{ request()->get('search_keyword') }}" class="form-control" placeholder="Keywords" />
                                         </div>
                                     </div>
                                     <div class="col-lg-4 mb-lg-0 mb-5">
@@ -53,7 +53,7 @@
                                             <span class="input-group-text">
                                                 <i class="form-icon icon-location"></i>
                                             </span>
-                                            <input type="text" class="form-control" placeholder="Placename" />
+                                            <input type="text" name="search_location" value="{{ request()->get('search_location') }}" class="form-control" placeholder="Placename" />
                                             {{--
                                             <select class="form-select">
                                                 <option value="1">30KM</option>
@@ -66,7 +66,7 @@
                                         </div>
                                     </div>
                                     <div class=" col-lg-4">
-                                        <button type="button" class="btn btn-lg login-from-btn  search-btn">Search
+                                        <button type="submit" class="btn btn-lg login-from-btn  search-btn">Search
                                             Vacancies</button>
                                     </div>
                                 </div>
