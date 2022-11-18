@@ -35,7 +35,7 @@
                     <a href="{{ route('front-end.home') }}" class="logo-image d-inline-block  top-auto left-auto  order-1 order-md-2   mb-lg-0 mb-5">
                         <img src="{{ asset('assets/images/jobax-logo.png') }}" width="248" alt="" class="img-fluid" />
                     </a>
-                    <!-- <div class="order-3 order-md-3">
+                    {{--<div class="order-3 order-md-3">
                         <div class="banner-form">
                             <form>
                                 <div class="row">
@@ -69,7 +69,7 @@
                                 </div>
                             </form>
                         </div>
-                    </div> -->
+                    </div>--}}
                 </div>
             </div>
         </div>
