@@ -423,13 +423,16 @@
                     </div>
                     --}}
                     <div class="row justify-content-between">
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-4 form-group">
 
                             <a href="{{ route('employee.experience.create') }}" target="_blank">Add your experience</a>
                         </div>
-                        <div class="col-md-6 form-group">
+                        <div class="col-md-4 form-group">
 
                             <a href="{{ route('employee.education.create') }}" target="_blank">Add your education</a>
+                        </div>
+                        <div class="col-md-4 form-group">
+                            <a href="{{ route('employee.project.create') }}" target="_blank">Add your project</a>
                         </div>
                     </div>
                     {{--

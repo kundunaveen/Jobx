@@ -94,4 +94,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function companyRatings() : HasMany{
         return $this->hasMany(CompanyRating::class, 'company_id');
     }
+
+    public function projects() :HasMany{
+        return $this->hasMany(Project::class);
+    }
 }

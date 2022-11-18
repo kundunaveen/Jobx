@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Employee\EducationController;
 use App\Http\Controllers\Employee\EmployeeExperienceController;
+use App\Http\Controllers\Employee\ProjectController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -102,7 +103,15 @@ Route::prefix('employee')->name('employee.')->middleware(['auth', 'verified'])->
         Route::put('/update/{uuid}', [EducationController::class, 'update'])->name('update');
         Route::get('/destroy/{uuid}', [EducationController::class, 'destroy'])->name('destroy');
     });
+    Route::prefix('project')->name('project.')->group(function () {
+        Route::get('/create', [ProjectController::class, 'create'])->name('create');
+        Route::post('/store', [ProjectController::class, 'store'])->name('store');
+        Route::get('/edit/{uuid}', [ProjectController::class, 'edit'])->name('edit');
+        Route::put('/update/{uuid}', [ProjectController::class, 'update'])->name('update');
+        Route::get('/destroy/{uuid}', [ProjectController::class, 'destroy'])->name('destroy');
+    });
 });
+
 
 //####################### Employer Routes #########################//
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -135,5 +144,11 @@ Route::get('/companies', [App\Http\Controllers\FrontEnd\DashboardController::cla
 Route::get('/company/show/{company_id}', [App\Http\Controllers\FrontEnd\DashboardController::class, 'companyShow'])->name('company-show');
 Route::get('/jobs', [App\Http\Controllers\FrontEnd\DashboardController::class, 'jobs']);
 Route::get('/employee/job-search', [App\Http\Controllers\Employee\HomeController::class, 'searchJob'])->name('search.job');
+
+Route::get('/about-us', [App\Http\Controllers\FrontEnd\CmsController::class, 'aboutUs'])->name('frontend.about_us');
+Route::get('/privacy-policy', [App\Http\Controllers\FrontEnd\CmsController::class, 'privacyPolicy'])->name('frontend.privacy_policy');
+Route::get('/terms-conditions', [App\Http\Controllers\FrontEnd\CmsController::class, 'termsConditions'])->name('frontend.terms_conditions');
+
+
 
 
