@@ -10,7 +10,7 @@
                   <div class="row align-items-center">
                      <div class="col-lg-5 col-md-6">
                         <div class="video-wrapper position-relative">
-                              <img src="assets/images/emp-video-img.png" width="1502" height="664" alt="video img"
+                              <img src="{{ asset('assets/images/emp-video-img.png') }}" width="1502" height="664" alt="video img"
                               class="img-fluid video-one-img" />
                            <div class="video-btn position-absolute top-50 start-50 translate-middle">
                               <a href="javascript:void(0)" class="d-inline-block"><span
