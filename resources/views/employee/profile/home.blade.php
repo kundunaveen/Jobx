@@ -323,6 +323,8 @@ Profile
     <!-- Experience Section End Here-->
     <!-- Skills Section End Here-->
 
+    @include('employee.profile.includes.project-section')
+
     <section class="skills-section">
         <div class="container">
             <h4 class="">Professional Skills</h4>

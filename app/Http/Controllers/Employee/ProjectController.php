@@ -56,19 +56,18 @@ class ProjectController extends Controller
                 if ($request->hasFile('images')) {
                     foreach ($request->file('images') as $file) {
                         $file_name = $file->hashName();
-                        $status = $file->storeAs(
+                        $file->storeAs(
                             ProjectImage::IMAGE_PATH,
                             $file_name,
                             config('settings.file_system_service')
                         );
-                        ProjectImage::created([
+                        ProjectImage::create([
                             'project_id' => $project->id,
                             'image' => $file_name,
                         ]);
                     }
                 }
             });
-
             return Redirect::route('employee.project.create')->with('success', 'Your project data saved successful');
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage())->withInput();
@@ -123,23 +122,42 @@ class ProjectController extends Controller
         try {
 
             unset($data['images']);
+            unset($data['old_images']);
 
             DB::transaction(function () use ($data, $request, $project) {
                 $project->update($data);
 
+                if ($request->filled('old_images')) {
+                    $old_selected_images = $request->old_images;
+                    if ($project->images()->count() > 0) {
+                        $delete_files = array_diff($project->images()->pluck('image')->toArray(), $old_selected_images);
+                        foreach ($delete_files as $delete_file) {
+                            Storage::disk(config('settings.file_system_service'))->delete(ProjectImage::IMAGE_PATH . '/' . $delete_file);
+                            ProjectImage::where([
+                                ['project_id', '=', $project->id],
+                                ['image', '=', $delete_file],
+                            ])->delete();
+                        }
+                    }
+                }else{
+                    foreach($project->images()->pluck('image')->toArray() as $image){
+                        Storage::disk(config('settings.file_system_service'))->delete(ProjectImage::IMAGE_PATH . '/' . $image);
+                        ProjectImage::where([
+                            ['project_id', '=', $project->id],
+                            ['image', '=', $image],
+                        ])->delete();
+                    }                    
+                }
+
                 if ($request->hasFile('images')) {
                     foreach ($request->file('images') as $file) {
                         $file_name = $file->hashName();
-                        $status = $file->storeAs(
+                        $file->storeAs(
                             ProjectImage::IMAGE_PATH,
                             $file_name,
                             config('settings.file_system_service')
                         );
-                        // if ($status && optional($project->images)->profile_resume_path) {
-                        //     Storage::disk(config('settings.file_system_service'))->delete(optional($employee->profile)->profile_resume_path);
-                        // }
-
-                        ProjectImage::created([
+                        ProjectImage::create([
                             'project_id' => $project->id,
                             'image' => $file_name,
                         ]);
@@ -147,7 +165,7 @@ class ProjectController extends Controller
                 }
             });
 
-            return Redirect::route('employee.project.edit')->with('success', 'Your project data saved successful');
+            return Redirect::route('employee.home')->with('success', 'Your project data saved successful');
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage())->withInput();
         }
@@ -167,7 +185,7 @@ class ProjectController extends Controller
         ])->firstOrFail();
 
         try {
-            
+
             foreach ($project->images as $image) {
                 if ($image instanceof ProjectImage && filled($image->image_path)) {
                     Storage::disk(config('settings.file_system_service'))->delete($image->image_path);
@@ -180,7 +198,6 @@ class ProjectController extends Controller
             });
 
             return Redirect::route('employee.project.edit')->with('success', 'Your project data delete successful');
-
         } catch (\Exception $e) {
             return back()->withInput()->with([
                 'error' => $e->getMessage()
