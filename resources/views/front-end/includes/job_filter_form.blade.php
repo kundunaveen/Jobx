@@ -27,7 +27,7 @@
                                     --}}
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4 mt-44-class">
             {{--
             <div class="form-check float-md-end">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
