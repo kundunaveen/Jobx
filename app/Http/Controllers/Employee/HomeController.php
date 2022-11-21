@@ -90,6 +90,7 @@ class HomeController extends Controller
         $min_exp = $request->get('min_exp');
         $max_exp = $request->get('max_exp');
         $sort_by = $request->get('sort_by');
+        $show_favorite_job = $request->get('show_favorite_job');
 
         $jobs = Vacancy::query();
 
@@ -126,11 +127,16 @@ class HomeController extends Controller
                 return $builder->whereIn('industry_type_id', $value);
             });
         });
+        $jobs->when($show_favorite_job, function (Builder $builder) {
+            return $builder->whereHas('favoriteJobs', function(Builder $builder){
+                return $builder->where('user_id', auth()->id());
+            });
+        });
         $jobs->when($skill, function (Builder $builder, $value) {
             return $builder->whereRaw("FIND_IN_SET(?, skills)", $value);
         });
         $jobs->when($sort_by == 'newest', function (Builder $builder, $value) {
-            return $builder->orderBy('updated_at', 'DESC');
+            return $builder->orderBy('created_at', 'DESC');
         });
         $jobs->when($sort_by == 'highest_salary', function (Builder $builder, $value) {
             return $builder->orderByRaw('cast(salary_offer as decimal(10,2)) DESC');
@@ -146,7 +152,7 @@ class HomeController extends Controller
             $jobs->whereRaw('cast(min_exp as decimal(10,2)) >= '.$min_exp.' AND cast(min_exp as decimal(10,2)) <= ' .$max_exp);
         }
 
-        $jobs = $jobs->latest()->paginate(config('setting.pagination_no'));
+        $jobs = $jobs->paginate(config('setting.pagination_no'));
 
 
         // if ($request->job_type) {

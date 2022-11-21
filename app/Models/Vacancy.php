@@ -36,6 +36,11 @@ class Vacancy extends Model
         'jpg'
     ];
 
+    protected $append = [
+        'single_image',
+        'job_type_text'
+    ];
+
     public function user()
     {
         return $this->belongsTo('App\Models\User', 'employer_id');
@@ -71,6 +76,14 @@ class Vacancy extends Model
     }
 
     public function favoriteJobs(): HasMany{
-        return $this->hasMany(Vacancy::class);
+        return $this->hasMany(FavoriteJob::class, 'vacancy_id');
+    }
+
+    public function getSingleImageAttribute() :string{
+        return array_key_exists(0, $this->getImagesInArray()) ? asset('image/company_images/'. $this->getImagesInArray()[0]) : asset('assets/images/apple.png');
+    }
+
+    public function getJobTypeTextAttribute() :string{
+        return filled($this->job_type) ? MasterAttribute::where('id', $this->job_type)->value('value') : '';
     }
 }
