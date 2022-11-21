@@ -313,6 +313,16 @@ label.error {
     margin-bottom: 10px;
 }
 
-.mt-44-class{
+.mt-44-class {
     margin-top: 44px;
+}
+
+.favorite_job {
+    position: absolute;
+    right: 35px;
+    top: 25px;
+}
+
+.card-body.job-profile-info {
+    position: relative;
 }

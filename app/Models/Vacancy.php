@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Vacancy extends Model
@@ -67,5 +68,9 @@ class Vacancy extends Model
 
     public function getImagesInArray() :array{
         return filled($this->images) ? explode(',', $this->images) : [];
+    }
+
+    public function favoriteJobs(): HasMany{
+        return $this->hasMany(Vacancy::class);
     }
 }

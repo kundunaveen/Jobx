@@ -145,6 +145,11 @@ Route::get('/company/show/{company_id}', [App\Http\Controllers\FrontEnd\Dashboar
 Route::get('/jobs', [App\Http\Controllers\FrontEnd\DashboardController::class, 'jobs']);
 Route::get('/employee/job-search', [App\Http\Controllers\Employee\HomeController::class, 'searchJob'])->name('search.job');
 
+Route::prefix('favorite-vacancy')->name('favorite-vacancy.')->group(function () {
+    Route::get('/add', [App\Http\Controllers\AjaxController::class, 'addFavoriteVacancy'])->name('add');
+    Route::get('/destroy', [App\Http\Controllers\AjaxController::class, 'destroyFavoriteVacancy'])->name('destroy');
+});
+
 Route::get('/about-us', [App\Http\Controllers\FrontEnd\CmsController::class, 'aboutUs'])->name('frontend.about_us');
 Route::get('/privacy-policy', [App\Http\Controllers\FrontEnd\CmsController::class, 'privacyPolicy'])->name('frontend.privacy_policy');
 Route::get('/terms-conditions', [App\Http\Controllers\FrontEnd\CmsController::class, 'termsConditions'])->name('frontend.terms_conditions');
