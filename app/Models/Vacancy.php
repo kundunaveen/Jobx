@@ -83,7 +83,7 @@ class Vacancy extends Model
         return array_key_exists(0, $this->getImagesInArray()) ? asset('image/company_images/'. $this->getImagesInArray()[0]) : asset('assets/images/apple.png');
     }
 
-    public function getJobTypeTextAttribute() :string{
-        return filled($this->job_type) ? MasterAttribute::where('id', $this->job_type)->value('value') : '';
+    public function getJobTypeTextAttribute() :? string{
+        return filled($this->job_type) ? MasterAttribute::where('id', $this->job_type)->value('value') : null;
     }
 }
