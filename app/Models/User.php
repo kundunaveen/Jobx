@@ -98,4 +98,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function projects() :HasMany{
         return $this->hasMany(Project::class);
     }
+
+    public function favoriteJobs(): HasMany{
+        return $this->hasMany(FavoriteJob::class);
+    }
 }

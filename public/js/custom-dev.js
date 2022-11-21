@@ -1,3 +1,22 @@
+function successToastAlert(message){
+    $.toast({
+        heading: 'Success',
+        text: message,
+        showHideTransition: 'slide',
+        icon: 'success',
+        position: 'top-right',
+    })
+}
+
+function errorToastAlert(message){
+    $.toast({
+        heading: 'Error',
+        text: message,
+        showHideTransition: 'slide',
+        icon: 'error',
+        position: 'top-right',
+    })
+}
 $(document).ready(function () {
     if (window.File && window.FileList && window.FileReader) {
         $('#files').on('change', function (e) {
@@ -475,6 +494,41 @@ $(document).ready(function() {
                         icon: 'success',
                         position: 'top-right',
                     })
+                }                
+            },
+        });
+    });
+
+    $(document).on('click', '.favorite_vacancy', function () {
+        var user_id = $(this).attr('data-user_id');
+        var vacancy_id = $(this).attr('data-vacancy_id');
+        var url = $(this).attr('data-url');
+
+        if(!user_id){
+            errorToastAlert('User not found!');
+            return false;
+        }
+        if(!vacancy_id){
+            errorToastAlert('Vacancy not found!');
+            return false;
+        }
+
+        $.ajax({
+            'url': url,
+            'type':'GET',
+            'data':{
+                'user_id': user_id,
+                'vacancy_id': vacancy_id
+            },
+            success:function(response){
+                if(response.status == true){
+                    successToastAlert(response.message);
+                }
+                if(response.status == false){
+                    errorToastAlert(response.message);
+                }
+                if(response.html){
+                    $('#vacancy-id-'+vacancy_id).html(response.html);
                 }                
             },
         });

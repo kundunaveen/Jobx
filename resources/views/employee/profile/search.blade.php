@@ -122,6 +122,9 @@ Job Search
                               <div class="card-body job-profile-info">
                                  <figure class="job-profile-figure d-flex align-items-center justify-content-between">
                                     <img src="{{asset('assets/images/apple.png')}}" width="51" height="50" alt="">
+                                    @auth                                       
+                                    <x-favorite.job :vacancy-id="$job->id" :user-id="auth()->id()" />
+                                    @endauth
                                     <span class="date" style="font-size:13px">{{date('d F, Y',strtotime($job->created_at))}}</span>
                                  </figure>
                                  <article class="job-profile-article">
