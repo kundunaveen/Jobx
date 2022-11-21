@@ -9,25 +9,25 @@ Job Search
       <div class="row">
          <div class="banner-section-wrapper">
             <div class="banner-form">
-            <form action="{{route('search.job')}}" method="GET">
-    <div class="row">
-        <div class="col-lg-4 mb-4 mb-lg-0">
-            <label>What kind of work?</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <i class="form-icon icon-keywords"></i>
-                </span>
-                <input type="text" name="search_keyword" value="{{ request()->get('search_keyword') }}" class="form-control" placeholder="Keywords" />
-            </div>
-        </div>
-        <div class="col-lg-4 mb-4 mb-lg-0">
-            <label>True?</label>
-            <div class="input-group">
-                <span class="input-group-text">
-                    <i class="form-icon icon-location"></i>
-                </span>
-                <input type="text" name="search_location" value="{{ request()->get('search_location') }}" class="form-control" placeholder="Location" />
-                {{--
+               <form action="{{route('search.job')}}" method="GET">
+                  <div class="row">
+                     <div class="col-lg-4 mb-4 mb-lg-0">
+                        <label>What kind of work?</label>
+                        <div class="input-group">
+                           <span class="input-group-text">
+                              <i class="form-icon icon-keywords"></i>
+                           </span>
+                           <input type="text" name="search_keyword" value="{{ request()->get('search_keyword') }}" class="form-control" placeholder="Keywords" />
+                        </div>
+                     </div>
+                     <div class="col-lg-4 mb-4 mb-lg-0">
+                        <label>True?</label>
+                        <div class="input-group">
+                           <span class="input-group-text">
+                              <i class="form-icon icon-location"></i>
+                           </span>
+                           <input type="text" name="search_location" value="{{ request()->get('search_location') }}" class="form-control" placeholder="Location" />
+                           {{--
                     <select class="form-select">
                                         <option value="1">30KM</option>
                                         <option value="1">40KM</option>
@@ -36,10 +36,10 @@ Job Search
                                         <option value="1">70KM</option>
                                     </select>
                                     --}}
-            </div>
-        </div>
-        <div class="col-lg-4">
-            {{--
+                        </div>
+                     </div>
+                     <div class="col-lg-4">
+                        {{--
             <div class="form-check float-md-end">
                 <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
                 <label class="form-check-label" for="flexCheckChecked">
@@ -47,17 +47,17 @@ Job Search
                 </label>
             </div>
             --}}
-            <button class="btn btn-lg search-btn" type="submit">Search Vacancies</button>
-                @if(request()->except('credit_card'))
-                    <div class="search-advance">
-                        <ul class="col-md-auto">
-                            <li class="text-end"><a href="{{ route('search.job') }}"><u>Clear Filter</u></a></li>
-                        </ul>
-                    </div>
-                @endif
-        </div>
-    </div>
-</form>
+                        <button class="btn btn-lg search-btn" type="submit">Search Vacancies</button>
+                        @if(request()->except('credit_card'))
+                        <div class="search-advance">
+                           <ul class="col-md-auto">
+                              <li class="text-end"><a href="{{ route('search.job') }}"><u>Clear Filter</u></a></li>
+                           </ul>
+                        </div>
+                        @endif
+                     </div>
+                  </div>
+               </form>
             </div>
          </div>
       </div>
@@ -82,12 +82,12 @@ Job Search
             <li class="list-group-item border-0">
                <div class="form-btn-wrapper">
                   <a href="{{ route('search.job') }}" class="text-underline">Clear Filter</a>
-               </div>
-            </li>
-         </ul>
-      </div>
-      @endif
-      --}}
+   </div>
+   </li>
+   </ul>
+   </div>
+   @endif
+   --}}
    </div>
 </section>
 <!-- Main Banner End Here -->
@@ -106,13 +106,21 @@ Job Search
                   <section class="job-listing-section">
                      <div class="row justify-content-between">
                         <h4 class="col-auto">Recommended Jobs ({{ $jobs->total() }})</h4>
-                        <div class="col-md-2">
-                           <select onchange="setSortValue()" id="sortdropdown" class="form-control" name="sort_by">
-                              <option value="">Sort By</option>
-                              <option value="newest" @if(request()->get('sort_by') == 'newest') selected @endif>Newest</option>
-                              <option value="highest_salary" @if(request()->get('sort_by') == 'highest_salary') selected @endif>Highest Salary</option>
-                              <option value="lowest_experience" @if(request()->get('sort_by') == 'lowest_experience') selected @endif>Lowest Experience</option>
-                           </select>
+                        <div class="col-md-5 align-right">
+                           @auth
+                           <div class="check_job_btn">
+                              <input type="checkbox" name="show_favorite_job" value="1" class="form-check-input" id="show_favorite_job" @if(request()->get('show_favorite_job') == "1") checked @endif onchange="setSortValue()">
+                              <label class="form-check-label" for="show_favorite_job">Show favorite jobs</label>
+                           </div>
+                           @endauth
+                           <div class="sort_filter_job">
+                              <select onchange="setSortValue()" id="sortdropdown" class="form-control" name="sort_by">
+                                 <option value="">Sort By</option>
+                                 <option value="newest" @if(request()->get('sort_by') == 'newest') selected @endif>Newest</option>
+                                 <option value="highest_salary" @if(request()->get('sort_by') == 'highest_salary') selected @endif>Highest Salary</option>
+                                 <option value="lowest_experience" @if(request()->get('sort_by') == 'lowest_experience') selected @endif>Lowest Experience</option>
+                              </select>
+                           </div>
                         </div>
                      </div>
                      <div class="row">
@@ -121,20 +129,29 @@ Job Search
                            <div class="card">
                               <div class="card-body job-profile-info">
                                  <figure class="job-profile-figure d-flex align-items-center justify-content-between">
-                                    <img src="{{asset('assets/images/apple.png')}}" width="51" height="50" alt="">
-                                    @auth                                       
+                                    <img src="{{ $job->single_image }}" class="round_image" title="{{ $job->job_title }}">
+                                    @auth
                                     <x-favorite.job :vacancy-id="$job->id" :user-id="auth()->id()" />
                                     @endauth
-                                    <span class="date" style="font-size:13px">{{date('d F, Y',strtotime($job->created_at))}}</span>
+                                    <span class="date job-listing-alignment">{{date('d F, Y',strtotime($job->created_at))}}</span>
                                  </figure>
                                  <article class="job-profile-article">
                                     <h5 class="">{{ Str::limit($job->job_role, 25)}}</h5>
                                     <ul class="job-type list-group flex-row mb-3">
-                                       <li class="list-group-item">{{$job->job_type == 'part_time'? 'Part Time':($job->job_type == 'full_time'?'Full Time':'Contract Based')}}</li>
-                                       <!-- <li class="list-group-item">Part Time</li> -->
+                                       <li class="list-group-item">
+                                          {{ $job->job_type_text }}
+                                       </li>
                                     </ul>
-                                    <h6 class="d-flex align-items-center" style="font-size: 13px;margin-bottom: 14px;"><i class="icon-location me-2"></i>{{$job->citydetail->city.', '.$job->countrydetail->name}}</h6>
-                                    <p class="job_description{{$job->id}}" style="font-size: 13px;padding: 0 0 30px;line-height: 22px;margin-bottom: 0;">@if(strlen($job->description)>60) {{substr($job->description ,0, 60).'...'}} <a class="read_more{{$job->id}}" onclick="readDescription('{{$job->id}}', '{{$job->description}}')" href="javascript:void(0)">Read more</a>@else {{$job->description}} @endif</p>
+                                    <h6 class="d-flex align-items-center" style="font-size: 13px;margin-bottom: 14px;">
+                                       <i class="icon-location me-2"></i>{{ optional($job->citydetail)->city.', '.optional($job->countrydetail)->name }}
+                                    </h6>
+                                    <p class="job_description{{$job->id}}" style="font-size: 13px;padding: 0 0 15px;line-height: 22px;margin-bottom: 0;">
+                                    @if( strlen($job->description) > 60) 
+                                       {{ substr($job->description ,0, 60).'...'}} 
+                                       <a class="read_more{{$job->id}}" onclick="readDescription('{{$job->id}}', '{{$job->description}}')" href="javascript:void(0)">Read more</a>
+                                    @else 
+                                       {{$job->description}} 
+                                    @endif</p>
                                     <x-review.company :company-id="optional($job->loadMissing('user')->user)->id" />
                                     <div class="job-btn-wrapper d-flex justify-content-between">
                                        <a href="{{route('employee.job.apply', $job->id)}}" class="btn btn-lg">@if( in_array($job->id, $applied_jobs)) Applied @else Apply @endif</a>

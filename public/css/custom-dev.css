@@ -321,8 +321,44 @@ label.error {
     position: absolute;
     right: 35px;
     top: 25px;
+    margin-top: 10px;
 }
 
 .card-body.job-profile-info {
     position: relative;
+}
+
+.job-profile-info .company_rating_readonly {
+    margin-bottom: 15px;
+}
+
+.check_job_btn,
+.sort_filter_job {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.align-right {
+    text-align: right;
+}
+
+.check_job_btn {
+    margin-right: 20px;
+}
+
+.check_job_btn input {
+    margin: 0;
+    vertical-align: sub;
+}
+
+.job-listing-alignment{
+    font-size: 13px;
+    margin-top: 15px;
+}
+
+.round_image{
+    object-fit:cover;
+    border-radius:100%;
+    width:51px;
+    height:51px;
 }

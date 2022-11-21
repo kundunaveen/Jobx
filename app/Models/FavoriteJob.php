@@ -20,6 +20,6 @@ class FavoriteJob extends Model
     }
 
     public function vacancy() :BelongsTo{
-        return $this->belongsTo(Vacancy::class);
+        return $this->belongsTo(Vacancy::class, 'vacancy_id');
     }
 }
