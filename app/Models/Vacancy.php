@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Vacancy extends Model
 {
@@ -36,8 +37,18 @@ class Vacancy extends Model
         'jpg'
     ];
 
+    public CONST IMAGE_PATH = 'image/company_images';
+    public CONST VIDEO_PATH = 'image/company_videos';
+
     protected $append = [
+        'video_url',
+        'video_path',
+
         'single_image',
+        
+        'images_url',
+        'images_path',
+
         'job_type_text'
     ];
 
@@ -79,8 +90,25 @@ class Vacancy extends Model
         return $this->hasMany(FavoriteJob::class, 'vacancy_id');
     }
 
+    public function getVideoUrlAttribute(){
+        return filled($this->video) ? Storage::disk(config('settings.file_system_service'))->url(self::VIDEO_PATH.'/'.$this->video) : '';
+    }
+
+    public function getVideoPathAttribute()
+    {
+        return filled($this->video) ? self::VIDEO_PATH.'/'.$this->video : '';
+    }
+
+    public function getImagesUrlAttribute() :string{
+        $images_url = [];
+        foreach($this->getImagesInArray() as $image){
+            $images_url[] = Storage::disk(config('settings.file_system_service'))->url(self::IMAGE_PATH.'/'.$image);
+        }
+        return $images_url;
+    }
+
     public function getSingleImageAttribute() :string{
-        return array_key_exists(0, $this->getImagesInArray()) ? asset('image/company_images/'. $this->getImagesInArray()[0]) : asset('assets/images/apple.png');
+        return array_key_exists(0, $this->getImagesInArray()) ? Storage::disk(config('settings.file_system_service'))->url(self::IMAGE_PATH.'/'.$this->getImagesInArray()[0]) : asset('image/company.png');
     }
 
     public function getJobTypeTextAttribute() :? string{
