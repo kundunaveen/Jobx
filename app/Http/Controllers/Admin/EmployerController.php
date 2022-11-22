@@ -12,6 +12,7 @@ use App\Models\MasterAttribute;
 use App\Models\Country;
 use App\Models\City;
 use App\Models\State;
+use Illuminate\Support\Facades\Storage;
 use Session;
 
 class EmployerController extends Controller
@@ -26,7 +27,7 @@ class EmployerController extends Controller
         // $employers = User::employerList();
         $employers = User::whereHas('roleUser', function($q){
             $q->where('role_id', 2);
-        })->get();
+        })->latest()->get();
         return view('admin.dashboard.employer.index', compact('employers'));
     }
 
@@ -113,7 +114,9 @@ class EmployerController extends Controller
                 'first_name' => 'required|string|max:100',
                 'last_name' => 'required|string|max:100',
                 'company_name' => 'required',
-                'contact' => 'required'
+                'contact' => 'required',
+                'company_image' => 'mimes:jpeg,bmp,png,jpg|max:2000',
+                'company_intro' => 'mimes:mp4|max:20000'
             ]);
             
             $user_data = $request->all();
@@ -129,26 +132,53 @@ class EmployerController extends Controller
             }
             $employer->update($user_data);
 
-            if($request->file('company_image')){
-                $request->validate([
-                    'company_image' => 'mimes:jpeg,bmp,png,jpg|max:2000'
-                ]);
-                $file = $request->file('company_image');
-                $fileName = date('YmdHis').$file->getClientOriginalName();
-                $destinationPath = public_path().'/image/company_images';
-                $file->move($destinationPath,$fileName);
+            $profile = Profile::where('user_id',$id)->first();
+            //dd($id);
+            // if($request->file('company_image')){
+                
+            //     $file = $request->file('company_image');
+            //     $fileName = date('YmdHis').$file->getClientOriginalName();
+            //     $destinationPath = public_path().'/image/company_images';
+            //     $file->move($destinationPath,$fileName);
                
+            // }
+
+            $fileName = null;
+            if ($request->hasFile('company_image')) {
+                $file = $request->file('company_image');
+                $file_name = $file->hashName();
+                $file->storeAs(
+                    Profile::EMPLOYER_IMAGE_PATH,
+                    $file_name,
+                    config('settings.file_system_service')
+                );
+                if($profile instanceof Profile && filled($profile->employer_image_path)){
+                    Storage::disk(config('settings.file_system_service'))->delete($profile->employer_image_path);
+                }
+                $fileName = $file_name;
             }
 
-            if($request->file('company_intro')){
-                $request->validate([
-                    'company_intro' => 'mimes:mp4|max:20000'
-                ]);
-                $fileVideo = $request->file('company_intro');
-                $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
-                $destinationPath = public_path().'/image/company_videos';
-                $fileVideo->move($destinationPath,$videoFileName);
+            // if($request->file('company_intro')){
+            //     $fileVideo = $request->file('company_intro');
+            //     $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
+            //     $destinationPath = public_path().'/image/company_videos';
+            //     $fileVideo->move($destinationPath,$videoFileName);
                
+            // }
+
+            $videoFileName = null;
+            if ($request->hasFile('company_intro')) {
+                $file = $request->file('company_intro');
+                $file_name = $file->hashName();
+                $file->storeAs(
+                    Profile::EMPLOYER_VIDEO_PATH,
+                    $file_name,
+                    config('settings.file_system_service')
+                );
+                if($profile instanceof Profile && filled($profile->employer_video_path)){
+                    Storage::disk(config('settings.file_system_service'))->delete($profile->employer_video_path);
+                }
+                $videoFileName = $file_name;
             }
 
             $profile_data = [];

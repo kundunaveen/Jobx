@@ -28,7 +28,7 @@ class EmployeeController extends Controller
         // $employees = User::employeeList();
         $employees = User::whereHas('roleUser', function($q){
             $q->where('role_id', 3);
-        })->get();
+        })->latest()->get();
         return view('admin.dashboard.employee.index', compact('employees'));
     }
 

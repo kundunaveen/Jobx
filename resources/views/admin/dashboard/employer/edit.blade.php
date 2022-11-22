@@ -103,11 +103,12 @@
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-4" id="profile-image-div" style="position:relative">
-                                                @if($employer->profile && optional($employer->profile)->logo)
+                                            <img class="" src="{{ optional($employer->profile)->employer_image_url }}" id="blah" onclick="$('#company_image').click()" style="border-radius:100%; border:solid lightgray 1px; cursor:pointer; height:280px;width:280px;object-fit:cover">
+                                                {{--<!-- @if($employer->profile && optional($employer->profile)->logo)
                                                 <img class="" src="{{asset('image/company_images/'.optional($employer->profile)->logo)}}" id="blah" onclick="$('#company_image').click()" style="border-radius:100%; border:solid lightgray 1px; cursor:pointer; height:280px;width:280px;object-fit:cover">
                                                 @else
                                                 <img class="" src="{{asset('image/company.png')}}" id="blah" onclick="$('#company_image').click()" style="border-radius:100%; border:solid lightgray 1px; cursor:pointer; height:280px;width:280px;object-fit:cover">
-                                                @endif
+                                                @endif -->--}}
                                                 <button id="delete-profile-btn" onclick="deleteProfile('{{$employer->id}}')" class="text-danger d-none" style="position:absolute;top:20px;left:20px;border:none;background:inherit">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="22px" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
@@ -123,7 +124,7 @@
                                             <div class="col-md-8" style="border-radius:10px;position:relative" id="profile-video-div">
                                                 @if($employer->profile && optional($employer->profile)->intro_video)
                                                 <video class="" controls onclick="$('#company_intro').click()" style="border-radius: 20px;border:solid lightgray 1px; cursor:pointer; height:280px;width:100%; object-fit:cover">
-                                                    <source src="{{asset('image/company_videos/'.optional($employer->profile)->intro_video)}}" type="video/mp4">
+                                                    <source src="{{ optional($employer->profile)->employer_video_url }}" type="video/mp4">
                                                 </video>
                                                 @else
                                                 <img class="" src="{{asset('image/video.png')}}" onclick="$('#company_intro').click()" style="border-radius: 20px;border:solid lightgray 1px; cursor:pointer; height:280px;width:100%; object-fit:cover">

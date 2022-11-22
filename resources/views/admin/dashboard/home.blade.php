@@ -14,9 +14,9 @@
                             <div class="row align-items-center">
                                 <div class="col-md-7">
                                 <article class="recruiter-article">
-                                    <h5>Hello Recruiter!</h5>
-                                    <p>You have 10 new applications. </p>
-                                    <a href="javascript:void(0)">Review all</a>
+                                    <h5>Hello {{ auth()->user()->full_name }} !</h5>
+                                    <p>You have {{ $applied_jobs[0]->new_application_count }} new applications. </p>
+                                    <a href="{{ route('admin.manageVacancy', ['status' => 'new-application']) }}">Review all</a>
                                 </article>
                                 </div>
                                 <div class="col-md-5">
@@ -35,11 +35,10 @@
                                 <div class="card-body d-flex align-items-center justify-content-between">
                                     <article>
                                         <h5>Shortlisted</h5>
-                                        <span class="candidate-count">12.2K</span>
+                                        <span class="candidate-count">{{ $applied_jobs[0]->shortlisted_count }}</span>
                                     </article>
                                     <figure>
-                                        <img src="{{asset('assets/images/progress-1.png')}}" width="85" height="85" alt=""
-                                            class="img-fluid" />
+                                        <div role="progressbar" aria-valuenow="{{ ($applied_jobs[0]->shortlisted_count/$applied_job_count) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="--value:{{ ($applied_jobs[0]->shortlisted_count / $applied_job_count) * 100 }}"></div>
                                     </figure>
                                 </div>
                                 </div>
@@ -50,10 +49,10 @@
                                 <div class="card-body d-flex align-items-center justify-content-between">
                                     <article>
                                         <h5>On-Hold</h5>
-                                        <span class="candidate-count">10.5K</span>
+                                        <span class="candidate-count">{{ $applied_jobs[0]->on_hold_count }}</span>
                                     </article>
                                     <figure>
-                                        <img src="{{asset('assets/images/progress-2.png')}}" width="85" height="85" alt="" />
+                                        <div role="progressbar" aria-valuenow="{{ ($applied_jobs[0]->on_hold_count / $applied_job_count) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="--value:{{ ($applied_jobs[0]->on_hold_count / $applied_job_count) * 100 }}"></div>
                                     </figure>
                                 </div>
                                 </div>
@@ -64,10 +63,10 @@
                                 <div class="card-body d-flex align-items-center justify-content-between">
                                     <article>
                                         <h5>Hired</h5>
-                                        <span class="candidate-count">12.2K</span>
+                                        <span class="candidate-count">{{ $applied_jobs[0]->hired_count }}</span>
                                     </article>
                                     <figure>
-                                        <img src="{{asset('assets/images/progress-3.png')}}" width="85" height="85" alt="" />
+                                        <div role="progressbar" aria-valuenow="{{ ($applied_jobs[0]->hired_count/$applied_job_count) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="--value:{{ ($applied_jobs[0]->hired_count / $applied_job_count) * 100 }}"></div>
                                     </figure>
                                 </div>
                                 </div>
@@ -78,10 +77,10 @@
                                 <div class="card-body d-flex align-items-center justify-content-between">
                                     <article>
                                         <h5>Rejected</h5>
-                                        <span class="candidate-count">9.2K</span>
+                                        <span class="candidate-count">{{ $applied_jobs[0]->rejected_count }}</span>
                                     </article>
                                     <figure>
-                                        <img src="{{asset('assets/images/progress-1.png')}}" width="85" height="85" alt="" />
+                                        <div role="progressbar" aria-valuenow="{{ ($applied_jobs[0]->rejected_count/$applied_job_count) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="--value:{{ ($applied_jobs[0]->rejected_count / $applied_job_count) * 100 }}"></div>
                                     </figure>
                                 </div>
                                 </div>
@@ -95,11 +94,9 @@
                                 <div class="card-body">
                                     <article class="d-flex align-items-center justify-content-between">
                                         <h4>Top Active Jobs</h4>
-                                        <a href="javascript:void(0)">Last Week</a>
                                     </article>
                                     <figure>
-                                        <img src="{{asset('assets/images/graph-img.png')}}" width="869" height="516" alt=""
-                                            class="img-fluid" />
+                                        <canvas class="col-12" id="employer_chart"></canvas>
                                     </figure>
                                 </div>
                                 </div>
@@ -116,55 +113,22 @@
                                 <a href="{{url('/admin/manage-vacancy')}}">See all</a>
                                 </div>
                                 <ul class="list-group posted-list">
-    
+                                @forelse ($posted_vacancies as $posted_vacancy)
+                                    <li class="list-group-item d-flex align-items-center justify-content-between">
+                                        <h5>{{ $posted_vacancy->job_role }}</h5>
+                                        <div class="pause-share-wrapper">
+                                            <a href="{{ route('admin.editVacancy', $posted_vacancy->id) }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="22px" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                                    </svg>
+                                            </a>
+                                        </div>
+                                    </li>
+                                @empty
                                 <li class="list-group-item d-flex align-items-center justify-content-between">
-                                    <h5>Front End Developer</h5>
-                                    <div class="pause-share-wrapper">
-                                        <a href="javascript:void(0)"><span class="pause-btn"><i class="icon-pause"></i></span></a> 
-                                        <a href="javascript:void(0)"><span class="share-btn"><i class="icon-share"></i></span></a>
-                                    </div>
+                                    Vacancy not found!
                                 </li>
-    
-                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                    <h5>Front End Developer</h5>
-                                    <div class="pause-share-wrapper">
-                                        <a href="javascript:void(0)"><span class="pause-btn"><i class="icon-pause"></i></span></a> 
-                                        <a href="javascript:void(0)"><span class="share-btn"><i class="icon-share"></i></span></a>
-                                    </div>
-                                </li>
-    
-                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                    <h5>Front End Developer</h5>
-                                    <div class="pause-share-wrapper">
-                                        <a href="javascript:void(0)"><span class="pause-btn"><i class="icon-pause"></i></span></a> 
-                                        <a href="javascript:void(0)"><span class="share-btn"><i class="icon-share"></i></span></a>
-                                    </div>
-                                </li>
-    
-                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                    <h5>Front End Developer</h5>
-                                    <div class="pause-share-wrapper">
-                                        <a href="javascript:void(0)"><span class="pause-btn"><i class="icon-pause"></i></span></a> 
-                                        <a href="javascript:void(0)"><span class="share-btn"><i class="icon-share"></i></span></a>
-                                    </div>
-                                </li>
-    
-                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                    <h5>Front End Developer</h5>
-                                    <div class="pause-share-wrapper">
-                                        <a href="javascript:void(0)"><span class="pause-btn"><i class="icon-pause"></i></span></a> 
-                                        <a href="javascript:void(0)"><span class="share-btn"><i class="icon-share"></i></span></a>
-                                    </div>
-                                </li>
-    
-                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                    <h5>Front End Developer</h5>
-                                    <div class="pause-share-wrapper">
-                                        <a href="javascript:void(0)"><span class="pause-btn"><i class="icon-pause"></i></span></a> 
-                                        <a href="javascript:void(0)"><span class="share-btn"><i class="icon-share"></i></span></a>
-                                    </div>
-                                </li>
-    
+                                @endforelse    
                                 </ul>
                             </div>
                         </div>
@@ -173,137 +137,37 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                 <h4>New Applicants</h4>
-                                <a href="javascript:void(0)">See all</a>
+                                <a href="{{ route('admin.manageVacancy', ['status' => 'new-application']) }}">See all</a>
                                 </div>
                                 <ul class="list-group applicants-list">
+                                @forelse ($new_applications as $new_application)
                                 <li class="list-group-item d-flex align-items-center justify-content-between ">
                                     <div class="d-flex align-items-center">
                                         <figure>
-                                            <img src="{{asset('assets/images/user-img.png')}}" width="51" height="51" alt=""
+                                            <img src="{{ optional($new_application->user)->profile_image_url }}" width="51" height="51" alt=""
                                             class="img-fluid">
                                         </figure>
                                         <article>
-                                            <h5>John Doe</h5>
-                                            <span class="designation">Front End Developer</span>
+                                            <h5>{{ optional($new_application->user)->full_name }}</h5>
+                                            <span class="designation">{{ optional($new_application->user)->profile_current_job_title }}</span>
                                         </article>
                                     </div>
                                     <div class="phone-email-wrapper">
-                                        <a href="tel:8888888888"><span class="phone-btn"><i class="icon-phone"></i></span></a>
-                                        <a href="mailto:123@gmail.com"><span class="email-btn"><i class="icon-email"></i></span></a>
+                                        <a href="{{ route('admin.editEmployee', optional($new_application->user)->id) }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="22px" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                                    </svg>
+                                        </a>
                                     </div>
                                 </li>
+                                @empty
                                 <li class="list-group-item d-flex align-items-center justify-content-between ">
-                                    <div class="d-flex align-items-center">
-                                        <figure>
-                                            <img src="{{asset('assets/images/user-img.png')}}" width="51" height="51" alt=""
-                                            class="img-fluid">
-                                        </figure>
-                                        <article>
-                                            <h5>John Doe</h5>
-                                            <span class="designation">Front End Developer</span>
-                                        </article>
-                                    </div>
-                                    <div class="phone-email-wrapper">
-                                        <a href="tel:8888888888"><span class="phone-btn"><i class="icon-phone"></i></span></a>
-                                        <a href="mailto:123@gmail.com"><span class="email-btn"><i class="icon-email"></i></span></a>
-                                    </div>
+                                    No New Applicant found!
                                 </li>
-                                <li class="list-group-item d-flex align-items-center justify-content-between ">
-                                    <div class="d-flex align-items-center">
-                                        <figure>
-                                            <img src="{{asset('assets/images/user-img.png')}}" width="51" height="51" alt=""
-                                            class="img-fluid">
-                                        </figure>
-                                        <article>
-                                            <h5>John Doe</h5>
-                                            <span class="designation">Front End Developer</span>
-                                        </article>
-                                    </div>
-                                    <div class="phone-email-wrapper">
-                                        <a href="tel:8888888888"><span class="phone-btn"><i class="icon-phone"></i></span></a>
-                                        <a href="mailto:123@gmail.com"><span class="email-btn"><i class="icon-email"></i></span></a>
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex align-items-center justify-content-between ">
-                                    <div class="d-flex align-items-center">
-                                        <figure>
-                                            <img src="{{asset('assets/images/user-img.png')}}" width="51" height="51" alt=""
-                                            class="img-fluid">
-                                        </figure>
-                                        <article>
-                                            <h5>John Doe</h5>
-                                            <span class="designation">Front End Developer</span>
-                                        </article>
-                                    </div>
-                                    <div class="phone-email-wrapper">
-                                        <a href="tel:8888888888"><span class="phone-btn"><i class="icon-phone"></i></span></a>
-                                        <a href="mailto:123@gmail.com"><span class="email-btn"><i class="icon-email"></i></span></a>
-                                    </div>
-                                </li>
-                                <li class="list-group-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-center">
-                                        <figure>
-                                            <img src="{{asset('assets/images/user-img.png')}}" width="51" height="51" alt=""
-                                            class="img-fluid">
-                                        </figure>
-                                        <article>
-                                            <h5>John Doe</h5>
-                                            <span class="designation">Front End Developer</span>
-                                        </article>
-                                    </div>
-                                    <div class="phone-email-wrapper">
-                                        <a href="tel:8888888888"><span class="phone-btn"><i class="icon-phone"></i></span></a>
-                                        <a href="mailto:123@gmail.com"><span class="email-btn"><i class="icon-email"></i></span></a>
-                                    </div>
-                                </li>
+                                @endforelse                                
                                 </ul>
                             </div>
                         </div>
-    
-                        <!-- <div class="card activity-wrapper">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between">
-                                <h4>Activity</h4>
-                                <a href="javascript:void(0)" class="notify-icon"><span class="pause-btn"></span><i class="icon-notify"></i></span><span class="notify-count">0</span></a>
-                                </div>
-                                <ul class="list-group activity-list">
-                                <li class="list-group-item">
-                                    <div class="d-flex">
-                                        <figure>
-                                            <span class="spriteicon"><i class="plan-expire"></i></span>
-                                        </figure>
-                                        <article>
-                                            <p class="mb-0 text-underline">Your plan expires in <span>3 days</span>.</p>
-                                            <a href="javascript:void(0)">Renew now</a>
-                                        </article>
-                                    </div>
-                                </li>
-                                <li class="list-group-item">
-                                    <div class="d-flex">
-                                        <figure>
-                                            <span class="spriteicon"><i class="applictaion"></i></span>
-                                        </figure>
-                                        <article>
-                                            <p class="mb-0 text-underline">There are <span>3 new appplications</span> to
-                                            <span>iOS Developer</span>.
-                                            </p>
-                                        </article>
-                                    </div>
-                                </li>
-    
-                                <li class="list-group-item">
-                                    <div class="d-flex">
-                                        <figure>
-                                            <span class="spriteicon"><i class="closed"></i></span>
-                                        </figure>
-                                        <article>
-                                            <p class="">Your teammate, <span>Sammy</span> has closed
-                                            the job post of <span>UI/UX Designer</span> </p>
-                                        </article>
-                                </li>
-                                </ul>
-                            </div>
-                        </div> -->
                     </aside>
                     </div>
                 </div>
@@ -311,4 +175,52 @@
         </div>
     
     </section>
+@endsection
+@section('scripts')
+<script>
+    let labels = [];
+    let data = [];
+<?php foreach($date_arr as $index => $data) {?>
+    labels.push('{{$index}}')
+    data.push('{{$data}}')
+<?php }?>
+var ctx = document.getElementById('employer_chart').getContext('2d');
+var myChart = new Chart(ctx, {
+   type: 'line',
+   data: {
+      labels: labels,
+      datasets: [{
+         data: data,
+         borderWidth: 1
+      }]
+   },
+   options: {
+    bezierCurve : true,
+      responsive: false,
+      scales: {
+         xAxes: [{
+         }],
+         yAxes: [{
+            ticks: {
+               beginAtZero: true,
+            },
+            scaleLabel: {
+                display: true,
+                labelString: 'Number of jobs'
+            }
+         }]
+      },
+      legend: {
+         display: false
+      },
+      tooltips: {
+         callbacks: {
+            title: function(t, d) {
+               return d.labels[t[0].index];
+            }
+         }
+      }
+   }
+});
+</script>
 @endsection

@@ -11,13 +11,23 @@ use App\Models\State;
 use App\Models\City;
 use App\Models\JobSkill;
 use App\Models\MasterAttribute;
+use Illuminate\Database\Eloquent\Builder;
 use Session;
 
 class VacancyController extends Controller
 {
-    public function index()
+    public function __construct()
     {
-        $vacancies = Vacancy::all();
+        $this->middleware(['auth', 'adminaccount']);
+    }
+
+    public function index(Request $request)
+    {
+        $vacancies = Vacancy::when($request->status == 'new-application', function(Builder $builder){
+            return $builder->whereHas('applicants', function(Builder $builder){
+                return $builder->where('status', 0);
+            });
+        })->latest()->get();
         $employers = User::employerList();
         return view('admin.dashboard.vacancy.index', compact('vacancies', 'employers'));
     }
