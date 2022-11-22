@@ -111,10 +111,10 @@ class EmployeeController extends Controller
         $genders = MasterAttribute::join('master_attribute_categories', 'master_attribute_categories.id', 'master_attributes.master_attribute_category_id')->where('master_attribute_categories.name', 'Gender')->select('master_attributes.*')->get();
         $allLanguages = MasterAttribute::join('master_attribute_categories', 'master_attribute_categories.id', 'master_attributes.master_attribute_category_id')->where('master_attribute_categories.name', 'Languages')->select('master_attributes.*')->get();
         $countries = Country::all();
-        $states = State::where('country_id', $employee->profile->country)->get();
-        $cities = City::where('state_id', $employee->profile->state)->get();
+        $states = State::where('country_id', optional($employee->profile)->country)->get();
+        $cities = City::where('state_id', optional($employee->profile)->state)->get();
         $allSkills = JobSkill::all();
-        if($employee->profile && $employee->profile->skills)
+        if($employee->profile && optional($employee->profile)->skills)
         {
             $skills = explode(',', $employee->profile->skills);
         }
