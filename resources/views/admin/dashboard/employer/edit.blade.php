@@ -103,8 +103,8 @@
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-4" id="profile-image-div" style="position:relative">
-                                                @if($employer->profile && $employer->profile->logo)
-                                                <img class="" src="{{asset('image/company_images/'.$employer->profile->logo)}}" id="blah" onclick="$('#company_image').click()" style="border-radius:100%; border:solid lightgray 1px; cursor:pointer; height:280px;width:280px;object-fit:cover">
+                                                @if($employer->profile && optional($employer->profile)->logo)
+                                                <img class="" src="{{asset('image/company_images/'.optional($employer->profile)->logo)}}" id="blah" onclick="$('#company_image').click()" style="border-radius:100%; border:solid lightgray 1px; cursor:pointer; height:280px;width:280px;object-fit:cover">
                                                 @else
                                                 <img class="" src="{{asset('image/company.png')}}" id="blah" onclick="$('#company_image').click()" style="border-radius:100%; border:solid lightgray 1px; cursor:pointer; height:280px;width:280px;object-fit:cover">
                                                 @endif
@@ -121,9 +121,9 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-8" style="border-radius:10px;position:relative" id="profile-video-div">
-                                                @if($employer->profile && $employer->profile->intro_video)
+                                                @if($employer->profile && optional($employer->profile)->intro_video)
                                                 <video class="" controls onclick="$('#company_intro').click()" style="border-radius: 20px;border:solid lightgray 1px; cursor:pointer; height:280px;width:100%; object-fit:cover">
-                                                    <source src="{{asset('image/company_videos/'.$employer->profile->intro_video)}}" type="video/mp4">
+                                                    <source src="{{asset('image/company_videos/'.optional($employer->profile)->intro_video)}}" type="video/mp4">
                                                 </video>
                                                 @else
                                                 <img class="" src="{{asset('image/video.png')}}" onclick="$('#company_intro').click()" style="border-radius: 20px;border:solid lightgray 1px; cursor:pointer; height:280px;width:100%; object-fit:cover">
@@ -184,7 +184,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Company Name <span class="text-danger">*</span></label>
-                                                <input type="text" maxlength="100" name="company_name" class="form-control @error('company_name') is-invalid @enderror" @if($employer->profile && $employer->profile->company_name) value="{{$employer->profile->company_name}}" @endif required>
+                                                <input type="text" maxlength="100" name="company_name" class="form-control @error('company_name') is-invalid @enderror" @if($employer->profile && optional($employer->profile)->company_name) value="{{optional($employer->profile)->company_name}}" @endif required>
                                                 @error('company_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -196,7 +196,7 @@
                                                 <select class="form-control" name="industry_type" required>
                                                    
                                                     @foreach($industries as $industry)
-                                                    <option @if($employer->profile && $employer->profile->industry_type_id && $employer->profile->industry_type_id == $industry->id) selected @endif value="{{$industry->id}}">{{$industry->value}}</option>
+                                                    <option @if($employer->profile && optional($employer->profile)->industry_type_id && optional($employer->profile)->industry_type_id == $industry->id) selected @endif value="{{$industry->id}}">{{$industry->value}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -204,7 +204,7 @@
                                         <!-- <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Address <span class="text-danger">*</span></label>
-                                                <input name="address" type="text" class="form-control @error('address') is-invalid @enderror" value="{{$employer->profile->address}}" required>
+                                                <input name="address" type="text" class="form-control @error('address') is-invalid @enderror" value="{{optional($employer->profile)->address}}" required>
                                                 @error('address')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -213,7 +213,7 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">City <span class="text-danger">*</span></label>
-                                                <input type="text" name="city" class="form-control @error('city') is-invalid @enderror" value="{{$employer->profile->city}}" required>
+                                                <input type="text" name="city" class="form-control @error('city') is-invalid @enderror" value="{{optional($employer->profile)->city}}" required>
                                                 @error('city')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -224,7 +224,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">State <span class="text-danger">*</span></label>
-                                                <input name="state" type="text" class="form-control @error('state') is-invalid @enderror" value="{{$employer->profile->state}}" required>
+                                                <input name="state" type="text" class="form-control @error('state') is-invalid @enderror" value="{{optional($employer->profile)->state}}" required>
                                                 @error('state')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -233,7 +233,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Country <span class="text-danger">*</span></label>
-                                                <input type="text" name="country" class="form-control @error('country') is-invalid @enderror" value="{{$employer->profile->country}}" required>
+                                                <input type="text" name="country" class="form-control @error('country') is-invalid @enderror" value="{{optional($employer->profile)->country}}" required>
                                                 @error('country')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -242,7 +242,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Zip <span class="text-danger">*</span></label>
-                                                <input type="number" name="zip" class="form-control @error('zip') is-invalid @enderror" value="{{$employer->profile->zip}}" required>
+                                                <input type="number" name="zip" class="form-control @error('zip') is-invalid @enderror" value="{{optional($employer->profile)->zip}}" required>
                                                 @error('zip')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -253,7 +253,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Address <span class="text-danger">*</span></label>
-                                                <input name="address" maxlength="100" type="text" class="form-control @error('address') is-invalid @enderror" value="{{$employer->profile->address}}" required>
+                                                <input name="address" maxlength="100" type="text" class="form-control @error('address') is-invalid @enderror" value="{{optional($employer->profile)->address}}" required>
                                                 @error('address')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -263,10 +263,10 @@
                                             
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Country <span class="text-danger">*</span></label>
-                                                <!-- <input type="text" name="country" class="form-control @error('country') is-invalid @enderror" value="{{$employer->profile->country}}" required> -->
+                                                <!-- <input type="text" name="country" class="form-control @error('country') is-invalid @enderror" value="{{optional($employer->profile)->country}}" required> -->
                                                 <select class="form-control country-list" name="country" id="countries">
                                                     @foreach($countries as $country)
-                                                    <option {{$country->id == $employer->profile->country ? 'selected':''}} value="{{$country->id}}">{{$country->name}}</option>
+                                                    <option {{$country->id == optional($employer->profile)->country ? 'selected':''}} value="{{$country->id}}">{{$country->name}}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('country')
@@ -279,10 +279,10 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">State <span class="text-danger">*</span></label>
-                                                <!-- <input name="state" type="text" class="form-control @error('state') is-invalid @enderror" value="{{$employer->profile->state}}" required> -->
+                                                <!-- <input name="state" type="text" class="form-control @error('state') is-invalid @enderror" value="{{optional($employer->profile)->state}}" required> -->
                                                 <select class="form-control state-list" name="state" id="states">
                                                     @foreach($states as $state)
-                                                    <option {{$state->id == $employer->profile->state ? 'selected':''}} value="{{$state->id}}">{{$state->name}}</option>
+                                                    <option {{$state->id == optional($employer->profile)->state ? 'selected':''}} value="{{$state->id}}">{{$state->name}}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('state')
@@ -293,10 +293,10 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">City <span class="text-danger">*</span></label>
-                                                <!-- <input type="text" name="city" class="form-control @error('city') is-invalid @enderror" value="{{$employer->profile->city}}" required> -->
+                                                <!-- <input type="text" name="city" class="form-control @error('city') is-invalid @enderror" value="{{optional($employer->profile)->city}}" required> -->
                                                 <select class="form-control city-list" name="city" id="cities">
                                                     @foreach($cities as $city)
-                                                    <option {{$city->id == $employer->profile->city ? 'selected':''}} value="{{$city->id}}">{{$city->city}}</option>
+                                                    <option {{$city->id == optional($employer->profile)->city ? 'selected':''}} value="{{$city->id}}">{{$city->city}}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('city')
@@ -307,7 +307,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Zip <span class="text-danger">*</span></label>
-                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7" name="zip" class="form-control @error('zip') is-invalid @enderror" value="{{$employer->profile->zip}}" required>
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7" name="zip" class="form-control @error('zip') is-invalid @enderror" value="{{optional($employer->profile)->zip}}" required>
                                                 @error('zip')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -318,7 +318,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-12">
                                                 <label class="form-label">Description</label>
-                                                <textarea class="form-control" name="description">@if($employer->profile && $employer->profile->description) {{$employer->profile->description}} @endif</textarea>
+                                                <textarea class="form-control" name="description">@if($employer->profile && optional($employer->profile)->description) {{optional($employer->profile)->description}} @endif</textarea>
                                             </div>
                                         </div>
                                         <div class="mt-4 row justify-content-between"> 
