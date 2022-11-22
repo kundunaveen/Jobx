@@ -106,8 +106,8 @@ class EmployerController extends Controller
         $employer = User::find($id);
         $industries = MasterAttribute::join('master_attribute_categories', 'master_attribute_categories.id', 'master_attributes.master_attribute_category_id')->where('master_attribute_categories.name', 'Industries')->select('master_attributes.*')->get();
         $countries = Country::all();
-        $states = State::where('country_id', $employer->profile->country)->get();
-        $cities = City::where('state_id', $employer->profile->state)->get();
+        $states = State::where('country_id', optional($employer->profile)->country)->get();
+        $cities = City::where('state_id', optional($employer->profile)->state)->get();
         if($request->method() == "POST"){
             $request->validate([
                 'first_name' => 'required|string|max:100',
