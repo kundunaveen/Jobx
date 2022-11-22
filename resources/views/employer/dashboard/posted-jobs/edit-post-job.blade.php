@@ -253,7 +253,7 @@ Employer | Edit Post Job
                                 <div class="row thumbnails">
                                     @forelse ($vacancy->getImagesInArray() as $image)
                                     <div class="col-3 pip">
-                                        <img class='imageThumb' src="{{ asset('image/company_images/'.$image) }}" width="100" class="">
+                                        <img class='imageThumb' src="{{ \Illuminate\Support\Facades\Storage::disk(config('settings.file_system_service'))->url(\App\Models\Vacancy::IMAGE_PATH.'/'.$image) }}" width="100" class="">
                                         <input type="hidden" name="old_images_input[]" value="{{ $image }}">
                                         <a class='remove remove-button mt-2 btn btn-danger btn-sm' href='javascript:void(0);' width='100'>Remove</a>
                                     </div>

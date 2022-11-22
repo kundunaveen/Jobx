@@ -86,11 +86,7 @@
                            <div class="card">
                               <div class="card-body job-profile-info">
                                  <figure class="job-profile-figure d-flex align-items-center justify-content-between">
-                                    @if(filled($job->images))
-                                    <img src="{{asset('image/company_images/'.explode(',',$job->images)[0])}}" style="border-radius:100%;object-fit:cover" width="51" height="50" alt="">
-                                    @else
-                                    <img src="{{asset('image/company.png')}}" style="border-radius:100%;object-fit:cover" width="51" height="50" alt="">
-                                    @endif
+                                    <img src="{{ $job->single_image }}" style="border-radius:100%;object-fit:cover" width="51" height="50" alt="">
                                     <span class="date" style="font-size:13px">{{date('d F, Y',strtotime($job->created_at))}}</span>
                                  </figure>
                                  <article class="job-profile-article">

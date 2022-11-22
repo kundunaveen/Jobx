@@ -25,36 +25,28 @@ class JobPostController extends Controller
     public function index(Request $request)
     {
         $jobs = Vacancy::where('employer_id', auth()->user()->id);
-        if($request->search)
-        {
+        if ($request->search) {
             $jobs->where('job_title', 'LIKE', '%' . $request->search . '%')->orWhere('job_role', 'LIKE', '%' . $request->search . '%');
         }
-        if($request->job_type && $request->job_type != 'empty')
-        {
+        if ($request->job_type && $request->job_type != 'empty') {
             // dd($request->job_type);
             $jobs->where('job_type', $request->job_type);
         }
-        if($request->salary && $request->salary != 'empty')
-        {   
-            if($request->salary == 25)
-            {
-                $jobs->where('salary_offer','>',24);
-            }
-            else{
-                $salaries = explode('-',$request->salary);
+        if ($request->salary && $request->salary != 'empty') {
+            if ($request->salary == 25) {
+                $jobs->where('salary_offer', '>', 24);
+            } else {
+                $salaries = explode('-', $request->salary);
                 // dd($salaries);
                 $jobs->where('salary_offer', '>', $salaries[0])->where('salary_offer', '<=', $salaries[1]);
             }
         }
-        if($request->experience && $request->experience != 'empty')
-        {   
+        if ($request->experience && $request->experience != 'empty') {
             // dd('yes');
-            if($request->experience == 16)
-            {
-                $jobs->where('min_exp','>',15);
-            }
-            else{
-                $exp = explode('-',$request->experience);
+            if ($request->experience == 16) {
+                $jobs->where('min_exp', '>', 15);
+            } else {
+                $exp = explode('-', $request->experience);
                 $jobs->where('min_exp', '>', $exp[0])->where('min_exp', '<=', $exp[1]);
             }
         }
@@ -64,8 +56,7 @@ class JobPostController extends Controller
 
     public function create(Request $request)
     {
-        if($request->method() == "POST")
-        {
+        if ($request->method() == "POST") {
             $request->validate([
                 'job_title' => 'required|string|max:129',
                 'city' => 'nullable',
@@ -82,16 +73,15 @@ class JobPostController extends Controller
                 'skills' => 'required|array',
                 'job_type' => 'required',
                 'images_input' => 'required|array',
-                'images_input.*' => 'image|max:2000|mimes:'.implode(',', Vacancy::SUPPORTED_IMAGE_MIME_TYPE),
+                'images_input.*' => 'image|max:2000|mimes:' . implode(',', Vacancy::SUPPORTED_IMAGE_MIME_TYPE),
                 'video_input' => 'mimes:mp4|max:20000'
             ]);
 
             try {
 
-                if($request->skills && count($request->skills) > 0){
-                    $skills = implode(',',$request->skills);
-                }
-                else{
+                if ($request->skills && count($request->skills) > 0) {
+                    $skills = implode(',', $request->skills);
+                } else {
                     $skills = null;
                 }
                 $input = $request->all();
@@ -99,31 +89,34 @@ class JobPostController extends Controller
                 $input['skills'] = $skills;
 
                 $image_files = [];
-                if($request->hasFile('images_input'))
-                {
-                    foreach($request->file('images_input') as $file)
-                    {
-                        $name = time().rand(1,100).'.'.$file->extension();
-                        $file->move(public_path('/image/company_images'), $name);  
-                        $image_files[] = $name;  
-                    }                    
+                if ($request->hasFile('images_input')) {
+                    foreach ($request->file('images_input') as $file) {
+                        $file_name = $file->hashName();
+                        $file->storeAs(
+                            Vacancy::IMAGE_PATH,
+                            $file_name,
+                            config('settings.file_system_service')
+                        );
+                        $image_files[] = $file_name;
+                    }
                 }
-                
                 $input['images'] = implode(',', $image_files);
-                
-                if($request->hasFile('video_input')){
-                    $fileVideo = $request->file('video_input');
-                    $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
-                    $destinationPath = public_path().'/image/company_videos';
-                    $fileVideo->move($destinationPath,$videoFileName);
-                    $input['video'] = $videoFileName;
+
+                if ($request->hasFile('video_input')) {
+                    $file = $request->file('video_input');
+                    $file_name = $file->hashName();
+                    $file->storeAs(
+                        Vacancy::VIDEO_PATH,
+                        $file_name,
+                        config('settings.file_system_service')
+                    );
+                    $input['video'] = $file_name;
                 }
 
                 $input['location'] = $request->address;
                 Vacancy::create($input);
 
                 return redirect()->route('employer.posted.jobs')->with('success', 'Job Posted Successfully');
-                
             } catch (\Exception $e) {
                 return back()->with([
                     'error' => $e->getMessage()
@@ -131,13 +124,12 @@ class JobPostController extends Controller
             }
         }
         $skills = JobSkill::all();
-        $job_types = MasterAttribute::whereHas('masterCategory', function($q){
+        $job_types = MasterAttribute::whereHas('masterCategory', function ($q) {
             $q->where('name', 'Job Type');
         })->get();
         $countries = Country::all();
         $states = State::where('country_id', 156)->get();
-        foreach($states as $state)
-        {
+        foreach ($states as $state) {
             $cities = City::where('state_id', $state->id)->get();
             break;
         }
@@ -149,22 +141,18 @@ class JobPostController extends Controller
     {
         $vacancy = Vacancy::find($id);
         $countries = Country::all();
-        $states = State::where('country_id',$vacancy->country)->get();
+        $states = State::where('country_id', $vacancy->country)->get();
         $cities = City::where('state_id', $vacancy->state)->get();
         $allSkills = JobSkill::all();
-        $job_types = MasterAttribute::whereHas('masterCategory', function($q){
+        $job_types = MasterAttribute::whereHas('masterCategory', function ($q) {
             $q->where('name', 'Job Type');
         })->get();
-        if($vacancy->skills)
-        {
+        if ($vacancy->skills) {
             $skills = explode(',', $vacancy->skills);
-        }
-        else
-        {
+        } else {
             $skills = null;
         }
-        if($request->method() == "POST")
-        {
+        if ($request->method() == "POST") {
             $request->validate([
                 'job_title' => 'required|string|max:129',
                 'city' => 'nullable',
@@ -181,75 +169,77 @@ class JobPostController extends Controller
                 'skills' => 'required|array',
                 'job_type' => 'required',
                 'images_input' => 'array',
-                'images_input.*' => 'image|max:2000|mimes:'.implode(',', Vacancy::SUPPORTED_IMAGE_MIME_TYPE),
+                'images_input.*' => 'image|max:2000|mimes:' . implode(',', Vacancy::SUPPORTED_IMAGE_MIME_TYPE),
                 'old_images_input' => 'nullable',
                 'old_images_input.*' => 'string',
                 'video_input' => 'mimes:mp4|max:20000'
             ]);
 
-            try{
+            try {
 
-                if($request->skills && count($request->skills) > 0){
-                    $skills = implode(',',$request->skills);
-                }
-                else{
+                if ($request->skills && count($request->skills) > 0) {
+                    $skills = implode(',', $request->skills);
+                } else {
                     $skills = null;
                 }
 
                 $input = $request->all();
-                
-                $image_files = [];                
-                $old_files = [];                
 
-                if($request->hasFile('images_input'))
-                {
-                    foreach($request->file('images_input') as $file)
-                    {
-                        $name = time().rand(1,100).'.'.$file->extension();
-                        $file->move(public_path('/image/company_images'), $name);  
-                        $image_files[] = $name;  
+                $image_files = [];
+                $old_files = [];
+
+                if ($request->hasFile('images_input')) {
+                    foreach ($request->file('images_input') as $file) {
+                        $file_name = $file->hashName();
+                        $file->storeAs(
+                            Vacancy::IMAGE_PATH,
+                            $file_name,
+                            config('settings.file_system_service')
+                        );
+                        $image_files[] = $file_name;
                     }
                 }
 
-                if($request->filled('old_images_input')){
-                    foreach($request->old_images_input as $old_file){
-                        $image_files[] = $old_file;
-                        $old_files[] = $old_file;
+                if ($request->filled('old_images_input')) {
+                    $old_selected_images = $request->old_images_input;
+                    if (count($vacancy->getImagesInArray()) > 0) {
+                        $delete_files = array_diff($vacancy->getImagesInArray(), $old_selected_images);
+                        foreach ($delete_files as $delete_file) {
+                            Storage::disk(config('settings.file_system_service'))->delete(Vacancy::IMAGE_PATH . '/' . $delete_file);
+                        }
                     }
-                    if(count($vacancy->getImagesInArray()) > 0){
-                        $delete_files = array_diff($vacancy->getImagesInArray(), $old_files);
-                        if(is_array($delete_files) && count($delete_files) > 0){
-                            foreach ($delete_files as $delete_file) { 
-                                unlink(public_path('image/company_images/'. $delete_file));
-                               //Storage::disk('public')->delete('image/company_images/'. $delete_file);
-                            }
-                        }                        
+                } else {
+                    foreach ($vacancy->getImagesInArray() as $image) {
+                        Storage::disk(config('settings.file_system_service'))->delete(Vacancy::IMAGE_PATH . '/' . $image);
                     }
                 }
 
                 $input['images'] = implode(',', $image_files);
-    
-                if($request->file('video_input')){
 
-                    $fileVideo = $request->file('video_input');
-                    $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
-                    $destinationPath = public_path().'/image/company_videos';
-                    $fileVideo->move($destinationPath,$videoFileName);
-                    $input['video'] = $videoFileName;
+                if ($request->hasFile('video_input')) {
+                    $file = $request->file('video_input');
+                    $file_name = $file->hashName();
+                    $file->storeAs(
+                        Vacancy::VIDEO_PATH,
+                        $file_name,
+                        config('settings.file_system_service')
+                    );
+                    if(filled($vacancy->video_path)){
+                        Storage::disk(config('settings.file_system_service'))->delete($vacancy->video_path);
+                    }
+                    $input['video'] = $file_name;
                 }
+
                 $input['skills'] = $skills;
                 $input['location'] = $request->address;
-                $vacancy->update($input);                
-    
-                return redirect()->route('employer.posted.jobs')->with('success', 'Job Post Updated Successfully');
+                $vacancy->update($input);
 
-            }catch(\Exception $e){
+                return redirect()->route('employer.posted.jobs')->with('success', 'Job Post Updated Successfully');
+            } catch (\Exception $e) {
                 return back()->with('error', $e->getMessage())->withInput();
             }
-
-            
         }
-        return view('employer.dashboard.posted-jobs.edit-post-job', compact('vacancy','countries', 'states', 'cities', 'skills', 'allSkills', 'job_types'));
+        return view('employer.dashboard.posted-jobs.edit-post-job', compact('vacancy', 'countries', 'states', 'cities', 'skills', 'allSkills', 'job_types'));
     }
 
     public function delete(Request $request)
@@ -266,8 +256,7 @@ class JobPostController extends Controller
     {
         $job = Vacancy::find($id);
         $requireSkills = $job->skills;
-        $employee = User::where('id',4)->orWhere('id',5)->get();
+        $employee = User::where('id', 4)->orWhere('id', 5)->get();
         return view('employer.dashboard.posted-jobs.view-candidates', compact('job', 'employee'));
-        
     }
 }
