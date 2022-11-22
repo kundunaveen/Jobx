@@ -185,11 +185,11 @@
                                         </div>
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
-                                                <label class="form-label">Current Salary <strong>(LPA)</strong></label>
+                                                <label class="form-label">Current Salary <strong>({{ config('settings.currency') }}/month)</strong></label>
                                                 <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" step="0.01" name="current_salary" @if($employee->profile && optional($employee->profile)->current_salary) value="{{optional($employee->profile)->current_salary}}" @endif class="form-control">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label class="form-label">Expected Salary <strong>(LPA)</strong></label>
+                                                <label class="form-label">Expected Salary <strong>({{ config('settings.currency') }}/month)</strong></label>
                                                 <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" step="0.01" name="expected_salary" @if($employee->profile && optional($employee->profile)->expected_salary) value="{{optional($employee->profile)->expected_salary}}" @endif class="form-control">
                                             </div>
                                         </div>

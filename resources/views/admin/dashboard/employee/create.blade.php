@@ -157,11 +157,11 @@
                                         </div>
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
-                                                <label class="form-label">Current Salary <strong>(LPA)</strong></label>
+                                                <label class="form-label">Current Salary <strong>({{ config('settings.currency') }}/month)</strong></label>
                                                 <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" value="{{ old('current_salary') }}" step="0.01" name="current_salary" class="form-control">
                                             </div>
                                             <div class="form-group col-md-6">
-                                                <label class="form-label">Expected Salary <strong>(LPA)</strong></label>
+                                                <label class="form-label">Expected Salary <strong>({{ config('settings.currency') }}/month)</strong></label>
                                                 <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" value="{{ old('expected_salary') }}" step="0.01" name="expected_salary" class="form-control">
                                             </div>
                                         </div>
