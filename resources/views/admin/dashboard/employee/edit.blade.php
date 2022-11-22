@@ -103,11 +103,13 @@
                                         @csrf
                                         <div class="row">
                                             <div class="col-md-4" id="profile-image-div" style="position:relative">
-                                                @if($employee->profile && $employee->profile->logo)
-                                                <img class="" src="{{asset('image/employee_images/'.$employee->profile->logo)}}" id="blah" onclick="$('#company_image').click()" style="border-radius:100%; border:solid lightgray 1px; cursor:pointer; height:280px;width:280px;object-fit:cover">
+                                                <img class="" src="{{ optional($employee->profile)->profile_image_url }}" id="blah" onclick="$('#company_image').click()" style="border-radius:100%; border:solid lightgray 1px; cursor:pointer; height:280px;width:280px;object-fit:cover">
+
+                                                {{--<!-- @if($employee->profile && optional($employee->profile)->logo)
+                                                <img class="" src="{{asset('image/employee_images/'.optional($employee->profile)->logo)}}" id="blah" onclick="$('#company_image').click()" style="border-radius:100%; border:solid lightgray 1px; cursor:pointer; height:280px;width:280px;object-fit:cover">
                                                 @else
                                                 <img class="" src="{{asset('image/user.png')}}" id="blah" onclick="$('#company_image').click()" style="border-radius:100%; border:solid lightgray 1px; cursor:pointer; height:280px;width:280px;object-fit:cover">
-                                                @endif
+                                                @endif -->--}}
                                                 <button id="delete-profile-btn" onclick="deleteEmployeeProfile('{{$employee->id}}')" class="text-danger d-none" style="position:absolute;top:20px;left:20px;border:none;background:inherit">
                                                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="22px" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M14.74 9l-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 01-2.244 2.077H8.084a2.25 2.25 0 01-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 00-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 013.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 00-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 00-7.5 0" />
@@ -121,9 +123,9 @@
                                                 @enderror
                                             </div>
                                             <div class="col-md-8" style="border-radius:10px;position:relative" id="profile-video-div">
-                                                @if($employee->profile && $employee->profile->intro_video)
+                                                @if($employee->profile && optional($employee->profile)->intro_video)
                                                 <video class="" controls onclick="$('#employee_intro').click()" style="border-radius: 20px;border:solid lightgray 1px; cursor:pointer; height:280px;width:100%; object-fit:cover">
-                                                    <source src="{{asset('image/employee_videos/'.$employee->profile->intro_video)}}" type="video/mp4">
+                                                    <source src="{{ optional($employee->profile)->profile_video_url }}" type="video/mp4">
                                                 </video>
                                                 @else
                                                 <img class="" src="{{asset('image/video.png')}}" onclick="$('#employee_intro').click()" style="border-radius: 20px;border:solid lightgray 1px; cursor:pointer; height:280px;width:100%; object-fit:cover">
@@ -167,7 +169,7 @@
                                                 <label class="form-label">Gender <span class="text-danger">*</span></label>
                                                 <select class="form-control" name="gender">
                                                     @foreach($genders as $gender)
-                                                    <option $value="{{$gender->id}}" @if($employee->profile && $employee->profile->gender == $gender->id) selected @endif >{{$gender->value}}</option>
+                                                    <option $value="{{$gender->id}}" @if($employee->profile && optional($employee->profile)->gender == $gender->id) selected @endif >{{$gender->value}}</option>
                                                     @endforeach
                                                 </select>
                                             </div>
@@ -184,17 +186,17 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Current Salary <strong>(LPA)</strong></label>
-                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" step="0.01" name="current_salary" @if($employee->profile && $employee->profile->current_salary) value="{{$employee->profile->current_salary}}" @endif class="form-control">
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" step="0.01" name="current_salary" @if($employee->profile && optional($employee->profile)->current_salary) value="{{optional($employee->profile)->current_salary}}" @endif class="form-control">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Expected Salary <strong>(LPA)</strong></label>
-                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" step="0.01" name="expected_salary" @if($employee->profile && $employee->profile->expected_salary) value="{{$employee->profile->expected_salary}}" @endif class="form-control">
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" step="0.01" name="expected_salary" @if($employee->profile && optional($employee->profile)->expected_salary) value="{{optional($employee->profile)->expected_salary}}" @endif class="form-control">
                                             </div>
                                         </div>
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Experience (Yrs)</label>
-                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" max="40" step="0.01" name="experience" @if($employee->profile && $employee->profile->experience) value="{{$employee->profile->experience}}" @endif class="form-control">
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" max="40" step="0.01" name="experience" @if($employee->profile && optional($employee->profile)->experience) value="{{optional($employee->profile)->experience}}" @endif class="form-control">
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Languages</label>
@@ -213,7 +215,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Address <span class="text-danger">*</span></label>
-                                                <input name="address" maxlength="100" type="text" class="form-control @error('address') is-invalid @enderror" value="{{$employee->profile->address}}" required>
+                                                <input name="address" maxlength="100" type="text" class="form-control @error('address') is-invalid @enderror" value="{{optional($employee->profile)->address}}" required>
                                                 @error('address')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -223,10 +225,10 @@
                                             
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Country <span class="text-danger">*</span></label>
-                                                <!-- <input type="text" name="country" class="form-control @error('country') is-invalid @enderror" value="{{$employee->profile->country}}" required> -->
+                                                <!-- <input type="text" name="country" class="form-control @error('country') is-invalid @enderror" value="{{optional($employee->profile)->country}}" required> -->
                                                 <select class="form-control country-list" name="country" id="countries">
                                                     @foreach($countries as $country)
-                                                    <option {{$country->id == $employee->profile->country ? 'selected':''}} value="{{$country->id}}">{{$country->name}}</option>
+                                                    <option {{$country->id == optional($employee->profile)->country ? 'selected':''}} value="{{$country->id}}">{{$country->name}}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('country')
@@ -239,10 +241,10 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">State <span class="text-danger">*</span></label>
-                                                <!-- <input name="state" type="text" class="form-control @error('state') is-invalid @enderror" value="{{$employee->profile->state}}" required> -->
+                                                <!-- <input name="state" type="text" class="form-control @error('state') is-invalid @enderror" value="{{optional($employee->profile)->state}}" required> -->
                                                 <select class="form-control state-list" name="state" id="states">
                                                     @foreach($states as $state)
-                                                    <option {{$state->id == $employee->profile->state ? 'selected':''}} value="{{$state->id}}">{{$state->name}}</option>
+                                                    <option {{$state->id == optional($employee->profile)->state ? 'selected':''}} value="{{$state->id}}">{{$state->name}}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('state')
@@ -253,10 +255,10 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">City <span class="text-danger">*</span></label>
-                                                <!-- <input type="text" name="city" class="form-control @error('city') is-invalid @enderror" value="{{$employee->profile->city}}" required> -->
+                                                <!-- <input type="text" name="city" class="form-control @error('city') is-invalid @enderror" value="{{optional($employee->profile)->city}}" required> -->
                                                 <select class="form-control city-list" name="city" id="cities">
                                                     @foreach($cities as $city)
-                                                    <option {{$city->id == $employee->profile->city ? 'selected':''}} value="{{$city->id}}">{{$city->city}}</option>
+                                                    <option {{$city->id == optional($employee->profile)->city ? 'selected':''}} value="{{$city->id}}">{{$city->city}}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('city')
@@ -267,7 +269,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Zip <span class="text-danger">*</span></label>
-                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7" name="zip" class="form-control @error('zip') is-invalid @enderror" value="{{$employee->profile->zip}}" required>
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7" name="zip" class="form-control @error('zip') is-invalid @enderror" value="{{optional($employee->profile)->zip}}" required>
                                                 @error('zip')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -279,8 +281,8 @@
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Upload Resume </label>
                                                 <input type="file" name="resume" class="form-control">
-                                                @if($employee->profile->resume)
-                                                <small><a class="text-secondary" href="{{asset('image/resume/'.$employee->profile->resume)}}" target="_blank">View Resume</a></small>
+                                                @if(optional($employee->profile)->resume)
+                                                <small><a class="text-secondary" href="{{asset('image/resume/'.optional($employee->profile)->resume)}}" target="_blank">View Resume</a></small>
                                                 @endif
                                                 @error('resume')
                                                     <span class="text-danger" role="alert">
