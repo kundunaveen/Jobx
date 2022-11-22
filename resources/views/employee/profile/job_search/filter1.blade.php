@@ -119,8 +119,8 @@
             </div>
             <div class="container">
                 <div class="slider-track"></div>
-                <input type="range" min="{{ data_get(get_min_max_salary(), 'MinSalary', 0) }}" max="{{ data_get(get_min_max_salary(), 'MaxSalary', 0) }}" value="{{ request()->get('min_salary', data_get(get_min_max_salary(), 'MinSalary', 0)) }}" id="slider-1" name="min_salary" oninput="slideOne()">
-                <input type="range" min="{{ data_get(get_min_max_salary(), 'MinSalary', 0) }}" max="{{ data_get(get_min_max_salary(), 'MaxSalary', 0) }}" value="{{ request()->get('max_salary', data_get(get_min_max_salary(), 'MaxSalary', 0)) }}" id="slider-2" name="max_salary" oninput="slideTwo()">
+                <input type="range" min="0" max="{{ data_get(get_min_max_salary(), 'MaxSalary', 0) }}" value="{{ request()->get('min_salary', 0) }}" id="slider-1" name="min_salary" oninput="slideOne()">
+                <input type="range" min="0" max="{{ data_get(get_min_max_salary(), 'MaxSalary', 0) }}" value="{{ request()->get('max_salary', data_get(get_min_max_salary(), 'MaxSalary', 0)) }}" id="slider-2" name="max_salary" oninput="slideTwo()">
             </div>
         </div>
     </div>
@@ -134,19 +134,19 @@
                 </span>
                 <span> — </span>
                 <span id="range-exp2" class="range_span-exp">
-                    40
+                    {{ data_get(get_min_max_experience(), 'MaxExperience', 0) }}
                 </span>
             </div>
             <div class="container">
                 <div class="slider-track-exp"></div>
-                <input type="range" min="0" max="40" value="{{ request()->get('min_exp', 0) }}" id="slider-exp1" name="min_exp" oninput="slideOneExp()">
-                <input type="range" min="0" max="40" value="{{ request()->get('max_exp', 40) }}" id="slider-exp2" name="max_exp" oninput="slideTwoExp()">
+                <input type="range" min="0" max="{{ data_get(get_min_max_experience(), 'MaxExperience', 0) }}" value="{{ request()->get('min_exp', 0) }}" id="slider-exp1" name="min_exp" oninput="slideOneExp()">
+                <input type="range" min="0" max="{{ data_get(get_min_max_experience(), 'MaxExperience', 0) }}" value="{{ request()->get('max_exp', data_get(get_min_max_experience(), 'MaxExperience', 0)) }}" id="slider-exp2" name="max_exp" oninput="slideTwoExp()">
             </div>
         </div>
     </div>
     </div>
     {{--
-            <div class="aside-filter">
+            <!-- <div class="aside-filter">
                 <h5>Employment Type</h5>
                 <ul class="list-group">
                     <li class="list-group-item">
@@ -162,7 +162,7 @@
                         <label class="form-check-label" for="exampleCheck8">Distant Work</label>
                     </li>
                 </ul>
-            </div>
+            </div> -->
             --}}
     @forelse (request()->only(['search_keyword', 'search_location']) as $key => $value)
     <input type="hidden" name="{{ $key }}" value="{{ $value }}" />
