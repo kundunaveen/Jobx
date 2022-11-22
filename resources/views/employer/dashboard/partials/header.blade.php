@@ -32,15 +32,16 @@
                 <li class="list-group-item  bg-transparent border-0 p-0 me-5"><a href="javascript:void(0)"><span class="pause-btn"></span><i class="icon-notify"></i></span><span class="notify-count">0</span></a></li>
                 <li class="list-group-item  bg-transparent d-flex border-0 p-0">
                     <figure class="me-2 mb-0">
-                        @if(auth()->user()->profile->logo == null)
+                        <img src="{{ optional(auth()->user())->employer_profile_image_url }}" style="object-fit:cover;border-radius:100%;width:51px;height:51px" height="51" width="51" alt="" class="img-fluid" />
+                        {{--<!-- @if(auth()->user()->profile->logo == null)
                         <img src="{{asset('assets/images/user-img.png')}}" height="51" width="51" alt="" class="img-fluid" />
                         @else
                         <img src="{{asset('image/company_images/'.auth()->user()->profile->logo)}}" style="object-fit:cover;border-radius:100%;width:51px;height:51px" height="51" width="51" alt="" class="img-fluid" />
-                        @endif
+                        @endif -->--}}
                     </figure>
                     <article class="text-left">
                         <h5 class="mb-0">{{ auth()->user()->first_name.' '.auth()->user()->last_name }}</h5>
-                        <p class="mb-0 user-designation">{{auth()->user()->profile->company_name}}</p>
+                        <p class="mb-0 user-designation">{{ optional(auth()->user()->profile)->company_name }}</p>
                     </article>
                 </li>
                 <li class="list-group-item bg-transparent d-flex border-0 p-0 custom-dropdown-menu">

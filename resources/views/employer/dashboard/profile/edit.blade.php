@@ -227,13 +227,14 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                         <div class="row justify-content-between">
                             <div class="col-auto"><h2 class="form-heading mt-4">Profile Details</h2></div>
                             <div class="col-auto">
-                                @if($employer->profile->logo ==null)
+                                <img src="{{ optional($employer->profile)->employer_image_url }}" id="profile_image" onclick="$('#profile_image_input').click()" style="height:100px;width:100px;object-fit:cover; border-radius:100%">
+                                {{--<!-- @if($employer->profile->logo ==null)
                                 <img src="{{asset('image/user.png')}}" id="profile_image" onclick="$('#profile_image_input').click()" style="height:100px;width:100px;object-fit:cover; border-radius:100%">
                                 @else
                                 <img src="{{asset('image/company_images/'.$employer->profile->logo)}}" id="profile_image" onclick="$('#profile_image_input').click()" style="height:100px;width:100px;object-fit:cover; border-radius:100%">
-                                @endif
+                                @endif -->--}}
                             </div>
-                            <input type="file" class="d-none" name="profile_image" id="profile_image_input">
+                            <input type="file" class="d-none" name="profile_image" id="profile_image_input" accept="image/png, image/jpg, image/jpeg">
                         </div>
                         <div class="row form-group">
                             <div class="col-md-6 mb-5 mb-md-0">
@@ -266,8 +267,8 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                             <div class="col-12">
                                 <select name="notification_option" class="form-select" aria-label="Default select example">
                                     
-                                    <option {{ 'email'== $employer->profile->notification_option ? 'selected':''}} value="email">Email</option>
-                                    <option {{ 'jobax'== $employer->profile->notification_option ? 'selected':''}} value="jobax">Jobax platform notification</option>
+                                    <option {{ 'email'== optional($employer->profile)->notification_option ? 'selected':''}} value="email">Email</option>
+                                    <option {{ 'jobax'== optional($employer->profile)->notification_option ? 'selected':''}} value="jobax">Jobax platform notification</option>
                                    
                                 </select>
                             </div>
@@ -279,7 +280,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                         <div class="row form-group">
                             <label for="inputCompanyName" class="form-label">Company Name*</label>
                             <div class="col-12">
-                                <input type="text" name="company_name" class="form-control form-input" value="{{$employer->profile->company_name}}" placeholder="Ex: Google"
+                                <input type="text" name="company_name" class="form-control form-input" value="{{optional($employer->profile)->company_name}}" placeholder="Ex: Google"
                                     aria-label="Company Name">
                             </div>
                         </div>
@@ -289,7 +290,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                                 <select name="industry" class="form-select" aria-label="Default select example">
                                     <option selected>Enter your industry</option>
                                     @foreach($industries as $industry)
-                                    <option {{$industry->id == $employer->profile->industry_type_id ? 'selected':''}} value="{{$industry->id}}">{{$industry->value}}</option>
+                                    <option {{$industry->id == optional($employer->profile)->industry_type_id ? 'selected':''}} value="{{$industry->id}}">{{$industry->value}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -299,10 +300,10 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                             <div class="col-12">
                                 <select name="company_size" class="form-select" aria-label="Default select example">
                                     
-                                    <option {{ '1-10'== $employer->profile->company_size ? 'selected':''}} value="1-10">1-10 (Small Organization)</option>
-                                    <option {{ '11-20'== $employer->profile->company_size ? 'selected':''}} value="11-20">11-20 (Medium Organization)</option>
-                                    <option {{ '21-50'== $employer->profile->company_size ? 'selected':''}} value="21-50">21-50 (Large Organization)</option>
-                                    <option {{ '>50'== $employer->profile->company_size ? 'selected':''}} value=">50">More than 50 (very Large Organization)</option>
+                                    <option {{ '1-10'== optional($employer->profile)->company_size ? 'selected':''}} value="1-10">1-10 (Small Organization)</option>
+                                    <option {{ '11-20'== optional($employer->profile)->company_size ? 'selected':''}} value="11-20">11-20 (Medium Organization)</option>
+                                    <option {{ '21-50'== optional($employer->profile)->company_size ? 'selected':''}} value="21-50">21-50 (Large Organization)</option>
+                                    <option {{ '>50'== optional($employer->profile)->company_size ? 'selected':''}} value=">50">More than 50 (very Large Organization)</option>
                                    
                                 </select>
                             </div>
@@ -312,12 +313,12 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                             <div class="col-12">
                                 <select name="company_role" class="form-select" aria-label="Default select example">
                                     
-                                    <option {{ 'HR Manager'== $employer->profile->company_role ? 'selected':''}} value="HR Manager">HR Manager</option>
-                                    <option {{ 'Branch Manager'== $employer->profile->company_role ? 'selected':''}} value="Branch Manager">Branch Manager</option>
-                                    <option {{ 'CEO'== $employer->profile->company_role ? 'selected':''}} value="CEO">CEO</option>
-                                    <option {{ 'CTO'== $employer->profile->company_role ? 'selected':''}} value="CTO">CTO</option>
-                                    <option {{ 'MD'== $employer->profile->company_role ? 'selected':''}} value="MD">MD</option>
-                                    <option {{ 'Company Owner'== $employer->profile->company_role ? 'selected':''}} value="Company Owner">Company Owner</option>
+                                    <option {{ 'HR Manager'== optional($employer->profile)->company_role ? 'selected':''}} value="HR Manager">HR Manager</option>
+                                    <option {{ 'Branch Manager'== optional($employer->profile)->company_role ? 'selected':''}} value="Branch Manager">Branch Manager</option>
+                                    <option {{ 'CEO'== optional($employer->profile)->company_role ? 'selected':''}} value="CEO">CEO</option>
+                                    <option {{ 'CTO'== optional($employer->profile)->company_role ? 'selected':''}} value="CTO">CTO</option>
+                                    <option {{ 'MD'== optional($employer->profile)->company_role ? 'selected':''}} value="MD">MD</option>
+                                    <option {{ 'Company Owner'== optional($employer->profile)->company_role ? 'selected':''}} value="Company Owner">Company Owner</option>
                                    
                                 </select>
                             </div>
@@ -326,14 +327,15 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Company Introduction</label>
                             <div class="col-12">
-                                <input type="file" class="form-control" name="profile_video" id="profile_video_input">
+                                <input type="file" class="form-control" name="profile_video" id="profile_video_input">                                
+                                <small class="text-secondary">Maximum file size 20 Mb (only MP4 file is supported)</small>
                             </div>
                         </div>
-                        @if($employer->profile->intro_video != null)
+                        @if(optional($employer->profile)->employer_video_url)
                         <div class="row">
                             <div class="col-12">
                                 <video class="" controls>
-                                    <source src="{{asset('image/company_videos/'.$employer->profile->intro_video)}}" type="video/mp4">
+                                    <source src="{{ optional($employer->profile)->employer_video_url }}" type="video/mp4">
                                 </video>
                             </div>
                         </div>
@@ -345,7 +347,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                         <div class="row form-group">
                             <label for="check" class="form-label">Location*</label>
                             <div class="col-12">
-                            <textarea name="address" placeholder="Ex: #123 main street" class="form-control" id="exampleFormControlTextarea1" rows="5">{{$employer->profile->address}}</textarea>
+                            <textarea name="address" placeholder="Ex: #123 main street" class="form-control" id="exampleFormControlTextarea1" rows="5">{{optional($employer->profile)->address}}</textarea>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -355,7 +357,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                                     <select name="country" class="form-select country-list" aria-label="Default select example">
                                         <option selected> </option>
                                         @foreach($countries as $country)
-                                        <option {{$country->id == $employer->profile->country ? 'selected': ''}} value="{{$country->id}}">{{$country->name}}</option>
+                                        <option {{$country->id == optional($employer->profile)->country ? 'selected': ''}} value="{{$country->id}}">{{$country->name}}</option>
                                         @endforeach
                                     </select>
                                 <!-- </div> -->
@@ -366,7 +368,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                                     <select name="state" class="form-select state-list" aria-label="Default select example">
                                         <option selected> </option>
                                         @foreach($states as $state)
-                                        <option {{$state->id == $employer->profile->state ? 'selected': ''}} value="{{$state->id}}">{{$state->name}}</option>
+                                        <option {{$state->id == optional($employer->profile)->state ? 'selected': ''}} value="{{$state->id}}">{{$state->name}}</option>
                                         @endforeach
                                     </select>
                                 <!-- </div> -->
@@ -379,7 +381,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                                 <select name="city" class="form-select city-list" aria-label="Default select example">
                                     <option selected> </option>
                                     @foreach($cities as $city)
-                                    <option {{$city->id == $employer->profile->city ? 'selected' : ''}} value="{{$city->id}}">{{$city->city}}</option>
+                                    <option {{$city->id == optional($employer->profile)->city ? 'selected' : ''}} value="{{$city->id}}">{{$city->city}}</option>
                                     @endforeach
                                 </select>
                             <!-- </div> -->
@@ -387,7 +389,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                         <div class="col-md-6">
                             <label for="check" class="form-label">Zip*</label>
                             <!-- <div class="col-12"> -->
-                                <input type="number" name="zip" class="form-control form-input" value="{{$employer->profile->zip}}" placeholder="Ex: 10101"
+                                <input type="number" name="zip" class="form-control form-input" value="{{optional($employer->profile)->zip}}" placeholder="Ex: 10101"
                                     aria-label="Zip Code">
                             <!-- </div> -->
                         </div>

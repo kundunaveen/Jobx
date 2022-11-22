@@ -29,6 +29,9 @@ class Profile extends Model
     public CONST IMAGE_PATH = 'image/employee_images';
     public CONST VIDEO_PATH = 'image/employee_videos';
 
+    public CONST EMPLOYER_IMAGE_PATH = 'image/company_images';
+    public CONST EMPLOYER_VIDEO_PATH = 'image/company_videos';
+
     public CONST NOTIFICATION_OPTION_EMAIL = 'email';
     public CONST NOTIFICATION_OPTION_JOBAX = 'jobax';
 
@@ -85,6 +88,11 @@ class Profile extends Model
         'profile_languages',
         'profile_skills',
         'profile_gender',
+
+        'employer_image_url',
+        'employer_image_path',
+        'employer_video_url',
+        'employer_video_path',
     ];
 
     public function user()
@@ -135,5 +143,25 @@ class Profile extends Model
     public function getProfileGenderAttribute()
     {
         return filled($this->gender) ? MasterAttribute::where('id', $this->gender)->value('value') : '';
+    }
+    
+    public function getEmployerImageUrlAttribute(): string
+    {
+        return filled($this->logo) ? Storage::disk(config('settings.file_system_service'))->url(self::EMPLOYER_IMAGE_PATH.'/'.$this->logo) : asset('image/user.png');
+    }
+
+    public function getEmployerImagePathAttribute()
+    {
+        return filled($this->logo) ? self::EMPLOYER_IMAGE_PATH.'/'.$this->logo : '';
+    }
+
+    public function getEmployerVideoUrlAttribute()
+    {
+        return filled($this->intro_video) ? Storage::disk(config('settings.file_system_service'))->url(self::EMPLOYER_VIDEO_PATH.'/'.$this->intro_video) : '';
+    }
+
+    public function getEmployerVideoPathAttribute()
+    {
+        return filled($this->intro_video) ? self::EMPLOYER_VIDEO_PATH.'/'.$this->intro_video : '';
     }
 }
