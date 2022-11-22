@@ -10,6 +10,11 @@ use Session;
 
 class SkillController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'adminaccount']);
+    }
+    
     public function index()
     {
         $skills = JobSkill::all();

@@ -10,6 +10,11 @@ use Session;
 
 class ManageAttributeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'adminaccount']);
+    }
+
     public function index()
     {
         $attributes = MasterAttribute::all();
@@ -93,7 +98,7 @@ class ManageAttributeController extends Controller
             ]);
             return redirect(route('admin.categories'))->with('success', 'Attribute Category Updated Successfully.');
         }
-        return view('admin.dashboard.manage_attribute.edit-Category', compact('category'));
+        return view('admin.dashboard.manage_attribute.edit-category', compact('category'));
     }
 
     public function createCategory(Request $request)

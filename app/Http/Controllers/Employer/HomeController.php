@@ -123,7 +123,7 @@ class HomeController extends Controller
                     $file_name,
                     config('settings.file_system_service')
                 );
-                if(filled($profile->employer_image_path)){
+                if($profile instanceof Profile && filled($profile->employer_image_path)){
                     Storage::disk(config('settings.file_system_service'))->delete($profile->employer_image_path);
                 }
                 $fileName = $file_name;
@@ -138,7 +138,7 @@ class HomeController extends Controller
                     $file_name,
                     config('settings.file_system_service')
                 );
-                if(filled($profile->employer_video_path)){
+                if($profile instanceof Profile && filled($profile->employer_video_path)){
                     Storage::disk(config('settings.file_system_service'))->delete($profile->employer_video_path);
                 }
                 $videoFileName = $file_name;
