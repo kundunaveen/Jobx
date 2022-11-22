@@ -94,7 +94,7 @@
                             </div>                            
                         </div> -->
                     <div class="row form-group">
-                        <label for="inputName4" class="form-label">Current Salary <small>(Kpa only)</small></label>
+                        <label for="inputName4" class="form-label">Current Salary <small>({{ config('settings.currency') }}/month)</small></label>
                         <div class="col-12">
                             <input type="text" class="form-control form-input" name="current_salary" value="{{ old('current_salary', optional($employee->profile)->current_salary) }}" aria-label="Current Salary" placeholder="Ex: 5">
                             @error('current_salary')

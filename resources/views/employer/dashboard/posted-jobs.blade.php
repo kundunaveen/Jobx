@@ -56,11 +56,11 @@
                         <!-- <label class="label">Salary</label> -->
                         <select name="salary" class="form-control">
                            <option value="empty">select salary</option>
-                           <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '0-6'?'selected':''}} @endif value="0-6">0-6 LPA</option>
-                           <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '6-12'?'selected':''}} @endif value="6-12">6-12 LPA</option>
-                           <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '12-18'?'selected':''}} @endif value="12-18">12-18 LPA</option>
-                           <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '18-24'?'selected':''}} @endif value="18-24">18-24 LPA</option>
-                           <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '25'?'selected':''}} @endif value="25">More than 24 LPA</option>
+                           <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '0-6'?'selected':''}} @endif value="0-6">0-6 ({{ config('settings.currency') }}/month)</option>
+                           <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '6-12'?'selected':''}} @endif value="6-12">6-12 ({{ config('settings.currency') }}/month)</option>
+                           <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '12-18'?'selected':''}} @endif value="12-18">12-18 ({{ config('settings.currency') }}/month)</option>
+                           <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '18-24'?'selected':''}} @endif value="18-24">18-24 ({{ config('settings.currency') }}/month)</option>
+                           <option @if(isset($_GET['salary'])) {{$_GET['salary'] == '25'?'selected':''}} @endif value="25">More than 24 ({{ config('settings.currency') }}/month)</option>
                         </select>
                      </div>
                      <div class="col-md-3 justify-content-end" style="padding:10px !important">
