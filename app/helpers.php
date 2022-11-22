@@ -19,6 +19,14 @@ if (!function_exists('get_min_max_salary')) {
     }
 }
 
+if (!function_exists('get_min_max_experience')) {
+
+    function get_min_max_experience() :?Vacancy
+    {
+        return Vacancy::selectRaw("MIN(cast(min_exp as unsigned)) AS MinExperience, MAX(cast(min_exp as unsigned)) AS MaxExperience")->first();
+    }
+}
+
 if (!function_exists('get_industries')) {
 
     function get_industries()
