@@ -46,7 +46,7 @@ class User extends Authenticatable implements MustVerifyEmail
     ];
 
     protected $appends = [
-        'full_name', 'profile_image_url', 'profile_current_job_title'
+        'full_name', 'profile_image_url', 'profile_current_job_title', 'employer_profile_image_url'
     ];
 
     public function roleUser()
@@ -85,6 +85,10 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function getProfileImageUrlAttribute(): string{
         return optional($this->profile)->profile_image_url ?? asset('image/user.png');
+    }
+
+    public function getEmployerProfileImageUrlAttribute(): string{
+        return optional($this->profile)->employer_image_url ?? asset('image/user.png');
     }
 
     public function getProfileCurrentJobTitleAttribute(): ?string{
