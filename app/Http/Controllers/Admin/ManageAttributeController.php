@@ -25,15 +25,13 @@ class ManageAttributeController extends Controller
     public function create(Request $request)
     {
         $attrCategories = MasterAttributeCategory::all();
-        if($request->method() == "POST")
-        {
+        if ($request->method() == "POST") {
             $request->validate([
                 'value' => 'required|max:100'
             ]);
             $attr = MasterAttribute::where('master_attribute_category_id', $request->category)->where('value', $request->value)->first();
-            if($attr != null)
-            {
-                return redirect()->back()->with('error','This master attribute is already exist');
+            if ($attr != null) {
+                return redirect()->back()->with('error', 'This master attribute is already exist');
             }
             MasterAttribute::create([
                 'master_attribute_category_id' => $request->category,
@@ -48,23 +46,28 @@ class ManageAttributeController extends Controller
     public function edit(Request $request, $id)
     {
         $attrCategories = MasterAttributeCategory::all();
-        $attribute = MasterAttribute::find($id);
-        if($request->method() == "POST")
-        {
+        $attribute = MasterAttribute::where('id', $id)->first();
+        if ($request->method() == "POST") {
             $request->validate([
                 'value' => 'required|max:100'
             ]);
-            $attr = MasterAttribute::where('master_attribute_category_id', $request->category)->whereNot('id', $id)->where('value', $request->value)->first();
-            if($attr != null)
-            {
-                return redirect()->back()->with('error','This master attribute is already exist');
+
+            try {
+                $attr = MasterAttribute::where('master_attribute_category_id', $request->category)->whereNotIn('id', [$id])->where('value', $request->value)->first();
+
+                if ($attr != null) {
+                    return redirect()->back()->with('error', 'This master attribute is already exist');
+                }
+
+                $attribute->update([
+                    'master_attribute_category_id' => $request->category,
+                    'value' => $request->value
+                ]);
+                Session::flash('success', 'Master Attribute Updated Successfully');
+                return redirect(route('admin.manageAttribute'));
+            } catch (\Exception $e) {
+                return back()->withInput()->with('error', $e->getMessage());
             }
-            $attribute->update([
-                'master_attribute_category_id' => $request->category,
-                'value' => $request->value
-            ]);
-            Session::flash('success', 'Master Attribute Updated Successfully');
-            return redirect(route('admin.manageAttribute'));
         }
         return view('admin.dashboard.manage_attribute.edit', compact('attrCategories', 'attribute'));
     }
@@ -82,16 +85,15 @@ class ManageAttributeController extends Controller
     public function manageCategory(Request $request)
     {
         $categories = MasterAttributeCategory::all();
-        return view('admin.dashboard.manage_attribute.category',compact('categories'));
+        return view('admin.dashboard.manage_attribute.category', compact('categories'));
     }
 
     public function editCategory(Request $request, $id)
     {
         $category = MasterAttributeCategory::find($id);
-        if($request->method() == "POST")
-        {
+        if ($request->method() == "POST") {
             $request->validate([
-                'name' => 'required|string|max:65|unique:master_attribute_categories,name,'.$id
+                'name' => 'required|string|max:65|unique:master_attribute_categories,name,' . $id
             ]);
             $category->update([
                 'name' => $request->name
@@ -103,8 +105,7 @@ class ManageAttributeController extends Controller
 
     public function createCategory(Request $request)
     {
-        if($request->method()=="POST")
-        {
+        if ($request->method() == "POST") {
             $request->validate([
                 'name' => 'required|string|max:65|unique:master_attribute_categories'
             ]);

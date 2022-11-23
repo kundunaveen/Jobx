@@ -14,6 +14,9 @@ use App\Models\Country;
 use App\Models\State;
 use App\Models\City;
 use App\Models\JobSkill;
+use App\Notifications\Auth\Credential;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 
 class EmployeeController extends Controller
@@ -26,7 +29,7 @@ class EmployeeController extends Controller
     public function index()
     {
         // $employees = User::employeeList();
-        $employees = User::whereHas('roleUser', function($q){
+        $employees = User::whereHas('roleUser', function ($q) {
             $q->where('role_id', 3);
         })->latest()->get();
         return view('admin.dashboard.employee.index', compact('employees'));
@@ -34,68 +37,84 @@ class EmployeeController extends Controller
 
     public function create(Request $request)
     {
-        if($request->method()=="POST")
-        {
-            $request->validate([
-                'first_name' => 'required|string|max:100',
-                'last_name' => 'required|string|max:100',
-                'email' => 'required|email|max:100|unique:users',
-                'password' => 'required|max:100|min:8|confirmed',
-                'gender' => 'required'
-            ]);
+        try {
+            if ($request->method() == "POST") {
 
-            $user = User::create([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
-                'password' => Hash::make($request->password)
-            ]);
-            
-            RoleUser::create([
-                'user_id' => $user->id,
-                'role_id' => 3
-            ]);
-            $profile_data = [];
-            $profile_data['user_id'] = $user->id;
-            $profile_data['gender'] = $request->gender;
-            if($request->current_salary){
-                $profile_data['current_salary'] = $request->current_salary;
+                $request->validate([
+                    'first_name' => 'required|string|max:100',
+                    'last_name' => 'required|string|max:100',
+                    'email' => 'required|email|max:100|unique:users',
+                    'password' => 'required|max:100|min:8|confirmed',
+                    'gender' => 'required'
+                ]);
+
+                DB::transaction(function () use ($request) {
+
+                    $password = $request->password;
+
+                    $user = User::create([
+                        'first_name' => $request->first_name,
+                        'last_name' => $request->last_name,
+                        'email' => $request->email,
+                        'password' => Hash::make($password)
+                    ]);
+
+                    RoleUser::create([
+                        'user_id' => $user->id,
+                        'role_id' => 3
+                    ]);
+                    $profile_data = [];
+                    $profile_data['user_id'] = $user->id;
+                    $profile_data['gender'] = $request->gender;
+                    if ($request->current_salary) {
+                        $profile_data['current_salary'] = $request->current_salary;
+                    }
+                    if ($request->expected_salary) {
+                        $profile_data['expected_salary'] = $request->expected_salary;
+                    }
+                    if ($request->experience) {
+                        $profile_data['experience'] = $request->experience;
+                    }
+                    if ($request->languages && count($request->languages) > 0) {
+                        $profile_data['languages'] = implode(',', $request->languages);
+                    }
+                    if ($request->skills && count($request->skills) > 0) {
+                        $profile_data['skills'] = implode(',', $request->skills);
+                    }
+                    if ($request->address) {
+                        $profile_data['address'] = $request->address;
+                    }
+                    if ($request->city) {
+                        $profile_data['city'] = $request->city;
+                    }
+                    if ($request->state) {
+                        $profile_data['state'] = $request->state;
+                    }
+                    if ($request->country) {
+                        $profile_data['country'] = $request->country;
+                    }
+                    if ($request->zip) {
+                        $profile_data['zip'] = $request->zip;
+                    }
+                    $profile = Profile::create($profile_data);
+
+                    $user->sendEmailVerificationNotification();
+                    $credential = [];
+                    $credential['password'] = $password;
+                    $user->notify(new Credential($credential));
+                });               
+
+                return redirect()->route('admin.manageEmployee')->with('success', 'Employee created successfully');
             }
-            if($request->expected_salary){
-                $profile_data['expected_salary'] = $request->expected_salary;
-            }
-            if($request->experience){
-                $profile_data['experience'] = $request->experience;
-            }
-            if($request->languages && count($request->languages) > 0){
-                $profile_data['languages'] = implode(',',$request->languages);
-            }
-            if($request->skills && count($request->skills) > 0){
-                $profile_data['skills'] = implode(',',$request->skills);
-            }
-            if($request->address){
-                $profile_data['address'] = $request->address;
-            }
-            if($request->city){
-                $profile_data['city'] = $request->city;
-            }
-            if($request->state){
-                $profile_data['state'] = $request->state;
-            }
-            if($request->country){
-                $profile_data['country'] = $request->country;
-            }
-            if($request->zip){
-                $profile_data['zip'] = $request->zip;
-            }
-            $profile = Profile::create($profile_data);
-        
-            return redirect(route('admin.manageEmployee'))->with('success', 'Employee created successfully');
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            return back()->with('error', $e->getMessage())->withInput();
         }
+
+
         $countries = Country::all();
         $states = State::where('country_id', 156)->get();
-        foreach($states as $state)
-        {
+        foreach ($states as $state) {
             $cities = City::where('state_id', $state->id)->get();
             break;
         }
@@ -114,22 +133,17 @@ class EmployeeController extends Controller
         $states = State::where('country_id', optional($employee->profile)->country)->get();
         $cities = City::where('state_id', optional($employee->profile)->state)->get();
         $allSkills = JobSkill::all();
-        if($employee->profile && optional($employee->profile)->skills)
-        {
+        if ($employee->profile && optional($employee->profile)->skills) {
             $skills = explode(',', $employee->profile->skills);
-        }
-        else
-        {
+        } else {
             $skills = null;
         }
-        if($employee->profile && $employee->profile->languages)
-        {
-            $languages = explode(',',$employee->profile->languages);
-        }
-        else{
+        if ($employee->profile && $employee->profile->languages) {
+            $languages = explode(',', $employee->profile->languages);
+        } else {
             $languages = null;
         }
-        if($request->method() == "POST"){
+        if ($request->method() == "POST") {
             $request->validate([
                 'first_name' => 'required|string|max:100',
                 'last_name' => 'required|string|max:100',
@@ -138,15 +152,14 @@ class EmployeeController extends Controller
                 'employee_intro' => 'mimes:mp4|max:20000',
                 'resume' => 'mimes:pdf,docx|max:2000'
             ]);
-            
+
             $user_data = $request->all();
-            if($request->password && $request->password != null){
+            if ($request->password && $request->password != null) {
                 $request->validate([
                     'password' => 'min:8|max:100'
                 ]);
                 $user_data['password'] = Hash::make($request->password);
-            }
-            else{
+            } else {
                 unset($user_data['password']);
             }
             $employee->update($user_data);
@@ -159,7 +172,7 @@ class EmployeeController extends Controller
             //     $fileName = date('YmdHis').$file->getClientOriginalName();
             //     $destinationPath = public_path().'/image/employee_images';
             //     $file->move($destinationPath,$fileName);
-               
+
             // }
             $profile_data = [];
             if ($request->hasFile('employee_image')) {
@@ -183,7 +196,7 @@ class EmployeeController extends Controller
             //     $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
             //     $destinationPath = public_path().'/image/employee_videos';
             //     $fileVideo->move($destinationPath,$videoFileName);
-               
+
             // }
 
             if ($request->hasFile('employee_intro')) {
@@ -207,7 +220,7 @@ class EmployeeController extends Controller
             //     $resumeName = date('YmdHis').$resume->getClientOriginalName();
             //     $destinationPath = public_path().'/image/resume';
             //     $resume->move($destinationPath,$resumeName);
-               
+
             // }
 
             if ($request->hasFile('resume')) {
@@ -225,34 +238,34 @@ class EmployeeController extends Controller
 
             $profile_data['gender'] = $request->gender;
             $profile_data['user_id'] = $id;
-            if($request->current_salary){
+            if ($request->current_salary) {
                 $profile_data['current_salary'] = $request->current_salary;
             }
-            if($request->expected_salary){
+            if ($request->expected_salary) {
                 $profile_data['expected_salary'] = $request->expected_salary;
             }
-            if($request->experience){
+            if ($request->experience) {
                 $profile_data['experience'] = $request->experience;
             }
-            if($request->languages && count($request->languages) > 0){
-                $profile_data['languages'] = implode(',',$request->languages);
+            if ($request->languages && count($request->languages) > 0) {
+                $profile_data['languages'] = implode(',', $request->languages);
             }
-            if($request->skills && count($request->skills) > 0){
-                $profile_data['skills'] = implode(',',$request->skills);
+            if ($request->skills && count($request->skills) > 0) {
+                $profile_data['skills'] = implode(',', $request->skills);
             }
-            if($request->address){
+            if ($request->address) {
                 $profile_data['address'] = $request->address;
             }
-            if($request->city){
+            if ($request->city) {
                 $profile_data['city'] = $request->city;
             }
-            if($request->state){
+            if ($request->state) {
                 $profile_data['state'] = $request->state;
             }
-            if($request->country){
+            if ($request->country) {
                 $profile_data['country'] = $request->country;
             }
-            if($request->zip){
+            if ($request->zip) {
                 $profile_data['zip'] = $request->zip;
             }
             // if($request->file('employee_image'))
@@ -271,19 +284,16 @@ class EmployeeController extends Controller
             // }
 
             $profile = Profile::where('user_id', $id)->first();
-            if($profile == null)
-            {
+            if ($profile == null) {
                 Profile::create($profile_data);
-            }
-            else{
+            } else {
                 $profile->update($profile_data);
             }
             return redirect(route('admin.manageEmployee'))->with('success', 'Employee details updated successfully');
         }
-        if($employee->roleUser->role->role == 'employee'){
+        if ($employee->roleUser->role->role == 'employee') {
             return view('admin.dashboard.employee.edit', compact('employee', 'languages', 'allLanguages', 'genders', 'countries', 'states', 'cities', 'skills', 'allSkills'));
-        }
-        else{
+        } else {
             return redirect()->back();
         }
     }
@@ -291,7 +301,7 @@ class EmployeeController extends Controller
     public function delete(Request $request)
     {
         User::find($request->id)->delete();
-        Session::flash('info','Employee Deleted Successfully');
+        Session::flash('info', 'Employee Deleted Successfully');
         return response()->json([
             'status' => 'success',
             'message' => 'Employee has been deleted successfully'
@@ -342,8 +352,7 @@ class EmployeeController extends Controller
 
     public function changeStatus(Request $request)
     {
-        if($request->status == 1)
-        {
+        if ($request->status == 1) {
             $employee = User::find($request->emp_id);
             $employee->is_active = 0;
             $employee->save();
@@ -351,8 +360,7 @@ class EmployeeController extends Controller
                 'status' => 'success',
                 'message' => 'Status changed successfully'
             ]);
-        }
-        else{
+        } else {
             $employee = User::find($request->emp_id);
             $employee->is_active = 1;
             $employee->save();
