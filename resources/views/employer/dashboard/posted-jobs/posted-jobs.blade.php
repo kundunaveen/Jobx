@@ -107,7 +107,7 @@
                                        <!-- <li class="list-group-item">Part Time</li> -->
                                     </ul>
                                     <h6 class="d-flex align-items-center" style="font-size: 13px;margin-bottom: 14px;"><i
-                                          class="icon-location me-2"></i>{{$job->citydetail->city.', '.$job->countrydetail->name}}</h6>
+                                          class="icon-location me-2"></i>{{ optional($job->citydetail)->city.', '.optional($job->countrydetail)->name}}</h6>
                                     <div class="row">
                                        <div class="col-auto"><h6 class="d-flex align-items-center" style="font-size:13px;">Total Applicants :</h6></div>
                                        <div class="col-auto"><h6 class="d-flex align-items-center" style="font-size:13px;"><a href="{{url('/employer/job-applicants', base64_encode($job->id))}}">{{count($job->applicants)}}</a></h6></div>

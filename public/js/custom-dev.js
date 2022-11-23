@@ -247,9 +247,6 @@ $(document).ready(function () {
                 },
                 'skills[]': {
                     required: true
-                },
-                'images_input[]': {
-                    required: true
                 }
             }
         });
