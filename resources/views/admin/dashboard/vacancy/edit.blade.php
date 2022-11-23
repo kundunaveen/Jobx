@@ -99,7 +99,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form action="" method="POST">
+                                    <form action="" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row"> 
                                             <div class="form-group col-md-6">
@@ -113,6 +113,17 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6">
+                                                <label class="form-label">Company Branch</label>
+                                                <input type="text" maxlength="100" name="branch" value="{{ $vacancy->branch }}" class="form-control @error('branch') is-invalid @enderror" required>
+                                                @error('branch')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 row"> 
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Job Title <span class="text-danger">*</span></label>
                                                 <input type="text" maxlength="100" name="job_title" value="{{$vacancy->job_title}}" class="form-control @error('job_title') is-invalid @enderror" required>
                                                 @error('job_title')
@@ -121,9 +132,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                        </div>
-                                        <div class="mt-4 row"> 
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Job Role <span class="text-danger">*</span></label>
                                                 <input type="text" maxlength="100" name="job_role" value="{{$vacancy->job_role}}" class="form-control @error('job_role') is-invalid @enderror" required>
                                                 @error('job_role')
@@ -132,7 +141,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Department <span class="text-danger">*</span></label>
                                                 <input type="text" name="department" maxlength="100" value="{{$vacancy->department}}" class="form-control @error('department') is-invalid @enderror" required>
                                                 @error('department')
@@ -245,6 +254,45 @@
                                                 <label class="form-label">Zip Code</label>
                                                 <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7" type="text" name="zip" value="{{$vacancy->zip}}" class="form-control @error('zip') is-invalid @enderror">
                                                 @error('zip')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 row"> 
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label">Image</label>
+                                                <input type="file" name="images_input[]" multiple class="form-control" id="files">
+                                                <small class="text-secondary">Maximum file size 2 MB (.jpeg, .jpg, .png files are accepted)</small>
+                                                <div class="row thumbnails">
+                                                @forelse ($vacancy->getImagesInArray() as $image)
+                                                    <div class="col-3 pip">
+                                                        <img class='imageThumb' src="{{ \Illuminate\Support\Facades\Storage::disk(config('settings.file_system_service'))->url(\App\Models\Vacancy::IMAGE_PATH.'/'.$image) }}" width="100" class="">
+                                                        <input type="hidden" name="old_images_input[]" value="{{ $image }}">
+                                                        <a class='remove remove-button mt-2 btn btn-danger btn-sm' href='javascript:void(0);' width='100'>Remove</a>
+                                                    </div>
+                                                @empty
+                                                @endforelse
+                                                </div>
+                                                @error('images_input')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label">Video</label>
+                                                <input type="file" name="video_input" class="form-control">
+                                                <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>
+                                                @if($vacancy->video_url)
+                                                <div class="mt-3">
+                                                    <video class="" controls>
+                                                        <source src="{{ $vacancy->video_url }}" type="video/mp4">
+                                                    </video>
+                                                </div>
+                                                @endif                                             
+                                                @error('video_input')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>

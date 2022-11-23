@@ -8,6 +8,7 @@
    <script src="{{asset('js/datatables.min.js')}}"></script>
    <script src="{{asset('js/toastr.js')}}"></script>
    <script src="{{asset('js/select2.min.js')}}"></script>
+   <script src="{{asset('js/custom-dev.js')}}"></script>
 
    <script>
       $(document).ready(function () {

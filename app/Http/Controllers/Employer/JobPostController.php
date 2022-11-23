@@ -203,23 +203,22 @@ class JobPostController extends Controller
                         );
                         $image_files[] = $file_name;
                     }
-                }
 
-                if ($request->filled('old_images_input')) {
-                    $old_selected_images = $request->old_images_input;
-                    if (count($vacancy->getImagesInArray()) > 0) {
-                        $delete_files = array_diff($vacancy->getImagesInArray(), $old_selected_images);
-                        foreach ($delete_files as $delete_file) {
-                            Storage::disk(config('settings.file_system_service'))->delete(Vacancy::IMAGE_PATH . '/' . $delete_file);
+                    if ($request->filled('old_images_input')) {
+                        $old_selected_images = $request->old_images_input;
+                        if (count($vacancy->getImagesInArray()) > 0) {
+                            $delete_files = array_diff($vacancy->getImagesInArray(), $old_selected_images);
+                            foreach ($delete_files as $delete_file) {
+                                Storage::disk(config('settings.file_system_service'))->delete(Vacancy::IMAGE_PATH . '/' . $delete_file);
+                            }
                         }
+                    } else {
+                        // foreach ($vacancy->getImagesInArray() as $image) {
+                        //     Storage::disk(config('settings.file_system_service'))->delete(Vacancy::IMAGE_PATH . '/' . $image);
+                        // }
                     }
-                } else {
-                    foreach ($vacancy->getImagesInArray() as $image) {
-                        Storage::disk(config('settings.file_system_service'))->delete(Vacancy::IMAGE_PATH . '/' . $image);
-                    }
-                }
-
-                $input['images'] = implode(',', $image_files);
+                    $input['images'] = implode(',', $image_files);
+                }                
 
                 if ($request->hasFile('video_input')) {
                     $file = $request->file('video_input');

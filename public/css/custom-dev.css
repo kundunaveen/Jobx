@@ -351,14 +351,19 @@ label.error {
     vertical-align: sub;
 }
 
-.job-listing-alignment{
+.job-listing-alignment {
     font-size: 13px;
     margin-top: 15px;
 }
 
-.round_image{
-    object-fit:cover;
-    border-radius:100%;
-    width:51px;
-    height:51px;
+.round_image {
+    object-fit: cover;
+    border-radius: 100%;
+    width: 51px;
+    height: 51px;
+}
+
+.round-image-class {
+    object-fit: cover;
+    border-radius: 100%;
 }
