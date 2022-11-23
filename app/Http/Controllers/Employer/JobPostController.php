@@ -12,6 +12,7 @@ use App\Models\User;
 use App\Models\MasterAttribute;
 use Session;
 use App\Models\City;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Storage;
 use Validator;
 
@@ -25,10 +26,16 @@ class JobPostController extends Controller
     public function index(Request $request)
     {
         $jobs = Vacancy::where('employer_id', auth()->user()->id);
-        if ($request->search) {
-            $jobs->where('job_title', 'LIKE', '%' . $request->search . '%');
-            //->orWhere('job_role', 'LIKE', '%' . $request->search . '%');
-        }
+
+        $jobs->when($request->search, function(Builder $builder, $value){
+            return $builder->where(function(Builder $builder) use ($value){
+                return $builder->where('job_title', 'LIKE', '%' . $value . '%')
+                ->orWhere('job_role', 'LIKE', '%' . $value . '%');
+            });
+        });
+        // if ($request->search) {
+        //     $jobs->;
+        // }
         if ($request->job_type && $request->job_type != 'empty') {
             // dd($request->job_type);
             $jobs->where('job_type', $request->job_type);
