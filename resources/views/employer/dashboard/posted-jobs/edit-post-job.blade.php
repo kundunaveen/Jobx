@@ -279,10 +279,10 @@ Employer | Edit Post Job
                                 </span>
                                 @enderror
                             </div>
-                            @if($vacancy->video !=null)
+                            @if($vacancy->video_url)
                             <div class="mt-3">
                                 <video class="" controls>
-                                    <source src="{{ asset('image/company_videos/'.$vacancy->video) }}" type="video/mp4">
+                                    <source src="{{ $vacancy->video_url }}" type="video/mp4">
                                 </video>
                             </div>
                             @endif

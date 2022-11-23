@@ -1,0 +1,4 @@
+.round-image-class {
+    object-fit: cover;
+    border-radius: 100%;
+}
