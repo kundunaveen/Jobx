@@ -49,32 +49,7 @@ class JobPostController extends Controller
                 return $builder->whereRaw("cast(salary_offer as decimal(10,2)) >= '{$salary[0]}' AND cast(salary_offer as decimal(10,2)) <= '{$salary[1]}'");
             }
         });
-
-        // if ($request->salary && $request->salary != 'empty') {
-        //     if ($request->salary == 25) {
-        //         $jobs->where('salary_offer', '>', 24);
-        //     } else {
-        //         $salaries = explode('-', $request->salary);
-        //         // dd($salaries);
-        //         $jobs->where('salary_offer', '>', $salaries[0])->where('salary_offer', '<=', $salaries[1]);
-        //     }
-        // }
-
-        // if ($request->experience && $request->experience != 'empty') {
-        //     // dd('yes');
-        //     if ($request->experience == 16) {
-        //         $jobs->where('min_exp', '>', 15);
-        //     } else {
-        //         $exp = explode('-', $request->experience);
-        //         $jobs->where('min_exp', '>', $exp[0])->where('min_exp', '<=', $exp[1]);
-        //     }
-        // }
-        // if ($request->job_type && $request->job_type != 'empty') {
-        //     // dd($request->job_type);
-        //     $jobs->where('job_type', $request->job_type);
-        // }        
         
-        //dump($jobs->toSql());
         $jobs = $jobs->simplePaginate(9);
 
         $job_types = MasterAttribute::whereHas('masterCategory', function ($q) {
