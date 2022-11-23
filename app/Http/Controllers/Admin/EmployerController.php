@@ -12,6 +12,8 @@ use App\Models\MasterAttribute;
 use App\Models\Country;
 use App\Models\City;
 use App\Models\State;
+use App\Notifications\Auth\Credential;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Session;
 
@@ -44,11 +46,14 @@ class EmployerController extends Controller
                 'contact' => 'required'
             ]);
 
+            try {
+                $password = $request->password;
+
             $user = User::create([
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
                 'email' => $request->email,
-                'password' => Hash::make($request->password),
+                'password' => Hash::make($password),
                 'contact' => $request->contact
             ]);
             
@@ -56,13 +61,6 @@ class EmployerController extends Controller
                 'user_id' => $user->id,
                 'role_id' => 2
             ]);
-
-            // Profile::create([
-            //     'user_id' => $user->id,
-            //     'company_name' => $request->company_name,
-            //     'industry_type_id' => $request->industry_type,
-            //     'description' => $request->description
-            // ]);
 
             $profile_data = [];
             $profile_data['user_id'] = $user->id;
@@ -88,6 +86,16 @@ class EmployerController extends Controller
                 $profile_data['description'] = $request->description;
             }
             $profile = Profile::create($profile_data);
+            
+            $user->sendEmailVerificationNotification();
+
+            $credential = [];
+            $credential['password'] = $password;
+            $user->notify(new Credential($credential));
+            } catch (\Exception $e) {
+                Log::error($e->getMessage());
+                return back()->with('error', $e->getMessage())->withInput();
+            }           
             
             return redirect(route('admin.manageEmployer'))->with('success', 'Employer created successfully');
         }
