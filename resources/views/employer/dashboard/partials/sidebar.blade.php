@@ -4,7 +4,7 @@
             <span class="spriteicon"><i class="navbar-icon navbar-close"></i></span> 
         </a>
         <div class="aside-logo">
-            <a href="index.html" class="logo-image d-inline-block  order-1 order-md-2  mb-3 mb-md-0">
+            <a href="{{ route('employer.dashboard') }}" class="logo-image d-inline-block  order-1 order-md-2  mb-3 mb-md-0">
                 <img src="{{asset('assets/images/jobax-logo.png')}}" width="248" alt="" class="img-fluid" />
             </a>
         </div>
