@@ -25,41 +25,63 @@ class JobPostController extends Controller
 
     public function index(Request $request)
     {
-        $jobs = Vacancy::where('employer_id', auth()->user()->id);
-
-        $jobs->when($request->search, function(Builder $builder, $value){
+        $jobs = Vacancy::where('employer_id', auth()->user()->id)
+        ->when($request->search, function(Builder $builder, $value){
             return $builder->where(function(Builder $builder) use ($value){
-                return $builder->where('job_title', 'LIKE', '%' . $value . '%')
-                ->orWhere('job_role', 'LIKE', '%' . $value . '%');
+                return $builder->where('job_title', 'LIKE', "%{$value}%")
+                ->orWhere('job_role', 'LIKE', "%{$value}%")
+                ->orWhere('department', 'like', "%{$value}%");
             });
+        })->when($request->job_type, function(Builder $builder, $value){
+            return $builder->where('job_type', $value);
+        })->when($request->experience, function(Builder $builder, $value){
+            if($value == 16){                
+                return $builder->whereRaw("cast(min_exp as decimal(10,2)) >= '{$value}'");
+            }else{
+                $experience = explode('-', $value);
+                return $builder->whereRaw("cast(min_exp as decimal(10,2)) >= '{$experience[0]}' AND cast(min_exp as decimal(10,2)) <= '{$experience[1]}'");
+            }
+        })->when($request->salary, function(Builder $builder, $value){
+            if($value == 25){                
+                return $builder->whereRaw("cast(salary_offer as decimal(10,2)) >= '{$value}'");
+            }else{
+                $salary = explode('-', $value);
+                return $builder->whereRaw("cast(salary_offer as decimal(10,2)) >= '{$salary[0]}' AND cast(salary_offer as decimal(10,2)) <= '{$salary[1]}'");
+            }
         });
-        // if ($request->search) {
-        //     $jobs->;
+
+        // if ($request->salary && $request->salary != 'empty') {
+        //     if ($request->salary == 25) {
+        //         $jobs->where('salary_offer', '>', 24);
+        //     } else {
+        //         $salaries = explode('-', $request->salary);
+        //         // dd($salaries);
+        //         $jobs->where('salary_offer', '>', $salaries[0])->where('salary_offer', '<=', $salaries[1]);
+        //     }
         // }
-        if ($request->job_type && $request->job_type != 'empty') {
-            // dd($request->job_type);
-            $jobs->where('job_type', $request->job_type);
-        }
-        if ($request->salary && $request->salary != 'empty') {
-            if ($request->salary == 25) {
-                $jobs->where('salary_offer', '>', 24);
-            } else {
-                $salaries = explode('-', $request->salary);
-                // dd($salaries);
-                $jobs->where('salary_offer', '>', $salaries[0])->where('salary_offer', '<=', $salaries[1]);
-            }
-        }
-        if ($request->experience && $request->experience != 'empty') {
-            // dd('yes');
-            if ($request->experience == 16) {
-                $jobs->where('min_exp', '>', 15);
-            } else {
-                $exp = explode('-', $request->experience);
-                $jobs->where('min_exp', '>', $exp[0])->where('min_exp', '<=', $exp[1]);
-            }
-        }
+
+        // if ($request->experience && $request->experience != 'empty') {
+        //     // dd('yes');
+        //     if ($request->experience == 16) {
+        //         $jobs->where('min_exp', '>', 15);
+        //     } else {
+        //         $exp = explode('-', $request->experience);
+        //         $jobs->where('min_exp', '>', $exp[0])->where('min_exp', '<=', $exp[1]);
+        //     }
+        // }
+        // if ($request->job_type && $request->job_type != 'empty') {
+        //     // dd($request->job_type);
+        //     $jobs->where('job_type', $request->job_type);
+        // }        
+        
+        //dump($jobs->toSql());
         $jobs = $jobs->simplePaginate(9);
-        return view('employer.dashboard.posted-jobs.posted-jobs', compact('jobs'));
+
+        $job_types = MasterAttribute::whereHas('masterCategory', function ($q) {
+            $q->where('name', 'Job Type');
+        })->get();
+
+        return view('employer.dashboard.posted-jobs.posted-jobs', compact('jobs', 'job_types'));
     }
 
     public function create(Request $request)

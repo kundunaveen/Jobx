@@ -43,10 +43,11 @@
                      <div class="col-md-3 mt-2" style="padding:10px !important">
                         <!-- <label class="label">Job Type</label> -->
                         <select name="job_type" class="form-control">
-                           <option  value="">Select job type</option>
-                           <option @if(isset($_GET['job_type'])) {{$_GET['job_type'] == 'full_time'?'selected':''}} @endif value="full_time">Full Time</option>
-                           <option @if(isset($_GET['job_type'])) {{$_GET['job_type'] == 'part_time'?'selected':''}} @endif value="part_time">Part Time</option>
-                           <option @if(isset($_GET['job_type'])) {{$_GET['job_type'] == 'contract_based'?'selected':''}} @endif value="contract_based">Contract Based</option>
+                           <option value="">Select job type</option>
+                           @forelse ($job_types as $job_type)
+                           <option value="{{ $job_type->id }}" @if($job_type->id == request()->get('job_type')) selected @endif>{{ $job_type->value }}</option>
+                           @empty                              
+                           @endforelse
                         </select>
                      </div>
                      <div class="col-md-3 mt-2" style="padding:10px !important">
