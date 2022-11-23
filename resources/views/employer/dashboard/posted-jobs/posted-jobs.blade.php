@@ -29,7 +29,7 @@
             <section class="job-listing-section ">
                     <div class="row justify-content-between">
                      <h4 class="col-auto">Posted Jobs</h4>
-                     <span class="col-auto"><u><a class="text-dark" href="{{route('employer.post.job')}}">Post Job</a></u></span>
+                     <span class="col-auto"><u><a href="{{ route('employer.post.job') }}" class="btn btn-custom-posted-jobs btn-primary">Post Job</a></u></span>
                     </div>
                     
                     <form method="GET" class="search-form">
@@ -75,7 +75,7 @@
                         <div class="row"> 
                            <div class="col-6"> <button type="submit" class="col-12 btn btn-custom-posted-jobs btn-primary">Search</button></div>
                            <!-- <a class="text-dark d-none redirect_to_posted_jobs" href="{{route('employer.posted.jobs')}}">Post Job</a> -->
-                           <div class="col-6"><button type="" class="col-12 btn btn-primary btn-custom-posted-jobs" onclick="$('.search-form').remove();window.location.href = '{{url('employer/posted-jobs')}}'">Reset</button></div>
+                           <div class="col-6"><button type="" class="col-12 btn btn-danger btn-custom-posted-jobs" onclick="$('.search-form').remove();window.location.href = "{{ url('employer/posted-jobs') }}">Reset</button></div>
                         </div>
                      </div>
                     </div>
