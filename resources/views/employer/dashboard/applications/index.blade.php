@@ -46,7 +46,7 @@ ul.pagination {
                                             </div>
                                             <div class="card-body">
                                                 
-                                                <table class="table table-striped" id="applicants_table">
+                                                <table class="table table-striped table-reponsive" id="applicants_table">
                                                     <thead>
                                                         <tr>
                                                             <th>Sr. no.</th>

@@ -1,3 +1,6 @@
+/* Employee responsive */
+
+
 .project_images img {
     object-fit: contain;
     height: 230px;
@@ -174,3 +177,181 @@
         padding: 70px 40px 50px;
     }
 }
+
+
+
+/* end employee responsive */
+
+
+/* start employer responsive */
+@media only screen and (max-width: 767px){
+    body.body.modal-open {
+        padding-right: 0!important;
+    } 
+    .top_employer_btn .spriteicon i.navbar-toggler-icon {
+        background-position: -15px -142px;
+    }
+    .top_employer_btn a.nav-link.link-secondary{
+        float: right;
+        position: relative;
+        top: 10px;
+    }
+    .top_employer_btn {
+        width: 100%;
+    }
+    .dashboard-main .dashboard-section .recruiter-section {
+        margin-top: 50px;
+    }
+    .dashboard-main .dashboard-section .recruiter-section .card-body .recruiter-article p {
+        padding: 0px 0 10px;
+        font-size: 16px;
+    }
+    .footer .footer-bottom {
+        padding: 25px 0;
+    }
+    .dashboard-main .dashboard-section {
+        padding: 200px 20px 0;
+    }
+    .employer_custom_btn li.custom-dropdown-menu {
+        margin-right: 0;
+    }
+    /* .employer_custom_btn .notification_btn{
+        margin-right: 25px!important;
+    } */
+    .job-profile-info .btn.btn-default {
+        line-height: 2;
+    }
+    .step-progress .step-slider .step-slider-item:after {
+        right: -25px;
+    }    
+    .step-progress .step-slider {
+        left: -10px;
+        top: 10px;
+    }
+    span.select2.select2-container.select2-container--default {
+        min-height: 58px !important;
+        height: auto!important;
+    }
+    div#applicants_table_wrapper .col-sm-12 {
+        overflow-x: auto;
+    }
+    table#applicants_table th, table#applicants_table td {
+        width: fit-content!important;
+    }
+    
+    table#applicants_table {
+        width: max-content;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+    body.body.modal-open {
+        padding-right: 0!important;
+    } 
+    .top_employer_btn {
+        margin-bottom: 11px;
+    }
+    span.select2.select2-container.select2-container--default {
+        min-height: 58px !important;
+        height: auto!important;
+    }
+    div#applicants_table_wrapper .col-sm-12 {
+        overflow-x: auto;
+    }
+    table#applicants_table th, table#applicants_table td {
+        width: fit-content!important;
+    }
+    
+    table#applicants_table {
+        width: max-content;
+    }
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1024px){
+    body.body.modal-open {
+        padding-right: 0!important;
+    } 
+    .step-progress .step-slider .step-slider-item:after {
+        right: -10px;
+    }
+    span.select2.select2-container.select2-container--default {
+        min-height: 58px !important;
+        height: auto!important;
+    }
+    div#applicants_table_wrapper .col-sm-12 {
+        overflow-x: auto;
+    }
+    table#applicants_table th, table#applicants_table td {
+        width: fit-content!important;
+    }
+    
+    table#applicants_table {
+        width: max-content;
+    }
+}
+
+/* end employer responsive */
+
+/* main screen */
+
+@media only screen and (max-width: 767px){
+    section.banner-section.main-banner-section, .featured-vacancies-section, .best-company {
+        padding-left: 10px;
+        padding-right: 10px;
+    } 
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+    section.banner-section.main-banner-section, .featured-vacancies-section{
+        padding-left: 40px;
+        padding-right: 40px;
+    } 
+    .header .logo-image {
+        transform: translateX(-190%) translateY(-50%);
+    }
+    .best-company .best-company-wrapper .best-company-left {
+        width: 100%;
+    }
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1024px){
+    section.banner-section.main-banner-section, .featured-vacancies-section {
+        padding-left: 40px;
+        padding-right: 40px;
+    } 
+    .header .logo-image {
+        transform: translateX(-195%) translateY(-50%);
+    }
+}
+
+
+/* end main screen */
+
+
+/* Login page */
+
+
+
+@media only screen and (max-width: 767px){
+    
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+    .login-page {
+        padding: 180px 0 100px;
+        position: relative;
+        z-index: 2;
+    }
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1024px){
+    .login-page {
+        padding: 180px 0 100px;
+        position: relative;
+        z-index: 2;
+    }
+}
+/* end login page */

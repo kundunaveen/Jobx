@@ -28,6 +28,7 @@
    <link rel="stylesheet" href="{{asset('assets/scss/main.css')}}" />
    <link rel="stylesheet" href="{{asset('css/toastr.css')}}" />
    <link rel="stylesheet" href="{{asset('css/select2.min.css')}}" />
+   <link rel="stylesheet" href="{{asset('css/responsive.css')}}" />
 </head>
 
 <body>
