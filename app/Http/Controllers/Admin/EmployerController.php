@@ -27,7 +27,7 @@ class EmployerController extends Controller
     public function index()
     {
         // $employers = User::employerList();
-        $employers = User::whereHas('roleUser', function($q){
+        $employers = User::whereHas('roleUser', function ($q) {
             $q->where('role_id', 2);
         })->latest()->get();
         return view('admin.dashboard.employer.index', compact('employers'));
@@ -35,8 +35,7 @@ class EmployerController extends Controller
 
     public function create(Request $request)
     {
-        if($request->method()=="POST")
-        {
+        if ($request->method() == "POST") {
             $request->validate([
                 'first_name' => 'required|string|max:100',
                 'last_name' => 'required|string|max:100',
@@ -49,65 +48,64 @@ class EmployerController extends Controller
             try {
                 $password = $request->password;
 
-            $user = User::create([
-                'first_name' => $request->first_name,
-                'last_name' => $request->last_name,
-                'email' => $request->email,
-                'password' => Hash::make($password),
-                'contact' => $request->contact
-            ]);
-            
-            RoleUser::create([
-                'user_id' => $user->id,
-                'role_id' => 2
-            ]);
+                $user = User::create([
+                    'first_name' => $request->first_name,
+                    'last_name' => $request->last_name,
+                    'email' => $request->email,
+                    'password' => Hash::make($password),
+                    'contact' => $request->contact
+                ]);
 
-            $profile_data = [];
-            $profile_data['user_id'] = $user->id;
-            $profile_data['company_name'] = $request->company_name;
-            $profile_data['industry_type_id'] = $request->industry_type;
+                RoleUser::create([
+                    'user_id' => $user->id,
+                    'role_id' => 2
+                ]);
 
-            if($request->address){
-                $profile_data['address'] = $request->address;
-            }
-            if($request->city){
-                $profile_data['city'] = $request->city;
-            }
-            if($request->state){
-                $profile_data['state'] = $request->state;
-            }
-            if($request->country){
-                $profile_data['country'] = $request->country;
-            }
-            if($request->zip){
-                $profile_data['zip'] = $request->zip;
-            }
-            if($request->description){
-                $profile_data['description'] = $request->description;
-            }
-            $profile = Profile::create($profile_data);
-            
-            $user->sendEmailVerificationNotification();
+                $profile_data = [];
+                $profile_data['user_id'] = $user->id;
+                $profile_data['company_name'] = $request->company_name;
+                $profile_data['industry_type_id'] = $request->industry_type;
 
-            $credential = [];
-            $credential['password'] = $password;
-            $user->notify(new Credential($credential));
+                if ($request->address) {
+                    $profile_data['address'] = $request->address;
+                }
+                if ($request->city) {
+                    $profile_data['city'] = $request->city;
+                }
+                if ($request->state) {
+                    $profile_data['state'] = $request->state;
+                }
+                if ($request->country) {
+                    $profile_data['country'] = $request->country;
+                }
+                if ($request->zip) {
+                    $profile_data['zip'] = $request->zip;
+                }
+                if ($request->description) {
+                    $profile_data['description'] = $request->description;
+                }
+                $profile = Profile::create($profile_data);
+
+                $user->sendEmailVerificationNotification();
+
+                $credential = [];
+                $credential['password'] = $password;
+                $user->notify(new Credential($credential));
             } catch (\Exception $e) {
                 Log::error($e->getMessage());
                 return back()->with('error', $e->getMessage())->withInput();
-            }           
-            
+            }
+
             return redirect(route('admin.manageEmployer'))->with('success', 'Employer created successfully');
         }
         $industries = MasterAttribute::join('master_attribute_categories', 'master_attribute_categories.id', 'master_attributes.master_attribute_category_id')->where('master_attribute_categories.name', 'Industries')->select('master_attributes.*')->get();
         $countries = Country::all();
         $states = State::where('country_id', 156)->get();
-        foreach($states as $state)
-        {
+        foreach ($states as $state) {
             $cities = City::where('state_id', $state->id)->get();
             break;
         }
-        return view('admin.dashboard.employer.create', compact('industries', 'states','cities', 'countries'));
+        return view('admin.dashboard.employer.create', compact('industries', 'states', 'cities', 'countries'));
     }
 
     public function edit(Request $request, $id)
@@ -117,7 +115,7 @@ class EmployerController extends Controller
         $countries = Country::all();
         $states = State::where('country_id', optional($employer->profile)->country)->get();
         $cities = City::where('state_id', optional($employer->profile)->state)->get();
-        if($request->method() == "POST"){
+        if ($request->method() == "POST") {
             $request->validate([
                 'first_name' => 'required|string|max:100',
                 'last_name' => 'required|string|max:100',
@@ -126,161 +124,95 @@ class EmployerController extends Controller
                 'company_image' => 'mimes:jpeg,bmp,png,jpg|max:2000',
                 'company_intro' => 'mimes:mp4|max:20000'
             ]);
-            
-            $user_data = $request->all();
-            
-            if($request->password && $request->password != null){
-                $request->validate([
-                    'password' => 'min:8|max:100'
-                ]);
-                $user_data['password'] = Hash::make($request->password);
-            }
-            else{
-                unset($user_data['password']);
-            }
-            $employer->update($user_data);
+            try {
 
-            $profile = Profile::where('user_id',$id)->first();
-            //dd($id);
-            // if($request->file('company_image')){
-                
-            //     $file = $request->file('company_image');
-            //     $fileName = date('YmdHis').$file->getClientOriginalName();
-            //     $destinationPath = public_path().'/image/company_images';
-            //     $file->move($destinationPath,$fileName);
-               
-            // }
+                $user_data = $request->all();
 
-            $fileName = null;
-            if ($request->hasFile('company_image')) {
-                $file = $request->file('company_image');
-                $file_name = $file->hashName();
-                $file->storeAs(
-                    Profile::EMPLOYER_IMAGE_PATH,
-                    $file_name,
-                    config('settings.file_system_service')
-                );
-                if($profile instanceof Profile && filled($profile->employer_image_path)){
-                    Storage::disk(config('settings.file_system_service'))->delete($profile->employer_image_path);
+                if ($request->password && $request->password != null) {
+                    $request->validate([
+                        'password' => 'min:8|max:100'
+                    ]);
+                    $user_data['password'] = Hash::make($request->password);
+                } else {
+                    unset($user_data['password']);
                 }
-                $fileName = $file_name;
-            }
+                $employer->update($user_data);
 
-            // if($request->file('company_intro')){
-            //     $fileVideo = $request->file('company_intro');
-            //     $videoFileName = date('YmdHis').$fileVideo->getClientOriginalName();
-            //     $destinationPath = public_path().'/image/company_videos';
-            //     $fileVideo->move($destinationPath,$videoFileName);
-               
-            // }
+                $profile = Profile::where('user_id', $id)->first();
 
-            $videoFileName = null;
-            if ($request->hasFile('company_intro')) {
-                $file = $request->file('company_intro');
-                $file_name = $file->hashName();
-                $file->storeAs(
-                    Profile::EMPLOYER_VIDEO_PATH,
-                    $file_name,
-                    config('settings.file_system_service')
-                );
-                if($profile instanceof Profile && filled($profile->employer_video_path)){
-                    Storage::disk(config('settings.file_system_service'))->delete($profile->employer_video_path);
+                $fileName = null;
+                if ($request->hasFile('company_image')) {
+                    $file = $request->file('company_image');
+                    $file_name = $file->hashName();
+                    $file->storeAs(
+                        Profile::EMPLOYER_IMAGE_PATH,
+                        $file_name,
+                        config('settings.file_system_service')
+                    );
+                    if ($profile instanceof Profile && filled($profile->employer_image_path)) {
+                        Storage::disk(config('settings.file_system_service'))->delete($profile->employer_image_path);
+                    }
+                    $fileName = $file_name;
                 }
-                $videoFileName = $file_name;
-            }
 
-            $profile_data = [];
-            $profile_data['user_id'] = $id;
-            $profile_data['company_name'] = $request->company_name;
-            $profile_data['industry_type_id'] = $request->industry_type;
+                $videoFileName = null;
+                if ($request->hasFile('company_intro')) {
+                    $file = $request->file('company_intro');
+                    $file_name = $file->hashName();
+                    $file->storeAs(
+                        Profile::EMPLOYER_VIDEO_PATH,
+                        $file_name,
+                        config('settings.file_system_service')
+                    );
+                    if ($profile instanceof Profile && filled($profile->employer_video_path)) {
+                        Storage::disk(config('settings.file_system_service'))->delete($profile->employer_video_path);
+                    }
+                    $videoFileName = $file_name;
+                }
 
-            if($request->address){
-                $profile_data['address'] = $request->address;
-            }
-            if($request->city){
-                $profile_data['city'] = $request->city;
-            }
-            if($request->state){
-                $profile_data['state'] = $request->state;
-            }
-            if($request->country){
-                $profile_data['country'] = $request->country;
-            }
-            if($request->zip){
-                $profile_data['zip'] = $request->zip;
-            }
-            if($request->description){
-                $profile_data['description'] = $request->description;
-            }
-            if($request->file('company_image'))
-            {
-                $profile_data['logo'] = $fileName;
-            }
-            if($request->file('company_intro'))
-            {
-                $profile_data['intro_video'] = $videoFileName;
-            }
-            if($request->file('company_intro'))
-            {
-                $profile_data['intro_video'] = $videoFileName;
-            }
-            $profile = Profile::where('user_id', $id)->update($profile_data);
-            // $profile = Profile::where('user_id', $id)->first();
-            // if($profile == null)
-            // {
-            //     Profile::create([
-            //         'user_id' => $id,
-            //         'company_name' => $request->company_name,
-            //         'industry_type_id' => $request->industry_type,
-            //         'description' => $request->description,
-            //         'logo' => $request->file('company_image')? $fileName:null,
-            //         'intro_video' => $request->file('company_intro')?$videoFileName : null,
+                $profile_data = [];
+                $profile_data['user_id'] = $id;
+                $profile_data['company_name'] = $request->company_name;
+                $profile_data['industry_type_id'] = $request->industry_type;
 
-            //     ]);
-            // }
-            // else{
-            //     if($request->file('company_image') && $request->file('company_intro'))
-            //     {
-            //         $profile->update([
-            //             'company_name' => $request->company_name,
-            //             'industry_type_id' => $request->industry_type,
-            //             'description' => $request->description,
-            //             'logo' => $fileName,
-            //             'intro_video' => $videoFileName,
-            //         ]);
-            //     }
-            //     elseif($request->file('company_image'))
-            //     {
-            //         $profile->update([
-            //             'company_name' => $request->company_name,
-            //             'industry_type_id' => $request->industry_type,
-            //             'description' => $request->description,
-            //             'logo' => $fileName
-            //         ]);
-            //     }
-            //     elseif($request->file('company_intro'))
-            //     {
-            //         $profile->update([
-            //             'company_name' => $request->company_name,
-            //             'industry_type_id' => $request->industry_type,
-            //             'description' => $request->description,
-            //             'intro_video' => $videoFileName
-            //         ]);
-            //     }
-            //     else{
-            //         $profile->update([
-            //             'company_name' => $request->company_name,
-            //             'industry_type_id' => $request->industry_type,
-            //             'description' => $request->description,
-            //         ]);
-            //     }
-            // }
-            return redirect(route('admin.manageEmployer'))->with('success', 'Employer details updated successfully');
+                if ($request->address) {
+                    $profile_data['address'] = $request->address;
+                }
+                if ($request->city) {
+                    $profile_data['city'] = $request->city;
+                }
+                if ($request->state) {
+                    $profile_data['state'] = $request->state;
+                }
+                if ($request->country) {
+                    $profile_data['country'] = $request->country;
+                }
+                if ($request->zip) {
+                    $profile_data['zip'] = $request->zip;
+                }
+                if ($request->description) {
+                    $profile_data['description'] = $request->description;
+                }
+                if ($request->file('company_image')) {
+                    $profile_data['logo'] = $fileName;
+                }
+                if ($request->file('company_intro')) {
+                    $profile_data['intro_video'] = $videoFileName;
+                }
+                if ($request->file('company_intro')) {
+                    $profile_data['intro_video'] = $videoFileName;
+                }
+                $profile = Profile::where('user_id', $id)->update($profile_data);
+
+                return redirect()->route('admin.manageEmployer')->with('success', 'Employer details updated successfully');
+            } catch (\Exception $e) {
+                Log::error($e->getMessage());
+                return back()->withInput()->with('error', $e->getMessage());
+            }
         }
-        if($employer->roleUser->role->role == 'employer'){
+        if ($employer->roleUser->role->role == 'employer') {
             return view('admin.dashboard.employer.edit', compact('employer', 'industries', 'countries', 'states', 'cities'));
-        }
-        else{
+        } else {
             return redirect()->back();
         }
     }
@@ -344,8 +276,7 @@ class EmployerController extends Controller
 
     public function changeStatus(Request $request)
     {
-        if($request->status == 1)
-        {
+        if ($request->status == 1) {
             $employer = User::find($request->emp_id);
             $employer->is_active = 0;
             $employer->save();
@@ -353,8 +284,7 @@ class EmployerController extends Controller
                 'status' => 'success',
                 'message' => 'Status changed successfully'
             ]);
-        }
-        else{
+        } else {
             $employer = User::find($request->emp_id);
             $employer->is_active = 1;
             $employer->save();

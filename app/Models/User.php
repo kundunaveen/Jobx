@@ -106,4 +106,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function favoriteJobs(): HasMany{
         return $this->hasMany(FavoriteJob::class);
     }
+
+    public function appliedJobs() :HasMany{
+        return $this->hasMany(AppliedJob::class);
+    }
 }

@@ -342,7 +342,8 @@ Profile
             No professional skills has been added.
             @endif
         </div>
-    </section>
+    </section>    
+    @include('employee.profile.includes.applied_job')
     <!-- Skills Section End Here-->
 </main>
 <!--========= Main Content End Here =========-->
