@@ -58,9 +58,9 @@
                         </a>
                         @endguest
                         @auth
-                        <ul class="list-group flex-row align-items-center justify-content-end">
+                        <ul class="list-group flex-row align-items-center justify-content-end profile_ul_list">
                             @if(auth()->user()->roleUser->role->role == 'employee')
-                            <li class="list-group-item bg-transparent border-0 p-0  me-3">
+                            <li class="list-group-item bg-transparent border-0 p-0  me-3 post_header">
                                 <a type="button" class="btn btn-default" href="{{ route('employee.profile.edit') }}">
                                     <span class="me-2">
                                         <i class="icon icon-resume"></i>
@@ -69,7 +69,7 @@
                                 </a>
                             </li>
                             @endif
-                            <li class="list-group-item d-flex flex-row  bg-transparent border-0 p-0">
+                            <li class="list-group-item d-flex flex-row  bg-transparent border-0 p-0 profile_name">
                                 <figure class="me-3 me-sm-1 mb-0">
                                     <img src="{{ optional(auth()->user())->profile_image_url }}" style="object-fit:cover;border-radius:100%;width:51px;height:51px" height="51" width="51" alt="" class="img-fluid" />
                                 </figure>
