@@ -155,15 +155,20 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                 <h4>Posted Vacancies</h4>
-                                <a href="{{url('/employer/posted-jobs')}}">See all</a>
+                                @if($postedJobs->count())
+                                    <a href="{{url('/employer/posted-jobs')}}">See all</a>
+                                @endif
                                 </div>
                                 <ul class="list-group posted-list">
                                 @forelse($postedJobs as $job)
                                 <li class="list-group-item d-flex align-items-center justify-content-between">
-                                    <h5>{{$job->job_role}}</h5>
+                                    <h5>{{ $job->job_role }}</h5>
                                     <div class="pause-share-wrapper">
-                                        <a href="javascript:void(0)"><span class="pause-btn"><i class="icon-pause"></i></span></a> 
-                                        <a href="javascript:void(0)"><span class="share-btn"><i class="icon-share"></i></span></a>
+                                        <a href="{{ route('employer.edit.post.job', $job->id) }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="22px" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                                    </svg>
+                                        </a>
                                     </div>
                                 </li>
                                 @empty
@@ -178,24 +183,29 @@
                             <div class="card-body">
                                 <div class="d-flex justify-content-between">
                                 <h4>New Applicants</h4>
+                                @if($applications->count())
                                 <a href="{{url('/employer/new-applicants')}}">See all</a>
+                                @endif
                                 </div>
                                 <ul class="list-group applicants-list">
                                 @forelse($applications as $application)
                                 <li class="list-group-item d-flex align-items-center justify-content-between ">
                                     <div class="d-flex align-items-center">
                                         <figure>
-                                            <img src="{{asset('assets/images/user-img.png')}}" width="51" height="51" alt=""
-                                            class="img-fluid">
+                                            <img src="{{ optional($application->user)->profile_image_url }}" width="51" height="51" alt=""
+                                            class="round-image-class">
                                         </figure>
                                         <article>
-                                            <h5>{{$application->user->first_name.' '.$application->user->last_name}}</h5>
-                                            <span class="designation">{{$application->user->profile->current_job_title}}</span>
+                                            <h5>{{ optional($application->user)->full_name }}</h5>
+                                            <span class="designation">{{ optional($application->user)->profile_current_job_title }}</span>
                                         </article>
                                     </div>
                                     <div class="phone-email-wrapper">
-                                        <a href="tel:8888888888"><span class="phone-btn"><i class="icon-phone"></i></span></a>
-                                        <a href="mailto:123@gmail.com"><span class="email-btn"><i class="icon-email"></i></span></a>
+                                        <a href="{{ route('employer.view-employee-profile', base64_encode($application->id)) }}">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" width="22px" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L6.832 19.82a4.5 4.5 0 01-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 011.13-1.897L16.863 4.487zm0 0L19.5 7.125" />
+                                                    </svg>
+                                        </a>
                                     </div>
                                 </li>
                                 @empty
