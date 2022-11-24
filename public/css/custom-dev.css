@@ -367,3 +367,14 @@ label.error {
     object-fit: cover;
     border-radius: 100%;
 }
+
+.slider_image img {
+    margin: 0 auto;
+    object-fit: cover;
+    border-radius: 100%;
+    max-width: 80px;
+    height: 80px;
+}
+.slider_image .job-btn-wrapper a {
+    margin: 0 auto;
+  }

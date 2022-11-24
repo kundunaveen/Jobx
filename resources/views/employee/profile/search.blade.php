@@ -136,7 +136,13 @@ Job Search
                                     <span class="date job-listing-alignment">{{date('d F, Y',strtotime($job->created_at))}}</span>
                                  </figure>
                                  <article class="job-profile-article">
-                                    <h5 class="">{{ Str::limit($job->job_role, 25)}}</h5>
+                                    <h5 class="">
+                                       {{ Str::limit($job->job_role, 25)}}
+                                       &nbsp;&nbsp;
+                                       <a href="{{ route('company-show', optional($job->loadMissing('user')->user)->id) }}" target="_blank" title="View company">
+                                          <i class="fa fa-building" aria-hidden="true"></i>
+                                       </a>
+                                    </h5>
                                     <ul class="job-type list-group flex-row mb-3">
                                        <li class="list-group-item">
                                           {{ $job->job_type_text }}
@@ -153,6 +159,7 @@ Job Search
                                        {{$job->description}} 
                                     @endif</p>
                                     <x-review.company :company-id="optional($job->loadMissing('user')->user)->id" />
+                                    
                                     <div class="job-btn-wrapper d-flex justify-content-between">
                                        <a href="{{route('employee.job.apply', $job->id)}}" class="btn btn-lg">@if( in_array($job->id, $applied_jobs)) Applied @else Apply @endif</a>
                                        <a href="{{route('employee.job.preview', $job->id)}}" class="btn btn-default btn-md">Preview Job</a>
