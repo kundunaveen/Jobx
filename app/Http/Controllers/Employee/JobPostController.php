@@ -55,4 +55,19 @@ class JobPostController extends Controller
         $job_details =  Vacancy::where('id', $id)->first();
         return view('employee.profile.previewjob', compact('job_details', 'profile'));
     }
+
+    public function jobWithdrawn(int $vacancy_id)
+    {
+        $applied_vacancy = AppliedJob::where([
+                ['user_id', '=', auth()->user()->id],
+                ['vacancy_id', '=', $vacancy_id],
+            ])->first();
+        
+        if($applied_vacancy instanceof AppliedJob){
+            $applied_vacancy->delete();
+            return Redirect::route('employee.home')->with('success', 'Job withdrawn successful');
+        }
+        
+        return back()->withInput()->with('error', 'Something wrong');
+    }
 }

@@ -27,7 +27,15 @@
             <div class="header-wrapper py-4">
                 <div class="d-flex flex-column flex-md-row align-items-center justify-content-between position-relative">
                     <a href="#" class="nav-link link-secondary order-2 order-md-1 mb-3 mb-md-0 "></a>
-
+                    @auth
+                    <ul class="list-group flex-row align-items-center justify-content-end">
+                        <li class="list-group-item bg-transparent border-0 p-0  me-3">
+                            <a class="dropdown-item nav-item" href="{{ route('employee.home') }}">
+                                Dashboard
+                            </a>
+                        </li>
+                    </ul>
+                    @endauth
                     <a href="{{ url('/') }}" class="logo-image d-inline-block  order-1 order-md-2  mb-3 mb-md-0">
                         <img src="{{asset('assets/images/jobax-logo.png')}}" width="248" alt="" class="img-fluid" />
                     </a>
@@ -76,11 +84,6 @@
                                 <div class="dropdown">
                                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="true">&nbsp;&nbsp;&nbsp;</a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" data-popper-placement="bottom-end">
-                                        <li class="nav-link">
-                                            <a class="dropdown-item nav-item" href="{{ route('employee.home') }}">
-                                                Dashboard
-                                            </a>
-                                        </li>
                                         <li class="nav-link"><a class="dropdown-item nav-item" href="{{route('employee.profile.edit')}}"> Profile</a></li>
                                         <li class="nav-link"><a class="dropdown-item nav-item" data-bs-toggle="modal" data-bs-target="#changePasswordModal" href="javascript:void(0)"> Change Password</a></li>
                                         <li class="nav-link"><a class="dropdown-item nav-item" href="javascript:void(0)" onclick="$('#logout_form').submit()"> Logout</a></li>
