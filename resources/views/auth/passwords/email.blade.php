@@ -25,6 +25,7 @@
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('assets/scss/main.css') }}" />
     <link rel="stylesheet" href="{{asset('css/toastr.css')}}" />
+    <link rel="stylesheet" href="{{ asset('css/responsive.css') }}" />
 </head>
 
 <body class="body">

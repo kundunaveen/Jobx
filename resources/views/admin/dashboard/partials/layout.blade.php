@@ -26,8 +26,9 @@
    <link rel="stylesheet" href="{{asset('assets/scss/main.css')}}" />
    <link rel="stylesheet" href="{{asset('css/toastr.css')}}" />
    <link rel="stylesheet" href="{{asset('css/select2.min.css')}}" />
-   <link rel="stylesheet" href="{{asset('css/datatables.min.css')}}" />
-   <link rel="stylesheet" href="{{asset('css/admin-custom-dev.css')}}" />
+   <link rel="stylesheet" href="{{asset('css/datatables.min.css')}}" />  
+   <link rel="stylesheet" href="{{asset('css/admin-custom-dev.css')}}" /> 
+   <link rel="stylesheet" href="{{asset('css/responsive.css')}}" />
    <style>
       .select2-selection{
          height: 38px;

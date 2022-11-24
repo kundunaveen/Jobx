@@ -1,0 +1,357 @@
+/* Employee responsive */
+
+
+.project_images img {
+    object-fit: contain;
+    height: 230px;
+}
+@media only screen and (max-width: 767px){
+    section.experience-section ul.list-group li.list-group-item h5 .text-secondary {
+        margin-left: 0!important;
+    }
+    section.video-section video {
+        height: 100%;
+    }
+    section.education-section ul.list-group li article {
+        width: -webkit-fill-available;
+    }
+    .skills-section .list-group .list-group-item {
+        padding: 2px 15px;
+    }
+    .profile-section .profile-summary .bio-list .bio-list-wrapper p {
+        line-height: 1;
+        padding-bottom: 15px;
+    }
+    .profile-section .profile-summary .bio-list .bio-list-wrapper h5 {
+        margin-bottom: 5px;
+    }
+    .profile-main-wrapper {
+        padding: 50px 0 50px;
+    }
+    .profile-section {
+        padding: 0px 0 60px;
+    }
+    .video-section {
+        padding: 0 0 40px;
+    }
+    .education-section {
+        padding: 35px 0 20px;
+    }
+    section.experience-section ul li.list-group-item:last-child {
+        padding-bottom: 0!important;
+    }
+    .profile-section .profile-wrapper {
+        padding: 20px 20px 0;
+    }
+    .profile_ul_list {
+        display: inline-block;
+    }
+    .post_header {
+        margin: 0!important;
+        display:block!important;
+    }
+    .post_header a {
+        width: 100%;
+        margin-bottom: 20px;
+    }
+    li.profile_name, li.custom-dropdown-menu {
+        display: inline-flex!important;
+    }
+    .project_images img {
+        object-fit: contain;
+        height: 180px;
+    }
+    .project_images {
+        width: 33%;
+    }
+    span.select2.select2-container.select2-container--default {
+        min-height: 58px !important;
+        height: auto!important;
+    }
+    .main-bg .form-inner-wrapper .btn-form-wrapper {
+        margin-top: 20px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 35px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        top: 15px;
+        right: 15px;
+    }
+    body.body.iti-mobile.modal-open {
+        padding-right: 0!important;
+    }
+    .profile-main-wrapper {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    section.banner-section.inner-banner.main-banner-section {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .footer .footer-top {
+        padding: 50px 10px 20px;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+    .inner-header .logo-image {
+        transform: translateX(-189%) translateY(-50%);
+    }
+    section.education-section ul.list-group li article {
+        width: -webkit-fill-available;
+    }
+    .project_images img {
+        object-fit: contain;
+        height: 200px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 35px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        top: 15px;
+        right: 15px;
+    }
+    body.body.iti-mobile.modal-open {
+        padding-right: 0!important;
+    }
+    .profile-main-wrapper {
+        background-color: #F4F4F4;
+        padding: 60px 40px 100px;
+    }
+    section.banner-section.inner-banner.main-banner-section {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    button.btn.btn-lg.search-btn {
+        padding: 18px;
+    }
+    .footer .footer-top {
+        padding: 70px 40px 50px;
+    }
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1024px){
+    section.education-section ul.list-group li article {
+        width: -webkit-fill-available;
+    }
+    .main-bg .form-inner-wrapper .form-inner {
+        max-width: 760px;
+    }
+    .inner-header .logo-image {
+        transform: translateX(-185%) translateY(-50%);
+    }
+    .main-bg {
+        padding: 150px 0 80px;
+    }
+    .footer .footer-bottom {
+        padding: 15px 0;
+    }
+    .project_images img {
+        object-fit: contain;
+        height: 200px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 35px;
+    }
+    .select2-container--default .select2-selection--single .select2-selection__arrow {
+        top: 15px;
+        right: 15px;
+    }
+    body.body.iti-mobile.modal-open {
+        padding-right: 0!important;
+    }
+    .profile-main-wrapper {
+        background-color: #F4F4F4;
+        padding: 60px 40px 100px;
+    }
+    section.banner-section.inner-banner.main-banner-section {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+    button.btn.btn-lg.search-btn {
+        padding: 18px;
+    }
+    .footer .footer-top {
+        padding: 70px 40px 50px;
+    }
+}
+
+
+
+/* end employee responsive */
+
+
+/* start employer responsive */
+@media only screen and (max-width: 767px){
+    body.body.modal-open {
+        padding-right: 0!important;
+    } 
+    .top_employer_btn .spriteicon i.navbar-toggler-icon {
+        background-position: -15px -142px;
+    }
+    .top_employer_btn a.nav-link.link-secondary{
+        float: right;
+        position: relative;
+        top: 10px;
+    }
+    .top_employer_btn {
+        width: 100%;
+    }
+    .dashboard-main .dashboard-section .recruiter-section {
+        margin-top: 50px;
+    }
+    .dashboard-main .dashboard-section .recruiter-section .card-body .recruiter-article p {
+        padding: 0px 0 10px;
+        font-size: 16px;
+    }
+    .footer .footer-bottom {
+        padding: 25px 0;
+    }
+    .dashboard-main .dashboard-section {
+        padding: 200px 20px 0;
+    }
+    .employer_custom_btn li.custom-dropdown-menu {
+        margin-right: 0;
+    }
+    /* .employer_custom_btn .notification_btn{
+        margin-right: 25px!important;
+    } */
+    .job-profile-info .btn.btn-default {
+        line-height: 2;
+    }
+    .step-progress .step-slider .step-slider-item:after {
+        right: -25px;
+    }    
+    .step-progress .step-slider {
+        left: -10px;
+        top: 10px;
+    }
+    span.select2.select2-container.select2-container--default {
+        min-height: 58px !important;
+        height: auto!important;
+    }
+    div#applicants_table_wrapper .col-sm-12 {
+        overflow-x: auto;
+    }
+    table#applicants_table th, table#applicants_table td {
+        width: fit-content!important;
+    }
+    
+    table#applicants_table {
+        width: max-content;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+    body.body.modal-open {
+        padding-right: 0!important;
+    } 
+    .top_employer_btn {
+        margin-bottom: 11px;
+    }
+    span.select2.select2-container.select2-container--default {
+        min-height: 58px !important;
+        height: auto!important;
+    }
+    div#applicants_table_wrapper .col-sm-12 {
+        overflow-x: auto;
+    }
+    table#applicants_table th, table#applicants_table td {
+        width: fit-content!important;
+    }
+    
+    table#applicants_table {
+        width: max-content;
+    }
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1024px){
+    body.body.modal-open {
+        padding-right: 0!important;
+    } 
+    .step-progress .step-slider .step-slider-item:after {
+        right: -10px;
+    }
+    span.select2.select2-container.select2-container--default {
+        min-height: 58px !important;
+        height: auto!important;
+    }
+    div#applicants_table_wrapper .col-sm-12 {
+        overflow-x: auto;
+    }
+    table#applicants_table th, table#applicants_table td {
+        width: fit-content!important;
+    }
+    
+    table#applicants_table {
+        width: max-content;
+    }
+}
+
+/* end employer responsive */
+
+/* main screen */
+
+@media only screen and (max-width: 767px){
+    section.banner-section.main-banner-section, .featured-vacancies-section, .best-company {
+        padding-left: 10px;
+        padding-right: 10px;
+    } 
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+    section.banner-section.main-banner-section, .featured-vacancies-section{
+        padding-left: 40px;
+        padding-right: 40px;
+    } 
+    .header .logo-image {
+        transform: translateX(-190%) translateY(-50%);
+    }
+    .best-company .best-company-wrapper .best-company-left {
+        width: 100%;
+    }
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1024px){
+    section.banner-section.main-banner-section, .featured-vacancies-section {
+        padding-left: 40px;
+        padding-right: 40px;
+    } 
+    .header .logo-image {
+        transform: translateX(-195%) translateY(-50%);
+    }
+}
+
+
+/* end main screen */
+
+
+/* Login page */
+
+
+
+@media only screen and (max-width: 767px){
+    
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+    .login-page {
+        padding: 180px 0 100px;
+        position: relative;
+        z-index: 2;
+    }
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1024px){
+    .login-page {
+        padding: 180px 0 100px;
+        position: relative;
+        z-index: 2;
+    }
+}
+/* end login page */

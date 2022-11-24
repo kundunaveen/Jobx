@@ -40,7 +40,7 @@
                     @if($images = optional($project->loadMissing('images'))->images)
                     <div class="row">
                         @forelse ($images as $image)
-                        <div class="col-2">
+                        <div class="col-2 project_images">
                             <a href="{{ $image->image_url }}" target="_blank">
                                 <img src="{{ $image->image_url }}" width="100" height="100" title="Project image" />
                             </a>
