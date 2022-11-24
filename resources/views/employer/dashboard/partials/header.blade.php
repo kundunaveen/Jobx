@@ -32,7 +32,7 @@
                 <li class="list-group-item  bg-transparent border-0 p-0 me-5"><a href="javascript:void(0)"><span class="pause-btn"></span><i class="icon-notify"></i></span><span class="notify-count">0</span></a></li>
                 <li class="list-group-item  bg-transparent d-flex border-0 p-0">
                     <figure class="me-2 mb-0">
-                        <img src="{{ optional(auth()->user())->employer_profile_image_url }}" style="object-fit:cover;border-radius:100%;width:51px;height:51px" height="51" width="51" alt="" class="img-fluid" />
+                        <img src="{{ optional(auth()->user())->employer_profile_image_url }}" width="51" height="51" alt="" class="round-image-class" />
                         {{--<!-- @if(auth()->user()->profile->logo == null)
                         <img src="{{asset('assets/images/user-img.png')}}" height="51" width="51" alt="" class="img-fluid" />
                         @else

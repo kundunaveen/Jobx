@@ -145,7 +145,7 @@
                                     <div class="d-flex align-items-center">
                                         <figure>
                                             <img src="{{ optional($new_application->user)->profile_image_url }}" width="51" height="51" alt=""
-                                            class="img-fluid">
+                                            class="round-image-class">
                                         </figure>
                                         <article>
                                             <h5>{{ optional($new_application->user)->full_name }}</h5>

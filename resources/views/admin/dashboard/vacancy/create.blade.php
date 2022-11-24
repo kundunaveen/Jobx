@@ -99,7 +99,7 @@
                                     </div>
                                 </div>
                                 <div class="card-body">
-                                    <form action="" method="POST">
+                                    <form action="" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row"> 
                                             <div class="form-group col-md-6">
@@ -113,6 +113,17 @@
                                                 </select>
                                             </div>
                                             <div class="form-group col-md-6">
+                                                <label class="form-label">Company Branch</label>
+                                                <input type="text" maxlength="100" name="branch" class="form-control @error('branch') is-invalid @enderror" required>
+                                                @error('branch')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>                                            
+                                        </div>
+                                        <div class="mt-4 row"> 
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Job Title <span class="text-danger">*</span></label>
                                                 <input type="text" maxlength="100" name="job_title" class="form-control @error('job_title') is-invalid @enderror" required>
                                                 @error('job_title')
@@ -121,9 +132,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                        </div>
-                                        <div class="mt-4 row"> 
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Job Role <span class="text-danger">*</span></label>
                                                 <input type="text" maxlength="100" name="job_role" class="form-control @error('job_role') is-invalid @enderror" required>
                                                 @error('job_role')
@@ -132,7 +141,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Department <span class="text-danger">*</span></label>
                                                 <input type="text" maxlength="100" name="department" class="form-control @error('department') is-invalid @enderror" required>
                                                 @error('department')
@@ -212,11 +221,8 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            
-                                            
                                         </div>
                                         <div class="mt-4 row"> 
-
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">State <span class="text-danger">*</span></label>
                                                 <!-- <input name="state" type="text" class="form-control @error('state') is-invalid @enderror" required> -->
@@ -260,6 +266,29 @@
                                                 <label class="form-label">Description <span class="text-danger">*</span></label>
                                                 <textarea class="form-control @error('description') is-invalid @enderror" name="description"></textarea>
                                                 @error('description')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 row"> 
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label">Image</label>
+                                                <input type="file" name="images_input[]" multiple class="form-control" id="files">
+                                                <small class="text-secondary">Maximum file size 2 MB (.jpeg, .jpg, .png files are accepted)</small>
+                                                <div class="row thumbnails"></div>
+                                                @error('images_input')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="form-label">Video</label>
+                                                <input type="file" name="video_input" class="form-control">
+                                                <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>                                             
+                                                @error('video_input')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>

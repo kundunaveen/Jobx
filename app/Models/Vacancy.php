@@ -28,7 +28,8 @@ class Vacancy extends Model
         'skills',
         'job_type',
         'images',
-        'video'
+        'video',
+        'branch',
     ];
 
     public CONST SUPPORTED_IMAGE_MIME_TYPE = [
