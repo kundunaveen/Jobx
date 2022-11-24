@@ -1,7 +1,7 @@
 @extends('front-end.partials.layout')
 @section('title', 'Terms & Conditions')
 @section('content')
-<main class="Form-wrapper-main main-bg inner-login-shape personal-det-form-page">
+<main class="Form-wrapper-main main-bg inner-login-shape personal-det-form-page privecy_policy_page">
     <section class="form-inner-wrapper">
         <div class="container">
             <div class="card">

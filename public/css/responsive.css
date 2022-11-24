@@ -300,6 +300,10 @@
         padding-left: 10px;
         padding-right: 10px;
     } 
+    main.privecy_policy_page {
+        padding-left: 10px;
+        padding-right: 10px;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px){
@@ -313,6 +317,10 @@
     .best-company .best-company-wrapper .best-company-left {
         width: 100%;
     }
+    main.privecy_policy_page {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
 }
 
 
@@ -323,6 +331,10 @@
     } 
     .header .logo-image {
         transform: translateX(-195%) translateY(-50%);
+    }
+    main.privecy_policy_page {
+        padding-left: 40px;
+        padding-right: 40px;
     }
 }
 
@@ -335,23 +347,27 @@
 
 
 @media only screen and (max-width: 767px){
-    
+    .header-wrapper.login-header .banner-form .mb-5 {
+        margin-bottom: 30px!important;
+    } 
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px){
     .login-page {
-        padding: 180px 0 100px;
-        position: relative;
-        z-index: 2;
+        padding: 160px 40px 100px;
+    }
+    .header-wrapper.login-header .logo-image {
+        transform: translateX(-140%) translateY(0%);
     }
 }
 
 
 @media only screen and (min-width: 992px) and (max-width: 1024px){
     .login-page {
-        padding: 180px 0 100px;
-        position: relative;
-        z-index: 2;
+        padding: 160px 40px 100px;
+    }
+    .header-wrapper.login-header .logo-image {
+        transform: translateX(0%) translateY(0%);
     }
 }
 /* end login page */
