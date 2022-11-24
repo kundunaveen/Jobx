@@ -131,7 +131,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/employer/new-applicants', [App\Http\Controllers\Employer\ApplicationController::class, 'newApplicants']);
     Route::get('/employer/job-applicants/{id}', [App\Http\Controllers\Employer\ApplicationController::class, 'jobApplicants']);
     Route::post('/employer/update-applicant-status', [App\Http\Controllers\Employer\ApplicationController::class, 'updateStatus']);
-    Route::get('/employer/view-employee-profile/{id}', [App\Http\Controllers\Employer\ApplicationController::class, 'viewEmployeeProfile']);
+    Route::get('/employer/view-employee-profile/{id}', [App\Http\Controllers\Employer\ApplicationController::class, 'viewEmployeeProfile'])->name('employer.view-employee-profile');
 
     Route::post('/employer-profile/getStates', [App\Http\Controllers\Employer\HomeController::class, 'getStates']);
     Route::post('/employer-profile/getCities', [App\Http\Controllers\Employer\HomeController::class, 'getCities']);
