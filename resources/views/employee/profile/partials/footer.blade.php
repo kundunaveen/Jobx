@@ -24,7 +24,7 @@
                                             <h6>Company</h6>
                                             <ul class="footer-menu-list list-group">
                                                 <li class="list-group-item border-0 p-0 mb-3">
-                                                    <a href="javascript:void(0)">About Us</a>
+                                                    <a href="{{ route('frontend.about_us') }}">About Us</a>
                                                 </li>
                                                 <li class="list-group-item border-0 p-0 mb-3">
                                                     <a href="javascript:void(0)">Careers</a>
@@ -43,7 +43,7 @@
                                             <h6>Quick Links</h6>
                                             <ul class="footer-menu-list list-group">
                                                 <li class="list-group-item border-0 p-0 mb-3">
-                                                    <a href="javascript:void(0)">Home</a>
+                                                    <a href="{{ url('/') }}">Home</a>
                                                 </li>
                                                 <li class="list-group-item border-0 p-0 mb-3">
                                                     <a href="javascript:void(0)">Explore</a>
@@ -87,10 +87,10 @@
                                             <h6>Legal</h6>
                                             <ul class="footer-menu-list list-group">
                                                 <li class="list-group-item border-0 p-0 mb-3">
-                                                    <a href="javascript:void(0)">Termaof Services</a>
+                                                    <a href="{{ route('frontend.terms_conditions') }}">Terms & Conditions</a>
                                                 </li>
                                                 <li class="list-group-item border-0 p-0">
-                                                    <a href="javascript:void(0)"> Privacy Policy</a>
+                                                    <a href="{{ route('frontend.privacy_policy') }}">Privacy Policy</a>
                                                 </li>
                                             </ul>
                                         </div>

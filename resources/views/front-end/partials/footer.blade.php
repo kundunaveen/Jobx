@@ -90,7 +90,7 @@
                                                 <a href="{{ route('frontend.terms_conditions') }}">Terms & Conditions</a>
                                             </li>
                                             <li class="list-group-item border-0 p-0">
-                                                <a href="{{ route('frontend.privacy_policy') }}"> Privacy Policy</a>
+                                                <a href="{{ route('frontend.privacy_policy') }}">Privacy Policy</a>
                                             </li>
                                         </ul>
                                     </div>
