@@ -9,13 +9,13 @@
                         Industries
                     </button>
                 </h2>
-                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingTwo">
+                <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="panelsStayOpen-headingTwo">
                     <div class="accordion-body p-0">
                         @foreach(get_industries() as $indus)
                         <ul class="list-group">
                             <li class="list-group-item">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1" @if(isset($_GET['industry']) && in_array($indus->id, $_GET['industry'])) checked @endif name="industry[]" value="{{$indus->id}}">
-                                <label class="form-check-label" title="{{$indus->value}}" for="exampleCheck1">{{Str::limit($indus->value, 15)}}</label>
+                                <input type="checkbox" class="form-check-input" id="exampleCheck{{$indus->id}}" @if(isset($_GET['industry']) && in_array($indus->id, $_GET['industry'])) checked @endif name="industry[]" value="{{$indus->id}}">
+                                <label class="form-check-label" title="{{$indus->value}}" for="exampleCheck{{$indus->id}}">{{Str::limit($indus->value, 15)}}</label>
                             </li>
                         </ul>
                         @endforeach
@@ -131,7 +131,8 @@
                     </div>
                 </div>
             </div>                
-            --}}
+            --}}            
+            <button type="submit" class="btn btn-primary">Filter</button>
         </div>
     </div>
 </aside>
