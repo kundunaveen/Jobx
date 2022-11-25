@@ -33,7 +33,7 @@ class ApplicationController extends Controller
         ->when($request->search_status, function(Builder $builder, $value){
             return $builder->where('status', $value);            
         })
-        ->when($request->search_status === 0, function(Builder $builder, $value){
+        ->when($request->search_status === "0", function(Builder $builder, $value){
             return $builder->where('status', 0);            
         })
         ->latest()->paginate(config('settings.pagination_employer'));

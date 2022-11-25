@@ -55,7 +55,7 @@ ul.pagination {
                                                             <select name="search_status" class="form-control">
                                                                 <option value="">Select status</option>
                                                                 @forelse (\App\Models\AppliedJob::STATUS_ARRAY as $key => $value)
-                                                                <option value="{{ $key }}" @if($key == request()->get('search_status')) selected @endif>{{ $value }}</option>                                                                
+                                                                <option value="{{ $key }}" @if($key === request()->get('search_status')) selected @endif>{{ $value }}</option>                                                                
                                                                 @empty                                                                
                                                                 @endforelse
                                                             </select>
