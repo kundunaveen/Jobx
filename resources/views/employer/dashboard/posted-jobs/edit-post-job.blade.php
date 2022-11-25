@@ -48,7 +48,7 @@ Employer | Edit Post Job
         padding: 0px !important;
     }
 </style>
-<section class="dashboard-section inner-login-shape">
+<section class="dashboard-section inner-login-shape employer_padding_card">
     <main class="main-bg employer-form-page">
         <section class="form-inner-wrapper">
             <div class="container ">

@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-    <section class="dashboard-section inner-login-shape" style="min-height:800px">
+    <section class="dashboard-section inner-login-shape add_vacancy_table" style="min-height:800px">
         <div class="dashboard-wrapper">
             <div class="container-fluid">
                 <div class="row">
