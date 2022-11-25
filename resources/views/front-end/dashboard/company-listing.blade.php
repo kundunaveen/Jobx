@@ -136,8 +136,8 @@
                                        @endforelse                                    
                                     </tbody>
                                  </table>
-                              </div>
-                              
+                              </div>                              
+                              {{ $employers->appends($_GET)->links() }}
                            </section>
                         </div>
                      </div>
