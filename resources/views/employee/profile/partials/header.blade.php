@@ -28,10 +28,10 @@
                 <div class="d-flex flex-column flex-md-row align-items-center justify-content-between position-relative">
                     <a href="#" class="nav-link link-secondary order-2 order-md-1 mb-3 mb-md-0 "></a>
                     @auth
-                    <ul class="list-group flex-row align-items-center justify-content-end">
+                    <ul class="list-group flex-row align-items-center justify-content-end employee_dashboard_btn">
                         <li class="list-group-item bg-transparent border-0 p-0  me-3">
                             <a class="nav-item nav-link link-secondary" href="{{ route('employee.home') }}">
-                                Dashboard <span><i class="icomoon icon-dashboard"></i></span>
+                            <span>Dashboard</span> <i class="fa fa-tachometer" aria-hidden="true"></i>
                             </a>
                         </li>
                     </ul>

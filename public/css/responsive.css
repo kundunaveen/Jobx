@@ -5,7 +5,24 @@
     object-fit: contain;
     height: 230px;
 }
+.employee_dashboard_btn i{
+    display: none;
+}
+.tools-section .item .card .card-body:hover h5 {
+    color: #fff;
+}
+.tools-section .item .card .card-body:hover .btn.btn-default {
+    background-color: transparent;
+    border: 1px solid #fff;
+    color: #fff;
+}
 @media only screen and (max-width: 767px){
+    
+    ul.list-group.flex-row.align-items-center.justify-content-end.employee_dashboard_btn {
+        order: 2;
+        position: relative;
+        top: -20px;
+    }
     section.experience-section ul.list-group li.list-group-item h5 .text-secondary {
         margin-left: 0!important;
     }
@@ -92,9 +109,16 @@
     .footer .footer-top {
         padding: 50px 10px 20px;
     }
+    
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px){
+    .employee_dashboard_btn i{
+        display: block;
+    }
+    .employee_dashboard_btn span{
+        display: none;
+    }
     .inner-header .logo-image {
         transform: translateX(-189%) translateY(-50%);
     }
@@ -129,10 +153,19 @@
     .footer .footer-top {
         padding: 70px 40px 50px;
     }
+    .employee_dashboard_btn a {
+        font-size: 30px;
+    }
+    .employee_dashboard_btn {
+        transform: translateX(32vw);
+    }
 }
 
 
 @media only screen and (min-width: 992px) and (max-width: 1024px){
+    .employee_dashboard_btn {
+        transform: translateX(42vw);
+    }
     section.education-section ul.list-group li article {
         width: -webkit-fill-available;
     }
@@ -222,7 +255,7 @@
         line-height: 2;
     }
     .step-progress .step-slider .step-slider-item:after {
-        right: -25px;
+        right: -25px!important;
     }    
     .step-progress .step-slider {
         left: -10px;
@@ -242,9 +275,19 @@
     table#applicants_table {
         width: max-content;
     }
+    table#applicants_table thead, table#applicants_table tbody {
+        display: contents!important;
+        width: 100%;
+    }
+    .employer_padding_card form#jquery-post-job-form-validation {
+        width: 100%;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px){
+    .employer_profile_detail .form-wrapper.card {
+        padding: 90px 50px 10px;
+    }
     body.body.modal-open {
         padding-right: 0!important;
     } 
@@ -261,19 +304,28 @@
     table#applicants_table th, table#applicants_table td {
         width: fit-content!important;
     }
-    
+    table#applicants_table thead, table#applicants_table tbody {
+        display: contents!important;
+        width: 100%;
+    }
     table#applicants_table {
         width: max-content;
+    }
+    .employer_padding_card .form-wrapper.card {
+        padding: 90px 50px;
     }
 }
 
 
 @media only screen and (min-width: 992px) and (max-width: 1024px){
+    .employer_profile_detail .form-wrapper.card {
+        padding: 90px 50px 10px;
+    }
     body.body.modal-open {
         padding-right: 0!important;
     } 
     .step-progress .step-slider .step-slider-item:after {
-        right: -10px;
+        right: -10px!important;
     }
     span.select2.select2-container.select2-container--default {
         min-height: 58px !important;
@@ -285,9 +337,15 @@
     table#applicants_table th, table#applicants_table td {
         width: fit-content!important;
     }
-    
+    table#applicants_table thead, table#applicants_table tbody {
+        display: contents!important;
+        width: 100%;
+    }
     table#applicants_table {
         width: max-content;
+    }
+    .employer_padding_card .form-wrapper.card {
+        padding: 90px 50px;
     }
 }
 
