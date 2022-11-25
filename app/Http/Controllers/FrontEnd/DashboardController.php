@@ -31,7 +31,7 @@ class DashboardController extends Controller
                 return $builder->whereIn('industry_type_id', $value);
             });
         })
-        ->get();
+        ->paginate(config('settings.pagination_frontend'));
         //dd($employers);
         return view('front-end.dashboard.company-listing', compact('employers'));
     }
