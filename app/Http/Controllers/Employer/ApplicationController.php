@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\AppliedJob;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Redirect;
 use Session;
 
 class ApplicationController extends Controller
@@ -59,22 +60,55 @@ class ApplicationController extends Controller
 
     public function updateStatus(Request $request)
     {
-        $appJob =  AppliedJob::find($request->id);
-        $appJob->status = $request->status;
-        $appJob->save();
-        // dd($appJob);
+        $application_id = $request->id;
 
+        $applied_job =  AppliedJob::where('id', $application_id)->first();
+
+        if($applied_job){
+            return response()->json([
+                'status' => true,
+                'message' => 'success',
+                'data' => view('employer.dashboard.applications.application_status_form', [
+                    'applied_job' => $applied_job
+                ])->render(),
+            ]);
+        }else{
+            return response()->json([
+                'status' => false,
+                'message' => 'No data found',
+                'data' => '',
+            ]);
+        }
         
-        Session::flash('info', 'Applicant status updated successfully');
-        return response()->json([
-            'status' => 'success'
-        ]);
     }
 
     public function viewEmployeeProfile($id)
     {
         $user = User::find(base64_decode($id));
         return view('employer.dashboard.applications.employee_profile', compact('user'));
+    }
+
+    public function applicantStatusUpdate(Request $request, int $applicant_id)
+    {
+        $applied_Job =  AppliedJob::where('id', $applicant_id)->firstOrFail();
+        
+        try{
+
+            $applied_Job->update([
+                'status' => $request->status
+            ]);
+            
+            return response()->json([
+                'status' => true,
+                'message' => 'Applicant status updated successfully',
+            ]);
+
+        }catch(\Exception $e){
+            return response()->json([
+                'status' => false,
+                'message' => $e->getMessage(),
+            ]);
+        }
     }
 
 }
