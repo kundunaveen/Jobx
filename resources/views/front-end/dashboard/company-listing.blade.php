@@ -49,20 +49,20 @@
                                  <a href="{{ route('companies') }}"><u>Clear Filter</u></a>
                               </div>
                               @endif
-                                 <button type="submit" class="btn btn-primary">
+                                 {{--<!-- <button type="submit" class="btn btn-primary">
                                     <span class="spriteicon"><i class="filter-icon"></i></span>Filter
-                                 </button>
+                                 </button> -->--}}
                               </div>
                               <div class="table-wrapper table-responsive">
                                  <table class="table align-middle">
                                     <thead>
                                        <tr>
-                                          <th scope="col">
+                                          {{--<!-- <th scope="col">
                                              <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value=""
                                                    id="flexCheckDefault">
                                              </div>
-                                          </th>                                       
+                                          </th>-->--}}
                                           <th scope="col">Companies Name</th>
                                           <th scope="col">Owner</th>
                                           <th scope="col">Rating Count</th>
@@ -73,11 +73,11 @@
                                     <tbody>
                                        @forelse($employers as $employer)
                                        <tr>
-                                          <td>
+                                          {{--<!-- <td>
                                              <div class="form-check">
                                                 <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
                                              </div>
-                                          </td>
+                                          </td> -->--}}
                                           <td>
                                              <a href="javascript:void(0)" class="d-flex align-items-center">
                                                 <figure>
@@ -117,8 +117,7 @@
                                                          Stars
                                                       @else
                                                          Star
-                                                      @endif
-                                                      
+                                                      @endif                                                      
                                                    </span>
                                                 </div>
                                              </div>
