@@ -11,7 +11,22 @@ class AppliedJob extends Model
     protected $table = 'applied_jobs';
     protected $fillable = [
         'user_id',
-        'vacancy_id'
+        'vacancy_id',
+        'status',
+    ];
+
+    public CONST STATUS_IN_REVIEW = 0;
+    public CONST STATUS_SHORTLISTED = 1;
+    public CONST STATUS_REJECTED = 2;
+    public CONST STATUS_HIRED = 3;
+    public CONST STATUS_HOLD = 4;
+
+    public CONST STATUS_ARRAY = [
+        self::STATUS_IN_REVIEW => 'In Review',
+        self::STATUS_SHORTLISTED => 'Shortlisted',
+        self::STATUS_REJECTED => 'Rejected',
+        self::STATUS_HIRED => 'Hired',
+        self::STATUS_HOLD => 'Hold',
     ];
 
     public function user()

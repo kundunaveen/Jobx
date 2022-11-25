@@ -375,6 +375,15 @@ label.error {
     max-width: 80px;
     height: 80px;
 }
+
 .slider_image .job-btn-wrapper a {
     margin: 0 auto;
-  }
+}
+
+.btn.btn-search.btn-primary, .btn-search.btn-danger {
+    padding: .375rem 1.75rem;
+    width: auto;
+}
+.btn.btn-search.btn-primary{
+    margin-right: 10px;
+}
