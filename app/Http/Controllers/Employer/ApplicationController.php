@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\AppliedJob;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Session;
 
 class ApplicationController extends Controller
@@ -15,11 +16,25 @@ class ApplicationController extends Controller
         $this->middleware(['auth', 'employeraccount']);
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $applications = AppliedJob::whereHas('vacancy', function($q){
+        $applications = AppliedJob::whereHas('vacancy', function(Builder $q){
             $q->where('employer_id', auth()->user()->id);
-        })->get();
+        })->when($request->search_keyword, function(Builder $builder, $value){
+            return $builder->whereHas('vacancy', function(Builder $builder) use($value){
+                return $builder->where(function(Builder $builder) use ($value){
+                    return $builder->where('job_title', 'like', "%{$value}%")
+                    ->orWhere('job_role', 'like', "%{$value}%");
+                })->orWhereHas('user', function(Builder $builder) use ($value){
+                    return $builder->whereRaw("concat(first_name, ' ', last_name) like '%{$value}%'");
+                });
+            });            
+        })
+        ->when($request->search_status, function(Builder $builder, $value){
+            return $builder->where('status', $value);
+        })
+        ->latest()->paginate(config('settings.pagination_employer'));
+
         return view('employer.dashboard.applications.index', compact('applications'));
     }
 

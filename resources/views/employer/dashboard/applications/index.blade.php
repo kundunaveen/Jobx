@@ -45,8 +45,28 @@ ul.pagination {
                                                 </div>
                                             </div>
                                             <div class="card-body">
-                                                
-                                                <table class="table table-striped table-reponsive" id="applicants_table">
+                                                <form action="{{ route('employer.applications') }}" method="GET">
+                                                    <div class="row mb-4">
+                                                        <div class="col-md-2"></div>
+                                                        <div class="col-md-4">
+                                                            <input type="text" name="search_keyword" value="{{ request()->get('search_keyword') }}" class="form-control" placeholder="Search applicant name or job title or job role" />
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <select name="search_status" class="form-control">
+                                                                <option value="">Select status</option>
+                                                                @forelse (\App\Models\AppliedJob::STATUS_ARRAY as $key => $value)
+                                                                <option value="{{ $key }}" @if($key == request()->get('search_status')) selected @endif>{{ $value }}</option>                                                                
+                                                                @empty                                                                
+                                                                @endforelse
+                                                            </select>
+                                                        </div>
+                                                        <div class="col-md-3">
+                                                            <button type="submit" class="btn btn-search btn-primary">Search</button>
+                                                            <a href="{{ route('employer.applications') }}" class="btn btn-search btn-danger">Reset</a>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                                <table class="table table-striped table-reponsive">
                                                     <thead>
                                                         <tr>
                                                             <th>Sr. no.</th>
@@ -97,6 +117,7 @@ ul.pagination {
                                                         @endforelse
                                                     </tbody>
                                                 </table>
+                                                {{ $applications->appends($_GET)->links() }}
                                             </div>
                                         </div>
                                     </div>
