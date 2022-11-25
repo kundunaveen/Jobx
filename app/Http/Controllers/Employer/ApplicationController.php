@@ -31,7 +31,12 @@ class ApplicationController extends Controller
             });            
         })
         ->when($request->search_status, function(Builder $builder, $value){
-            return $builder->where('status', $value);
+            if($value == 0){
+                return $builder->where('status', 0);
+            }else{
+                return $builder->where('status', $value);
+            }
+            
         })
         ->latest()->paginate(config('settings.pagination_employer'));
 
