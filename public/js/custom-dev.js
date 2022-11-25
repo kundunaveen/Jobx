@@ -402,7 +402,7 @@ $(document).ready(function () {
                 to_year: "To year field is required",
             }
         });
-    }
+    }   
     
 });
 

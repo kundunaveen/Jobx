@@ -99,7 +99,8 @@ $(document).ready(function () {
 if ($('.tools-section .owl-carousel').length > 0) {
     $('.tools-section .owl-carousel').owlCarousel({
         rtl: true,
-        loop: true,
+        loop: false,
+        autoplay: true,
         nav: true,
         margin: 20,
         responsive: {

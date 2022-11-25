@@ -7,7 +7,7 @@ Profile
 <section class="banner-section inner-banner main-banner-section">
     <div class="container">
         <div class="row">
-            @include('layouts.messages.success')
+            @include('layouts.messages.success_jquery_toast')
             @include('layouts.messages.error')
             <div class="banner-section-wrapper">
                 <div class="banner-content">

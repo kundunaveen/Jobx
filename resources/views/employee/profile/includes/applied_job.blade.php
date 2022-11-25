@@ -1,9 +1,12 @@
 @if(optional($employee->appliedJobs()->count()))
-<section class="tools-section text-start  section-space">
+<section class="tools-section text-start section-space">
       <div class="container">
          <div class="row">
             <div class="col-md-12">
-               <div class=" pt-0 card">
+                <div class="heading">
+                    <h4>Your Applied Jobs</h4>
+                </div>
+               <div class="pt-0">
                   <div class="card-body p-5">
                      <div class="owl-carousel owl-theme">
                         @forelse ($employee->loadMissing('appliedJobs')->appliedJobs as $appliedJobs)

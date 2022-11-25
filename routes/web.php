@@ -85,6 +85,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/employee/job-preview/{id}', [App\Http\Controllers\Employee\JobPostController::class, 'previewJob'])->name('employee.job.preview');
     Route::post('/employee/get-states', [App\Http\Controllers\Employee\HomeController::class, 'getStates']);
     Route::post('/employee/get-cities', [App\Http\Controllers\Employee\HomeController::class, 'getCities']);
+
+    Route::get('/employee/job-withdrawn/{vacancy_id}', [App\Http\Controllers\Employee\JobPostController::class, 'jobWithdrawn'])->name('employee.job-withdrawn');
 });
 
 
