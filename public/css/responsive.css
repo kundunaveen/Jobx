@@ -639,3 +639,95 @@ span.select2-selection.select2-selection--multiple {
 
 
 /* end admin page */
+
+
+
+/* Companies List */
+button.accordion-button.company_list_button {
+    margin-bottom: 20px!important;
+}
+
+
+@media only screen and (max-width: 767px){
+    .company_list_main .company-listing-wrapper .company-listing-aside .accordion-item .list-group-item .form-check-input {
+        margin-right: 3px;
+    }
+    
+    .company_list_main section.Company-listing-section table th, section.Company-listing-section table td {
+        width: fit-content!important;
+        display: table-cell!important;
+    }
+    .company_list_main .company-listing-wrapper .Company-listing-section .table tr {
+        display: table-row!important;
+    }
+    .company_list_main .company-listing-wrapper .Company-listing-section .table thead, .company-listing-wrapper .Company-listing-section .table tbody {
+        display: contents!important;
+    }
+    .company_list_main .company_rating_readonly {
+        display: flex;
+        width: max-content;
+    }
+    .company_list_main .company-listing-wrapper .Company-listing-section .table th, .company_list_main .company-listing-wrapper .Company-listing-section .table td {
+        font-size: 14px;
+        white-space: nowrap;
+    }
+    .company_list_main table.table.align-middle td figure {
+        width: 50px!important;
+        height: 50px!important;
+        object-fit: cover;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 991px){
+    .company_list_main .company-listing-wrapper .Company-listing-section .table-wrapper {
+        width: 100%!important;
+    }
+    .company-listing-wrapper .Company-listing-section .table {
+        width: max-content;
+        border-collapse: collapse;
+    }
+    .company_list_main .company-listing-wrapper .company-listing-aside .accordion-item .list-group-item .form-check-input {
+        margin-right: 3px;
+    }
+    .company_list_main .company-listing-wrapper .company-listing-aside .accordion-item .list-group-item .form-check-label {
+        font-size: 13px;
+    }
+    .company_list_main .company-listing-wrapper .card .card-body {
+        padding: 48px 25px;
+    }
+    .company_list_side_table {
+        width: 70%;
+    }
+    .company_list_side_bar {
+        width: 30%;
+    }    
+    
+}
+
+
+@media only screen and (min-width: 992px) and (max-width: 1024px){
+    .company_list_main .company-listing-wrapper .Company-listing-section .table-wrapper {
+        width: 100%!important;
+    }
+    .company_list_main .company-listing-wrapper .company-listing-aside .accordion-item .list-group-item .form-check-input {
+        margin-right: 3px;
+    }
+    .company_list_main .company-listing-wrapper .company-listing-aside .accordion-item .list-group-item .form-check-label {
+        font-size: 13px;
+    }
+    .company_list_main .company-listing-wrapper .card .card-body {
+        padding: 48px 25px;
+    }
+    .company_list_side_table {
+        width: 79%;
+    }
+    .company_list_side_bar {
+        width: 21%;
+    }    
+    .company-listing-wrapper .Company-listing-section .table {
+        width: max-content;
+        border-collapse: collapse;
+    }
+}
+
+/* end listing page */
