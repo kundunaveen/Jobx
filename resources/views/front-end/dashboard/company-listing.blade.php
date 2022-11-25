@@ -3,7 +3,7 @@
     Jobax
 @endsection
 @section('content')
-<section class="banner-section job-listing-banner inner-banner main-banner-section">
+<section class="banner-section job-listing-banner inner-banner main-banner-section ">
       <div class="container">
          <div class="row">
             <div class="banner-section-wrapper">
@@ -30,7 +30,7 @@
    </section>
    <!-- Main Banner End Here -->
    <!--========= Main Content End Here =========-->
-   <main class="profile-main-wrapper">
+   <main class="profile-main-wrapper company_list_main">
       <!-- Section Start Here-->
       <section class="company-listing-wrapper">
          <div class="container">
@@ -38,10 +38,10 @@
                <div class="card-body">
                   <form method="GET" action="{{ route('companies') }}">
                      <div class="row">
-                        <div class="col-lg-2 col-md-3">
+                        <div class="col-lg-2 col-md-3 company_list_side_bar">
                            @include('front-end.dashboard.includes.industries_sidebar')
                         </div>
-                        <div class="col-lg-10 col-md-9">
+                        <div class="col-lg-10 col-md-9 company_list_side_table">
                            <section class="Company-listing-section">
                               <div class="text-end">
                               @if(request()->except('credit_card'))                              

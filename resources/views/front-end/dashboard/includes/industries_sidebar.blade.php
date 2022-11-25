@@ -1,11 +1,11 @@
-<aside class="company-listing-aside">
+<aside class="company-listing-aside company_list_page">
     <h4 class="">Companies List</h4>
     <div class="aside-filter">
         <div class="accordion" id="accordionPanelsStayOpenExample">
 
             <div class="accordion-item">
                 <h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
+                    <button class="accordion-button collapsed company_list_button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false" aria-controls="panelsStayOpen-collapseTwo">
                         Industries
                     </button>
                 </h2>
