@@ -36,7 +36,7 @@
                 </label>
             </div>
             --}}
-            <button class="btn btn-lg search-btn" type="submit">Search Vacancies</button>
+            <button class="btn btn-lg search-btn mt-0" type="submit">Search Vacancies</button>
                 @if(request()->except('credit_card'))
                     <div class="search-advance">
                         <ul class="col-md-auto">
