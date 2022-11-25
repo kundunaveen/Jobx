@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-    <section class="dashboard-section inner-login-shape">
+    <section class="dashboard-section inner-login-shape ">
         <div class="dashboard-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -102,7 +102,7 @@
                                     <form action="" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row">
-                                            <div class="col-md-4" id="profile-image-div" style="position:relative">
+                                            <div class="col-md-4 edit_profile_section" id="profile-image-div" style="position:relative">
                                             <img class="" src="{{ optional($employer->profile)->employer_image_url }}" id="blah" onclick="$('#company_image').click()" style="border-radius:100%; border:solid lightgray 1px; cursor:pointer; height:280px;width:280px;object-fit:cover">
                                                 {{--<!-- @if($employer->profile && optional($employer->profile)->logo)
                                                 <img class="" src="{{asset('image/company_images/'.optional($employer->profile)->logo)}}" id="blah" onclick="$('#company_image').click()" style="border-radius:100%; border:solid lightgray 1px; cursor:pointer; height:280px;width:280px;object-fit:cover">

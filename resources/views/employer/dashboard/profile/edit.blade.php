@@ -202,7 +202,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
             width: 100%;
         }
     </style>
-<section class="dashboard-section inner-login-shape">
+<section class="dashboard-section inner-login-shape employer_profile_detail">
     <main class="main-bg employer-form-page">
         <section class="form-inner-wrapper">
             <div class="container ">

@@ -88,7 +88,7 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class="dashboard-graph-wrapper">
+                    <div class="dashboard-graph-wrapper add_vacancy_table">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card active-wrapper">
