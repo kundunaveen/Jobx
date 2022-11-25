@@ -210,7 +210,7 @@
         padding: 25px 0;
     }
     .dashboard-main .dashboard-section {
-        padding: 150px 10px 0;
+        padding: 200px 10px 0;
     }
     .employer_custom_btn li.custom-dropdown-menu {
         margin-right: 0;
@@ -474,35 +474,109 @@
 
 
 /* admin page */
+
+span.select2-selection.select2-selection--multiple {
+    height: auto;
+}
+
+
 @media only screen and (max-width: 767px){
-    /* div#employee_table_wrapper .col-sm-12 {
+    div#employee_table_length {
+        margin-bottom: 10px;
+    }
+    .for_admin_btns a {
+        width: 50%;
+        padding-left: 0;
+        padding-right: 0;
+        display: inline-block;
+        margin-bottom: 10px;
+    }
+    
+    .for_admin_btns {
+        display: flex;
+        width: 100%;
+    }
+    div#employee_table_wrapper thead, div#employee_table_wrapper tbody {
+        display: contents!important;
+        width: 100%;
+    }
+    div#employee_table_wrapper .col-sm-12 {
         overflow-x: auto;
     }
     div#employee_table_wrapper th, div#employee_table_wrapper td {
         width: fit-content!important;
         white-space: nowrap;
-    } */
+    }
+    div#employee_table_paginate ul.pagination {
+        margin-top: 15px;
+    }
+    .add_vacancy_table .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 25px!important;
+    }
+    .add_vacancy_table .select2-container--default .select2-selection--single .select2-selection__arrow {
+        top: 0px;
+        right: 15px;
+    }
+    .add_vacancy_table span.select2.select2-container.select2-container--default {
+        width: 100%!important;
+    }
+    .add_vacancy_table .card-body {
+        padding: 45px 20px!important;
+    }
+    .edit_profile_section img {
+        margin-bottom: 20px;
+    }
 }
 
 @media only screen and (min-width: 768px) and (max-width: 991px){
-    /* div#employee_table_wrapper .col-sm-12 {
+    .add_vacancy_table .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 25px!important;
+    }
+    .add_vacancy_table .select2-container--default .select2-selection--single .select2-selection__arrow {
+        top: 0px;
+        right: 15px;
+    }
+    div#employee_table_wrapper thead, div#employee_table_wrapper tbody {
+        display: contents!important;
+        width: 100%;
+    }
+    div#employee_table_wrapper .col-sm-12 {
         overflow-x: auto;
     }
     div#employee_table_wrapper th, div#employee_table_wrapper td {
         width: fit-content!important;
         white-space: nowrap;
-    } */
+    }
+    .edit_profile_section img {
+        width: 180px!important;
+        height: 180px!important;
+    }
 }
 
 
 @media only screen and (min-width: 992px) and (max-width: 1024px){
-    /* div#employee_table_wrapper .col-sm-12 {
+    .add_vacancy_table .select2-container--default .select2-selection--single .select2-selection__rendered {
+        line-height: 25px!important;
+    }
+    .add_vacancy_table .select2-container--default .select2-selection--single .select2-selection__arrow {
+        top: 0px;
+        right: 15px;
+    }
+    div#employee_table_wrapper thead, div#employee_table_wrapper tbody {
+        display: contents!important;
+        width: 100%;
+    }
+    div#employee_table_wrapper .col-sm-12 {
         overflow-x: auto;
     }
     div#employee_table_wrapper th, div#employee_table_wrapper td {
         width: fit-content!important;
         white-space: nowrap;
-    } */
+    }
+    .edit_profile_section img {
+        width: 180px!important;
+        height: 180px!important;
+    }
 }
 
 

@@ -4,7 +4,7 @@
 @endsection
 @section('content')
 
-    <section class="dashboard-section inner-login-shape">
+    <section class="dashboard-section inner-login-shape add_vacancy_table ">
         <div class="dashboard-wrapper">
             <div class="container-fluid">
                 <div class="row">
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                     </div> -->
-                    <div class="dashboard-graph-wrapper">
+                    <div class="dashboard-graph-wrapper admin_inputs">
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="card active-wrapper">

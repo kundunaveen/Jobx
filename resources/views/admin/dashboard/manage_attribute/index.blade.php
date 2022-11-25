@@ -95,7 +95,7 @@
                                     <div class="card-header">
                                         <div class="row justify-content-between">
                                             <h3 class="card-title col-auto mt-2">Master Attributes</h3>
-                                            <div class="col-auto">
+                                            <div class="col-auto for_admin_btns">
                                                 <a class="col-auto btn btn-primary" href="{{ route('admin.categories') }}" style="margin-right:10px !important">Categories</a>
                                                 <a class="col-auto btn btn-primary" href="{{ route('admin.addManageAttribute') }}" style="margin-right:10px !important">Add Attributes</a>
                                             </div>

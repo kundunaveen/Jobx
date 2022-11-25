@@ -30,8 +30,8 @@
                     @auth
                     <ul class="list-group flex-row align-items-center justify-content-end">
                         <li class="list-group-item bg-transparent border-0 p-0  me-3">
-                            <a class="dropdown-item nav-item" href="{{ route('employee.home') }}">
-                                Dashboard
+                            <a class="nav-item nav-link link-secondary" href="{{ route('employee.home') }}">
+                                Dashboard <span><i class="icomoon icon-dashboard"></i></span>
                             </a>
                         </li>
                     </ul>
