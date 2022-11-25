@@ -142,7 +142,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
 });
 
 
-Route::get('/companies', [App\Http\Controllers\FrontEnd\DashboardController::class, 'companies']);
+Route::get('/companies', [App\Http\Controllers\FrontEnd\DashboardController::class, 'companies'])->name('companies');
 Route::get('/company/show/{company_id}', [App\Http\Controllers\FrontEnd\DashboardController::class, 'companyShow'])->name('company-show');
 Route::get('/jobs', [App\Http\Controllers\FrontEnd\DashboardController::class, 'jobs']);
 Route::get('/employee/job-search', [App\Http\Controllers\Employee\HomeController::class, 'searchJob'])->name('search.job');

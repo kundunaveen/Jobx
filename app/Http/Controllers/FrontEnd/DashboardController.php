@@ -17,7 +17,7 @@ class DashboardController extends Controller
         return view('front-end.dashboard.home');
     }
 
-    public function companies()
+    public function companies(Request $request)
     {
         $employers = User::with('profile')
         ->whereHas('profile')
@@ -26,7 +26,12 @@ class DashboardController extends Controller
         })
         ->withCount('companyRatings')
         ->withAvg('companyRatings', 'rating')
-        ->get();
+        ->when($request->industry, function(Builder $builder, $value){
+            return $builder->whereHas('profile', function(Builder $builder) use ($value){
+                return $builder->whereIn('industry_type_id', $value);
+            });
+        })
+        ->paginate(config('settings.pagination_frontend'));
         //dd($employers);
         return view('front-end.dashboard.company-listing', compact('employers'));
     }
