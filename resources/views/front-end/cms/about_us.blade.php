@@ -1,14 +1,14 @@
 @extends('front-end.partials.layout')
 @section('title', 'About Us')
 @section('content')
-<main class="employer-main-wrapper section-space">
+<main class="employer-main-wrapper section-space about_page_section">
       <!-- Profile Section Start Here-->
       <section class="employer-video-section section-space">
          <div class="container">
             <div class="card">
                <div class="card-body p-0">
                   <div class="row align-items-center">
-                     <div class="col-lg-5 col-md-6">
+                     <div class="col-md-5 col-sm-12 video_div">
                         <div class="video-wrapper position-relative">
                               <img src="{{ asset('assets/images/emp-video-img.png') }}" width="1502" height="664" alt="video img"
                               class="img-fluid video-one-img" />
@@ -18,7 +18,7 @@
                            </div>
                         </div>
                      </div>
-                     <div class="col-lg-7 col-md-6">
+                     <div class="col-md-7 col-sm-12 video_div">
                         <article class="profile-summary">
                            <h2 class="d-flex justify-content-between  mb-4">Explanation about <br /> Visual
                               Vacancies
@@ -58,7 +58,7 @@
             <div class="card">
                <div class="card-body">
                   <div class="row align-items-center">
-                     <div class="col-lg-7 col-md-6">
+                     <div class="col-lg-7 col-md-6 video_div sec_video_content">
                         <div class="about-wrapper profile-summary">
                            <h2>Explanation about <br /> Visual Vacancies</h2>
                            <p>
@@ -84,7 +84,7 @@
                            </p>
                         </div>
                      </div>
-                     <div class="col-lg-5 col-md-6">
+                     <div class="col-lg-5 col-md-6 video_div sec_video_img">
                         <div class="image-box">
                            <img src="{{ asset('assets/images/about-img.png') }}" width="671" height="687" class="image-fluid" />
                         </div>

@@ -25,10 +25,12 @@
     <div class="header-wrapper">
         
         <div class="d-flex flex-column flex-md-row align-items-center justify-content-between position-relative">
-            <button class="navbar-toggler d-none" type="button">
-            <span class="spriteicon"><i class="navbar-toggler-icon"></i></span>
-            </button>
-            <a href="{{ route('admin.dashboard') }}" class="nav-link link-secondary order-2 order-md-1 mb-3 mb-md-0 ">Dashboard</a>
+            <div class="top_employer_btn">
+                <button class="navbar-toggler d-none" type="button">
+                <span class="spriteicon"><i class="navbar-toggler-icon"></i></span>
+                </button>
+                <a href="{{ route('admin.dashboard') }}" class="nav-link link-secondary order-2 order-md-1 mb-3 mb-md-0 ">Dashboard</a>
+            </div>
             <div class="order-3 order-md-3">
             <ul class="list-group flex-row align-items-center justify-content-end">
                 <li class="list-group-item  bg-transparent border-0 p-0 me-5"><a href="javascript:void(0)"><span class="pause-btn"></span><i class="icon-notify"></i></span><span class="notify-count">0</span></a></li>

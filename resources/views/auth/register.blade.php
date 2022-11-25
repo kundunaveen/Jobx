@@ -41,11 +41,11 @@
     <header class="header"  id="myHeader">
         <div class="container">
             <div class="header-wrapper login-header py-4">
-                <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between">
-                    <a href="{{ route('front-end.home') }}" class="logo-image d-inline-block  top-auto left-auto  order-1 order-md-2   mb-lg-0 mb-5">
+                <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between login_signup">
+                    <a href="{{ route('front-end.home') }}" class="logo-image d-inline-block  top-auto left-auto  order-1 order-md-2   mb-lg-0 mb-5 log_in_logo">
                         <img src="{{ asset('assets/images/jobax-logo.png') }}" width="248" alt="" class="img-fluid" />
                     </a>
-                    <div class="order-3 order-md-3">
+                    <div class="order-3 order-md-3 log_in_form">
                         <div class="banner-form">
                             <form action="{{ route('search.job') }}" method="GET">
                                 <div class="row">
@@ -93,12 +93,12 @@
         <section class="login-page register-page">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-7">
+                    <div class="col-md-7 log_in_col">
                         <img src="{{ asset('assets\images\login.png') }}" alt="login-image" class="img-fluid login-img">
                         <h2 class="login-subheading">To Find More relevant jobs. Register to <span
                                 class="text-blue">JobaX</span></h2>
                     </div>
-                    <div class="col-md-5">
+                    <div class="col-md-5 log_in_col">
                         <form class="login-form" method="POST" action="{{ route('register') }}">
                             @csrf
                         <input type="hidden" id="user_role" value="employer" name="role">
