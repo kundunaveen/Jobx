@@ -27,7 +27,6 @@
    <link rel="stylesheet" href="{{asset('css/toastr.css')}}" />
    <link rel="stylesheet" href="{{asset('css/select2.min.css')}}" />
    <link rel="stylesheet" href="{{asset('css/jquery.toast.css')}}" />
-   <link rel="stylesheet" href="{{asset('css/custom-dev.css')}}" />
    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" rel="stylesheet">
    <link rel="stylesheet" href="{{asset('css/custom-dev.css')}}" />
    <link rel="stylesheet" href="{{asset('css/intelTelInput.css')}}" />   
