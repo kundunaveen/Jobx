@@ -391,6 +391,7 @@ label.error {
 }
 
 @keyframes growProgressBar {
+
     0%,
     33% {
         --pgPercentage: 0;
@@ -430,3 +431,4 @@ div[role="progressbar"]::before {
     counter-reset: percentage var(--value);
     content: counter(percentage) '%';
 }
+

@@ -12,9 +12,13 @@
     color: #fff;
 }
 .tools-section .item .card .card-body:hover .btn.btn-default {
-    background-color: transparent;
+    background-color: #fff;
     border: 1px solid #fff;
-    color: #fff;
+    color: #000;
+}
+.tools-section .slider_image .btn.btn-default:hover {
+    background-color: transparent !important;
+    color: #fff !important;
 }
 
 p.job_description_content {
