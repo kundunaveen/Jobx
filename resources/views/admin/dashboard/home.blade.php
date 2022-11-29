@@ -38,7 +38,7 @@
                                         <span class="candidate-count">{{ $applied_jobs[0]->shortlisted_count }}</span>
                                     </article>
                                     <figure>
-                                        <div role="progressbar" aria-valuenow="{{ ($applied_jobs[0]->shortlisted_count/$applied_job_count) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="--value:{{ ($applied_jobs[0]->shortlisted_count / $applied_job_count) * 100 }}"></div>
+                                        <div class="blue_bg" role="progressbar" aria-valuenow="{{ ($applied_jobs[0]->shortlisted_count/$applied_job_count) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="--value:{{ ($applied_jobs[0]->shortlisted_count / $applied_job_count) * 100 }}"></div>
                                     </figure>
                                 </div>
                                 </div>
@@ -52,7 +52,7 @@
                                         <span class="candidate-count">{{ $applied_jobs[0]->on_hold_count }}</span>
                                     </article>
                                     <figure>
-                                        <div role="progressbar" aria-valuenow="{{ ($applied_jobs[0]->on_hold_count / $applied_job_count) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="--value:{{ ($applied_jobs[0]->on_hold_count / $applied_job_count) * 100 }}"></div>
+                                        <div class="orange_bg" role="progressbar" aria-valuenow="{{ ($applied_jobs[0]->on_hold_count / $applied_job_count) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="--value:{{ ($applied_jobs[0]->on_hold_count / $applied_job_count) * 100 }}"></div>
                                     </figure>
                                 </div>
                                 </div>
@@ -66,7 +66,7 @@
                                         <span class="candidate-count">{{ $applied_jobs[0]->hired_count }}</span>
                                     </article>
                                     <figure>
-                                        <div role="progressbar" aria-valuenow="{{ ($applied_jobs[0]->hired_count/$applied_job_count) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="--value:{{ ($applied_jobs[0]->hired_count / $applied_job_count) * 100 }}"></div>
+                                        <div class="green_bg" role="progressbar" aria-valuenow="{{ ($applied_jobs[0]->hired_count/$applied_job_count) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="--value:{{ ($applied_jobs[0]->hired_count / $applied_job_count) * 100 }}"></div>
                                     </figure>
                                 </div>
                                 </div>
@@ -80,7 +80,7 @@
                                         <span class="candidate-count">{{ $applied_jobs[0]->rejected_count }}</span>
                                     </article>
                                     <figure>
-                                        <div role="progressbar" aria-valuenow="{{ ($applied_jobs[0]->rejected_count/$applied_job_count) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="--value:{{ ($applied_jobs[0]->rejected_count / $applied_job_count) * 100 }}"></div>
+                                        <div class="red_bg" role="progressbar" aria-valuenow="{{ ($applied_jobs[0]->rejected_count/$applied_job_count) * 100 }}" aria-valuemin="0" aria-valuemax="100" style="--value:{{ ($applied_jobs[0]->rejected_count / $applied_job_count) * 100 }}"></div>
                                     </figure>
                                 </div>
                                 </div>
