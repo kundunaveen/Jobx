@@ -30,7 +30,23 @@ a.company_profile {
     font-weight: 500;
     margin-left: 9px;
     font-family: "cooper_hewittbold";
+    float: right;
+    margin-top: 5px;
 }
+.orange_bg {
+    --fg: rgb(255, 136, 0)!important;
+    --bg: #ff88001f!important;
+}
+.green_bg{
+    --fg: #00b53b!important;
+    --bg: #00b53b1f!important;
+}
+
+.red_bg{
+    --fg: #e51900!important;
+    --bg: #e519001f!important;
+}
+
 
 @media only screen and (max-width: 767px){
     
