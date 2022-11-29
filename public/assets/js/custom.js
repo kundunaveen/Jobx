@@ -98,10 +98,10 @@ $(document).ready(function () {
 // tools-section
 if ($('.tools-section .owl-carousel').length > 0) {
     $('.tools-section .owl-carousel').owlCarousel({
-        rtl: true,
+        rtl: false,
         loop: false,
         autoplay: true,
-        nav: true,
+        nav: false,
         margin: 20,
         responsive: {
             0: {

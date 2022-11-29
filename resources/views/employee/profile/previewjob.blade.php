@@ -1,6 +1,6 @@
 @extends('employee.profile.partials.layout')
+@section('title', 'Vacancy Details')
 @section('content')
-
 <main class="main-bg inner-login-shape vacancy-details-page">
     <section class="form-inner-wrapper">
         <div class="container">
@@ -44,8 +44,7 @@
                         <div class="row form-group">
                             <label for="check" class="form-label">Description</label>
                             <div class="col-12">
-                                <input type="text" class="form-control form-input" readonly name="description" value="{{$job_details->description}}" placeholder="Description"
-                                    aria-label="Description">
+                                <textarea class="form-control" rows="5" aria-label="Description">{{ $job_details->description }}</textarea>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -78,3 +77,4 @@
         </div>
     </section>
 </main>
+@endsection
