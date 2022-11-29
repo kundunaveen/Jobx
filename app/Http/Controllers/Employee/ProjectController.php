@@ -68,7 +68,7 @@ class ProjectController extends Controller
                     }
                 }
             });
-            return Redirect::route('employee.project.create')->with('success', 'Your project data saved successful');
+            return Redirect::route('employee.home')->with('success', 'Your project data saved successful');
         } catch (\Exception $e) {
             return back()->with('error', $e->getMessage())->withInput();
         }
@@ -197,7 +197,7 @@ class ProjectController extends Controller
                 $project->delete();
             });
 
-            return Redirect::route('employee.project.edit')->with('success', 'Your project data delete successful');
+            return Redirect::route('employee.home')->with('success', 'Your project data delete successful');
         } catch (\Exception $e) {
             return back()->withInput()->with([
                 'error' => $e->getMessage()
