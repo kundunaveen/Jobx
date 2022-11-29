@@ -110,4 +110,8 @@ class User extends Authenticatable implements MustVerifyEmail
     public function appliedJobs() :HasMany{
         return $this->hasMany(AppliedJob::class);
     }
+
+    public function vacancies() :HasMany{
+        return $this->hasMany(Vacancy::class, 'employer_id');
+    }
 }

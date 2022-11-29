@@ -37,7 +37,7 @@
                         <div class="row form-group">
                             <label for="check" class="form-label">Job Type</label>
                             <div class="col-12">
-                                <input type="text" class="form-control form-input" readonly name="job_type" value="{{$job_details->job_type == 'full_time' ? 'Full Time' : $job_details->job_type == 'part_time' ? 'Part Time' : 'Contract Based' }}" placeholder="Job Type"
+                                <input type="text" class="form-control form-input" readonly name="job_type" value="{{ $job_details->job_type_text }}" placeholder="Job Type"
                                 aria-label="Job Type">
                             </div>
                         </div>
