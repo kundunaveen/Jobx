@@ -6,6 +6,7 @@ Job Search
 
 <section class="banner-section job-listing-banner inner-banner main-banner-section">
    <div class="container">
+      @include('layouts.messages.success_jquery_toast')
       <div class="row">
          <div class="banner-section-wrapper">
             <div class="banner-form">

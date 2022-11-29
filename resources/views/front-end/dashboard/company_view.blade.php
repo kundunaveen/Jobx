@@ -94,6 +94,57 @@
         </div>
     </section>
     <!-- content section End Here -->
+    
+    <!-- Tools Section Start Here -->
+    <section class="tools-section text-start  section-space">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="heading">
+                        <h4>Posted jobs</h4>
+                    </div>
+                    @if($company->vacancies()->count() > 0)
+                    <div class="pt-0">
+                        <div class="card-body p-5">
+                            <div class="owl-carousel owl-theme">
+                                @forelse ($company->loadMissing('vacancies')->vacancies as $vacancy)
+                                    <div class="item">
+                                        <div class="card slider_image">
+                                            <div class="card-body">
+                                                <figure class="job-profile-figure d-flex align-items-center justify-content-between">
+                                                    <img src="{{ $vacancy->single_image }}" title="{{ $vacancy->job_title }}" class="img-fluid">
+                                                </figure>
+                                                <article>
+                                                    <h4>
+                                                        {{ \Illuminate\Support\Str::limit($vacancy->job_role, 20, '...') }}
+                                                    </h4>
+                                                    <h5>
+                                                        {{ \Illuminate\Support\Str::limit($vacancy->job_title, 30, '...') }}
+                                                        </h4>
+                                                        <p>
+                                                            {{ \Illuminate\Support\Str::limit($vacancy->description, 30, '...') }}
+                                                        </p>
+                                                </article>
+                                                <div class="job-btn-wrapper d-flex justify-content-between">
+                                                    <a href="{{route('employee.job.preview', $vacancy->id)}}" class="btn btn-default btn-md">view Job</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @empty
+                                    <h5>No job posted yet</h5>
+                                @endforelse
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <p>No job posted yet.</p>
+                @endif
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Tools Section End Here -->
     <!-- Brands Section Start Here -->
     {{--
     <section class="brand-section slass-icon  section-space">
@@ -140,10 +191,10 @@
             </div>
         </div>
     </section>
-    --}}
+  
     <!-- Brands Logo Section End -->
     <!-- Feature Vacancies Section Start -->
-    {{--
+   
     <section class="featured-emp-section featured-vacancies-section section-space">
         <div class="container">
             <div class="row">
@@ -229,64 +280,6 @@
         </div>
     </section>
     <!-- Feature Vacancies section End -->
-
-    <!-- Tools Section Start Here -->
-    <section class="tools-section text-start  section-space">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class=" pt-0 card">
-                        <div class="card-body p-5">
-                            <div class="owl-carousel owl-theme">
-                                <div class="item">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <figure class="spriteicon">
-                                                <i class="salary-tools"></i>
-                                            </figure>
-                                            <article>
-                                                <h4>Salary tools</h4>
-                                                <p>See how your salary compares to others with the same job title in your area.
-                                                    Not only can you compare your salary, but you can also see what skills you are
-                                                    missing to earn more money.</p>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <figure class="spriteicon">
-                                                <i class="quick-apply"></i>
-                                            </figure>
-                                            <article>
-                                                <h4>Quick apply</h4>
-                                                <p>Easily apply to multiple jobs with one click! Quick Apply shows you recommended jobs based off your most recent search and allows you to apply to 25+ jobs in a matter of seconds!</p>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <figure class="spriteicon">
-                                                <i class="job-alert"></i>
-                                            </figure>
-                                            <article>
-                                                <h4>Job Alert</h4>
-                                                <p>Keep track of positions that you're interested in by signing up for job alert emails. You'll be notifed via email when new jobs are posted in that search.</p>
-                                            </article>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Tools Section End Here -->
     --}}
 
 </main>
