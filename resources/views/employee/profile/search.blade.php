@@ -137,11 +137,9 @@ Job Search
                                  </figure>
                                  <article class="job-profile-article">
                                     <h5 class="">
-                                       {{ Str::limit($job->job_role, 25)}}
+                                       {{ Str::limit($job->job_role, 30)}}
                                        &nbsp;&nbsp;
-                                       <a href="{{ route('company-show', optional($job->loadMissing('user')->user)->id) }}" target="_blank" title="View company">
-                                          <i class="fa fa-building" aria-hidden="true"></i>
-                                       </a>
+                                       
                                     </h5>
                                     <ul class="job-type list-group flex-row mb-3">
                                        <li class="list-group-item">
@@ -151,15 +149,19 @@ Job Search
                                     <h6 class="d-flex align-items-center" style="font-size: 13px;margin-bottom: 14px;">
                                        <i class="icon-location me-2"></i>{{ optional($job->citydetail)->city.', '.optional($job->countrydetail)->name }}
                                     </h6>
-                                    <p class="job_description{{$job->id}}" style="font-size: 13px;padding: 0 0 15px;line-height: 22px;margin-bottom: 0;">
-                                    @if( strlen($job->description) > 60) 
-                                       {{ substr($job->description ,0, 60).'...'}} 
+                                    <p class="job_description_content job_description{{$job->id}}" style="font-size: 13px;padding: 0 0 15px;line-height: 22px;margin-bottom: 0;">
+                                    @if( strlen($job->description) > 70) 
+                                       {{ substr($job->description ,0, 70).'...'}} 
                                        <a class="read_more{{$job->id}}" onclick="readDescription('{{$job->id}}', '{{$job->description}}')" href="javascript:void(0)">Read more</a>
                                     @else 
                                        {{$job->description}} 
                                     @endif</p>
-                                    <x-review.company :company-id="optional($job->loadMissing('user')->user)->id" />
-                                    
+                                    <div class="star_rating">
+                                       <x-review.company :company-id="optional($job->loadMissing('user')->user)->id" />
+                                       <a href="{{ route('company-show', optional($job->loadMissing('user')->user)->id) }}" target="_blank" class="company_profile">
+                                          Company Profile
+                                       </a>
+                                    </div>
                                     <div class="job-btn-wrapper d-flex justify-content-between">
                                        <a href="{{route('employee.job.apply', $job->id)}}" class="btn btn-lg">@if( in_array($job->id, $applied_jobs)) Applied @else Apply @endif</a>
                                        <a href="{{route('employee.job.preview', $job->id)}}" class="btn btn-default btn-md">Preview Job</a>
