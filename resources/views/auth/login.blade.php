@@ -98,7 +98,7 @@
                                 <span class="input-icon">
                                     <img src="{{ asset('assets\images\message.png') }}" width="20px" height="20px" class="img-fluid" alt="message">
                                 </span>
-                                <input type="email" id="email_input" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Enter your Email" value="{{ old('email') }}" required autocomplete="email" autofocus />
+                                <input type="text" id="email_input" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Enter your Email or User name *" value="{{ old('email') }}" required autocomplete="email" autofocus />
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
