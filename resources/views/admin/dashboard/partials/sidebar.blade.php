@@ -16,14 +16,19 @@
             <li class="nav-item"><a href="{{ route('admin.manageAttribute') }}" class="nav-link {{ route('admin.manageAttribute') == url()->current() ? 'text-primary' : '' }}"><i class="navbar-icon icon-job-application"></i>Manage Attributes</a></li>
             <li class="nav-item"><a href="{{ route('admin.manageVacancy') }}" class="nav-link {{ route('admin.manageVacancy') == url()->current() ? 'text-primary' : '' }}"><i class="navbar-icon icon-recuirment"></i>Job Vacancies</a></li>
             <li class="nav-item"><a href="{{ route('admin.jobSkills') }}" class="nav-link {{ route('admin.jobSkills') == url()->current() ? 'text-primary' : '' }}"><i class="navbar-icon icon-recuirment"></i>Job Skills</a></li>
-            <!-- <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i class="navbar-icon icon-recuirment"></i>Recruitment</a></li>
+            <li class="nav-item">
+                <a href="{{ route('admin.setting') }}" class="nav-link {{ route('admin.setting') == url()->current() ? 'text-primary' : '' }}">
+                    <i class="navbar-icon icon-setting"></i>Setting
+                </a>
+            </li>
+            {{--<!-- <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i class="navbar-icon icon-recuirment"></i>Recruitment</a></li>
             <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i class="navbar-icon icon-on-board"></i>On Boarding</a></li>
             <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i class="navbar-icon icon-job-application"></i>Applications</a></li>
             <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i class="navbar-icon icon-team"></i>Team</a></li>
             <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i class="navbar-icon icon-view-eye"></i>Number Of Views</a></li>
             <li class="nav-item"><a href="javascript:void(0)" class="nav-link"><i class="navbar-icon icon-job-vacancy"></i>Job Vacancy Engagement</a></li> -->
             <!-- <li class="nav-item"><a href="{{ route('admin.setting') }}" class="nav-link {{ route('admin.setting') == url()->current() ? 'text-primary' : '' }}"><i class="navbar-icon icon-setting"></i>Setting</a></li> -->
-            <!-- <li class="nav-item"><a href="javascript:void(0)" onclick="$('#logout_form').submit()" class="nav-link"><i class="navbar-icon icon-lock"></i>Logout</a></li> -->
+            <!-- <li class="nav-item"><a href="javascript:void(0)" onclick="$('#logout_form').submit()" class="nav-link"><i class="navbar-icon icon-lock"></i>Logout</a></li> -->--}}
         </ul>
         <!-- Aside Nav End Here -->
     </aside>
