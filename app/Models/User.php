@@ -20,7 +20,13 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'contact', 'is_active'
+        'first_name',
+        'last_name',
+        'user_name',
+        'email',
+        'password',
+        'contact',
+        'is_active'
     ];
 
     /**
@@ -32,9 +38,9 @@ class User extends Authenticatable implements MustVerifyEmail
         'password', 'remember_token',
     ];
 
-    public CONST ROLE_ADMIN_ID = 1;
-    public CONST ROLE_EMPLOYER_ID = 2;
-    public CONST ROLE_EMPLOYEE_ID = 3;
+    public const ROLE_ADMIN_ID = 1;
+    public const ROLE_EMPLOYER_ID = 2;
+    public const ROLE_EMPLOYEE_ID = 3;
 
     /**
      * The attributes that should be cast to native types.
@@ -61,57 +67,68 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public static function employeeList()
     {
-        $employees = DB::table('role_users')->join('users','users.id','role_users.user_id')->where('role_users.role_id', 3)->where('users.deleted_at', null)->select('users.*')->get();
+        $employees = DB::table('role_users')->join('users', 'users.id', 'role_users.user_id')->where('role_users.role_id', 3)->where('users.deleted_at', null)->select('users.*')->get();
         return $employees;
     }
 
     public static function employerList()
     {
-        $employers = DB::table('role_users')->join('users','users.id','role_users.user_id')->where('role_users.role_id', 2)->where('users.deleted_at', null)->select('users.*')->get();
+        $employers = DB::table('role_users')->join('users', 'users.id', 'role_users.user_id')->where('role_users.role_id', 2)->where('users.deleted_at', null)->select('users.*')->get();
         return $employers;
     }
 
-    public function experience():HasMany{
+    public function experience(): HasMany
+    {
         return $this->hasMany(Experience::class);
     }
 
-    public function educations():HasMany{
+    public function educations(): HasMany
+    {
         return $this->hasMany(Education::class);
     }
 
-    public function getFullNameAttribute():string{
-        return $this->first_name .' '.$this->last_name;
+    public function getFullNameAttribute(): string
+    {
+        return $this->first_name . ' ' . $this->last_name;
     }
 
-    public function getProfileImageUrlAttribute(): string{
+    public function getProfileImageUrlAttribute(): string
+    {
         return optional($this->profile)->profile_image_url ?? asset('image/user.png');
     }
 
-    public function getEmployerProfileImageUrlAttribute(): string{
+    public function getEmployerProfileImageUrlAttribute(): string
+    {
         return optional($this->profile)->employer_image_url ?? asset('image/user.png');
     }
 
-    public function getProfileCurrentJobTitleAttribute(): ?string{
+    public function getProfileCurrentJobTitleAttribute(): ?string
+    {
         return filled(optional($this->profile)->current_job_title) ? optional($this->profile)->current_job_title : null;
     }
 
-    public function companyRatings() : HasMany{
+    public function companyRatings(): HasMany
+    {
         return $this->hasMany(CompanyRating::class, 'company_id');
     }
 
-    public function projects() :HasMany{
+    public function projects(): HasMany
+    {
         return $this->hasMany(Project::class);
     }
 
-    public function favoriteJobs(): HasMany{
+    public function favoriteJobs(): HasMany
+    {
         return $this->hasMany(FavoriteJob::class);
     }
 
-    public function appliedJobs() :HasMany{
+    public function appliedJobs(): HasMany
+    {
         return $this->hasMany(AppliedJob::class);
     }
 
-    public function vacancies() :HasMany{
+    public function vacancies(): HasMany
+    {
         return $this->hasMany(Vacancy::class, 'employer_id');
     }
 }

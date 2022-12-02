@@ -55,8 +55,10 @@ class RegisterController extends Controller
         return Validator::make($data, [
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
+            'user_name' => ['required', 'string', 'max:255', 'unique:users,user_name'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:6', 'max:15', 'confirmed'],
+            'policy_agreement' => ['required'],
         ]);
 
         if($data['role'] != 'employee' && $data['role'] != 'employer'){
@@ -77,6 +79,7 @@ class RegisterController extends Controller
             'first_name' => $data['first_name'],
             'last_name' => $data['last_name'],
             'email' => $data['email'],
+            'user_name' => $data['user_name'],
             'password' => Hash::make($data['password']),
         ]);
         if($data['role'] == 'employer')
@@ -96,8 +99,6 @@ class RegisterController extends Controller
         Profile::create([
             'user_id' => $user->id
         ]);
-        
-        event(new Registered($user));
 
         return $user;
     }
