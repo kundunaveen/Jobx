@@ -36,6 +36,12 @@
                         </div>
                     </div>
                     <div class="row form-group">
+                        <label for="inputName4" class="form-label">User name</label>
+                        <div class="col-12">
+                            <input type="text" class="form-control form-input" value="{{ $employee->user_name }}" aria-label="Expected Salary" readonly>
+                        </div>
+                    </div>
+                    <div class="row form-group">
                         <label for="inputPhone" class="form-label">Phone Number*</label>
                         <div class="col-12">
                             <input type="tel" class="form-control form-input" name="contact" value="{{ old('contact', $employee->contact) }}" aria-label="Phone Number" placeholder="Ex: 9876543210" id="contact_number">
