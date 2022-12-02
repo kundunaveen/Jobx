@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Cms;
 use App\Models\MasterAttribute;
 use App\Models\Vacancy;
 
@@ -48,5 +49,13 @@ if (!function_exists('total_industries')) {
     function total_industries()
     {
         return MasterAttribute::where('master_attribute_category_id', '4')->count();
+    }
+}
+
+if (!function_exists('get_cms_setting_data')) {
+
+    function get_cms_setting_data() :Cms
+    {
+        return Cms::where('slug', Cms::CMS_SLUG_SETTING)->first();
     }
 }
