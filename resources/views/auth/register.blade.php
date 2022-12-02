@@ -268,18 +268,24 @@
                                         </ul>
                                     </div>
                                 </div>
+                                @if(get_cms_setting_data())
                                 <div class="col-lg-5 col-md-4">
                                     <div class="mb-5 mb-lg-0 ms-xl-5">
                                         <h6>Contact</h6>
                                         <ul class="footer-menu-list list-group">
-                                            <li class="list-group-item border-0 p-0 mb-3"><a href="mailto:info@devacaturemaker.nl"><i class="icon-email me-1"></i>info@devacaturemaker.nl</a>
+                                            @if(data_get(get_cms_setting_data()->content, 'contact_number', ''))
+                                            <li class="list-group-item border-0 p-0 mb-3"><a href="mailto:{{ data_get(get_cms_setting_data()->content, 'contact_number', '') }}"><i class="icon-email me-1"></i>{{ data_get(get_cms_setting_data()->content, 'contact_number', '') }}</a>
                                             </li>
+                                            @endif
+                                            @if(data_get(get_cms_setting_data()->content, 'contact_email', ''))
                                             <li class="list-group-item border-0 p-0">
-                                                <a href="tel:+124 56789 1010"><i class="icon-phone me-1"></i>+124 56789 1010</a>
+                                                <a href="tel:{{ data_get(get_cms_setting_data()->content, 'contact_email', '') }}"><i class="icon-phone me-1"></i>{{ data_get(get_cms_setting_data()->content, 'contact_email', '') }}</a>
                                             </li>
+                                            @endif
                                         </ul>
                                     </div>
                                 </div>
+                                @endif
                                 <div class="col-md-4">
                                     <div class="mb-5 mb-lg-0">
                                         <h6>Legal</h6>

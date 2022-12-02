@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
             RoleUserTableSeeder::class,
             MasterAttributeCategorySeeder::class,
             MasterAttributeSeeder::class,
-            JobSkillSeeder::class
+            JobSkillSeeder::class,
+            CmsSeeder::class,
         ]);
     }
 }
