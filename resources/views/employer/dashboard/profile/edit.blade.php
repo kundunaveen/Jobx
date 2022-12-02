@@ -249,6 +249,12 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                             </div>
                         </div>
                         <div class="row form-group">
+                            <label for="inputEmail4" class="form-label">User Name</label>
+                            <div class="col-12">
+                                <input type="text" class="form-control form-input" disabled value="{{ $employer->user_name }}" id="inputEmail4">
+                            </div>
+                        </div>
+                        <div class="row form-group">
                             <label for="inputEmail4" class="form-label">Email</label>
                             <div class="col-12">
                                 <input type="email" class="form-control form-input"
