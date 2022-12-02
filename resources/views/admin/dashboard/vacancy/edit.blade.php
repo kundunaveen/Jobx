@@ -153,7 +153,7 @@
                                             
                                         </div>
                                         <div class="mt-4 row"> 
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-3">
                                                 <label class="form-label">Min. Experience Required </label>
                                                 <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" value="{{$vacancy->min_exp}}" step="0.01" name="min_exp" class="form-control @error('min_exp') is-invalid @enderror" >
                                                 @error('min_exp')
@@ -162,7 +162,7 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-3">
                                                 <label class="form-label">Salary Offer </label>
                                                 <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" value="{{$vacancy->salary_offer}}" step="0.01" name="salary_offer" class="form-control @error('salary_offering') is-invalid @enderror" >
                                                 @error('salary_offer')
@@ -171,7 +171,24 @@
                                                     </span>
                                                 @enderror
                                             </div>
-                                            
+                                            <div class="form-group col-md-3">
+                                                <label class="form-label">Minimum weekly work hour</label>
+                                                <input type="text" name="min_work_hours" value="{{ old('min_work_hours', $vacancy->min_work_hours) }}" class="form-control @error('min_work_hours') is-invalid @enderror" >
+                                                @error('min_work_hours')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-3">
+                                            <label class="form-label">Maximum weekly work hour</label>
+                                                <input type="text" name="max_work_hours" value="{{ old('max_work_hours', $vacancy->max_work_hours) }}" class="form-control @error('min_work_hours') is-invalid @enderror" >
+                                                @error('max_work_hours')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
                                         </div>
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">

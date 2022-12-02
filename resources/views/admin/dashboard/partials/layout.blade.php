@@ -42,6 +42,7 @@
          margin-top:4px !important;
       }
    </style>
+   @stack('head_style')
 </head>
 
 

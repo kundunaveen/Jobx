@@ -46,6 +46,5 @@ Admin | Settings
             </div>
         </div>
     </div>
-
 </section>
 @endsection
