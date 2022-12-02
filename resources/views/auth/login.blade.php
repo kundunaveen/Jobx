@@ -21,8 +21,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="{{ asset('assets/images/favicon.svg') }}" width="10" height="10" type="image/x-icon" />
     <!--Bootsrap CDN Here-->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ asset('assets/scss/main.css') }}" />
     <link rel="stylesheet" href="{{ asset('css/responsive.css') }}" />
 </head>
@@ -30,7 +29,7 @@
 <body class="body">
 
     <!--=========  Header Start Here =========-->
-    <header class="header"  id="myHeader">
+    <header class="header" id="myHeader">
         <div class="container">
             <div class="header-wrapper login-header py-4">
                 <div class="d-flex flex-column flex-lg-row align-items-center justify-content-between login_signup">
@@ -87,8 +86,7 @@
                 <div class="row">
                     <div class="col-md-7 log_in_col">
                         <img src="{{ asset('assets\images\login.png') }}" alt="login-image" class="img-fluid login-img">
-                        <h2 class="login-subheading">To Find More relevant jobs. Login to <span
-                                class="text-blue">JobaX</span></h2>
+                        <h2 class="login-subheading">To Find More relevant jobs. Login to <span class="text-blue">JobaX</span></h2>
                     </div>
                     <div class="col-md-5 log_in_col">
                         <form method="POST" action="{{ route('login') }}" id="login_form" class="login-form">
@@ -100,20 +98,20 @@
                                 </span>
                                 <input type="text" id="email_input" name="email" class="form-control @error('email') is-invalid @enderror" placeholder="Enter your Email or User name *" value="{{ old('email') }}" required autocomplete="email" autofocus />
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <div class="form-group">
                                 <span class="input-icon">
-                                    <img src="{{ asset('assets\images\password.png') }}" width="20px"  height="20px" class="img-fluid" alt="password">
+                                    <img src="{{ asset('assets\images\password.png') }}" width="20px" height="20px" class="img-fluid" alt="password">
                                 </span>
                                 <input type="password" name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Enter your Password" required autocomplete="current-password" />
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <!-- <div class="form-group">
@@ -148,140 +146,137 @@
         <!-- login Section End Here-->
     </main>
     <!--=========  Main Section End Here =========-->
-        <!--========= Footer Section Start Here =========-->
-        <footer class="footer footer-bg">
-            <div class="container">
-                <div class="footer-top">
-                    <div class="row">
-                        <div class="col-lg-5">
-                            <figure class="footer-logo">
-                                <a class="" href="{{ route('front-end.home') }}">
-                                    <img src="{{ asset('assets/images/jobax-logo.png') }}" width="248" alt="" class="img-fluid" />
-                                </a>
-                            </figure>
-                            <article>
-                                <p>JobaX is a job site that provides visual vacancies, RAMS software and on-site offers
-                                    additions
-                                    to
-                                    the recruiters</p>
-                            </article>
-                        </div>
-                        <div class="col-lg-7">
-                            <div class="menu-list">
-                                <div class="row">
-                                    <div class="col-md-4">
-                                        <div class="mb-5 ms-xl-5">
-                                            <h6>Company</h6>
-                                            <ul class="footer-menu-list list-group">
-                                                <li class="list-group-item border-0 p-0 mb-3">
-                                                    <a href="{{ route('frontend.about_us') }}">About Us</a>
-                                                </li>
-                                                <li class="list-group-item border-0 p-0 mb-3">
-                                                    <a href="javascript:void(0)">Careers</a>
-                                                </li>
-                                                <li class="list-group-item border-0 p-0 mb-3">
-                                                    <a href="javascript:void(0)">Customers</a>
-                                                </li>
-                                                <li class="list-group-item border-0 p-0">
-                                                    <a href="javascript:void(0)">Partnership</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+    <!--========= Footer Section Start Here =========-->
+    <footer class="footer footer-bg">
+        <div class="container">
+            <div class="footer-top">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <figure class="footer-logo">
+                            <a class="" href="{{ route('front-end.home') }}">
+                                <img src="{{ asset('assets/images/jobax-logo.png') }}" width="248" alt="" class="img-fluid" />
+                            </a>
+                        </figure>
+                        <article>
+                            <p>JobaX is a job site that provides visual vacancies, RAMS software and on-site offers
+                                additions
+                                to
+                                the recruiters</p>
+                        </article>
+                    </div>
+                    <div class="col-lg-7">
+                        <div class="menu-list">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <div class="mb-5 ms-xl-5">
+                                        <h6>Company</h6>
+                                        <ul class="footer-menu-list list-group">
+                                            <li class="list-group-item border-0 p-0 mb-3">
+                                                <a href="{{ route('frontend.about_us') }}">About Us</a>
+                                            </li>
+                                            <li class="list-group-item border-0 p-0 mb-3">
+                                                <a href="javascript:void(0)">Careers</a>
+                                            </li>
+                                            <li class="list-group-item border-0 p-0 mb-3">
+                                                <a href="javascript:void(0)">Customers</a>
+                                            </li>
+                                            <li class="list-group-item border-0 p-0">
+                                                <a href="javascript:void(0)">Partnership</a>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-5 ms-xl-5 ps-lg-3">
-                                            <h6>Quick Links</h6>
-                                            <ul class="footer-menu-list list-group">
-                                                <li class="list-group-item border-0 p-0 mb-3">
-                                                    <a href="{{ url('/') }}">Home</a>
-                                                </li>
-                                                <li class="list-group-item border-0 p-0 mb-3">
-                                                    <a href="javascript:void(0)">Explore</a>
-                                                </li>
-                                                <li class="list-group-item border-0 p-0">
-                                                    <a href="javascript:void(0)">Category</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-5 ms-xl-5 ps-lg-3">
+                                        <h6>Quick Links</h6>
+                                        <ul class="footer-menu-list list-group">
+                                            <li class="list-group-item border-0 p-0 mb-3">
+                                                <a href="{{ url('/') }}">Home</a>
+                                            </li>
+                                            <li class="list-group-item border-0 p-0 mb-3">
+                                                <a href="javascript:void(0)">Explore</a>
+                                            </li>
+                                            <li class="list-group-item border-0 p-0">
+                                                <a href="javascript:void(0)">Category</a>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-5 ms-xl-5">
-                                            <h6>Resources</h6>
-                                            <ul class="footer-menu-list list-group">
-                                                <li class="list-group-item border-0 p-0 mb-3">
-                                                    <a href="javascript:void(0)">FAQ</a>
-                                                </li>
-                                                <li class="list-group-item border-0 p-0 ">
-                                                    <a href="javascript:void(0)">Blog</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-5 ms-xl-5">
+                                        <h6>Resources</h6>
+                                        <ul class="footer-menu-list list-group">
+                                            <li class="list-group-item border-0 p-0 mb-3">
+                                                <a href="javascript:void(0)">FAQ</a>
+                                            </li>
+                                            <li class="list-group-item border-0 p-0 ">
+                                                <a href="javascript:void(0)">Blog</a>
+                                            </li>
+                                        </ul>
                                     </div>
-                                    <div class="col-lg-5 col-md-4">
-                                        <div class="mb-5 mb-lg-0 ms-xl-5">
-                                            <h6>Contact</h6>
-                                            <ul class="footer-menu-list list-group">
-                                                <li class="list-group-item border-0 p-0 mb-3"><a
-                                                        href="mailto:info@devacaturemaker.nl"><i
-                                                        class="icon-email me-1"></i>info@devacaturemaker.nl</a>
-                                                </li>
-                                                <li class="list-group-item border-0 p-0">
-                                                    <a href="tel:+124 56789 1010"><i
-                                                      class="icon-phone me-1"></i>+124 56789 1010</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                </div>
+                                @if(get_cms_setting_data())
+                                <div class="col-lg-5 col-md-4">
+                                    <div class="mb-5 mb-lg-0 ms-xl-5">
+                                        <h6>Contact</h6>
+                                        <ul class="footer-menu-list list-group">
+                                            @if(data_get(get_cms_setting_data()->content, 'contact_number', ''))
+                                            <li class="list-group-item border-0 p-0 mb-3"><a href="mailto:{{ data_get(get_cms_setting_data()->content, 'contact_number', '') }}"><i class="icon-email me-1"></i>{{ data_get(get_cms_setting_data()->content, 'contact_number', '') }}</a>
+                                            </li>
+                                            @endif
+                                            @if(data_get(get_cms_setting_data()->content, 'contact_email', ''))
+                                            <li class="list-group-item border-0 p-0">
+                                                <a href="tel:{{ data_get(get_cms_setting_data()->content, 'contact_email', '') }}"><i class="icon-phone me-1"></i>{{ data_get(get_cms_setting_data()->content, 'contact_email', '') }}</a>
+                                            </li>
+                                            @endif
+                                        </ul>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-5 mb-lg-0">
-                                            <h6>Legal</h6>
-                                            <ul class="footer-menu-list list-group">
-                                                <li class="list-group-item border-0 p-0 mb-3">
-                                                    <a href="{{ route('frontend.terms_conditions') }}">Terms & Conditions</a>
-                                                </li>
-                                                <li class="list-group-item border-0 p-0">
-                                                    <a href="{{ route('frontend.privacy_policy') }}">Privacy Policy</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                </div>
+                                @endif
+                                <div class="col-md-4">
+                                    <div class="mb-5 mb-lg-0">
+                                        <h6>Legal</h6>
+                                        <ul class="footer-menu-list list-group">
+                                            <li class="list-group-item border-0 p-0 mb-3">
+                                                <a href="{{ route('frontend.terms_conditions') }}">Terms & Conditions</a>
+                                            </li>
+                                            <li class="list-group-item border-0 p-0">
+                                                <a href="{{ route('frontend.privacy_policy') }}">Privacy Policy</a>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="footer-bottom text-center border-top">
-                    <p class="mb-0">© 2022 JobaX. All rights reserved.</p>
-                </div>
             </div>
-        </footer>
-        <!--========= Footer Section End Here =========-->
+            <div class="footer-bottom text-center border-top">
+                <p class="mb-0">© 2022 JobaX. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <!--========= Footer Section End Here =========-->
     <!-- Script Link Here -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="{{ asset('assets/js/custom.js') }}"></script>
     <script>
-        function beforeLogin()
-        {
-            if($('#email_input').val() == "" || $('#email_input').val() == undefined)
-            {
+        function beforeLogin() {
+            if ($('#email_input').val() == "" || $('#email_input').val() == undefined) {
                 $('#login_form').submit();
-            }
-            else{
+            } else {
                 $.ajax({
                     "url": "{{route('check.admin')}}",
                     "type": "POST",
-                    "data":{
+                    "data": {
                         "_token": "{{ csrf_token() }}",
                         "email": $('#email_input').val(),
                     },
-                    success: function(response){
-                        if(response.status == "success"){
+                    success: function(response) {
+                        if (response.status == "success") {
                             $('#login_form').submit();
-                        }
-                        else{
+                        } else {
                             window.location.href = "{{route('admin.login')}}"
                         }
                     }

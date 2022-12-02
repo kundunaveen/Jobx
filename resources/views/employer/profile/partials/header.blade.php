@@ -57,7 +57,6 @@
                                 <div class="dropdown">
                                     <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="true">&nbsp;&nbsp;&nbsp;</a>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink" data-popper-placement="bottom-end">
-                                        <!-- <li class="nav-link"><a class="dropdown-item nav-item" href="{{ route('admin.setting') }}"><i class="navbar-icon icon-recuirment"></i> Setting</a></li> -->
                                         <li class="nav-link"><a class="dropdown-item nav-item" href="{{route('employer.profile.edit')}}"> Profile</a></li>
                                         <li class="nav-link"><a class="dropdown-item nav-item" data-bs-toggle="modal" data-bs-target="#changePasswordModal" href="javascript:void(0)"> Change Password</a></li>
                                         <li class="nav-link"><a class="dropdown-item nav-item" href="javascript:void(0)" onclick="$('#logout_form').submit()"> Logout</a></li>

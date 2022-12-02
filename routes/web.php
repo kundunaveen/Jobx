@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Employee\EducationController;
 use App\Http\Controllers\Employee\EmployeeExperienceController;
 use App\Http\Controllers\Employee\ProjectController;
@@ -19,9 +20,18 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes(['verify' => true]);
 
+Route::prefix('admin')->name('admin.')->middleware(['auth', 'adminaccount'])->group(function () {
+    Route::prefix('cms')->name('cms.')->group(function () {
+        Route::prefix('setting')->name('setting.')->group(function () {
+            Route::get('/edit', [SettingController::class, 'edit'])->name('edit');
+            Route::put('/update', [SettingController::class, 'update'])->name('update');
+        });
+    });
+});
+
 Route::get('/admin/login', [App\Http\Controllers\Admin\ThemeController::class, 'login'])->name('admin.login');
 Route::get('/admin', [App\Http\Controllers\Admin\DashboardController::class, 'home'])->name('admin.dashboard');
-Route::get('/admin/setting', [App\Http\Controllers\Admin\SettingController::class, 'index'])->name('admin.setting');
+
 Route::post('/admin/change-password', [App\Http\Controllers\Admin\AdminController::class, 'changePassword'])->name('admin.changePassword');
 Route::post('/admin/check-password-validation', [App\Http\Controllers\Admin\AdminController::class, 'checkPasswordValidation'])->name('checkPasswordValidation');
 
@@ -158,7 +168,3 @@ Route::prefix('favorite-vacancy')->name('favorite-vacancy.')->group(function () 
 Route::get('/about-us', [App\Http\Controllers\FrontEnd\CmsController::class, 'aboutUs'])->name('frontend.about_us');
 Route::get('/privacy-policy', [App\Http\Controllers\FrontEnd\CmsController::class, 'privacyPolicy'])->name('frontend.privacy_policy');
 Route::get('/terms-conditions', [App\Http\Controllers\FrontEnd\CmsController::class, 'termsConditions'])->name('frontend.terms_conditions');
-
-
-
-
