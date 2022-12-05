@@ -138,7 +138,7 @@ Job Search
                                  </figure>
                                  <article class="job-profile-article">
                                     <h5 class="">
-                                       {{ Str::limit($job->job_role, 30)}}
+                                       {{ Str::limit($job->job_role, 25)}}
                                        &nbsp;&nbsp;
                                        
                                     </h5>
@@ -151,8 +151,8 @@ Job Search
                                        <i class="icon-location me-2"></i>{{ optional($job->citydetail)->city.', '.optional($job->countrydetail)->name }}
                                     </h6>
                                     <p class="job_description_content job_description{{$job->id}}" style="font-size: 13px;padding: 0 0 15px;line-height: 22px;margin-bottom: 0;">
-                                    @if( strlen($job->description) > 70) 
-                                       {{ substr($job->description ,0, 70).'...'}} 
+                                    @if( strlen($job->description) > 80) 
+                                       {{ substr($job->description ,0, 80).'...'}} 
                                        <a class="read_more{{$job->id}}" onclick="readDescription('{{$job->id}}', '{{$job->description}}')" href="javascript:void(0)">Read more</a>
                                     @else 
                                        {{$job->description}} 

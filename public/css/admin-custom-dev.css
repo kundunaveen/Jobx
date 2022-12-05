@@ -44,3 +44,6 @@ div[role="progressbar"]::before {
     counter-reset: percentage var(--value);
     content: counter(percentage) '%';
 }
+.dashboard-wrapper {
+    min-height: 100vh;
+}

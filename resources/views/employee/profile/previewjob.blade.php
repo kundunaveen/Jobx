@@ -44,7 +44,7 @@
                         <div class="row form-group">
                             <label for="check" class="form-label">Description</label>
                             <div class="col-12">
-                                <textarea class="form-control" rows="5" aria-label="Description">{{ $job_details->description }}</textarea>
+                                <textarea class="form-control" rows="5" aria-label="Description" readonly>{{ $job_details->description }}</textarea>
                             </div>
                         </div>
                         <div class="row form-group">
@@ -59,6 +59,18 @@
                             <div class="col-12">
                                 <input type="text" class="form-control form-input" readonly name="min_exp" value="{{$job_details->min_exp}}" placeholder="Minimum Experience"
                                     aria-label="Minimum Experience">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="check" class="form-label">Minimum weekly work hour</label>
+                            <div class="col-12">
+                                <input type="text" class="form-control form-input" readonly value="{{ $job_details->min_work_hours }}">
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="check" class="form-label">Maximum weekly work hour</label>
+                            <div class="col-12">
+                                <input type="text" class="form-control form-input" readonly value="{{ $job_details->max_work_hours }}">
                             </div>
                         </div>
                         @if(auth()->user() && auth()->user()->roleUser->role->role == 'employee')

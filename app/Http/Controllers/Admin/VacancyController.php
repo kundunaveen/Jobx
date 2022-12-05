@@ -48,7 +48,9 @@ class VacancyController extends Controller
                 'description' => 'required',
                 'branch' => 'nullable',                
                 'images_input.*' => 'image|max:2000|mimes:' . implode(',', Vacancy::SUPPORTED_IMAGE_MIME_TYPE),
-                'video_input' => 'mimes:mp4|max:20000'
+                'video_input' => 'mimes:mp4|max:20000',
+                'min_work_hours' => 'nullable|integer',
+                'max_work_hours' => 'nullable|integer',
             ]);
 
             try {
@@ -104,7 +106,9 @@ class VacancyController extends Controller
                     'job_type' => $request->job_type,
                     'branch' => $request->branch,
                     'images' => $images,
-                    'video' => $video,
+                    'video' => $video,                    
+                    'min_work_hours' => $request->min_work_hours,
+                    'max_work_hours' => $request->max_work_hours,
                 ]);
                 Session::flash('success', 'Job Vacancy Created Successfully');
                 return redirect(route('admin.manageVacancy'));
@@ -168,6 +172,8 @@ class VacancyController extends Controller
                 'video_input' => 'mimes:mp4|max:20000',                
                 'old_images_input' => 'nullable',
                 'old_images_input.*' => 'string',
+                'min_work_hours' => 'nullable|integer',
+                'max_work_hours' => 'nullable|integer',
                 // 'skills' => 'required'
             ]);
 
@@ -242,6 +248,8 @@ class VacancyController extends Controller
                     'branch' => $request->branch,
                     'images' => $images,
                     'video' => $video,
+                    'min_work_hours' => $request->min_work_hours,
+                    'max_work_hours' => $request->max_work_hours,
                 ]);
                 Session::flash('success', 'Job Vacancy Updated Successfully');
                 return redirect(route('admin.manageVacancy'));

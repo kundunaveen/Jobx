@@ -3,11 +3,8 @@
 Employer | Edit Post Job
 @endsection
 @section('content')
-<style>
-    .select-box-2 span.select2.select2-container.select2-container--default {
-        width: 100% !important;
-    }
 
+<style>
     .select2-selection {
         border: none !important;
     }
@@ -19,7 +16,8 @@ Employer | Edit Post Job
         -webkit-border-radius: 10px;
         -moz-border-radius: 10px;
         padding: 0.5rem 3rem;
-        height: 58px;
+        min-height: 58px !important;
+        height: auto !important;
         width: 100% !important;
     }
 
@@ -30,7 +28,8 @@ Employer | Edit Post Job
         -webkit-border-radius: 10px !important;
         -moz-border-radius: 10px !important;
         padding: .8rem 3rem !important;
-        height: 58px !important;
+        min-height: 58px !important;
+        height: auto !important;
         width: 100% !important;
     }
 
@@ -48,6 +47,7 @@ Employer | Edit Post Job
         padding: 0px !important;
     }
 </style>
+
 <section class="dashboard-section inner-login-shape employer_padding_card">
     <main class="main-bg employer-form-page">
         <section class="form-inner-wrapper">
@@ -139,7 +139,7 @@ Employer | Edit Post Job
                         </div>
 
                         <div class="row form-group">
-                            <label for="inputPhone" class="form-label">Salary Offer <small>(kpa)</small></label>
+                            <label for="inputPhone" class="form-label">Salary Offer <strong>({{ config('settings.currency') }}/month)</strong></label>
                             <div class="col-12">
                                 <input type="number" step="0.01" value="{{ old('salary_offer', $vacancy->salary_offer) }}" name="salary_offer" class="form-control form-input" placeholder="Ex: 33" aria-label="Department">
                                 @error('salary_offer')
@@ -150,6 +150,28 @@ Employer | Edit Post Job
                             </div>
                         </div>
 
+                        <div class="row form-group">
+                            <label for="inputPhone" class="form-label">Minimum weekly work hour</label>
+                            <div class="col-12">
+                                <input type="text" name="min_work_hours" value="{{ old('min_work_hours', $vacancy->min_work_hours) }}" class="form-control form-input" placeholder="Ex: 33" aria-label="Department">
+                                @error('min_work_hours')
+                                <span class="text-danger mt-1" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="inputPhone" class="form-label">Maximum weekly work hour</label>
+                            <div class="col-12">
+                                <input type="text" name="max_work_hours" value="{{ old('max_work_hours', $vacancy->max_work_hours) }}" class="form-control form-input" placeholder="Ex: 33" aria-label="Department">
+                                @error('max_work_hours')
+                                <span class="text-danger mt-1" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
                         <div class="row form-group">
                             <label for="inputPhone" class="form-label">Skill Required</label>
                             <div class="col-12 ">
@@ -300,4 +322,5 @@ Employer | Edit Post Job
             </div>
         </section>
     </main>
-</section @endsection
+</section>
+@endsection

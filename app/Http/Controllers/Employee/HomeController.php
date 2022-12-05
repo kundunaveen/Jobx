@@ -154,36 +154,6 @@ class HomeController extends Controller
 
         $jobs = $jobs->paginate(config('setting.pagination_no'));
 
-
-        // if ($request->job_type) {
-        //     $jobs->whereIn('job_type', $request->job_type);
-        // }
-        // if ($request->industry) {
-        //     $jobs->whereHas('user', function ($q) use ($request) {
-        //         $q->whereHas('profile', function ($query) use ($request) {
-        //             $query->whereIn('industry_type_id', $request->industry);
-        //         });
-        //     });
-        // }
-        // if ($request->skill) {
-        //     $jobs->whereRaw("FIND_IN_SET(?, skills)", $request->skill);
-        // }
-        // if ($request->sortby == "newest") {
-        //     $jobs = Vacancy::orderBy('created_at', 'DESC');
-        // }
-        // if ($request->sortby == "highest_salary") {
-        //     $jobs = Vacancy::orderBy('salary_offer', 'DESC');
-        // }
-        // if ($request->sortby == "lowest_experience") {
-        //     $jobs = Vacancy::orderBy('min_exp');
-        // }
-        // if ($request->min_salary && $request->max_salary) {
-        //     $jobs->whereBetween('salary_offer', [$request->min_salary, $request->max_salary])->get();
-        // }
-        // if ($request->min_exp && $request->max_exp) {
-        //     $jobs->whereBetween('min_exp', [$request->min_exp, $request->max_exp])->get();
-        // }
-
         $salaries = Vacancy::selectRaw("MIN(salary_offer) AS MinSalary, MAX(salary_offer) AS MaxSalary")->first();
         $industry = MasterAttribute::where('master_attribute_category_id', '4')->get();
         $job_types = MasterAttribute::whereHas('masterCategory', function ($q) {
@@ -191,8 +161,6 @@ class HomeController extends Controller
         })->get();
         $applied_jobs = AppliedJob::where('user_id', optional(auth()->user())->id)->pluck('vacancy_id')->toArray();
         $skills = JobSkill::all();
-
-        //$jobs = $jobs->simplePaginate(3);
 
         return view('employee.profile.search', compact('salaries', 'job_types', 'jobs', 'industry', 'applied_jobs', 'skills'));
     }

@@ -79,7 +79,9 @@ class JobPostController extends Controller
                 'job_type' => 'required',
                 'images_input' => 'required|array',
                 'images_input.*' => 'image|max:2000|mimes:' . implode(',', Vacancy::SUPPORTED_IMAGE_MIME_TYPE),
-                'video_input' => 'mimes:mp4|max:20000'
+                'video_input' => 'mimes:mp4|max:20000',                
+                'min_work_hours' => 'nullable|integer',
+                'max_work_hours' => 'nullable|integer',
             ]);
 
             try {
@@ -177,7 +179,9 @@ class JobPostController extends Controller
                 'images_input.*' => 'image|max:2000|mimes:' . implode(',', Vacancy::SUPPORTED_IMAGE_MIME_TYPE),
                 'old_images_input' => 'nullable',
                 'old_images_input.*' => 'string',
-                'video_input' => 'mimes:mp4|max:20000'
+                'video_input' => 'mimes:mp4|max:20000',
+                'min_work_hours' => 'nullable|integer',
+                'max_work_hours' => 'nullable|integer',
             ]);
 
             try {
