@@ -181,7 +181,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-3">
-                                            <label class="form-label">Maximum weekly work hour</label>
+                                                <label class="form-label">Maximum weekly work hour</label>
                                                 <input type="text" name="max_work_hours" value="{{ old('max_work_hours', $vacancy->max_work_hours) }}" class="form-control @error('min_work_hours') is-invalid @enderror" >
                                                 @error('max_work_hours')
                                                     <span class="invalid-feedback" role="alert">

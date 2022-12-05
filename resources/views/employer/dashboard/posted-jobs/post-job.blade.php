@@ -146,7 +146,30 @@ Employer | Post Job
                         </div>
 
                         <div class="row form-group">
-                            <label for="inputPhone" class="form-label">Salary Offer <small>(kpa)</small></label>
+                            <label for="inputPhone" class="form-label">Minimum weekly work hour</label>
+                            <div class="col-12">
+                                <input type="text" name="min_work_hours" value="{{ old('min_work_hours') }}" class="form-control form-input" placeholder="Ex: 33" aria-label="Department">
+                                @error('min_work_hours')
+                                <span class="text-danger mt-1" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+                        <div class="row form-group">
+                            <label for="inputPhone" class="form-label">Maximum weekly work hour</label>
+                            <div class="col-12">
+                                <input type="text" name="max_work_hours" value="{{ old('max_work_hours') }}" class="form-control form-input" placeholder="Ex: 33" aria-label="Department">
+                                @error('max_work_hours')
+                                <span class="text-danger mt-1" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row form-group">
+                            <label for="inputPhone" class="form-label">Salary Offer <strong>({{ config('settings.currency') }}/month)</strong></label>
                             <div class="col-12">
                                 <input type="number" step="0.01" name="salary_offer" value="{{ old('salary_offer') }}" class="form-control form-input" placeholder="Ex: 33" aria-label="Department">
                                 @error('salary_offer')

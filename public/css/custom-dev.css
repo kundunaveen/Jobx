@@ -15,7 +15,8 @@ span.select2.select2-container.select2-container--default {
     -moz-border-radius: 10px !important;
     padding: .6rem 3rem !important;
     width: 100% !important;
-    height: 58px !important;
+    min-height: 58px !important;
+    height: auto;
 }
 
 .select2-container--default .select2-selection--multiple {
