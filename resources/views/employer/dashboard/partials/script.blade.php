@@ -155,7 +155,7 @@
 
       function readLess(id, description)
       {
-         $('.job_description'+id).html(description.substr(0,60)+`... <a onclick="readDescription('${id}','${description}')" href="javascript:void(0)">Read more</a>`)
+         $('.job_description'+id).html(description.substr(0,40)+`... <a onclick="readDescription('${id}','${description}')" href="javascript:void(0)">Read more</a>`)
       }
 
       function readURL(input) {
