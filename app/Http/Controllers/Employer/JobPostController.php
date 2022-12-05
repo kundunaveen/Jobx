@@ -81,7 +81,7 @@ class JobPostController extends Controller
                 'images_input.*' => 'image|max:2000|mimes:' . implode(',', Vacancy::SUPPORTED_IMAGE_MIME_TYPE),
                 'video_input' => 'mimes:mp4|max:20000',                
                 'min_work_hours' => 'nullable|integer',
-                'max_work_hours' => 'nullable|integer',
+                'max_work_hours' => 'nullable|integer|gt:min_work_hours',
             ]);
 
             try {
@@ -181,7 +181,7 @@ class JobPostController extends Controller
                 'old_images_input.*' => 'string',
                 'video_input' => 'mimes:mp4|max:20000',
                 'min_work_hours' => 'nullable|integer',
-                'max_work_hours' => 'nullable|integer',
+                'max_work_hours' => 'nullable|integer|gt:min_work_hours',
             ]);
 
             try {

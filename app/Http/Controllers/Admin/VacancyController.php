@@ -50,7 +50,7 @@ class VacancyController extends Controller
                 'images_input.*' => 'image|max:2000|mimes:' . implode(',', Vacancy::SUPPORTED_IMAGE_MIME_TYPE),
                 'video_input' => 'mimes:mp4|max:20000',
                 'min_work_hours' => 'nullable|integer',
-                'max_work_hours' => 'nullable|integer',
+                'max_work_hours' => 'nullable|integer|gt:min_work_hours',
             ]);
 
             try {
@@ -173,7 +173,7 @@ class VacancyController extends Controller
                 'old_images_input' => 'nullable',
                 'old_images_input.*' => 'string',
                 'min_work_hours' => 'nullable|integer',
-                'max_work_hours' => 'nullable|integer',
+                'max_work_hours' => 'nullable|integer|gt:min_work_hours',
                 // 'skills' => 'required'
             ]);
 
