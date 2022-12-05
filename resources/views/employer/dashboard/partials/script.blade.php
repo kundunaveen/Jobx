@@ -26,10 +26,12 @@
             iDisplayLength:25,
             // dom:'rtip'
          })
-         var input = document.querySelector("#phone");
-         window.intlTelInput(input, {
-            // any initialisation options go here
-         });
+         if($('#phone').length > 0){
+            var input = document.querySelector("#phone");
+            window.intlTelInput(input, {
+               // any initialisation options go here
+            });
+         }
       })
 
       function checkPasswordValidation()

@@ -23,6 +23,8 @@ class Vacancy extends Model
         'department',
         'job_role',
         'description',
+        'min_work_hours',
+        'max_work_hours',
         'salary_offer',
         'min_exp',
         'skills',
