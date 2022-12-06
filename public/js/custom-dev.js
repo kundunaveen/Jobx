@@ -1,4 +1,4 @@
-function successToastAlert(message){
+function successToastAlert(message) {
     $.toast({
         heading: 'Success',
         text: message,
@@ -8,7 +8,7 @@ function successToastAlert(message){
     })
 }
 
-function errorToastAlert(message){
+function errorToastAlert(message) {
     $.toast({
         heading: 'Error',
         text: message,
@@ -66,7 +66,7 @@ $(document).on('click', '.remove', function () {
 // });
 $(document).ready(function () {
 
-    if($('#contact_number').length > 0){
+    if ($('#contact_number').length > 0) {
         var input_number = document.querySelector("#contact_number");
         window.intlTelInput(input_number, {
             defaultCountry: "auto",
@@ -75,7 +75,7 @@ $(document).ready(function () {
         var mobile_number = iti.getNumber();
         // mobile_number = $("#phone").intlTelInput("getSelectedCountryData").dialCode;
         $("#phone").val(mobile_number);
-    }    
+    }
 
     if ($('.select2_dropdown').length > 0) {
         $('.select2_dropdown').select2();
@@ -402,23 +402,23 @@ $(document).ready(function () {
                 to_year: "To year field is required",
             }
         });
-    }   
-    
+    }
+
 });
 
-$(document).ready(function() {
-    $('div[class^="company_rating_readonly"]').each(function() {
+$(document).ready(function () {
+    $('div[class^="company_rating_readonly"]').each(function () {
         var score = $(this).attr('data-score');
         $(this).raty({
             readOnly: true,
             number: 5,
             starOff: "https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/images/star-off.png",
             starOn: "https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/images/star-on.png",
-            score: function(){
+            score: function () {
                 return score;
             },
-            hints: [1, 2, 3, 4, 5],            
-        });        
+            hints: [1, 2, 3, 4, 5],
+        });
     });
 
     // $('.company_rating_readonly').raty({
@@ -432,49 +432,49 @@ $(document).ready(function() {
     //     hints: [1, 2, 3, 4, 5],            
     // });
 
-    $('div[class^="company_rating_writeonly"]').each(function() {
+    $('div[class^="company_rating_writeonly"]').each(function () {
         var score = $(this).attr('data-score');
         var company_id = $(this).attr('data-company_id');
         $(this).raty({
             number: 5,
             starOff: "https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/images/star-off.png",
             starOn: "https://cdnjs.cloudflare.com/ajax/libs/raty/2.9.0/images/star-on.png",
-            score: function(){
+            score: function () {
                 return score;
             },
             target: "#text-" + company_id,
-            hints: [1, 2, 3, 4, 5],            
-        });        
-    });     
+            hints: [1, 2, 3, 4, 5],
+        });
+    });
 
-    $(".company_rating_writeonly").click(function(){
+    $(".company_rating_writeonly").click(function () {
         var company_id = $(this).attr('data-company_id');
         var rating_value = $('#text-' + company_id).val();
         var user_id = auth_user_id;
 
-        if(!company_id){
+        if (!company_id) {
             alert('Company is missing!');
             return false;
         }
-        if(!rating_value){
+        if (!rating_value) {
             alert('rating is missing!');
             return false;
         }
-        if(!user_id){
+        if (!user_id) {
             alert('Please login!');
             return false;
         }
 
         $.ajax({
             'url': company_rating_store_update_route,
-            'type':'GET',
-            'data':{
+            'type': 'GET',
+            'data': {
                 'rating_value': rating_value,
                 'user_id': user_id,
                 'company_id': company_id
             },
-            success:function(response){
-                if(response.status == false){
+            success: function (response) {
+                if (response.status == false) {
                     $.toast({
                         heading: 'Error',
                         text: response.message,
@@ -483,7 +483,7 @@ $(document).ready(function() {
                         position: 'top-right',
                     })
                 }
-                if(response.status == true){
+                if (response.status == true) {
                     $.toast({
                         heading: 'Success',
                         text: 'You rating successfully saved.',
@@ -491,7 +491,7 @@ $(document).ready(function() {
                         icon: 'success',
                         position: 'top-right',
                     })
-                }                
+                }
             },
         });
     });
@@ -501,33 +501,88 @@ $(document).ready(function() {
         var vacancy_id = $(this).attr('data-vacancy_id');
         var url = $(this).attr('data-url');
 
-        if(!user_id){
+        if (!user_id) {
             errorToastAlert('User not found!');
             return false;
         }
-        if(!vacancy_id){
+        if (!vacancy_id) {
             errorToastAlert('Vacancy not found!');
             return false;
         }
 
         $.ajax({
             'url': url,
-            'type':'GET',
-            'data':{
+            'type': 'GET',
+            'data': {
                 'user_id': user_id,
                 'vacancy_id': vacancy_id
             },
-            success:function(response){
-                if(response.status == true){
+            success: function (response) {
+                if (response.status == true) {
                     successToastAlert(response.message);
                 }
-                if(response.status == false){
+                if (response.status == false) {
                     errorToastAlert(response.message);
                 }
-                if(response.html){
-                    $('#vacancy-id-'+vacancy_id).html(response.html);
-                }                
+                if (response.html) {
+                    $('#vacancy-id-' + vacancy_id).html(response.html);
+                }
             },
         });
+    });
+});
+
+$(document).ready(function () {
+    $("input[name='search_keyword']").autocomplete({
+        minLength: 2,
+        source: function (request, response) {
+            $.ajax({
+                url: $("input[name='search_keyword']").attr('data-route'),
+                type: 'GET',
+                dataType: "json",
+                data: {
+                    search_keyword: request.term
+                },
+                success: function (data) {
+                    if (data.status == true) {
+                        response(data.data);
+                    } else {
+                        errorToastAlert(data.message);
+                        return false;
+                    }
+
+                }
+            });
+        },
+        select: function (event, ui) {
+            $("input[name='search_keyword']").val(ui.item.value);
+            return false;
+        }
+    });
+    $("input[name='search_location']").autocomplete({
+        minLength: 2,
+        source: function (request, response) {
+            $.ajax({
+                url: $("input[name='search_location']").attr('data-route'),
+                type: 'GET',
+                dataType: "json",
+                data: {
+                    search_location: request.term
+                },
+                success: function (data) {
+                    if (data.status == true) {
+                        response(data.data);
+                    } else {
+                        errorToastAlert(data.message);
+                        return false;
+                    }
+
+                }
+            });
+        },
+        select: function (event, ui) {
+            $("input[name='search_location']").val(ui.item.value);
+            return false;
+        }
     });
 });

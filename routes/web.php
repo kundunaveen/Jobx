@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\Employee\EducationController;
 use App\Http\Controllers\Employee\EmployeeExperienceController;
 use App\Http\Controllers\Employee\ProjectController;
@@ -163,6 +164,13 @@ Route::get('/employee/job-search', [App\Http\Controllers\Employee\HomeController
 Route::prefix('favorite-vacancy')->name('favorite-vacancy.')->group(function () {
     Route::get('/add', [App\Http\Controllers\AjaxController::class, 'addFavoriteVacancy'])->name('add');
     Route::get('/destroy', [App\Http\Controllers\AjaxController::class, 'destroyFavoriteVacancy'])->name('destroy');
+});
+
+Route::prefix('ajax')->name('ajax.')->group(function () {
+    Route::prefix('autocomplete-search')->name('autocomplete-search.')->group(function () {
+        Route::get('/vacancy', [AjaxController::class, 'vacancyAutoCompleteSearch'])->name('vacancy');
+        Route::get('/location', [AjaxController::class, 'locationAutoCompleteSearch'])->name('location');
+    });
 });
 
 Route::get('/about-us', [App\Http\Controllers\FrontEnd\CmsController::class, 'aboutUs'])->name('frontend.about_us');
