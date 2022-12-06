@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Country extends Model
 {
@@ -42,5 +43,9 @@ class Country extends Model
     public function cities()
     {
         return $this->hasMany('App\Models\City', 'country_id');
+    }
+
+    public function vacancies(): HasMany{
+        return $this->hasMany(Vacancy::class, 'country');
     }
 }

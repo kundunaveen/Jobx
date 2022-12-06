@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class State extends Model
 {
@@ -31,5 +32,9 @@ class State extends Model
     public function cities()
     {
         return $this->hasMany('App\Models\City', 'state_id');
+    }
+
+    public function vacancies(): HasMany{
+        return $this->hasMany(Vacancy::class, 'state');
     }
 }
