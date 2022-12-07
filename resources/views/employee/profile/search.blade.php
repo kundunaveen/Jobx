@@ -18,7 +18,7 @@ Job Search
                            <span class="input-group-text">
                               <i class="form-icon icon-keywords"></i>
                            </span>
-                           <input type="text" name="search_keyword" value="{{ request()->get('search_keyword') }}" class="form-control" placeholder="Keywords" data-route="{{ route('ajax.autocomplete-search.vacancy') }}"/>
+                           <input type="text" name="search_keyword" value="{{ request()->get('search_keyword') }}" class="form-control" placeholder="Keywords" />
                         </div>
                      </div>
                      <div class="col-lg-4 mb-4 mb-lg-0">
@@ -27,7 +27,7 @@ Job Search
                            <span class="input-group-text">
                               <i class="form-icon icon-location"></i>
                            </span>
-                           <input type="text" name="search_location" value="{{ request()->get('search_location') }}" class="form-control" placeholder="Location" data-route="{{ route('ajax.autocomplete-search.location') }}"/>
+                           <input type="text" name="search_location" value="{{ request()->get('search_location') }}" class="form-control" placeholder="Location" />
                            {{--
                     <select class="form-select">
                                         <option value="1">30KM</option>
