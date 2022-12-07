@@ -537,7 +537,7 @@ $(document).ready(function () {
         minLength: 2,
         source: function (request, response) {
             $.ajax({
-                url: $("input[name='search_keyword']").attr('data-route'),
+                url: vacancy_search_keyword_route,
                 type: 'GET',
                 dataType: "json",
                 data: {
@@ -563,7 +563,7 @@ $(document).ready(function () {
         minLength: 2,
         source: function (request, response) {
             $.ajax({
-                url: $("input[name='search_location']").attr('data-route'),
+                url: vacancy_search_location_route,
                 type: 'GET',
                 dataType: "json",
                 data: {
