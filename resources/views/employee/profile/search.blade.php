@@ -164,7 +164,7 @@ Job Search
                                        </a>
                                     </div>
                                     <div class="job-btn-wrapper d-flex justify-content-between">
-                                       <a href="{{route('employee.job.apply', $job->id)}}" class="btn btn-lg">@if( in_array($job->id, $applied_jobs)) Applied @else Apply @endif</a>
+                                       <a  href="javascript:void(0)" onclick="applyJob('{{$job->id}}')" data-bs-toggle="modal" data-bs-modal="#applyJobModal" class="btn btn-lg">@if( in_array($job->id, $applied_jobs)) Applied @else Apply @endif</a>
                                        <a href="{{route('employee.job.preview', $job->id)}}" class="btn btn-default btn-md">Preview Job</a>
                                        {{--
                                     <!-- <a href="{{route('employer.edit.post.job', $job->id)}}" style="margin-left:-5px;margin-right:10px" class="btn col-6 btn-default ">Apply</a>
@@ -193,11 +193,42 @@ Job Search
    <!-- Modal Popup -->
    @include('front-end.includes.job_listing_modal')
    <!-- model Start Here-->
+
+   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Job Application Form</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{url('/employee/job-applied')}}" method="POST" id="job_application_form">
+               @csrf
+               <input type="hidden" name="job_id" id="apply_job_id">
+               <div class="modal-body">
+                  <div class="form-group">
+                     <label>Cover Letter</label>
+                     <textarea rows="10" name="cover_letter" class="form-control"></textarea>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Apply</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
 </main>
 @endsection
 
 @section('scripts')
 <script>
+   
+   function applyJob(id){
+      $('#job_application_form').attr('action', '{{url("/employee/job-applied")}}/'+id)
+      $('#apply_job_id').val(id)
+   }
+
    function setSortValue() {
       $('#sortby').val($('#sortdropdown').val())
       $('#filter-form').submit()

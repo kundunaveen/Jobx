@@ -30,7 +30,7 @@ class JobPostController extends Controller
     /*apply for job*/
     public function applyJob(Request $request, $id)
     {
-
+        dd($request);
         $have_profile = Profile::where('user_id', $request->user()->id)
         ->where('gender', '>', 0)
         ->count();
