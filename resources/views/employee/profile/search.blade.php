@@ -3,7 +3,11 @@
 Job Search
 @endsection
 @section('content')
-
+<meta property="og:url" content="" />
+<meta property="og:title" content="Jobax | Visual Vacancies" />
+<meta property="og:type" content="Visual Vacancies" />
+<meta property="og:description" content="Visual Vacancies" />
+<meta property="og:image" content="{{asset('assets/images/jobax-logo.png')}}" />
 <section class="banner-section job-listing-banner inner-banner main-banner-section">
    <div class="container">
       @include('layouts.messages.success_jquery_toast')
@@ -131,10 +135,13 @@ Job Search
                               <div class="card-body job-profile-info">
                                  <figure class="job-profile-figure d-flex align-items-center justify-content-between">
                                     <img src="{{ $job->single_image }}" class="round_image" title="{{ $job->job_title }}">
-                                    @auth
-                                    <x-favorite.job :vacancy-id="$job->id" :user-id="auth()->id()" />
-                                    @endauth
-                                    <span class="date job-listing-alignment">{{date('d F, Y',strtotime($job->created_at))}}</span>
+                                    <div class="fav-fb-div">                                       
+                                       <a onclick="shareToFacebook()" href="javascript:void(0)" class="height-35 width-35  rounded-circle   flex-content-center"> <i class="fa fa-facebook-official" aria-hidden="true"></i> </a>
+                                       @auth
+                                       <x-favorite.job :vacancy-id="$job->id" :user-id="auth()->id()" />
+                                       @endauth
+                                    </div>
+                                       <span class="date job-listing-alignment">{{date('d F, Y',strtotime($job->created_at))}}</span>
                                  </figure>
                                  <article class="job-profile-article">
                                     <h5 class="">
@@ -311,5 +318,17 @@ Job Search
    function readLess(id, description) {
       $('.job_description' + id).html(description.substr(0, 60) + `... <a onclick="readDescription('${id}','${description}')" href="javascript:void(0)">Read more</a>`)
    }
+
+   function shareToFacebook()
+
+    {  
+
+        event.preventDefault();
+
+        urll = 'https://www.facebook.com/sharer/sharer.php?u='+window.location.href
+
+        window.location.href=urll      
+
+    }
 </script>
 @endsection

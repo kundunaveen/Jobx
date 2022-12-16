@@ -1,5 +1,19 @@
 /* Employee responsive */
+.fav-fb-div .favorite_job {
+    position: static;
+    display: inline;
+}
 
+.fav-fb-div a.height-35.width-35.rounded-circle.flex-content-center {
+    display: inline-block;
+    vertical-align: top;
+}
+.fav-fb-div {
+    display: block;
+    position: absolute;
+    right: 35px;
+    top: 30px;
+}
 .tools-section.text-start.section-space {
     padding: 35px 0;
 }
@@ -966,5 +980,7 @@ button.accordion-button.company_list_button {
         border-collapse: collapse;
     }
 }
+
+
 
 /* end listing page */
