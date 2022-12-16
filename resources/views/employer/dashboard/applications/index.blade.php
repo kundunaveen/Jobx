@@ -124,7 +124,7 @@ Employee Applications
                                                     @endforelse
                                                 </tbody>
                                             </table>
-                                            {{ $applications->appends(request()->query())->links() }}
+                                            {{ $applications->links() }}
                                         </div>
                                     </div>
                                 </div>

@@ -1,7 +1,13 @@
 <div class="modal-header">
+  
     <h5 class="modal-title" id="exampleModalLabel"><span class="text-primary">{{ optional($applied_job->loadMissing('user')->user)->full_name }}</span>'s application status update</h5>
+    
 </div>
 <div class="modal-body">
+    @if(!empty($applied_job->cover_letter))
+    <p>Cover Letter</p>
+    <p>{{$applied_job->cover_letter}}</p>
+    @endif
     <form action="{{ route('employer.applicant-status-update', $applied_job->id) }}" method="GET" id="application_form">
         <div class="row">
             <div class="col-md-8">

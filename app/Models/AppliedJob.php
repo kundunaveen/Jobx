@@ -15,6 +15,7 @@ class AppliedJob extends Model
         'user_id',
         'vacancy_id',
         'status',
+        'cover_letter',
     ];
 
     public const STATUS_IN_REVIEW = 0;

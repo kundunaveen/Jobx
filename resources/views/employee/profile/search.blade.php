@@ -211,8 +211,8 @@ Job Search
                   </div>
                </div>
                <div class="modal-footer">
-                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                  <button type="button" class="btn btn-primary">Apply</button>
+                  <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                  <button type="submit" class="btn btn-primary">Apply</button>
                </div>
             </form>
          </div>
@@ -227,6 +227,7 @@ Job Search
    function applyJob(id){
       $('#job_application_form').attr('action', '{{url("/employee/job-applied")}}/'+id)
       $('#apply_job_id').val(id)
+      $('#applyJobModal').modal('show')
    }
 
    function setSortValue() {

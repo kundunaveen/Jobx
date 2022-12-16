@@ -30,7 +30,7 @@ class JobPostController extends Controller
     /*apply for job*/
     public function applyJob(Request $request, $id)
     {
-        dd($request);
+        // dd($request);
         $have_profile = Profile::where('user_id', $request->user()->id)
         ->where('gender', '>', 0)
         ->count();
@@ -41,7 +41,8 @@ class JobPostController extends Controller
 
         AppliedJob::create([
             'user_id' => auth()->user()->id,
-            'vacancy_id' => $id
+            'vacancy_id' => $id,
+            'cover_letter'=>$request->cover_letter ? $request->cover_letter : '' //create mig long text
         ]);
 
         return redirect()->back()->with('success', 'Job Applied Successfully');
