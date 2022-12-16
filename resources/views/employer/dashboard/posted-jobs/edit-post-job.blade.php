@@ -204,7 +204,7 @@ Employer | Edit Post Job
                     <form class="form-inner" method="POST" enctype="multipart/form-data" id="jquery-post-job-form-validation">
                         @csrf
                         <div class="card step-progress">
-                            <div class="step-slider">
+                            <div class="step-slider step_six">
                                 <div data-id="step1" class="step-slider-item"></div>
                                 <div data-id="step2" class="step-slider-item"></div>
                                 <div data-id="step3" class="step-slider-item"></div>                
@@ -218,13 +218,11 @@ Employer | Edit Post Job
                                         <div class="col-auto"><h2 class="form-heading mt-4">Profile Details</h2></div>                                        
                                     </div>
                                     <div class="row form-group">
-                                        <div class="col-12">
+                                        <div class="col-md-6 mb-5 mb-md-0">
                                             <label for="inputName4" class="form-label">First Name*</label>
                                             <input type="text" class="form-control form-input" readonly value="{{auth()->user()->first_name}}" placeholder="First name" aria-label="First name">
                                         </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-12">
+                                        <div class="col-md-6">
                                             <label for="inputName4" class="form-label">Last Name*</label>
                                             <input type="text" class="form-control form-input" readonly value="{{auth()->user()->last_name}}" placeholder="Last name" aria-label="Last name">
                                         </div>

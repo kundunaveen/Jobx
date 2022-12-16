@@ -62,9 +62,22 @@ a.company_profile {
     --bg: #e519001f !important;
 }
 
-
+.main-bg .form-inner-wrapper .form-inner {
+    width: 100%;
+}
+.step-slider.step_six .step-slider-item {
+    width: 16.5%!important;
+}
+.step-slider.step_six .step-slider-item:after {
+    right: -20px!important;
+}
 @media only screen and (max-width: 767px) {
-
+    .step-slider.step_six .step-slider-item:after, .step-slider:before {
+        top: -15px!important;
+        width: 30px!important;
+        height: 30px!important;
+        line-height: 27px!important;
+    }
     ul.list-group.flex-row.align-items-center.justify-content-end.employee_dashboard_btn {
         order: 2;
         position: relative;
