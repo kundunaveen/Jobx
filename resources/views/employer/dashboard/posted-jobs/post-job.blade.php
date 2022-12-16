@@ -430,9 +430,12 @@ Employer | Post Job
                                             
                                         </div>
                                     </div>
+                                    <div class="row form-group">
                                      <div class=" d-grid col-sm-9">
                                         <input type="submit" class="btn  btn-primary btn-form" value="Publish">
-                                        <div class="col-sm-3  text-center text-sm-end">
+                                        
+                                    </div>
+                                    <div class="col-sm-3  text-center text-sm-end">
                                             <input type="reset" class="btn py-3 px-0 bg-transparent fw-bold btn-skip" value="Back" onclick="$('#prevBtn').click();$('#prevBtn').removeClass('d-none')">
                                         </div>
                                     </div>

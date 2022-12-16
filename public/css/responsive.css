@@ -71,6 +71,12 @@ a.company_profile {
 .step-slider.step_six .step-slider-item:after {
     right: -20px!important;
 }
+.step-content-foot button {
+    margin: 0 10px;
+}
+
+
+
 @media only screen and (max-width: 767px) {
     .step-slider.step_six .step-slider-item:after, .step-slider:before {
         top: -15px!important;
