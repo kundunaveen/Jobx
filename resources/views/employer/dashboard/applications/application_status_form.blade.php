@@ -5,7 +5,7 @@
 </div>
 <div class="modal-body">
     @if(!empty($applied_job->cover_letter))
-    <p>Cover Letter</p>
+    <h5>Cover Letter</h5>
     <p>{{$applied_job->cover_letter}}</p>
     @endif
     <form action="{{ route('employer.applicant-status-update', $applied_job->id) }}" method="GET" id="application_form">
