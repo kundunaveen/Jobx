@@ -253,9 +253,30 @@ Employer | Edit Post Job
                                     <div class="row form-group">
                                         <div class="col-12">
                                             <label for="inputEmail4" class="form-label">Company Branch</label>
-                                            <input value="{{old('job_title', $vacancy->branch)}}" type="text" name="company_branch" placeholder="Ex: New York" class="form-control form-input"  >
+                                            <input value="{{old('job_title', $vacancy->branch)}}" type="text" name="branch" placeholder="Ex: New York" class="form-control form-input"  >
                                         </div>
-                                    </div>     
+                                    </div> 
+                                    <div class="row form-group">
+                                        <div class="col-12">
+                                            <label for="inputEmail4" class="form-label">Company Size</label>
+                                            <select class="form-control" name="company_size">
+                                                <option {{old('company_size', $vacancy->company_size) == '1-10' ? 'selected':''}} value="1-10">1-10 (Small Organization)</option>
+                                                <option {{old('company_size', $vacancy->company_size) == '11-20' ? 'selected':''}} value="11-20">11-20 (Medium Organization)</option>
+                                                <option {{old('company_size', $vacancy->company_size) == '21-50' ? 'selected':''}} value="21-50">21-50 (Large Organization)</option>
+                                                <option {{old('company_size', $vacancy->company_size) == '>50' ? 'selected':''}} value=">50">More than 50 (very Large Organization)</option>
+                                            
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-12">
+                                            <label for="inputEmail4" class="form-label">Notification Preference</label>
+                                            <select class="form-control" name="notification_type">
+                                                <option {{old('notification_type', $vacancy->notification_type) == 'Email' ? 'selected':''}}>Email</option>
+                                                <option {{old('notification_type', $vacancy->notification_type) == 'Jobax Platform' ? 'selected':''}}>Jobax Platform</option>
+                                            </select>
+                                        </div>
+                                    </div>    
                                 </div>
                                 <div id="step3" class="step-content-body out">
                                      <div class="row justify-content-between">
@@ -305,6 +326,38 @@ Employer | Edit Post Job
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="row form-group">
+                                        <label for="inputPhone" class="form-label">Skill Required</label>
+                                        <div class="col-12 ">
+                                            <select name="skills[]" class="form-select skills" multiple aria-label="Default select example">
+                                                @foreach($allSkills as $skill)
+                                                <option value="{{ $skill->id }}" @if($skills && in_array($skill->id, old('skills', $skills))) selected @endif >{{$skill->skill}}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <label for="inputPhone" class="form-label">Languages</label>
+                                        <div class="col-12">
+                                            <select name="languages[]" class="form-select skills" multiple aria-label="Default select example">
+                                                @foreach($allLanguages as $language)
+                                                <option value="{{$language->id}}" @if($languages && in_array($language->id, $languages)) selected @endif>{{$language->value}}</option>
+                                                @endforeach
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <label for="inputPhone" class="form-label">Educational Qualification</label>
+                                        <div class="col-12">
+                                            <select name="education" class="form-select skills" aria-label="Default select example">
+                                                @foreach($educations as $education)
+                                                <option value="{{$education->id}}" @if($education->id == $vacancy->education) selected @endif>{{$education->value}}</option>
+                                                @endforeach
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="step4" class="step-content-body out">
                                     <div class="row justify-content-between">
@@ -342,12 +395,11 @@ Employer | Edit Post Job
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <label for="inputPhone" class="form-label">Skill Required</label>
-                                        <div class="col-12 ">
-                                            <select name="skills[]" class="form-select skills" multiple aria-label="Default select example">
-                                                @foreach($allSkills as $skill)
-                                                <option value="{{ $skill->id }}" @if($skills && in_array($skill->id, old('skills', $skills))) selected @endif >{{$skill->skill}}</option>
-                                                @endforeach
+                                        <label for="inputPhone" class="form-label">Driving License Required </label>
+                                        <div class="col-12">
+                                            <select class="form-control" name="dl_required">
+                                                <option {{$vacancy->dl_required == 'NO' ? 'selected':''}}>NO</option>
+                                                <option {{$vacancy->dl_required == 'YES' ? 'selected':''}}>YES</option>
                                             </select>
                                         </div>
                                     </div>
@@ -381,7 +433,7 @@ Employer | Edit Post Job
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <label for="check" class="form-label">Video</label>
+                                        <label for="check" class="form-label">Advertising Video</label>
                                         <div class="col-12">
                                             <input type="file" name="video_input" class="form-control">
                                             <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>
@@ -395,6 +447,36 @@ Employer | Edit Post Job
                                         <div class="mt-3">
                                             <video class="" controls>
                                                 <source src="{{ $vacancy->video_url }}" type="video/mp4">
+                                            </video>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    <div class="row form-group">
+                                        <label for="check" class="form-label">Company Employee Interview Video</label>
+                                        <div class="col-12">
+                                            <input type="file" name="comapny_employee_interview" class="form-control">
+                                            <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>
+                                          
+                                        </div>
+                                        @if($vacancy->company_employee_interview_url)
+                                        <div class="mt-3">
+                                            <video class="" controls>
+                                                <source src="{{ $vacancy->company_employee_interview_url }}" type="video/mp4">
+                                            </video>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    <div class="row form-group">
+                                        <label for="check" class="form-label">360° Photos or Video</label>
+                                        <div class="col-12">
+                                            <input type="file" name="three_sixty" class="form-control">
+                                            <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>
+                                          
+                                        </div>
+                                        @if($vacancy->three_sixty_url)
+                                        <div class="mt-3">
+                                            <video class="" controls>
+                                                <source src="{{ $vacancy->three_sixty_url }}" type="video/mp4">
                                             </video>
                                         </div>
                                         @endif

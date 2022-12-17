@@ -208,13 +208,21 @@ Job Search
             <h5 class="modal-title" id="exampleModalLabel">Job Application Form</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="{{url('/employee/job-applied')}}" method="POST" id="job_application_form">
+            <form action="{{url('/employee/job-applied')}}" method="POST" id="job_application_form" enctype="multipart/form-data">
                @csrf
                <input type="hidden" name="job_id" id="apply_job_id">
                <div class="modal-body">
                   <div class="form-group">
                      <label>Cover Letter</label>
                      <textarea rows="10" name="cover_letter" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group mt-4">
+                     <label>Motivation Letter</label>
+                     <textarea rows="10" name="motivation_letter" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group mt-4">
+                     <label>Cover Video</label>
+                     <input name="cover_video" type="file" class="form-control"></input>
                   </div>
                </div>
                <div class="modal-footer">

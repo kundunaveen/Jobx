@@ -46,7 +46,8 @@ class ApplicationController extends Controller
     {
         $applications = AppliedJob::whereHas('vacancy', function($q) use($id) {
             $q->where('vacancy_id', base64_decode($id));
-        })->get();
+        })->paginate(config('settings.pagination_employer'));
+     
         return view('employer.dashboard.applications.index', compact('applications'));
     }
 
@@ -54,7 +55,7 @@ class ApplicationController extends Controller
     {
         $applications = AppliedJob::whereHas('vacancy', function($q){
             $q->where('employer_id', auth()->user()->id);
-        })->where('status', 0)->get();
+        })->where('status', 0)->paginate(config('settings.pagination_employer'));
         return view('employer.dashboard.applications.index', compact('applications'));
     }
 

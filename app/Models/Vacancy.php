@@ -32,6 +32,13 @@ class Vacancy extends Model
         'images',
         'video',
         'branch',
+        'three_sixty',
+        'company_employee_interview',
+        'dl_required',
+        'education',
+        'languages',
+        'company_size',
+        'notification_type'
     ];
 
     public CONST SUPPORTED_IMAGE_MIME_TYPE = [
@@ -45,6 +52,8 @@ class Vacancy extends Model
 
     protected $append = [
         'video_url',
+        'three_sixty_url',
+        'company_employee_interview_url',
         'video_path',
 
         'single_image',
@@ -80,6 +89,11 @@ class Vacancy extends Model
         return $this->belongsTo('App\Models\MasterAttribute', 'job_type');
     }
 
+    public function Qualification()
+    {
+        return $this->belongsTo('App\Models\MasterAttribute', 'education');
+    }
+
     public function applicants()
     {
         return $this->hasMany('App\Models\AppliedJob','vacancy_id');
@@ -95,6 +109,14 @@ class Vacancy extends Model
 
     public function getVideoUrlAttribute(){
         return filled($this->video) ? Storage::disk(config('settings.file_system_service'))->url(self::VIDEO_PATH.'/'.$this->video) : '';
+    }
+
+    public function getThreeSixtyUrlAttribute(){
+        return filled($this->three_sixty) ? Storage::disk(config('settings.file_system_service'))->url(self::VIDEO_PATH.'/'.$this->three_sixty) : '';
+    }
+
+    public function getCompanyEmployeeInterviewUrlAttribute(){
+        return filled($this->company_employee_interview) ? Storage::disk(config('settings.file_system_service'))->url(self::VIDEO_PATH.'/'.$this->company_employee_interview) : '';
     }
 
     public function getVideoPathAttribute()

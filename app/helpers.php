@@ -40,7 +40,7 @@ if (!function_exists('total_vacancies')) {
 
     function total_vacancies()
     {
-        return Vacancy::count();
+        return Vacancy::count() ?? 0;
     }
 }
 

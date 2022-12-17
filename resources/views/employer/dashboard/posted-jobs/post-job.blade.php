@@ -256,7 +256,28 @@ Employer | Post Job
                                     <div class="row form-group">
                                         <div class="col-12">
                                             <label for="inputEmail4" class="form-label">Company Branch</label>
-                                            <input value="" type="text" name="company_branch" placeholder="Ex: New York" class="form-control form-input"  >
+                                            <input value="" type="text" name="branch" placeholder="Ex: New York" class="form-control form-input"  >
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-12">
+                                            <label for="inputEmail4" class="form-label">Company Size</label>
+                                            <select class="form-control" name="company_size">
+                                                <option value="1-10">1-10 (Small Organization)</option>
+                                                <option value="11-20">11-20 (Medium Organization)</option>
+                                                <option value="21-50">21-50 (Large Organization)</option>
+                                                <option value=">50">More than 50 (very Large Organization)</option>
+                                            
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-12">
+                                            <label for="inputEmail4" class="form-label">Notification Preference</label>
+                                            <select class="form-control" name="notification_type">
+                                                <option>Email</option>
+                                                <option>Jobax Platform</option>
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
@@ -310,6 +331,28 @@ Employer | Post Job
                                             
                                         </div>
                                     </div>
+                                    <div class="row form-group">
+                                        <label for="inputPhone" class="form-label">Languages</label>
+                                        <div class="col-12">
+                                            <select name="languages[]" class="form-select skills" multiple aria-label="Default select example">
+                                                @foreach($languages as $language)
+                                                <option value="{{$language->id}}" @if(is_array(old('languages')) && in_array($language->id, old('languages'))) selected @endif>{{$language->value}}</option>
+                                                @endforeach
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <label for="inputPhone" class="form-label">Educational Qualification</label>
+                                        <div class="col-12">
+                                            <select name="education" class="form-select skills" aria-label="Default select example">
+                                                @foreach($educations as $education)
+                                                <option value="{{$education->id}}" >{{$education->value}}</option>
+                                                @endforeach
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="step4" class="step-content-body out">
                                     <div class="row justify-content-between">
@@ -346,6 +389,15 @@ Employer | Post Job
                                             
                                         </div>
                                     </div>
+                                    <div class="row form-group">
+                                        <label for="inputPhone" class="form-label">Driving License Required </label>
+                                        <div class="col-12">
+                                            <select class="form-control" name="dl_required">
+                                                <option>NO</option>
+                                                <option>YES</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                   
                                 </div>
                                 <div id="step5" class="step-content-body out">
@@ -363,9 +415,25 @@ Employer | Post Job
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <label for="check" class="form-label">Video</label>
+                                        <label for="check" class="form-label">Advertising Video</label>
                                         <div class="col-12">
                                             <input type="file" name="video_input" class="form-control">
+                                            <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>
+                                          
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <label for="check" class="form-label">Company Employee Interview Video</label>
+                                        <div class="col-12">
+                                            <input type="file" name="comapny_employee_interview" class="form-control">
+                                            <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>
+                                          
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <label for="check" class="form-label">360° Photos or Video</label>
+                                        <div class="col-12">
+                                            <input type="file" name="three_sixty" class="form-control">
                                             <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>
                                           
                                         </div>

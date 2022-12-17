@@ -120,6 +120,44 @@ class JobPostController extends Controller
                     $input['video'] = $file_name;
                 }
 
+                if($request->languages && count($request->languages)>0){
+                    $input['languages'] = implode(',',$request->languages);
+                }
+                else{
+                    $input['languages'] = null;
+                }
+
+                $employee_interview = null;
+                if($request->hasFile('comapny_employee_interview'))
+                {
+                    $file = $request->file('comapny_employee_interview');
+                    $file_name = $file->hashName();
+                    $file->storeAs(
+                        Vacancy::VIDEO_PATH,
+                        $file_name,
+                        config('settings.file_system_service')
+                    );
+                    $employee_interview = $file_name;
+                }
+
+                $three_Sixty = null;
+                if($request->hasFile('three_sixty'))
+                {
+                    $file = $request->file('three_sixty');
+                    $file_name = $file->hashName();
+                    $file->storeAs(
+                        Vacancy::VIDEO_PATH,
+                        $file_name,
+                        config('settings.file_system_service')
+                    );
+                    $three_sixty = $file_name;
+                }
+
+                $input['company_employee_interview'] = $employee_interview;
+                $input['three_sixty'] = $three_sixty;
+
+                $input['min_exp'] = $request->min_exp;
+
                 $input['location'] = $request->address;
                 Vacancy::create($input);
 
@@ -134,13 +172,19 @@ class JobPostController extends Controller
         $job_types = MasterAttribute::whereHas('masterCategory', function ($q) {
             $q->where('name', 'Job Type');
         })->get();
+        $languages = MasterAttribute::whereHas('masterCategory', function ($q) {
+            $q->where('name', 'Languages');
+        })->get();
+        $educations = MasterAttribute::whereHas('masterCategory', function ($q) {
+            $q->where('name', 'Degree Levels');
+        })->get();
         $countries = Country::all();
         $states = State::where('country_id', 156)->get();
         foreach ($states as $state) {
             $cities = City::where('state_id', $state->id)->get();
             break;
         }
-        return view('employer.dashboard.posted-jobs.post-job', compact('countries', 'states', 'cities', 'skills', 'job_types'));
+        return view('employer.dashboard.posted-jobs.post-job', compact('countries', 'states', 'cities', 'skills', 'job_types', 'languages', 'educations'));
         // return view('employer.profile.post-job', compact('countries', 'states', 'cities', 'skills'));
     }
 
@@ -154,10 +198,22 @@ class JobPostController extends Controller
         $job_types = MasterAttribute::whereHas('masterCategory', function ($q) {
             $q->where('name', 'Job Type');
         })->get();
+        $allLanguages = MasterAttribute::whereHas('masterCategory', function ($q) {
+            $q->where('name', 'Languages');
+        })->get();
+
+        $educations = MasterAttribute::whereHas('masterCategory', function ($q) {
+            $q->where('name', 'Degree Levels');
+        })->get();
         if ($vacancy->skills) {
             $skills = explode(',', $vacancy->skills);
         } else {
             $skills = null;
+        }
+        if ($vacancy->languages) {
+            $languages = explode(',', $vacancy->languages);
+        } else {
+            $languages = null;
         }
         if ($request->method() == "POST") {
             $request->validate([
@@ -237,7 +293,41 @@ class JobPostController extends Controller
                     }
                     $input['video'] = $file_name;
                 }
+                if($request->languages && count($request->languages)>0){
+                    $input['languages'] = implode(',',$request->languages);
+                }
+                else{
+                    $input['languages'] = null;
+                }
 
+                $employee_interview = null;
+                if($request->hasFile('comapny_employee_interview'))
+                {
+                    $file = $request->file('comapny_employee_interview');
+                    $file_name = $file->hashName();
+                    $file->storeAs(
+                        Vacancy::VIDEO_PATH,
+                        $file_name,
+                        config('settings.file_system_service')
+                    );
+                    $employee_interview = $file_name;
+                }
+
+                $three_Sixty = null;
+                if($request->hasFile('three_sixty'))
+                {
+                    $file = $request->file('three_sixty');
+                    $file_name = $file->hashName();
+                    $file->storeAs(
+                        Vacancy::VIDEO_PATH,
+                        $file_name,
+                        config('settings.file_system_service')
+                    );
+                    $three_sixty = $file_name;
+                }
+
+                $input['company_employee_interview'] = $employee_interview;
+                $input['three_sixty'] = $three_sixty;
                 $input['skills'] = $skills;
                 $input['location'] = $request->address;
                 $vacancy->update($input);
@@ -247,7 +337,7 @@ class JobPostController extends Controller
                 return back()->with('error', $e->getMessage())->withInput();
             }
         }
-        return view('employer.dashboard.posted-jobs.edit-post-job', compact('vacancy', 'countries', 'states', 'cities', 'skills', 'allSkills', 'job_types'));
+        return view('employer.dashboard.posted-jobs.edit-post-job', compact('vacancy', 'countries', 'states', 'cities', 'skills', 'allSkills', 'job_types', 'languages', 'allLanguages', 'educations'));
     }
 
     public function delete(Request $request)

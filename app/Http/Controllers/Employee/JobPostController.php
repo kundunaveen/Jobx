@@ -9,6 +9,7 @@ use App\Models\JobSkill;
 use App\Models\MasterAttribute;
 use App\Models\AppliedJob;
 use App\Models\Profile;
+use App\Models\User;
 use Illuminate\Support\Facades\Redirect;
 
 class JobPostController extends Controller
@@ -39,10 +40,25 @@ class JobPostController extends Controller
             return Redirect::route('employee.profile.edit')->with('error', 'Before you applied the profile you need to fill up the profile.');
         }
 
+        $cover_video = null;
+        if($request->hasFile('cover_video'))
+        {
+            $file = $request->file('cover_video');
+            $file_name = $file->hashName();
+            $file->storeAs(
+                AppliedJob::VIDEO_PATH,
+                $file_name,
+                config('settings.file_system_service')
+            );
+            $cover_video = $file_name;
+        }
+
         AppliedJob::create([
             'user_id' => auth()->user()->id,
             'vacancy_id' => $id,
-            'cover_letter'=>$request->cover_letter ? $request->cover_letter : '' //create mig long text
+            'cover_letter'=> $request->cover_letter ? $request->cover_letter : null, //create mig long text
+            'motivation_letter' => $request->motivation_letter ? $request->motivation_letter : null,
+            'cover_video' => $cover_video
         ]);
 
         return redirect()->back()->with('success', 'Job Applied Successfully');
@@ -52,9 +68,12 @@ class JobPostController extends Controller
     /*preview job */
     public function previewJob(Request $request, $id)
     {
+
         $profile = Profile::where('user_id', auth()->user()->id)->first();
         $job_details =  Vacancy::where('id', $id)->first();
-        return view('employee.profile.previewjob', compact('job_details', 'profile'));
+        $company = User::find($job_details->employer_id);
+        
+        return view('employee.profile.previewjob', compact('job_details', 'profile', 'company'));
     }
 
     public function jobWithdrawn(int $vacancy_id)

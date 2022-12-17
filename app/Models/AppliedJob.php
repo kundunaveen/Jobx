@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class AppliedJob extends Model
 {
@@ -16,7 +17,11 @@ class AppliedJob extends Model
         'vacancy_id',
         'status',
         'cover_letter',
+        'cover_video',
+        'motivation_letter'
     ];
+
+    public CONST VIDEO_PATH = 'image/applied_jobs';
 
     public const STATUS_IN_REVIEW = 0;
     public const STATUS_SHORTLISTED = 1;
@@ -32,7 +37,10 @@ class AppliedJob extends Model
         self::STATUS_HOLD => 'Hold',
     ];
 
-    protected $appends = ['status_name'];
+    protected $appends = [
+        'status_name',
+        'cover_video_url'
+    ];
 
     public function user()
     {
@@ -41,6 +49,11 @@ class AppliedJob extends Model
     public function vacancy()
     {
         return $this->belongsTo('App\Models\Vacancy', 'vacancy_id');
+    }
+
+    public function getCoverVideoUrlAttribute(): string
+    {
+        return filled($this->cover_video) ? Storage::disk(config('settings.file_system_service'))->url(self::VIDEO_PATH.'/'.$this->cover_video) : '';
     }
 
     public function getStatusNameAttribute()

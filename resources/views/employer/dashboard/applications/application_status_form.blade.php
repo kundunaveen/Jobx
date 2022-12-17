@@ -8,7 +8,17 @@
     <h5>Cover Letter</h5>
     <p>{{$applied_job->cover_letter}}</p>
     @endif
-    <form action="{{ route('employer.applicant-status-update', $applied_job->id) }}" method="GET" id="application_form">
+    @if(!empty($applied_job->motivation_letter))
+    <h5 class="mt-3">Motivation Letter</h5>
+    <p>{{$applied_job->motivation_letter}}</p>
+    @endif
+    @if(!empty($applied_job->cover_video))
+    <h5 class="mt-3">Cover Video</h5>
+    <video class="" controls style="border-radius: 20px;border:solid lightgray 1px; cursor:pointer; height:280px;width:100%; object-fit:cover">
+        <source src="{{ $applied_job->cover_video_url }}" type="video/mp4">
+    </video>
+    @endif
+    <form action="{{ route('employer.applicant-status-update', $applied_job->id) }}" method="GET" id="application_form" class="mt-3">
         <div class="row">
             <div class="col-md-8">
                 <select name="status" class="form-control" required>
