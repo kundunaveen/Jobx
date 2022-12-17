@@ -139,7 +139,7 @@
             <div class="card">
                 <div class="card-body">
                     <div class="row align-items-center">
-                        <div class="col-lg-7 col-md-6">
+                        <div class="col-lg-12 col-md-12">
                             @if($job_details->video)
                             <div class="about-wrapper profile-summary mt-3">
                                 <h2>Advertising Video </h2>
@@ -173,9 +173,9 @@
                             <div class="row about-wrapper profile-summary mt-3">
                             @forelse ($job_details->getImagesInArray() as $image)
 
-                            <div class="col-3 pip">
-                                <img class='imageThumb' src="{{ \Illuminate\Support\Facades\Storage::disk(config('settings.file_system_service'))->url(\App\Models\Vacancy::IMAGE_PATH.'/'.$image) }}" width="100" class="">
-                                <input type="hidden" name="old_images_input[]" value="{{ $image }}">
+                            <div class="col-6 pip">
+                                <img style="height:400px;width:100%;object-fit:cover" class='imageThumb' src="{{ \Illuminate\Support\Facades\Storage::disk(config('settings.file_system_service'))->url(\App\Models\Vacancy::IMAGE_PATH.'/'.$image) }}" width="100" class="">
+                                
                             </div>
                             @empty
 
