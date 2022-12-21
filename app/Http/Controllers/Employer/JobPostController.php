@@ -25,7 +25,7 @@ class JobPostController extends Controller
 
     public function index(Request $request)
     {
-        $jobs = Vacancy::where('employer_id', auth()->user()->id)
+        $jobs = Vacancy::with('profile')->where('employer_id', auth()->user()->id)
         ->when($request->search, function(Builder $builder, $value){
             return $builder->where(function(Builder $builder) use ($value){
                 return $builder->where('job_title', 'LIKE', "%{$value}%")
@@ -51,7 +51,7 @@ class JobPostController extends Controller
         });
         
         $jobs = $jobs->simplePaginate(9);
-
+        // dd($jobs);
         $job_types = MasterAttribute::whereHas('masterCategory', function ($q) {
             $q->where('name', 'Job Type');
         })->get();

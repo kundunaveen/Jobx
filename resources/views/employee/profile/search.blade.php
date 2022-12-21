@@ -124,6 +124,7 @@ Job Search
                                  <option value="newest" @if(request()->get('sort_by') == 'newest') selected @endif>Newest</option>
                                  <option value="highest_salary" @if(request()->get('sort_by') == 'highest_salary') selected @endif>Highest Salary</option>
                                  <option value="lowest_experience" @if(request()->get('sort_by') == 'lowest_experience') selected @endif>Lowest Experience</option>
+                                 <option value="rating" @if(request()->get('sort_by') == 'rating') selected @endif>Rating</option>
                               </select>
                            </div>
                         </div>

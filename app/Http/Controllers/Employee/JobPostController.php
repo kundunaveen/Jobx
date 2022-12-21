@@ -72,8 +72,8 @@ class JobPostController extends Controller
         $profile = Profile::where('user_id', auth()->user()->id)->first();
         $job_details =  Vacancy::where('id', $id)->first();
         $company = User::find($job_details->employer_id);
-        
-        return view('employee.profile.previewjob', compact('job_details', 'profile', 'company'));
+        $applied_jobs = AppliedJob::where('user_id', optional(auth()->user())->id)->pluck('vacancy_id')->toArray();
+        return view('employee.profile.previewjob', compact('job_details', 'profile', 'company','applied_jobs'));
     }
 
     public function jobWithdrawn(int $vacancy_id)

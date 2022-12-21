@@ -95,7 +95,9 @@
                                  </figure>
                                  <article class="job-profile-article">
                                     <div class="row justify-content-between">
-                                       <div class="col-auto"><h5 class="mt-1">{{$job->job_role}}</h5></div>
+                                       <div class="col-auto"><h5 class="mt-1">{{$job->job_role}}</h5>
+                                          <p>{{$job->profile->company_name}}</p>
+                                       </div>
                                        <div class="col-auto text-primary">
                                           <a href="{{route('employer.job.candidates', $job->id)}}">
                                           <svg xmlns="http://www.w3.org/2000/svg" width="26px" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">

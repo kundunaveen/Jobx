@@ -68,7 +68,10 @@ class Vacancy extends Model
     {
         return $this->belongsTo('App\Models\User', 'employer_id');
     }
-
+    public function profile()
+    {
+        return $this->belongsTo('App\Models\Profile', 'employer_id','user_id');
+    }
     public function countrydetail()
     {
         return $this->belongsTo('App\Models\Country', 'country');

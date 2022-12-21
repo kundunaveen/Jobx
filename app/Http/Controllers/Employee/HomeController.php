@@ -144,6 +144,15 @@ class HomeController extends Controller
         $jobs->when($sort_by == 'lowest_experience', function (Builder $builder, $value) {
             return $builder->orderByRaw('cast(min_exp as decimal(10,2)) ASC');
         });
+        $jobs->when($sort_by == 'rating', function (Builder $builder) {
+            // return $builder->whereHas('user.companyRatings', function(Builder $builder){
+            //     return $builder->orderBy('rating', 'desc');
+            // });
+              return $builder->with(['user.companyRatings' => function($builder){
+                return $builder->orderBy('rating', 'desc');
+            }]);
+
+        });
         if($request->has(['min_salary', 'max_salary'])){
             $jobs->whereRaw('cast(salary_offer as decimal(10,2)) >= '.$min_salary.' AND cast(salary_offer as decimal(10,2)) <= ' .$max_salary);
         }
@@ -159,6 +168,7 @@ class HomeController extends Controller
         $job_types = MasterAttribute::whereHas('masterCategory', function ($q) {
             $q->where('name', 'Job Type');
         })->get();
+        
         $applied_jobs = AppliedJob::where('user_id', optional(auth()->user())->id)->pluck('vacancy_id')->toArray();
         $skills = JobSkill::all();
 

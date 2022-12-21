@@ -15,7 +15,7 @@
                             </figure>
                             <article>
                                 <h4 class="profile-heading">{{ optional($company->profile)->company_name }}</h4>
-
+                                 <a onclick="shareToFacebook()" href="javascript:void(0)" class="height-35 width-35  rounded-circle   flex-content-center"> <i class="fa fa-facebook-official" aria-hidden="true"></i> </a>
                                 <p class="work-profile">{{ $company->full_name }}</p>
 
                                 <div class="mail-id"><a href="mailto:{{ $company->email }}"><i class="icon-email me-2"></i>{{ $company->email }}</a>
@@ -26,6 +26,14 @@
 
 
                                 <hr class="hr" />
+                                 <div class="job-btn-wrapper d-flex justify-content-between">
+                                    
+                                     
+                                       <a  href="javascript:void(0)" onclick="applyJob('{{$job_details->id}}')" data-bs-toggle="modal" data-bs-modal="#applyJobModal" class="btn btn-lg">@if( in_array($job_details->id, $applied_jobs)) Applied @else Apply @endif</a>
+
+                                       
+                                </div>
+
                                 @if ($social_media_link = optional($company->profile)->social_media_link)
                                 <div class="social-wrapper">
                                     <h4>Connect with Social</h4>
@@ -379,5 +387,61 @@
     <!-- Feature Vacancies section End -->
     --}}
 
+
+   <div class="modal fade" id="applyJobModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+         <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Job Application Form</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{{url('/employee/job-applied')}}" method="POST" id="job_application_form" enctype="multipart/form-data">
+               @csrf
+               <input type="hidden" name="job_id" id="apply_job_id">
+               <div class="modal-body">
+                  <div class="form-group">
+                     <label>Cover Letter</label>
+                     <textarea rows="10" name="cover_letter" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group mt-4">
+                     <label>Motivation Letter</label>
+                     <textarea rows="10" name="motivation_letter" class="form-control"></textarea>
+                  </div>
+                  <div class="form-group mt-4">
+                     <label>Cover Video</label>
+                     <input name="cover_video" type="file" class="form-control"></input>
+                  </div>
+               </div>
+               <div class="modal-footer">
+                  <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                  <button type="submit" class="btn btn-primary">Apply</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+
 </main>
+@endsection
+@section('scripts')
+<script>
+   
+   function applyJob(id){
+      $('#job_application_form').attr('action', '{{url("/employee/job-applied")}}/'+id)
+      $('#apply_job_id').val(id)
+      $('#applyJobModal').modal('show')
+   }
+
+  function shareToFacebook()
+
+    {  
+
+        event.preventDefault();
+
+        urll = 'https://www.facebook.com/sharer/sharer.php?u='+window.location.href
+
+        window.location.href=urll      
+
+    }
+</script>
 @endsection
