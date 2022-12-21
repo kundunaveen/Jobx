@@ -92,7 +92,7 @@ class HomeController extends Controller
         $sort_by = $request->get('sort_by');
         $show_favorite_job = $request->get('show_favorite_job');
 
-        $jobs = Vacancy::query()->leftjoin('profiles', 'profiles.user_id','=','vacancies.employer_id');
+        $jobs = Vacancy::query()->select('vacancies.*')->leftjoin('profiles', 'profiles.user_id','=','vacancies.employer_id');
 
         $jobs->when($search_keyword, function (Builder $builder, $value) {
             return $builder->where(function (Builder $builder) use ($value) {
@@ -169,7 +169,7 @@ class HomeController extends Controller
         
         $applied_jobs = AppliedJob::where('user_id', optional(auth()->user())->id)->pluck('vacancy_id')->toArray();
         $skills = JobSkill::all();
-
+        // dd($jobs);
         return view('employee.profile.search', compact('salaries', 'job_types', 'jobs', 'industry', 'applied_jobs', 'skills'));
     }
 

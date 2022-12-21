@@ -72,9 +72,11 @@
                                 <div class="col-md-4">
                                     <h4>Weekly Hours : <span class="h6 text-secondary">{{$job_details->min_work_hours.' - '.$job_details->max_work_hours}}</span><h4>
                                 </div>
+                                @if($job_details->jobType)
                                 <div class="col-md-4">
-                                    <h4>Job Type : <span class="h6 text-secondary">{{$job_details->jobType->value}}</span><h4>
+                                    <h4>Job Type : <span class="h6 text-secondary">{{ $job_details->jobType->value }}</span><h4>
                                 </div>
+                                @endif
                                 @if($job_details->company_size)
                                 <div class="col-md-4">
                                     <h4>Company Size : <span class="h6 text-secondary">{{$job_details->company_size == '1-10' ? 'Small Organization' : ($job_details->company_size == '11-20' ? 'Mid Level Organization' : ($job_details->company_size == '21-50' ? 'Large Organization' : 'Very Large Organization'))}}</span><h4>
