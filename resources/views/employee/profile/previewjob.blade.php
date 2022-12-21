@@ -29,7 +29,7 @@
                                  <div class="job-btn-wrapper d-flex justify-content-between">
                                     
                                      
-                                       <a  href="javascript:void(0)" onclick="applyJob('{{$job_details->id}}')" data-bs-toggle="modal" data-bs-modal="#applyJobModal" class="btn btn-lg">@if( in_array($job_details->id, $applied_jobs)) Applied @else Apply @endif</a>
+                                       <a  href="javascript:void(0)"   class="btn btn-lg" @if( !in_array($job_details->id, $applied_jobs))  data-bs-toggle="modal" data-bs-modal="#applyJobModal" onclick="applyJob('{{$job_details->id}}')" @endif>@if( in_array($job_details->id, $applied_jobs)) Applied @else Apply @endif</a>
 
                                        
                                 </div>

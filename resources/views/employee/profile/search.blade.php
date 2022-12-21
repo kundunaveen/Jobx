@@ -174,7 +174,7 @@ Job Search
                                        </a>
                                     </div>
                                     <div class="job-btn-wrapper d-flex justify-content-between">
-                                       <a  href="javascript:void(0)" onclick="applyJob('{{$job->id}}')" data-bs-toggle="modal" data-bs-modal="#applyJobModal" class="btn btn-lg">@if( in_array($job->id, $applied_jobs)) Applied @else Apply @endif</a>
+                                       <a  href="javascript:void(0)"  class="btn btn-lg" @if( !in_array($job->id, $applied_jobs)) onclick="applyJob('{{$job->id}}')" data-bs-toggle="modal" data-bs-modal="#applyJobModal"  @endif>@if( in_array($job->id, $applied_jobs)) Applied @else Apply @endif</a>
                                        <a href="{{route('employee.job.preview', $job->id)}}" class="btn btn-default btn-md">Preview Job</a>
                                        {{--
                                     <!-- <a href="{{route('employer.edit.post.job', $job->id)}}" style="margin-left:-5px;margin-right:10px" class="btn col-6 btn-default ">Apply</a>
