@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Models\FavoriteJob;
 use App\Models\State;
 use App\Models\Vacancy;
+use App\Models\Profile;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Response;
@@ -32,7 +33,10 @@ class AjaxController extends Controller
                     ['employee_id' => $user_id, 'company_id' => $company_id],
                     ['rating' => $rating_value]
                 );
-
+                $avgStar = CompanyRating::where('company_id' , $company_id)->avg('rating');
+                if($avgStar){
+                    Profile::where('user_id',$company_id)->update(['avg_rating'=>$avgStar]);
+                }
                 $data['status'] = true;
                 $data['message'] = 'Data successfully added';
             } else {

@@ -150,6 +150,7 @@ Job Search
                                        &nbsp;&nbsp;
                                        
                                     </h5>
+                                   <p>{{ optional($job->loadMissing('profile')->profile)->company_name }}</p>
                                     <ul class="job-type list-group flex-row mb-3">
                                        <li class="list-group-item">
                                           {{ $job->job_type_text }}
@@ -169,6 +170,7 @@ Job Search
                                        <x-review.company :company-id="optional($job->loadMissing('user')->user)->id" />
                                        <a href="{{ route('company-show', optional($job->loadMissing('user')->user)->id) }}" target="_blank" class="company_profile">
                                           Company Profile
+
                                        </a>
                                     </div>
                                     <div class="job-btn-wrapper d-flex justify-content-between">

@@ -92,7 +92,7 @@ class HomeController extends Controller
         $sort_by = $request->get('sort_by');
         $show_favorite_job = $request->get('show_favorite_job');
 
-        $jobs = Vacancy::query();
+        $jobs = Vacancy::query()->leftjoin('profiles', 'profiles.user_id','=','vacancies.employer_id');
 
         $jobs->when($search_keyword, function (Builder $builder, $value) {
             return $builder->where(function (Builder $builder) use ($value) {
@@ -133,10 +133,10 @@ class HomeController extends Controller
             });
         });
         $jobs->when($skill, function (Builder $builder, $value) {
-            return $builder->whereRaw("FIND_IN_SET(?, skills)", $value);
+            return $builder->whereRaw("FIND_IN_SET(?, vacancies.skills)", $value);
         });
         $jobs->when($sort_by == 'newest', function (Builder $builder, $value) {
-            return $builder->orderBy('created_at', 'DESC');
+            return $builder->orderBy('vacancies.created_at', 'DESC');
         });
         $jobs->when($sort_by == 'highest_salary', function (Builder $builder, $value) {
             return $builder->orderByRaw('cast(salary_offer as decimal(10,2)) DESC');
@@ -145,13 +145,11 @@ class HomeController extends Controller
             return $builder->orderByRaw('cast(min_exp as decimal(10,2)) ASC');
         });
         $jobs->when($sort_by == 'rating', function (Builder $builder) {
-            // return $builder->whereHas('user.companyRatings', function(Builder $builder){
-            //     return $builder->orderBy('rating', 'desc');
+            // return $builder->whereHas('profile', function(Builder $builder){
+            //     return $builder->orderBy('avg_rating', 'DESC');
             // });
-              return $builder->with(['user.companyRatings' => function($builder){
-                return $builder->orderBy('rating', 'desc');
-            }]);
 
+            return $builder->orderBy('profiles.avg_rating', 'DESC');
         });
         if($request->has(['min_salary', 'max_salary'])){
             $jobs->whereRaw('cast(salary_offer as decimal(10,2)) >= '.$min_salary.' AND cast(salary_offer as decimal(10,2)) <= ' .$max_salary);
@@ -160,9 +158,9 @@ class HomeController extends Controller
         if($request->has(['min_exp', 'max_exp'])){
             $jobs->whereRaw('cast(min_exp as decimal(10,2)) >= '.$min_exp.' AND cast(min_exp as decimal(10,2)) <= ' .$max_exp);
         }
+        
 
         $jobs = $jobs->paginate(config('setting.pagination_no'));
-
         $salaries = Vacancy::selectRaw("MIN(salary_offer) AS MinSalary, MAX(salary_offer) AS MaxSalary")->first();
         $industry = MasterAttribute::where('master_attribute_category_id', '4')->get();
         $job_types = MasterAttribute::whereHas('masterCategory', function ($q) {
