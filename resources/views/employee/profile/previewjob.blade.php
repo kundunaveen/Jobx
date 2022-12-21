@@ -11,7 +11,7 @@
                     <div class="card mb-5 mb-lg-0 h-100">
                         <div class="profile-wrapper card-body text-center">
                             <figure class="">
-                                <img src="{{ $company->profile_image_url }}" width="230" height="230" alt="Profile Img" class="img-fluid">
+                                <img src="{{ $company->single_image }}" width="230" height="230" alt="Profile Img" class="img-fluid">
                             </figure>
                             <article>
                                 <h4 class="profile-heading">{{ optional($company->profile)->company_name }}</h4>
