@@ -51,15 +51,15 @@ class DashboardController extends Controller
         }
 
         $new_applications = AppliedJob::with('user')->whereHas('vacancy')->where('status', 0)->get();
-        $applied_job_count = $applied_jobs[0]->applicants_count > 0 ? $applied_jobs[0]->applicants_count : 1;
-        $posted_vacancies= Vacancy::limit(5)->latest()->get();
-        // return view('admin.dashboard.home', [
-        //     'applied_jobs' => $applied_jobs,
-        //     'applied_job_count' => $applied_jobs[0]->applicants_count > 0 ? $applied_jobs[0]->applicants_count : 1,
-        //     'date_arr' => $date_arr,
-        //     'posted_vacancies' => Vacancy::limit(5)->latest()->get(),
-        //     'new_applications' => $new_applications,
-        // ]);
-        return view('admin.dashboard.home',compact('applied_jobs','applied_job_count','date_arr','posted_vacancies','new_applications'));
+        // $applied_job_count = $applied_jobs[0]->applicants_count > 0 ? $applied_jobs[0]->applicants_count : 1;
+        // $posted_vacancies= Vacancy::limit(5)->latest()->get();
+        return view('admin.dashboard.home', [
+            'applied_jobs' => $applied_jobs,
+            'applied_job_count' => $applied_jobs[0]->applicants_count > 0 ? $applied_jobs[0]->applicants_count : 1,
+            'date_arr' => $date_arr,
+            'posted_vacancies' => Vacancy::limit(5)->latest()->get(),
+            'new_applications' => $new_applications,
+        ]);
+        // return view('admin.dashboard.home',compact('applied_jobs','applied_job_count','date_arr','posted_vacancies','new_applications'));
     }
 }
