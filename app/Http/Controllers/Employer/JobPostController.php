@@ -84,7 +84,7 @@ class JobPostController extends Controller
                 'video_input' => 'mimes:mp4|max:20000',                
                 'min_work_hours' => 'nullable|integer',
                 'max_work_hours' => 'nullable|integer|gt:min_work_hours',
-                'role_in_company' => 'string',
+                //'role_in_company' => 'string',
                 'min_salary'       => 'required_with:salary_min_max,on',
                 'max_salary'       => 'required_with:salary_min_max,on'
             ],[
@@ -264,7 +264,7 @@ class JobPostController extends Controller
                 'video_input' => 'mimes:mp4|max:20000',
                 'min_work_hours' => 'nullable|integer',
                 'max_work_hours' => 'nullable|integer|gt:min_work_hours',
-                'role_in_company' => 'string',
+                //'role_in_company' => 'string',
                 'min_salary'       => 'required_with:salary_min_max,on',
                 'max_salary'       => 'required_with:salary_min_max,on'
             ],[

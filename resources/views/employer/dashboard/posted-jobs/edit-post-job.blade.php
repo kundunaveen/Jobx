@@ -511,24 +511,21 @@ Employer | Edit Post Job
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <label for="check" class="form-label">Advertising Video</label>
+                                        <label for="check" class="form-label">Company Video</label>
                                         <div class="col-12">
-                                            <input type="file" name="video_input" class="form-control">
+                                            <input type="file" name="company_video" class="form-control">
                                             <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>
-                                            @error('video_input')
-                                            <span class="text-danger mt-1" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
+                                          
                                         </div>
-                                        @if($vacancy->video_url)
+                                        @if($vacancy->company_video)
                                         <div class="mt-3">
                                             <video class="" controls>
-                                                <source src="{{ $vacancy->video_url }}" type="video/mp4">
+                                                <source src="{{ $vacancy->company_video }}" type="video/mp4">
                                             </video>
                                         </div>
                                         @endif
                                     </div>
+                                    
                                     <div class="row form-group">
                                         <label for="check" class="form-label">Company Employee Interview Video</label>
                                         <div class="col-12">
@@ -555,6 +552,25 @@ Employer | Edit Post Job
                                         <div class="mt-3">
                                             <video class="" controls>
                                                 <source src="{{ $vacancy->three_sixty_url }}" type="video/mp4">
+                                            </video>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    <div class="row form-group">
+                                        <label for="check" class="form-label">Advertising Video</label>
+                                        <div class="col-12">
+                                            <input type="file" name="video_input" class="form-control">
+                                            <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>
+                                            @error('video_input')
+                                            <span class="text-danger mt-1" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                        @if($vacancy->video_url)
+                                        <div class="mt-3">
+                                            <video class="" controls>
+                                                <source src="{{ $vacancy->video_url }}" type="video/mp4">
                                             </video>
                                         </div>
                                         @endif
