@@ -1,4 +1,35 @@
 /* Employee responsive */
+article.profile-summary a.btn.btn-lg, .about-wrapper.profile-summary a.btn.btn-lg {
+    width: 41%;
+    display: inline-table;
+    vertical-align: middle;
+    float: right;
+    margin: 25px 0;
+}
+article.profile-summary h2, .about-wrapper.profile-summary h2 {
+    display: inline-block!important;
+    width: 50%;
+    vertical-align: middle;
+}
+.salary_bar_box .col-md-6 {
+    display: inline-block!important;
+    width: 49.5%;
+}
+.salary_bar_box .col-md-6.mb-5.mb-md-0 {
+    padding-right: 15px;
+}
+h5.about_help_desk {
+    margin-bottom: 20px;
+}
+span.min_max_sal input {
+    width: 15px;
+    height: 15px;
+    margin: 4px 7px 0 0;
+}
+span.min_max_sal {
+    text-align: left;
+    display: flex;
+}
 .fav-fb-div .favorite_job {
     position: static;
     display: inline;

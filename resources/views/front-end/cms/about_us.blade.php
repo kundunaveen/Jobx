@@ -23,6 +23,10 @@
                            <h2 class="d-flex justify-content-between  mb-4">Explanation about <br /> Visual
                               Vacancies
                            </h2>
+                          
+                           <a  @if(Auth::user()) href="{{url('employer/post-job')}}" @else href="{{url('login')}}" @endif class="btn btn-lg">POST A JOB</a>
+                           
+
                            <p class="mb-4">Lorem Ipsum is simply dummy text of the printing and typesetting industry.
                               Lorem
                               Ipsum has
@@ -61,6 +65,7 @@
                      <div class="col-lg-7 col-md-6 video_div sec_video_content">
                         <div class="about-wrapper profile-summary">
                            <h2>Explanation about <br /> Visual Vacancies</h2>
+                           <a  @if(Auth::user()) href="{{url('employer/post-job')}}" @else href="{{url('login')}}" @endif class="btn btn-lg">POST A JOB</a>
                            <p>
                               Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem
                               Ipsum has been the industry's standard dummy text ever since the 1500s, when an
@@ -82,6 +87,15 @@
                               the cites of the word in classical
                               literature, discovered the undoubtable source.
                            </p>
+                           <h5 class="about_help_desk">Help Desk:</h5>
+                           <ul class="footer-menu-list list-group">
+                              <li class="list-group-item border-0 p-0 mb-3">
+                                 <a href="mailto:+919876543214"><i class="icon-phone me-1"></i>+919876543214</a>
+                              </li>
+                              <li class="list-group-item border-0 p-0 mb-3">
+                                 <a href="tel:info@devacaturemaker.nl"><i class="icon-email me-1"></i>info@devacaturemaker.nl</a>
+                              </li>
+                           </ul>
                         </div>
                      </div>
                      <div class="col-lg-5 col-md-6 video_div sec_video_img">
