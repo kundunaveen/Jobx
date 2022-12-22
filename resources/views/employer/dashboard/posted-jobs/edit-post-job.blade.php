@@ -428,7 +428,7 @@ Employer | Edit Post Job
                                         </div>
                                     </div>
 
-                                    <div class="row form-group">
+                                    <div class="row form-group" id="fixedSalary" @if($vacancy->min_salary && $vacancy->max_salary) style="display: none;" @endif>
                                         <label for="inputPhone" class="form-label">Salary Offer <strong>({{ config('settings.currency') }}/month)*</strong></label>
                                         <div class="col-12">
                                             <input type="number" step="0.01" value="{{ old('salary_offer', $vacancy->salary_offer) }}" name="salary_offer" class="form-control form-input" placeholder="Ex: 33" aria-label="Department">
@@ -437,22 +437,22 @@ Employer | Edit Post Job
                                     </div>
                                     <div class="row form-group">
                                         <span class="min_max_sal">
-                                            <input type="checkbox" name="salary_min_max" id="salary_min_max">
+                                            <input type="checkbox" name="salary_min_max" id="salary_min_max" @if($vacancy->min_salary && $vacancy->max_salary) {{'checked'}} @endif>
                                         <label for="salary_min_max">Add minimum & maximum range</label>
                                         </span>
                                         
-                                        <div class="salary_bar_box" style="display: none;">                
+                                        <div class="salary_bar_box" @if($vacancy->min_salary && $vacancy->max_salary) style="display: block;" @else style="display: none;" @endif>                
                                             <div class="col-md-6 mb-5 mb-md-0">
                                                 <label for="min_salary" class="form-label">Minumum Salary</label>
                                                 <div class="col-12">
-                                                    <input type="number" name="min_salary" value="{{ old('min_salary') }}" class="form-control form-input" placeholder="Ex: 33" aria-label="min_salary">
+                                                    <input type="number" name="min_salary" value="{{ old('min_salary', $vacancy->min_salary) }}" class="form-control form-input" placeholder="Ex: 33" aria-label="min_salary">
                                                     
                                                 </div>                                            
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="max_salary" class="form-label">Maximum Salary</label>
                                                 <div class="col-12">
-                                                    <input type="number" name="max_salary" value="{{ old('max_salary') }}" class="form-control form-input" placeholder="Ex: 1000" aria-label="max_salary">
+                                                    <input type="number" name="max_salary" value="{{ old('max_salary', $vacancy->max_salary) }}" class="form-control form-input" placeholder="Ex: 1000" aria-label="max_salary">
                                                     
                                                 </div>                                            
                                             </div>
