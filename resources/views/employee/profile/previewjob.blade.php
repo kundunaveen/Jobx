@@ -134,6 +134,38 @@
                                     <h4>Driving License : <span class="h6 text-secondary">{{$job_details->dl_required == 'YES' ? 'Required' : 'Not Required'}} </span><h4>
                                 </div>
                                 @endif
+                               
+                                @if($job_details->min_salary && $job_details->max_salary)
+                                <div class="col-md-4">
+                                    <h4>Salary Offer : <span class="h6 text-secondary">{{$job_details->min_salary}} - {{$job_details->max_salary}} </span><h4>
+                                </div>
+                                @endif
+                                @if($job_details->company_role)
+                                <div class="col-md-4">
+                                    <h4>Role in company : <span class="h6 text-secondary">{{$job_details->company_role}}  </span><h4>
+                                </div>
+                                @endif
+                                
+                                @if($job_details->countrydetail)
+                                <div class="col-md-4">
+                                    <h4>Country : <span class="h6 text-secondary">{{$job_details->countrydetail->name}}</span><h4>
+                                </div>
+                                @endif
+                                @if($job_details->statedetail)
+                                <div class="col-md-4">
+                                    <h4>State : <span class="h6 text-secondary">{{$job_details->statedetail->name}}</span><h4>
+                                </div>
+                                @endif
+                                @if($job_details->citydetail)
+                                <div class="col-md-4">
+                                    <h4>City : <span class="h6 text-secondary">{{$job_details->citydetail->city}}</span><h4>
+                                </div>
+                                @endif
+                                @if($job_details->zip)
+                                <div class="col-md-4">
+                                    <h4>City : <span class="h6 text-secondary">{{$job_details->zip}}</span><h4>
+                                </div>
+                                @endif
                             </div>
 
                         </article>
@@ -176,6 +208,16 @@
                                 <div class="mt-2">
                                     <video class="" controls>
                                         <source src="{{ $job_details->three_sixty_url }}" type="video/mp4">
+                                    </video>
+                                </div>
+                            </div>
+                            @endif
+                            @if($job_details->company_video)
+                            <div class="about-wrapper profile-summary mt-3">
+                                <h2>Company Video</h2>
+                                <div class="mt-2">
+                                    <video class="" controls>
+                                        <source src="{{ $job_details->company_video }}" type="video/mp4">
                                     </video>
                                 </div>
                             </div>

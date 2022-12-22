@@ -70,7 +70,7 @@ class JobPostController extends Controller
     {
 
         $profile = Profile::where('user_id', auth()->user()->id)->first();
-        $job_details =  Vacancy::where('id', $id)->first();
+        $job_details =  Vacancy::with('countrydetail','statedetail','citydetail')->where('id', $id)->first();
       //  dd($job_details);
         $company = User::find($job_details->employer_id);
         $applied_jobs = AppliedJob::where('user_id', optional(auth()->user())->id)->pluck('vacancy_id')->toArray();

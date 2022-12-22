@@ -146,11 +146,12 @@ Job Search
                                  </figure>
                                  <article class="job-profile-article">
                                     <h5 class="">
+                                       <a href="{{route('employee.job.preview', $job->id)}}" >
                                        {{ Str::limit($job->job_role, 25)}}
                                        &nbsp;&nbsp;
-                                       
+                                       </a>
                                     </h5>
-                                   <p>{{ optional($job->loadMissing('profile')->profile)->company_name }}</p>
+                                   <p><a href="{{route('employee.job.preview', $job->id)}}" >{{ optional($job->loadMissing('profile')->profile)->company_name }}</a></p>
                                     <ul class="job-type list-group flex-row mb-3">
                                        <li class="list-group-item">
                                           {{ $job->job_type_text }}
