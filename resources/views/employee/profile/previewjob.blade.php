@@ -166,6 +166,11 @@
                                     <h4>City : <span class="h6 text-secondary">{{$job_details->zip}}</span></h4>
                                 </div>
                                 @endif
+                                @if($job_details->role_in_company)
+                                <div class="col-md-4">
+                                    <h4>Role in company : <span class="h6 text-secondary">{{$job_details->role_in_company}}</span></h4>
+                                </div>
+                                @endif
                             </div>
 
                         </article>
