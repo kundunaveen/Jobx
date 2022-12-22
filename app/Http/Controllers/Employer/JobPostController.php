@@ -184,6 +184,7 @@ class JobPostController extends Controller
                 $input['min_salary'] = $request->min_salary;
                 $input['max_salary'] = $request->max_salary;
                 $input['company_video'] = $request->company_video;
+                
                 Vacancy::create($input);
 
                 return redirect()->route('employer.posted.jobs')->with('success', 'Job Posted Successfully');

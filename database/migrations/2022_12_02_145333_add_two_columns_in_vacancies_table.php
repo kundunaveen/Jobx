@@ -14,8 +14,8 @@ class AddTwoColumnsInVacanciesTable extends Migration
     public function up()
     {
         Schema::table('vacancies', function (Blueprint $table) {
-            $table->unsignedInteger('min_work_hours')->default(0)->after('description')->comment('weekly basis MINIMUM work hours');
-            $table->unsignedInteger('max_work_hours')->default(0)->after('min_work_hours')->comment('weekly basis MAXIMUM work hours');
+            $table->unsignedInteger('min_work_hours')->default(0)->nullable()->after('description')->comment('weekly basis MINIMUM work hours');
+            $table->unsignedInteger('max_work_hours')->default(0)->nullable()->after('min_work_hours')->comment('weekly basis MAXIMUM work hours');
         });
     }
 
