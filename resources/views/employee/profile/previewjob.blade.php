@@ -145,7 +145,16 @@
                                     <h4>Role in company : <span class="h6 text-secondary">{{$job_details->company_role}}  </span></h4>
                                 </div>
                                 @endif
-                                
+                                @if($job_details->branch)
+                                <div class="col-md-4">
+                                    <h4>Company Branch : <span class="h6 text-secondary">{{$job_details->branch}}</span></h4>
+                                </div>
+                                @endif
+                                @if($job_details->location)
+                                <div class="col-md-4">
+                                    <h4>Location : <span class="h6 text-secondary">{{$job_details->location}}</span></h4>
+                                </div>
+                                @endif
                                 @if($job_details->countrydetail)
                                 <div class="col-md-4">
                                     <h4>Country : <span class="h6 text-secondary">{{$job_details->countrydetail->name}}</span></h4>
@@ -163,7 +172,7 @@
                                 @endif
                                 @if($job_details->zip)
                                 <div class="col-md-4">
-                                    <h4>City : <span class="h6 text-secondary">{{$job_details->zip}}</span></h4>
+                                    <h4>Zip Code : <span class="h6 text-secondary">{{$job_details->zip}}</span></h4>
                                 </div>
                                 @endif
                                 @if($job_details->role_in_company)
@@ -171,6 +180,9 @@
                                     <h4>Role in company : <span class="h6 text-secondary">{{$job_details->role_in_company}}</span></h4>
                                 </div>
                                 @endif
+                                
+                               
+
                             </div>
 
                         </article>
