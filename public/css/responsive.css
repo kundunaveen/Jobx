@@ -5,6 +5,10 @@ article.job-profile-article a {
 article.profile-summary.card-body .row h4 {
     padding-bottom: 0;
 }
+.preview-video .about-wrapper.profile-summary h2 {
+    font-size: 19px;
+    width: 100%;
+}
 article.profile-summary a.btn.btn-lg, .about-wrapper.profile-summary a.btn.btn-lg {
     width: 41%;
     display: inline-table;

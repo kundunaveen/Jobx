@@ -183,7 +183,7 @@
                     <div class="row align-items-center">
                         <div class="col-lg-12 col-md-12">
                             <!-- <videos -->
-                                <div class="row">
+                                <div class="row preview-video">
                                     <div class="col-md-3">
                                         @if($job_details->video)
                                         <div class="about-wrapper profile-summary mt-3">
