@@ -20,6 +20,8 @@
 
                                 <div class="mail-id"><a href="mailto:{{ $company->email }}"><i class="icon-email me-2"></i>{{ $company->email }}</a>
                                 </div>
+                                <div class="mail-id"><a href="javascript:void(0)"><i class="icon-phone me-2"></i>{{ $company->contact }}</a>
+                                </div>
                                 @if ($website_link = optional($company->profile)->website_link)
                                 <div class="website-link mb-5"><a href="{{ $website_link }}" target="_blank"><i class="icon-website me-2"></i>Website</a></div>
                                 @endif
