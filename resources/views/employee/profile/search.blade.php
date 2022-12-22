@@ -135,7 +135,9 @@ Job Search
                            <div class="card">
                               <div class="card-body job-profile-info">
                                  <figure class="job-profile-figure d-flex align-items-center justify-content-between">
+                                    <a href="{{route('employee.job.preview', $job->id)}}" >
                                     <img src="{{ $job->single_image }}" class="round_image" title="{{ $job->job_title }}">
+                                    </a>
                                     <div class="fav-fb-div">                                       
                                        <a onclick="shareToFacebook()" href="javascript:void(0)" class="height-35 width-35  rounded-circle   flex-content-center"> <i class="fa fa-facebook-official" aria-hidden="true"></i> </a>
                                        @auth
