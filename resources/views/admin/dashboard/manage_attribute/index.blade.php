@@ -115,7 +115,7 @@
                                                 @forelse($attributes as $index => $attribute)
                                                 <tr>
                                                     <td>{{ $index + 1}}</td>
-                                                    <td>{{$attribute->masterCategory->name}}</td>
+                                                    <td>{{$attribute->masterCategory ? $attribute->masterCategory->name : 'N/A'}}</td>
                                                     <td>{{$attribute->value}}</td>
                                                     <td>
                                                         <a href="{{ url('/admin/manage-attribute/edit', $attribute->id) }}" title="edit">
