@@ -288,7 +288,7 @@ Employer | Post Job
                                         
                                     </div>
                                      <div class="row form-group">
-                                        <label for="inputPhone" class="form-label">Job Title</label>
+                                        <label for="inputPhone" class="form-label">Job Title*</label>
                                         <div class="col-12">
                                             <input type="text" name="job_title" value="{{ old('job_title') }}" class="form-control form-input" placeholder="Ex: Business Manager" aria-label="Job Title">
                                            
@@ -296,14 +296,14 @@ Employer | Post Job
                                     </div>
 
                                     <div class="row form-group">
-                                        <label for="inputPhone" class="form-label">Job Role</label>
+                                        <label for="inputPhone" class="form-label">Job Role*</label>
                                         <div class="col-12">
                                             <input type="text" name="job_role" value="{{ old('job_role') }}" class="form-control form-input" placeholder="Ex: Business Analyst" aria-label="Job Role">
                                             
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <label for="inputPhone" class="form-label">Department</label>
+                                        <label for="inputPhone" class="form-label">Department*</label>
                                         <div class="col-12">
                                             <input type="text" name="department" value="{{ old('department') }}" class="form-control form-input" placeholder="Ex: Business Management" aria-label="Department">
                                             
@@ -322,9 +322,9 @@ Employer | Post Job
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <label for="inputPhone" class="form-label">Skill Required</label>
+                                        <label for="inputPhone" class="form-label">Skill Required*</label>
                                         <div class="col-12">
-                                            <select name="skills[]" class="form-select skills" multiple aria-label="Default select example">
+                                            <select name="skills[]" class="form-select skills" multiple aria-label="Default select example" id="jobSkills">
                                                 @foreach($skills as $skill)
                                                 <option value="{{$skill->id}}" @if(is_array(old('skills')) && in_array($skill->id, old('skills'))) selected @endif>{{$skill->skill}}</option>
                                                 @endforeach
@@ -361,7 +361,7 @@ Employer | Post Job
                                         
                                     </div>
                                     <div class="row form-group">
-                                        <label for="inputPhone" class="form-label">Min. Experience Required <small>(Yrs)</small></label>
+                                        <label for="inputPhone" class="form-label">Min. Experience Required <small>(Yrs)*</small></label>
                                         <div class="col-12">
                                             <input type="number" step="0.01" name="min_exp" value="{{ old('min_exp') }}" class="form-control form-input" placeholder="Ex: 5.6" aria-label="Department">
                                             
@@ -384,7 +384,7 @@ Employer | Post Job
                                     </div>
 
                                     <div class="row form-group">
-                                        <label for="inputPhone" class="form-label">Salary Offer <strong>({{ config('settings.currency') }}/month)</strong></label>
+                                        <label for="inputPhone" class="form-label">Salary Offer* <strong>({{ config('settings.currency') }}/month)</strong></label>
                                         <div class="col-12">
                                             <input type="number" step="0.01" name="salary_offer" value="{{ old('salary_offer') }}" class="form-control form-input" placeholder="Ex: 33" aria-label="Department">
                                             
@@ -407,7 +407,7 @@ Employer | Post Job
                                         
                                     </div>
                                     <div class="row form-group">
-                                        <label for="check" class="form-label">Images</label>
+                                        <label for="check" class="form-label">Images*</label>
                                         <div class="col-12">
                                             <input type="file" name="images_input[]" multiple class="form-control" id="files">
                                             <small class="text-secondary">Maximum file size 2 MB (.jpeg, .jpg, .png files are accepted)</small>
@@ -512,22 +512,12 @@ Employer | Post Job
                              
                                 <div class="step-content-foot">
                                     <button type="button" class="btn btn-custom-posted-jobs btn-primary active" id="prevBtn" name="prev">Prev</button>
-                                    <button type="button" class="btn btn-custom-posted-jobs btn-primary active" name="next">Next</button>
+                                    <button type="button" class="btn btn-custom-posted-jobs btn-primary active" name="next" id="nextForm">Next</button>
                                     <button type="button" class="active out btn btn-primary btn-custom-posted-jobs btn-form" id="submitBtn" name="finish">Submit</button>
                                 </div>
                             </div>
                         </div>
-                        
-                        
-                        <!-- <div class="row btn-form-wrapper">
-                            <div class=" d-grid col-sm-9">
-                                <button type="submit" class="btn  btn-primary btn-form">Publish</button>
-                            </div>
-                            <div class="col-sm-3  text-center text-sm-end">
-                                
-                                <a href="{{route('employer.posted.jobs')}}" type="reset" class="btn py-3 px-0 bg-transparent  fw-bold btn-skip">Cancel</a>
-                            </div>
-                        </div> -->
+                       
                     </form>
                 </div>
             </div>
@@ -605,5 +595,30 @@ Employer | Post Job
               });
             });
 
+        $('#nextForm').click(function(){
+            var activeFormId = $('.step-content-body').siblings().not('.out').attr('id');
+            if(activeFormId == 'step2'){
+               // $('#nextForm').prop('disable',true);
+            } 
+            if(activeFormId == 'step3'){
+
+                if(!$('[name="job_title"]').val()){
+                    $('[name="job_title"]').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Job title is required.</label>')
+                    return;
+                }
+                if(!$('[name="job_role"]').val()){
+                    $('[name="job_role"]').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Job role is required.</label>')
+                    return;
+                }
+                if(!$('[name="department"]').val()){
+                    $('[name="department"]').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Department is required.</label>')
+                    return;
+                }
+                if($("#jobSkills").select2('val') == ''){
+                    $('#jobSkills').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Skils is required.</label>')
+                }
+            }
+            console.log(activeFormId)
+        })
     </script>
     @endsection
