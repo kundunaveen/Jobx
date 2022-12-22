@@ -211,13 +211,19 @@ Employer | Post Job
                                 <div data-id="step3" class="step-slider-item"></div>                
                                 <div data-id="step4" class="step-slider-item"></div>
                                 <div data-id="step5" class="step-slider-item"></div>
-                                <div data-id="step6" class="step-slider-item"></div>
+                                <!-- <div data-id="step6" class="step-slider-item"></div> -->
                             </div>
                             <div class="step-content">
                                 <div id="step1" class="step-content-body">
                                     <div class="row justify-content-between">
-                                        <div class="col-auto"><h2 class="form-heading mt-4">Profile Details</h2></div>
+                                        <div class="col-auto"><h2 class="form-heading mt-4">Personal Details</h2></div>
                                         
+                                    </div>
+                                     <div class="row form-group">
+                                        <div class="col-12">
+                                            <label for="inputName4" class="form-label">Role in company</label>
+                                            <input type="text" name="role_in_company" class="form-control form-input" value="" placeholder="Role in company" aria-label="Role in company">
+                                        </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-md-6 mb-5 mb-md-0">
@@ -242,6 +248,16 @@ Employer | Post Job
                                     aria-label="Phone Number">
                                         </div>
                                     </div>
+                                    <div class="row form-group">
+                                        <div class="col-12">
+                                            <label for="inputEmail4" class="form-label">Notification Preference</label>
+                                            <select class="form-control" name="notification_type">
+                                                <option>Email</option>
+                                                <option>Jobax Platform</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <!-- <button type="button" class="btn btn-custom-posted-jobs btn-primary active" name="next" id="nextToCompany">Next</button> -->
                                 </div>
                                 <div id="step2" class="step-content-body out">
                                     <div class="row justify-content-between">
@@ -251,7 +267,7 @@ Employer | Post Job
                                      <div class="row form-group">
                                         <div class="col-12">
                                             <label for="inputEmail4" class="form-label">Company Name</label>
-                                            <input value="{{ auth()->user()->profile->company_name }}" type="text" class="form-control form-input" readonly disabled id="inputEmail4">
+                                            <input value="{{ auth()->user()->profile->company_name }}" type="text" name="company_name" class="form-control form-input" id="inputEmail4">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -274,13 +290,52 @@ Employer | Post Job
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-12">
-                                            <label for="inputEmail4" class="form-label">Notification Preference</label>
-                                            <select class="form-control" name="notification_type">
-                                                <option>Email</option>
-                                                <option>Jobax Platform</option>
-                                            </select>
+                                            <label for="exampleFormControlTextarea1" class="form-label">Address*</label>
+                                            <textarea class="form-control" name="address" placeholder="Ex: #123 main street" id="exampleFormControlTextarea1" rows="5">{{ old('address') }}</textarea>
+                                            
                                         </div>
                                     </div>
+                                    <div class="row form-group">
+                                        <label for="check" class="form-label">Country*</label>
+                                        <div class="col-12">
+                                            <select name="country" class="form-select country-list" aria-label="Default select example">
+                                                @foreach($countries as $country)
+                                                <option value="{{ $country->id }}" @if($country->id == old('country', '156')) selected @endif>{{$country->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <label for="check" class="form-label">State*</label>
+                                        <div class="col-12">
+                                            <select name="state" class="form-select state-list" aria-label="Default select example">
+                                                @foreach($states as $state)
+                                                <option value="{{$state->id}}" @if($state->id == old('state')) selected @endif>{{$state->name}}</option>
+                                                @endforeach
+                                            </select>
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <label for="check" class="form-label ">City*</label>
+                                        <div class="col-12">
+                                            <select name="city" class="form-select city-list" aria-label="Default select example">
+                                                @foreach($cities as $city)
+                                                <option value="{{$city->id}}" @if($city->id == old('city')) selected @endif>{{$city->city}}</option>
+                                                @endforeach
+                                            </select>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <label for="check" class="form-label">Zip*</label>
+                                        <div class="col-12">
+                                            <input type="number" name="zip" class="form-control form-input" value="{{ old('zip') }}" placeholder="Ex: 10101" aria-label="Zip Code">
+                                           
+                                        </div>
+                                    </div>
+                                    <!-- <button type="button" class="btn btn-custom-posted-jobs btn-primary active" name="next" id="nextToVacancy">Next</button> -->
                                 </div>
                                 <div id="step3" class="step-content-body out">
                                      <div class="row justify-content-between">
@@ -354,6 +409,7 @@ Employer | Post Job
                                             
                                         </div>
                                     </div>
+                                    <!-- <button type="button" class="btn btn-custom-posted-jobs btn-primary active" name="next" id="nextToWorking">Next</button> -->
                                 </div>
                                 <div id="step4" class="step-content-body out">
                                     <div class="row justify-content-between">
@@ -383,11 +439,36 @@ Employer | Post Job
                                         </div>
                                     </div>
 
-                                    <div class="row form-group">
-                                        <label for="inputPhone" class="form-label">Salary Offer* <strong>({{ config('settings.currency') }}/month)</strong></label>
+                                    <div class="row form-group" id="fixedSalary">
+                                        <label for="inputPhone" class="form-label">Salary Offer Fixed* <strong>({{ config('settings.currency') }}/month)</strong></label>
                                         <div class="col-12">
                                             <input type="number" step="0.01" name="salary_offer" value="{{ old('salary_offer') }}" class="form-control form-input" placeholder="Ex: 33" aria-label="Department">
                                             
+                                        </div>
+                                        
+
+                                    </div>
+                                    <div class="row form-group">
+                                        <span class="min_max_sal">
+                                            <input type="checkbox" name="salary_min_max" id="salary_min_max">
+                                        <label for="salary_min_max">Add minimum & maximum range</label>
+                                        </span>
+                                        
+                                        <div class="salary_bar_box" style="display: none;">                
+                                            <div class="col-md-6 mb-5 mb-md-0">
+                                                <label for="min_salary" class="form-label">Minumum Salary</label>
+                                                <div class="col-12">
+                                                    <input type="number" name="min_salary" value="{{ old('min_salary') }}" class="form-control form-input" placeholder="Ex: 33" aria-label="min_salary">
+                                                    
+                                                </div>                                            
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="max_salary" class="form-label">Maximum Salary</label>
+                                                <div class="col-12">
+                                                    <input type="number" name="max_salary" value="{{ old('max_salary') }}" class="form-control form-input" placeholder="Ex: 1000" aria-label="max_salary">
+                                                    
+                                                </div>                                            
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -399,7 +480,7 @@ Employer | Post Job
                                             </select>
                                         </div>
                                     </div>
-                                  
+                                  <!-- <button type="button" class="btn btn-custom-posted-jobs btn-primary active" name="next" id="nextToVisuals">Next</button> -->
                                 </div>
                                 <div id="step5" class="step-content-body out">
                                     <div class="row justify-content-between">
@@ -416,9 +497,9 @@ Employer | Post Job
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <label for="check" class="form-label">Advertising Video</label>
+                                        <label for="check" class="form-label">Company Video</label>
                                         <div class="col-12">
-                                            <input type="file" name="video_input" class="form-control">
+                                            <input type="file" name="company_video" class="form-control">
                                             <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>
                                           
                                         </div>
@@ -439,64 +520,12 @@ Employer | Post Job
                                           
                                         </div>
                                     </div>
-                                </div>
-                                <div id="step6" class="step-content-body out">
-                                    <div class="row justify-content-between">
-                                        <div class="col-auto"><h2 class="form-heading mt-4">Location Details</h2></div>
-                                        
-                                    </div>
                                     <div class="row form-group">
+                                        <label for="check" class="form-label">Advertising Video</label>
                                         <div class="col-12">
-                                            <label for="exampleFormControlTextarea1" class="form-label">Address*</label>
-                                            <textarea class="form-control" name="address" placeholder="Ex: #123 main street" id="exampleFormControlTextarea1" rows="5">{{ old('address') }}</textarea>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <label for="check" class="form-label">Country*</label>
-                                        <div class="col-12">
-                                            <select name="country" class="form-select country-list" aria-label="Default select example">
-                                                @foreach($countries as $country)
-                                                <option value="{{ $country->id }}" @if($country->id == old('country', '156')) selected @endif>{{$country->name}}</option>
-                                                @endforeach
-                                            </select>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <label for="check" class="form-label">State*</label>
-                                        <div class="col-12">
-                                            <select name="state" class="form-select state-list" aria-label="Default select example">
-                                                @foreach($states as $state)
-                                                <option value="{{$state->id}}" @if($state->id == old('state')) selected @endif>{{$state->name}}</option>
-                                                @endforeach
-                                            </select>
-                                            
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <label for="check" class="form-label ">City*</label>
-                                        <div class="col-12">
-                                            <select name="city" class="form-select city-list" aria-label="Default select example">
-                                                @foreach($cities as $city)
-                                                <option value="{{$city->id}}" @if($city->id == old('city')) selected @endif>{{$city->city}}</option>
-                                                @endforeach
-                                            </select>
-                                           
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <label for="check" class="form-label">Zip*</label>
-                                        <div class="col-12">
-                                            <input type="number" name="zip" class="form-control form-input" value="{{ old('zip') }}" placeholder="Ex: 10101" aria-label="Zip Code">
-                                           
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <label for="check" class="form-label">Describe*</label>
-                                        <div class="col-12">
-                                            <textarea name="description" class="form-control" placeholder="Ex: We are seeking for a awesome business manager." id="exampleFormControlTextarea1" rows="5">{{ old('description') }}</textarea>
-                                            
+                                            <input type="file" name="video_input" class="form-control">
+                                            <small class="text-secondary">Maximum file size 20 MB (.mp4 file accepted)</small>
+                                          
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -509,10 +538,25 @@ Employer | Post Job
                                         </div>
                                     </div>
                                 </div>
+                                <!-- <div id="step6" class="step-content-body out">
+                                    <div class="row justify-content-between">
+                                        <div class="col-auto"><h2 class="form-heading mt-4">Location Details</h2></div>
+                                        
+                                    </div>
+                                    
+                                    <div class="row form-group">
+                                        <label for="check" class="form-label">Describe*</label>
+                                        <div class="col-12">
+                                            <textarea name="description" class="form-control" placeholder="Ex: We are seeking for a awesome business manager." id="exampleFormControlTextarea1" rows="5">{{ old('description') }}</textarea>
+                                            
+                                        </div>
+                                    </div>
+                                    
+                                </div> -->
                              
                                 <div class="step-content-foot">
                                     <button type="button" class="btn btn-custom-posted-jobs btn-primary active" id="prevBtn" name="prev">Prev</button>
-                                    <button type="button" class="btn btn-custom-posted-jobs btn-primary active" name="next" id="nextForm">Next</button>
+                                    <button type="button" class="btn btn-custom-posted-jobs btn-primary active" name="next" id="nextForm" >Next</button>
                                     <button type="button" class="active out btn btn-primary btn-custom-posted-jobs btn-form" id="submitBtn" name="finish">Submit</button>
                                 </div>
                             </div>
@@ -542,10 +586,10 @@ Employer | Post Job
                 }
                 if(step == 1)
                 {
-                   // $('#prevBtn').addClass('d-none')
+                  
                     $('#submitBtn').addClass('d-none')
                 }
-                if(step == 4)
+                if(step == 3)
                 {
                     $('#prevBtn').addClass('d-none')
                 }
@@ -594,31 +638,78 @@ Employer | Post Job
                 }
               });
             });
+            $('#salary_min_max').click(function(){
 
-        $('#nextForm').click(function(){
-            var activeFormId = $('.step-content-body').siblings().not('.out').attr('id');
-            if(activeFormId == 'step2'){
-               // $('#nextForm').prop('disable',true);
-            } 
-            if(activeFormId == 'step3'){
+                if ($('#salary_min_max').is(':checked')) {
+                    $('.salary_bar_box').css('display','block')
+                    $('#fixedSalary').css('display','none');
+                }else{
+                    $('#fixedSalary').css('display','block');
+                     $('.salary_bar_box').css('display','none')
+                }
+            })
 
-                if(!$('[name="job_title"]').val()){
-                    $('[name="job_title"]').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Job title is required.</label>')
-                    return;
-                }
-                if(!$('[name="job_role"]').val()){
-                    $('[name="job_role"]').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Job role is required.</label>')
-                    return;
-                }
-                if(!$('[name="department"]').val()){
-                    $('[name="department"]').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Department is required.</label>')
-                    return;
-                }
-                if($("#jobSkills").select2('val') == ''){
-                    $('#jobSkills').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Skils is required.</label>')
-                }
-            }
-            console.log(activeFormId)
-        })
+        //frontend validation and form handling
+        // $('#nextToCompany').click(function(){
+        //     $('#step1').hide();
+        //     $('#step2').show();
+        // })
+        // $('#nextToVacancy').click(function(){
+        //     $('.error').remove();
+        //     if(!$('[name="address"]').val()){
+        //         $('[name="address"]').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Address is required.</label>')
+        //         return;
+        //     }
+        //     if(!$('[name="zip"]').val()){
+        //         $('[name="zip"]').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Zip is required.</label>')
+        //         return;
+        //     }
+        //     $('#step2').hide();
+        //     $('#step3').show();
+        // })
+        // $('#nextToWorking').click(function(){
+        //     $('.error').remove();
+        //     if(!$('[name="job_title"]').val()){
+        //             $('[name="job_title"]').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Job title is required.</label>')
+        //             return;
+        //     }
+        //     if(!$('[name="job_role"]').val()){
+        //         $('[name="job_role"]').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Job role is required.</label>')
+        //         return;
+        //     }
+        //     if(!$('[name="department"]').val()){
+        //         $('[name="department"]').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Department is required.</label>')
+        //         return;
+        //     }
+        //     if($("#jobSkills").select2('val') == ''){
+        //         $('#jobSkills').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Skils is required.</label>')
+        //         return;
+        //     }
+        //     $('#step3').hide();
+        //     $('#step4').show();
+        // })
+        // $('#nextToVisuals').click(function(){
+        //     $('#step4').hide();
+        //     $('#step5').show();
+        // });
+
+        // $('#nextForm').click(function(){
+        //   var  formStepID = $('.step-content-body').siblings().not('.out').attr('id')
+        //   if(formStepID == 'step2'){
+        //     $('.error').remove();
+        //     if(!$('[name="address"]').val()){
+        //         $('[name="address"]').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Address is required.</label>')
+        //         // alert('H')
+        //         return false;
+        //     }
+        //     if(!$('[name="zip"]').val()){
+        //         $('[name="zip"]').after('<label id="exampleFormControlTextarea1-error" class="error" for="exampleFormControlTextarea1">Zip is required.</label>')
+        //         alert('sdd')
+        //         return false;
+        //     }
+        //   }
+        // })
+        
+       
     </script>
     @endsection

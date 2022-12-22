@@ -38,7 +38,12 @@ class Vacancy extends Model
         'education',
         'languages',
         'company_size',
-        'notification_type'
+        'notification_type',
+        'company_name',
+        'role_in_company',
+        'min_salary',
+        'max_salary',
+        'company_video'
     ];
 
     public CONST SUPPORTED_IMAGE_MIME_TYPE = [

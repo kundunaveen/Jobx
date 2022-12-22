@@ -210,12 +210,18 @@ Employer | Edit Post Job
                                 <div data-id="step3" class="step-slider-item"></div>                
                                 <div data-id="step4" class="step-slider-item"></div>
                                 <div data-id="step5" class="step-slider-item"></div>
-                                <div data-id="step6" class="step-slider-item"></div>
+                                <!-- <div data-id="step6" class="step-slider-item"></div> -->
                             </div>
                             <div class="step-content">
                                 <div id="step1" class="step-content-body">
                                     <div class="row justify-content-between">
                                         <div class="col-auto"><h2 class="form-heading mt-4">Profile Details</h2></div>                                        
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-12">
+                                            <label for="inputName4" class="form-label">Role in company</label>
+                                            <input type="text" name="role_in_company" class="form-control form-input" value="{{old('role_in_company', $vacancy->role_in_company)}}" placeholder="Role in company" aria-label="Role in company">
+                                        </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-md-6 mb-5 mb-md-0">
@@ -241,6 +247,15 @@ Employer | Edit Post Job
                                     aria-label="Phone Number">
                                         </div>
                                     </div>
+                                    <div class="row form-group">
+                                        <div class="col-12">
+                                            <label for="inputEmail4" class="form-label">Notification Preference</label>
+                                            <select class="form-control" name="notification_type">
+                                                <option {{old('notification_type', $vacancy->notification_type) == 'Email' ? 'selected':''}}>Email</option>
+                                                <option {{old('notification_type', $vacancy->notification_type) == 'Jobax Platform' ? 'selected':''}}>Jobax Platform</option>
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                                 <div id="step2" class="step-content-body out">
                                     <div class="row justify-content-between">
@@ -249,7 +264,7 @@ Employer | Edit Post Job
                                     <div class="row form-group">
                                         <div class="col-12">
                                             <label for="inputEmail4" class="form-label">Company Name</label>
-                                            <input value="{{auth()->user()->profile->company_name}}" type="text" class="form-control form-input" placeholder="Enter your Email address" readonly disabled value="" id="inputEmail4">
+                                            <input value="{{$vacancy->company_name ? $vacancy->company_name : auth()->user()->profile->company_name}}" type="text" class="form-control form-input" placeholder="Enter your Email address" name="company_name" id="inputEmail4">
                                         </div>
                                     </div>
                                     <div class="row form-group">
@@ -272,13 +287,52 @@ Employer | Edit Post Job
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-12">
-                                            <label for="inputEmail4" class="form-label">Notification Preference</label>
-                                            <select class="form-control" name="notification_type">
-                                                <option {{old('notification_type', $vacancy->notification_type) == 'Email' ? 'selected':''}}>Email</option>
-                                                <option {{old('notification_type', $vacancy->notification_type) == 'Jobax Platform' ? 'selected':''}}>Jobax Platform</option>
-                                            </select>
+                                            <label for="exampleFormControlTextarea1" class="form-label">Address*</label>
+                                            <textarea class="form-control" name="address" placeholder="Ex: #123 main street" id="exampleFormControlTextarea1" rows="5">{{old('address', $vacancy->location)}}</textarea>
+                                           
                                         </div>
-                                    </div>    
+                                    </div>
+                                    <div class="row form-group select-box-2">
+                                        <label for="check" class="form-label">Country*</label>
+                                        <div class="col-12">
+                                            <select name="country" class="form-select country-list" aria-label="Default select example">
+                                                @foreach($countries as $country)
+                                                <option {{$country->id == old('country', $vacancy->country) ? 'selected':'' }} value="{{$country->id}}">{{$country->name}}</option>
+                                                @endforeach
+                                            </select>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="row form-group select-box-2">
+                                        <label for="check" class="form-label">State*</label>
+                                        <div class="col-12">
+                                            <select name="state" class="form-select state-list" aria-label="Default select example">
+                                                @foreach($states as $state)
+                                                <option {{$state->id == old('state', $vacancy->state) ? 'selected':'' }} value="{{$state->id}}">{{$state->name}}</option>
+                                                @endforeach
+                                            </select>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="row form-group select-box-2">
+                                        <label for="check" class="form-label">City*</label>
+                                        <div class="col-12">
+                                            <select name="city" class="form-select city-list" aria-label="Default select example">
+                                                @foreach($cities as $city)
+                                                <option {{$city->id == old('city', $vacancy->city) ? 'selected':'' }} value="{{$city->id}}">{{$city->city}}</option>
+                                                @endforeach
+                                            </select>
+                                         
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <label for="check" class="form-label">Zip*</label>
+                                        <div class="col-12">
+                                            <input type="number" value="{{ old('zip', $vacancy->zip) }}" name="zip" class="form-control form-input" value="" placeholder="Ex: 10101" aria-label="Zip Code">
+
+                                        </div>
+                                    </div>
+                                        
                                 </div>
                                 <div id="step3" class="step-content-body out">
                                      <div class="row justify-content-between">
@@ -286,7 +340,7 @@ Employer | Edit Post Job
                                         
                                     </div>
                                     <div class="row form-group">
-                                        <label for="inputPhone" class="form-label">Job Title</label>
+                                        <label for="inputPhone" class="form-label">Job Title*</label>
                                         <div class="col-12">
                                             <input type="text" name="job_title" value="{{old('job_title', $vacancy->job_title)}}" class="form-control form-input" placeholder="Ex: Business Manager" aria-label="Job Title">
                                             @error('job_title')
@@ -297,7 +351,7 @@ Employer | Edit Post Job
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <label for="inputPhone" class="form-label">Job Role</label>
+                                        <label for="inputPhone" class="form-label">Job Role*</label>
                                         <div class="col-12">
                                             <input type="text" name="job_role" value="{{old('job_role', $vacancy->job_role)}}" class="form-control form-input" placeholder="Ex: Business Analyst" aria-label="Job Role">
                                             @error('job_role')
@@ -308,7 +362,7 @@ Employer | Edit Post Job
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <label for="inputPhone" class="form-label">Department</label>
+                                        <label for="inputPhone" class="form-label">Department*</label>
                                         <div class="col-12">
                                             <input type="text" name="department" value="{{old('department', $vacancy->department)}}" class="form-control form-input" placeholder="Ex: Business Management" aria-label="Department">
                                             @error('department')
@@ -329,7 +383,7 @@ Employer | Edit Post Job
                                         </div>
                                     </div>
                                     <div class="row form-group">
-                                        <label for="inputPhone" class="form-label">Skill Required</label>
+                                        <label for="inputPhone" class="form-label">Skill Required*</label>
                                         <div class="col-12 ">
                                             <select name="skills[]" class="form-select skills" multiple aria-label="Default select example">
                                                 @foreach($allSkills as $skill)
@@ -367,7 +421,7 @@ Employer | Edit Post Job
                                         
                                     </div>
                                     <div class="row form-group">
-                                        <label for="inputPhone" class="form-label">Min. Experience Required <small>(Yrs)</small></label>
+                                        <label for="inputPhone" class="form-label">Min. Experience Required <small>(Yrs)</small>*</label>
                                         <div class="col-12">
                                             <input type="number" step="0.01" value="{{old('min_exp', $vacancy->min_exp)}}" name="min_exp" class="form-control form-input" placeholder="Ex: 5.6" aria-label="Department">
                                            
@@ -375,13 +429,35 @@ Employer | Edit Post Job
                                     </div>
 
                                     <div class="row form-group">
-                                        <label for="inputPhone" class="form-label">Salary Offer <strong>({{ config('settings.currency') }}/month)</strong></label>
+                                        <label for="inputPhone" class="form-label">Salary Offer <strong>({{ config('settings.currency') }}/month)*</strong></label>
                                         <div class="col-12">
                                             <input type="number" step="0.01" value="{{ old('salary_offer', $vacancy->salary_offer) }}" name="salary_offer" class="form-control form-input" placeholder="Ex: 33" aria-label="Department">
                                          
                                         </div>
                                     </div>
-
+                                    <div class="row form-group">
+                                        <span class="min_max_sal">
+                                            <input type="checkbox" name="salary_min_max" id="salary_min_max">
+                                        <label for="salary_min_max">Add minimum & maximum range</label>
+                                        </span>
+                                        
+                                        <div class="salary_bar_box" style="display: none;">                
+                                            <div class="col-md-6 mb-5 mb-md-0">
+                                                <label for="min_salary" class="form-label">Minumum Salary</label>
+                                                <div class="col-12">
+                                                    <input type="number" name="min_salary" value="{{ old('min_salary') }}" class="form-control form-input" placeholder="Ex: 33" aria-label="min_salary">
+                                                    
+                                                </div>                                            
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label for="max_salary" class="form-label">Maximum Salary</label>
+                                                <div class="col-12">
+                                                    <input type="number" name="max_salary" value="{{ old('max_salary') }}" class="form-control form-input" placeholder="Ex: 1000" aria-label="max_salary">
+                                                    
+                                                </div>                                            
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="row form-group">
                                         <label for="inputPhone" class="form-label">Minimum weekly work hour</label>
                                         <div class="col-12">
@@ -483,66 +559,6 @@ Employer | Edit Post Job
                                         </div>
                                         @endif
                                     </div>
-                                </div>
-                                <div id="step6" class="step-content-body out">
-                                    <div class="row justify-content-between">
-                                        <div class="col-auto"><h2 class="form-heading mt-4">Location Details</h2></div>
-                                        
-                                    </div>
-                                    <div class="row form-group">
-                                        <div class="col-12">
-                                            <label for="exampleFormControlTextarea1" class="form-label">Address*</label>
-                                            <textarea class="form-control" name="address" placeholder="Ex: #123 main street" id="exampleFormControlTextarea1" rows="5">{{old('address', $vacancy->location)}}</textarea>
-                                           
-                                        </div>
-                                    </div>
-                                    <div class="row form-group select-box-2">
-                                        <label for="check" class="form-label">Country*</label>
-                                        <div class="col-12">
-                                            <select name="country" class="form-select country-list" aria-label="Default select example">
-                                                @foreach($countries as $country)
-                                                <option {{$country->id == old('country', $vacancy->country) ? 'selected':'' }} value="{{$country->id}}">{{$country->name}}</option>
-                                                @endforeach
-                                            </select>
-                                           
-                                        </div>
-                                    </div>
-                                    <div class="row form-group select-box-2">
-                                        <label for="check" class="form-label">State*</label>
-                                        <div class="col-12">
-                                            <select name="state" class="form-select state-list" aria-label="Default select example">
-                                                @foreach($states as $state)
-                                                <option {{$state->id == old('state', $vacancy->state) ? 'selected':'' }} value="{{$state->id}}">{{$state->name}}</option>
-                                                @endforeach
-                                            </select>
-                                           
-                                        </div>
-                                    </div>
-                                    <div class="row form-group select-box-2">
-                                        <label for="check" class="form-label">City*</label>
-                                        <div class="col-12">
-                                            <select name="city" class="form-select city-list" aria-label="Default select example">
-                                                @foreach($cities as $city)
-                                                <option {{$city->id == old('city', $vacancy->city) ? 'selected':'' }} value="{{$city->id}}">{{$city->city}}</option>
-                                                @endforeach
-                                            </select>
-                                         
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <label for="check" class="form-label">Zip*</label>
-                                        <div class="col-12">
-                                            <input type="number" value="{{ old('zip', $vacancy->zip) }}" name="zip" class="form-control form-input" value="" placeholder="Ex: 10101" aria-label="Zip Code">
-
-                                        </div>
-                                    </div>
-                                    <div class="row form-group">
-                                        <label for="check" class="form-label">Describe*</label>
-                                        <div class="col-12">
-                                            <textarea name="description" class="form-control" placeholder="Ex: We are seeking for a awesome business manager" id="exampleFormControlTextarea1" rows="5">{{ old('description', $vacancy->description) }}</textarea>
-                                           
-                                        </div>
-                                    </div>
                                      <div class=" d-grid col-sm-9">
                                         <input type="submit" class="btn  btn-primary btn-form" value="Publish">
                                         <div class="col-sm-3  text-center text-sm-end">
@@ -550,6 +566,7 @@ Employer | Edit Post Job
                                         </div>
                                     </div>
                                 </div>
+                               
                                 <div class="step-content-foot">
                                     <button type="button" class="btn btn-custom-posted-jobs btn-primary active" id="prevBtn" name="prev">Prev</button>
                                     <button type="button" class="btn btn-custom-posted-jobs btn-primary active" name="next">Next</button>
@@ -586,7 +603,7 @@ Employer | Edit Post Job
                    // $('#prevBtn').addClass('d-none')
                     $('#submitBtn').addClass('d-none')
                 }
-                if(step == 4)
+                if(step == 3)
                 {
                     $('#prevBtn').addClass('d-none')
                 }
@@ -635,6 +652,17 @@ Employer | Edit Post Job
                 }
               });
             });
+
+        $('#salary_min_max').click(function(){
+
+            if ($('#salary_min_max').is(':checked')) {
+                $('.salary_bar_box').css('display','block')
+                $('#fixedSalary').css('display','none');
+            }else{
+                $('#fixedSalary').css('display','block');
+                 $('.salary_bar_box').css('display','none')
+            }
+        })
 
     </script>
 @endsection

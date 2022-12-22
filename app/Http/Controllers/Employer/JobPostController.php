@@ -61,7 +61,9 @@ class JobPostController extends Controller
 
     public function create(Request $request)
     {
+
         if ($request->method() == "POST") {
+            // dd($request->all());
             $request->validate([
                 'job_title' => 'required|string|max:129',
                 'city' => 'nullable',
@@ -73,7 +75,7 @@ class JobPostController extends Controller
                 'department' => 'required|string|max:129',
                 'job_role' => 'required|string',
                 'description' => 'nullable',
-                'salary_offer' => 'required',
+                'salary_offer' => 'required_without:salary_min_max',
                 'min_exp' => 'required',
                 'skills' => 'required|array',
                 'job_type' => 'required',
@@ -82,10 +84,17 @@ class JobPostController extends Controller
                 'video_input' => 'mimes:mp4|max:20000',                
                 'min_work_hours' => 'nullable|integer',
                 'max_work_hours' => 'nullable|integer|gt:min_work_hours',
+                'role_in_company' => 'string',
+                'min_salary'       => 'required_with:salary_min_max,on',
+                'max_salary'       => 'required_with:salary_min_max,on'
+            ],[
+                'min_salary.required_with' => 'Minimum salary is required.',
+                'max_salary.required_with' => 'Maximum salary is required.',
+                'salary_offer.required_without' => 'The salary field is required.'
             ]);
 
             try {
-
+               
                 if ($request->skills && count($request->skills) > 0) {
                     $skills = implode(',', $request->skills);
                 } else {
@@ -94,7 +103,7 @@ class JobPostController extends Controller
                 $input = $request->all();
                 $input['employer_id'] = auth()->user()->id;
                 $input['skills'] = $skills;
-
+ 
                 $image_files = [];
                 if ($request->hasFile('images_input')) {
                     foreach ($request->file('images_input') as $file) {
@@ -139,8 +148,7 @@ class JobPostController extends Controller
                     );
                     $employee_interview = $file_name;
                 }
-
-                $three_Sixty = null;
+                $three_sixty = null;
                 if($request->hasFile('three_sixty'))
                 {
                     $file = $request->file('three_sixty');
@@ -152,6 +160,18 @@ class JobPostController extends Controller
                     );
                     $three_sixty = $file_name;
                 }
+                $company_video = null;
+                if($request->hasFile('company_video'))
+                {
+                    $file = $request->file('company_video');
+                    $file_name = $file->hashName();
+                    $file->storeAs(
+                        Vacancy::VIDEO_PATH,
+                        $file_name,
+                        config('settings.file_system_service')
+                    );
+                    $company_video = $file_name;
+                }
 
                 $input['company_employee_interview'] = $employee_interview;
                 $input['three_sixty'] = $three_sixty;
@@ -159,6 +179,11 @@ class JobPostController extends Controller
                 $input['min_exp'] = $request->min_exp;
 
                 $input['location'] = $request->address;
+                $input['company_name']= $request->company_name;
+                $input['role_in_company'] = $request->role_in_company;
+                $input['min_salary'] = $request->min_salary;
+                $input['max_salary'] = $request->max_salary;
+                $input['company_video'] = $request->company_video;
                 Vacancy::create($input);
 
                 return redirect()->route('employer.posted.jobs')->with('success', 'Job Posted Successfully');
@@ -216,6 +241,7 @@ class JobPostController extends Controller
             $languages = null;
         }
         if ($request->method() == "POST") {
+            //dd($request->all());
             $request->validate([
                 'job_title' => 'required|string|max:129',
                 'city' => 'nullable',
@@ -238,6 +264,13 @@ class JobPostController extends Controller
                 'video_input' => 'mimes:mp4|max:20000',
                 'min_work_hours' => 'nullable|integer',
                 'max_work_hours' => 'nullable|integer|gt:min_work_hours',
+                'role_in_company' => 'string',
+                'min_salary'       => 'required_with:salary_min_max,on',
+                'max_salary'       => 'required_with:salary_min_max,on'
+            ],[
+                'min_salary.required_with' => 'Minimum salary is required.',
+                'max_salary.required_with' => 'Maximum salary is required.',
+                'salary_offer.required_without' => 'The salary field is required.'
             ]);
 
             try {
@@ -313,7 +346,7 @@ class JobPostController extends Controller
                     $employee_interview = $file_name;
                 }
 
-                $three_Sixty = null;
+                $three_sixty = null;
                 if($request->hasFile('three_sixty'))
                 {
                     $file = $request->file('three_sixty');
@@ -325,11 +358,28 @@ class JobPostController extends Controller
                     );
                     $three_sixty = $file_name;
                 }
+                $company_video = null;
+                if($request->hasFile('company_video'))
+                {
+                    $file = $request->file('company_video');
+                    $file_name = $file->hashName();
+                    $file->storeAs(
+                        Vacancy::VIDEO_PATH,
+                        $file_name,
+                        config('settings.file_system_service')
+                    );
+                    $company_video = $file_name;
+                }
 
                 $input['company_employee_interview'] = $employee_interview;
                 $input['three_sixty'] = $three_sixty;
                 $input['skills'] = $skills;
                 $input['location'] = $request->address;
+                $input['company_name']= $request->company_name;
+                $input['role_in_company'] = $request->role_in_company;
+                $input['min_salary'] = $request->min_salary;
+                $input['max_salary'] = $request->max_salary;
+                $input['company_video'] = $request->company_video;
                 $vacancy->update($input);
 
                 return redirect()->route('employer.posted.jobs')->with('success', 'Job Post Updated Successfully');
