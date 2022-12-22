@@ -183,7 +183,7 @@ class JobPostController extends Controller
                 $input['role_in_company'] = $request->role_in_company;
                 $input['min_salary'] = $request->min_salary;
                 $input['max_salary'] = $request->max_salary;
-                $input['company_video'] = $request->company_video;
+                $input['company_video'] = $company_video;
                 
                 Vacancy::create($input);
 
@@ -380,7 +380,7 @@ class JobPostController extends Controller
                 $input['role_in_company'] = $request->role_in_company;
                 $input['min_salary'] = $request->min_salary;
                 $input['max_salary'] = $request->max_salary;
-                $input['company_video'] = $request->company_video;
+                $input['company_video'] = $company_video;
                 $vacancy->update($input);
 
                 return redirect()->route('employer.posted.jobs')->with('success', 'Job Post Updated Successfully');
