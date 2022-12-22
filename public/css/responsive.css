@@ -9,6 +9,9 @@ article.profile-summary.card-body .row h4 {
     font-size: 19px;
     width: 100%;
 }
+.preview-images-list h2 {
+    width: 100%!important;
+}
 article.profile-summary a.btn.btn-lg, .about-wrapper.profile-summary a.btn.btn-lg {
     width: 41%;
     display: inline-table;
