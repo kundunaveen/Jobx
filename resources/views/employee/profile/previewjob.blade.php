@@ -238,13 +238,13 @@
                            
                             
                             <!-- vide -->
-                            <div class="row about-wrapper profile-summary mt-3">
+                            <div class="row about-wrapper profile-summary mt-3 preview-images-list">
                             @if(count($job_details->getImagesInArray())>0)
                             <h2>Vacancy Images</h2>
                             @endif
                             @forelse ($job_details->getImagesInArray() as $image)
 
-                            <div class="col-6 pip mt-2">
+                            <div class="col-md-3 pip mt-2">
                                 <img style="height:400px;width:100%;object-fit:cover" class='imageThumb' src="{{ \Illuminate\Support\Facades\Storage::disk(config('settings.file_system_service'))->url(\App\Models\Vacancy::IMAGE_PATH.'/'.$image) }}" width="100" class="">
                                 
                             </div>
