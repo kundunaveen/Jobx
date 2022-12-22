@@ -70,21 +70,21 @@
                             @endif
                             <div class=" row ">
                                 <div class="col-md-4">
-                                    <h4>Weekly Hours : <span class="h6 text-secondary">{{$job_details->min_work_hours.' - '.$job_details->max_work_hours}}</span><h4>
+                                    <h4>Weekly Hours : <span class="h6 text-secondary">{{$job_details->min_work_hours.' - '.$job_details->max_work_hours}}</span></h4>
                                 </div>
                                 @if($job_details->jobType)
                                 <div class="col-md-4">
-                                    <h4>Job Type : <span class="h6 text-secondary">{{ $job_details->jobType->value }}</span><h4>
+                                    <h4>Job Type : <span class="h6 text-secondary">{{ $job_details->jobType->value }}</span></h4>
                                 </div>
                                 @endif
                                 @if($job_details->company_size)
                                 <div class="col-md-4">
-                                    <h4>Company Size : <span class="h6 text-secondary">{{$job_details->company_size == '1-10' ? 'Small Organization' : ($job_details->company_size == '11-20' ? 'Mid Level Organization' : ($job_details->company_size == '21-50' ? 'Large Organization' : 'Very Large Organization'))}}</span><h4>
+                                    <h4>Company Size : <span class="h6 text-secondary">{{$job_details->company_size == '1-10' ? 'Small Organization' : ($job_details->company_size == '11-20' ? 'Mid Level Organization' : ($job_details->company_size == '21-50' ? 'Large Organization' : 'Very Large Organization'))}}</span></h4>
                                 </div>
                                 @endif
                                 @if($job_details->department)
                                 <div class="col-md-4">
-                                    <h4>Department : <span class="h6 text-secondary">{{$job_details->department}}</span><h4>
+                                    <h4>Department : <span class="h6 text-secondary">{{$job_details->department}}</span></h4>
                                 </div>
                                 @endif
                                 @php
@@ -104,66 +104,66 @@
                                 @if(count($skills) > 0)
                                 <div class="col-md-4">
                                     <h4>Skills : <span class="h6 text-secondary">
-                                        @foreach($jobSkills as $skill) <?php $counter++; ?> {{$counter < count($skills) ? $skill->skill.', ' : $skill->skill}}  @endforeach</span><h4>
+                                        @foreach($jobSkills as $skill) <?php $counter++; ?> {{$counter < count($skills) ? $skill->skill.', ' : $skill->skill}}  @endforeach</span></h4>
                                 </div>
                                 @endif
 
                                 @if($languages != null)
                                 <div class="col-md-4">
                                     <h4>Languages : <span class="h6 text-secondary">
-                                        @foreach($joblanguages as $language) <?php $counter1++; ?> {{$counter1 < count($languages) ? $language->value.', ' : $language->value}}  @endforeach</span><h4>
+                                        @foreach($joblanguages as $language) <?php $counter1++; ?> {{$counter1 < count($languages) ? $language->value.', ' : $language->value}}  @endforeach</span></h4>
                                 </div>
                                 @endif
                                 @if($job_details->education)
                                 <div class="col-md-4">
-                                    <h4>Education : <span class="h6 text-secondary">{{$job_details->Qualification->value}}</span><h4>
+                                    <h4>Education : <span class="h6 text-secondary">{{$job_details->Qualification->value}}</span></h4>
                                 </div>
                                 @endif
                                 @if($job_details->min_exp)
                                 <div class="col-md-4">
-                                    <h4>Minimum Experience : <span class="h6 text-secondary">{{$job_details->min_exp}} Yrs</span><h4>
+                                    <h4>Minimum Experience : <span class="h6 text-secondary">{{$job_details->min_exp}} Yrs</span></h4>
                                 </div>
                                 @endif
                                 @if($job_details->salary_offer)
                                 <div class="col-md-4">
-                                    <h4>Salary Offer : <span class="h6 text-secondary">€ {{$job_details->salary_offer}} </span><h4>
+                                    <h4>Salary Offer : <span class="h6 text-secondary">€ {{$job_details->salary_offer}} </span></h4>
                                 </div>
                                 @endif
                                 @if($job_details->dl_required)
                                 <div class="col-md-4">
-                                    <h4>Driving License : <span class="h6 text-secondary">{{$job_details->dl_required == 'YES' ? 'Required' : 'Not Required'}} </span><h4>
+                                    <h4>Driving License : <span class="h6 text-secondary">{{$job_details->dl_required == 'YES' ? 'Required' : 'Not Required'}} </span></h4>
                                 </div>
                                 @endif
                                
                                 @if($job_details->min_salary && $job_details->max_salary)
                                 <div class="col-md-4">
-                                    <h4>Salary Offer : <span class="h6 text-secondary">{{$job_details->min_salary}} - {{$job_details->max_salary}} </span><h4>
+                                    <h4>Salary Offer : <span class="h6 text-secondary">{{$job_details->min_salary}} - {{$job_details->max_salary}} </span></h4>
                                 </div>
                                 @endif
                                 @if($job_details->company_role)
                                 <div class="col-md-4">
-                                    <h4>Role in company : <span class="h6 text-secondary">{{$job_details->company_role}}  </span><h4>
+                                    <h4>Role in company : <span class="h6 text-secondary">{{$job_details->company_role}}  </span></h4>
                                 </div>
                                 @endif
                                 
                                 @if($job_details->countrydetail)
                                 <div class="col-md-4">
-                                    <h4>Country : <span class="h6 text-secondary">{{$job_details->countrydetail->name}}</span><h4>
+                                    <h4>Country : <span class="h6 text-secondary">{{$job_details->countrydetail->name}}</span></h4>
                                 </div>
                                 @endif
                                 @if($job_details->statedetail)
                                 <div class="col-md-4">
-                                    <h4>State : <span class="h6 text-secondary">{{$job_details->statedetail->name}}</span><h4>
+                                    <h4>State : <span class="h6 text-secondary">{{$job_details->statedetail->name}}</span></h4>
                                 </div>
                                 @endif
                                 @if($job_details->citydetail)
                                 <div class="col-md-4">
-                                    <h4>City : <span class="h6 text-secondary">{{$job_details->citydetail->city}}</span><h4>
+                                    <h4>City : <span class="h6 text-secondary">{{$job_details->citydetail->city}}</span></h4>
                                 </div>
                                 @endif
                                 @if($job_details->zip)
                                 <div class="col-md-4">
-                                    <h4>City : <span class="h6 text-secondary">{{$job_details->zip}}</span><h4>
+                                    <h4>City : <span class="h6 text-secondary">{{$job_details->zip}}</span></h4>
                                 </div>
                                 @endif
                             </div>
@@ -182,46 +182,62 @@
                 <div class="card-body">
                     <div class="row align-items-center">
                         <div class="col-lg-12 col-md-12">
-                            @if($job_details->video)
-                            <div class="about-wrapper profile-summary mt-3">
-                                <h2>Advertising Video </h2>
-                                <div class="mt-2">
-                                    <video class="" controls style="width:100%">
-                                        <source src="{{ $job_details->video_url }}" type="video/mp4">
-                                    </video>
+                            <!-- <videos -->
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        @if($job_details->video)
+                                        <div class="about-wrapper profile-summary mt-3">
+                                            <h2>Advertising Video </h2>
+                                            <div class="mt-2">
+                                                <video class="" controls style="width:100%">
+                                                    <source src="{{ $job_details->video_url }}" type="video/mp4">
+                                                </video>
+                                            </div>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-3">
+                                        @if($job_details->company_employee_interview)
+                                        <div class="about-wrapper profile-summary mt-3">
+                                            <h2>Company Employee Interview</h2>
+                                            <div class="mt-2">
+                                                <video class="" controls>
+                                                    <source src="{{ $job_details->company_employee_interview_url }}" type="video/mp4">
+                                                </video>
+                                            </div>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-3">
+                                         @if($job_details->three_sixty)
+                                        <div class="about-wrapper profile-summary mt-3">
+                                            <h2>360° Tour</h2>
+                                            <div class="mt-2">
+                                                <video class="" controls>
+                                                    <source src="{{ $job_details->three_sixty_url }}" type="video/mp4">
+                                                </video>
+                                            </div>
+                                        </div>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-3">
+                                        @if($job_details->company_video)
+                                        <div class="about-wrapper profile-summary mt-3">
+                                            <h2>Company Video</h2>
+                                            <div class="mt-2">
+                                                <video class="" controls>
+                                                    <source src="{{ $job_details->company_video }}" type="video/mp4">
+                                                </video>
+                                            </div>
+                                        </div>
+                                        @endif
+                                    </div>
                                 </div>
-                            </div>
-                            @endif
-                            @if($job_details->company_employee_interview)
-                            <div class="about-wrapper profile-summary mt-3">
-                                <h2>Company Employee Interview</h2>
-                                <div class="mt-2">
-                                    <video class="" controls>
-                                        <source src="{{ $job_details->company_employee_interview_url }}" type="video/mp4">
-                                    </video>
-                                </div>
-                            </div>
-                            @endif
-                            @if($job_details->three_sixty)
-                            <div class="about-wrapper profile-summary mt-3">
-                                <h2>360° Tour</h2>
-                                <div class="mt-2">
-                                    <video class="" controls>
-                                        <source src="{{ $job_details->three_sixty_url }}" type="video/mp4">
-                                    </video>
-                                </div>
-                            </div>
-                            @endif
-                            @if($job_details->company_video)
-                            <div class="about-wrapper profile-summary mt-3">
-                                <h2>Company Video</h2>
-                                <div class="mt-2">
-                                    <video class="" controls>
-                                        <source src="{{ $job_details->company_video }}" type="video/mp4">
-                                    </video>
-                                </div>
-                            </div>
-                            @endif
+                            
+                            
+                           
+                            
+                            <!-- vide -->
                             <div class="row about-wrapper profile-summary mt-3">
                             @if(count($job_details->getImagesInArray())>0)
                             <h2>Vacancy Images</h2>

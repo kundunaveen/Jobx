@@ -1,4 +1,10 @@
 /* Employee responsive */
+article.job-profile-article a {
+    color: #000;
+}
+article.profile-summary.card-body .row h4 {
+    padding-bottom: 0;
+}
 article.profile-summary a.btn.btn-lg, .about-wrapper.profile-summary a.btn.btn-lg {
     width: 41%;
     display: inline-table;
