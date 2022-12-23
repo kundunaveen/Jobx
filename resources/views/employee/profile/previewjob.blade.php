@@ -15,7 +15,7 @@
                                 <img src="{{ $job_details->single_image }}" width="230" height="230" alt="Profile Img" class="img-fluid">
                             </figure>
                             <article>
-                                <h4 class="profile-heading">{{ optional($company->profile)->company_name }}</h4>
+                                <h4 class="profile-heading">{{ $job_details->company_name ? $job_details->company_name : optional($company->profile)->company_name }}</h4>
                                  <a onclick="shareToFacebook()" href="javascript:void(0)" class="height-35 width-35  rounded-circle   flex-content-center"> <i class="fa fa-facebook-official" aria-hidden="true"></i> </a>
                                 <p class="work-profile">{{ $company->full_name }}</p>
 

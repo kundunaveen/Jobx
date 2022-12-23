@@ -96,7 +96,7 @@
                                  <article class="job-profile-article">
                                     <div class="row justify-content-between">
                                        <div class="col-auto"><h5 class="mt-1">{{$job->job_role}}</h5>
-                                          <p>{{$job->profile->company_name}}</p>
+                                          <p>{{$job->company_name ? $job->company_name : $job->profile->company_name}}</p>
                                        </div>
                                        <div class="col-auto text-primary">
                                           <a href="{{route('employer.job.candidates', $job->id)}}">

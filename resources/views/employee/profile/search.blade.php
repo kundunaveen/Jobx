@@ -153,7 +153,7 @@ Job Search
                                        &nbsp;&nbsp;
                                        </a>
                                     </h5>
-                                   <p><a href="{{route('employee.job.preview', $job->id)}}" >{{ optional($job->loadMissing('profile')->profile)->company_name }}</a></p>
+                                   <p><a href="{{route('employee.job.preview', $job->id)}}" >{{  $job->company_name ? $job->company_name : optional($job->loadMissing('profile')->profile)->company_name }}</a></p>
                                     <ul class="job-type list-group flex-row mb-3">
                                        <li class="list-group-item">
                                           {{ $job->job_type_text }}
