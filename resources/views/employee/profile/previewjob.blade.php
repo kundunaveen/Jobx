@@ -204,8 +204,8 @@
                         <div class="col-lg-12 col-md-12">
                             <!-- <videos -->
                                 <div class="row preview-video">
+                                    @if($job_details->video)
                                     <div class="col-md-3">
-                                        @if($job_details->video)
                                         <div class="about-wrapper profile-summary mt-3">
                                             <h2>Advertising Video </h2>
                                             <div class="mt-2">
@@ -214,10 +214,10 @@
                                                 </video>
                                             </div>
                                         </div>
-                                        @endif
                                     </div>
+                                    @endif
+                                    @if($job_details->company_employee_interview)
                                     <div class="col-md-3">
-                                        @if($job_details->company_employee_interview)
                                         <div class="about-wrapper profile-summary mt-3">
                                             <h2>Company Employee Interview</h2>
                                             <div class="mt-2">
@@ -226,10 +226,10 @@
                                                 </video>
                                             </div>
                                         </div>
-                                        @endif
                                     </div>
+                                    @endif
+                                    @if($job_details->three_sixty)
                                     <div class="col-md-3">
-                                         @if($job_details->three_sixty)
                                         <div class="about-wrapper profile-summary mt-3">
                                             <h2>360° Tour</h2>
                                             <div class="mt-2">
@@ -238,20 +238,20 @@
                                                 </video>
                                             </div>
                                         </div>
-                                        @endif
                                     </div>
+                                    @endif
+                                    @if($job_details->company_video)
                                     <div class="col-md-3">
-                                        @if($job_details->company_video)
                                         <div class="about-wrapper profile-summary mt-3">
                                             <h2>Company Video</h2>
                                             <div class="mt-2">
                                                 <video class="" controls>
-                                                    <source src="{{ $job_details->company_video }}" type="video/mp4">
+                                                    <source src="http://65.2.143.196/anadev/Jobx/public/storage/image/company_videos/{{ $job_details->company_video }}" type="video/mp4">
                                                 </video>
                                             </div>
                                         </div>
-                                        @endif
                                     </div>
+                                    @endif
                                 </div>
                             
                             
