@@ -14,7 +14,7 @@ class AddAvgRatingToProfilesTable extends Migration
     public function up()
     {
         Schema::table('profiles', function (Blueprint $table) {
-            $table->unsignedSmallInteger('avg_rating')->index();
+            $table->unsignedSmallInteger('avg_rating')->index()->nullable();
         });
     }
 

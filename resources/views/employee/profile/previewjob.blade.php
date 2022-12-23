@@ -6,6 +6,7 @@
     <!-- Profile Section Start Here-->
     <section class="profile-section mt-5">
         <div class="container-xxl">
+             @include('layouts.messages.success_jquery_toast')
             <div class="row">
                 <div class="col-lg-4 mb-5 mb-lg-0  ">
                     <div class="card mb-5 mb-lg-0 h-100">
@@ -31,7 +32,7 @@
                                  <div class="job-btn-wrapper d-flex justify-content-between">
                                     
                                      
-                                       <a  href="javascript:void(0)"   class="btn btn-lg" @if( !in_array($job_details->id, $applied_jobs))  data-bs-toggle="modal" data-bs-modal="#applyJobModal" onclick="applyJob('{{$job_details->id}}')" @endif>@if( in_array($job_details->id, $applied_jobs)) Applied @else Apply @endif</a>
+                                       <a  href="javascript:void(0)"   class="btn btn-lg @if( in_array($job_details->id, $applied_jobs)) job_applied @endif" @if( !in_array($job_details->id, $applied_jobs))  data-bs-toggle="modal" data-bs-modal="#applyJobModal" onclick="applyJob('{{$job_details->id}}')" @endif>@if( in_array($job_details->id, $applied_jobs)) Applied @else Apply @endif</a>
 
                                        
                                 </div>
@@ -480,11 +481,11 @@
                <div class="modal-body">
                   <div class="form-group">
                      <label>Cover Letter</label>
-                     <textarea rows="10" name="cover_letter" class="form-control"></textarea>
+                     <textarea rows="4" name="cover_letter" class="form-control"></textarea>
                   </div>
                   <div class="form-group mt-4">
                      <label>Motivation Letter</label>
-                     <textarea rows="10" name="motivation_letter" class="form-control"></textarea>
+                     <textarea rows="4" name="motivation_letter" class="form-control"></textarea>
                   </div>
                   <div class="form-group mt-4">
                      <label>Cover Video</label>

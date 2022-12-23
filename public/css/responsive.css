@@ -12,6 +12,12 @@ article.profile-summary.card-body .row h4 {
 .preview-images-list h2 {
     width: 100%!important;
 }
+a.btn.btn-lg.job_applied, a.btn.btn-lg.job_applied:hover {
+    background-color: #b9b9b9;
+    border-color: #b9b9b9;
+    cursor: not-allowed;
+    color: #fff;
+}
 article.profile-summary a.btn.btn-lg, .about-wrapper.profile-summary a.btn.btn-lg {
     width: 41%;
     display: inline-table;

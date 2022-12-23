@@ -177,7 +177,7 @@ Job Search
                                        </a>
                                     </div>
                                     <div class="job-btn-wrapper d-flex justify-content-between">
-                                       <a  href="javascript:void(0)"  class="btn btn-lg" @if( !in_array($job->id, $applied_jobs)) onclick="applyJob('{{$job->id}}')" data-bs-toggle="modal" data-bs-modal="#applyJobModal"  @endif>@if( in_array($job->id, $applied_jobs)) Applied @else Apply @endif</a>
+                                       <a  href="javascript:void(0)"  class="btn btn-lg @if( in_array($job->id, $applied_jobs)) job_applied @endif" @if( !in_array($job->id, $applied_jobs)) onclick="applyJob('{{$job->id}}')" data-bs-toggle="modal" data-bs-modal="#applyJobModal"  @endif>@if( in_array($job->id, $applied_jobs)) Applied @else Apply @endif</a>
                                        <a href="{{route('employee.job.preview', $job->id)}}" class="btn btn-default btn-md">Preview Job</a>
                                        {{--
                                     <!-- <a href="{{route('employer.edit.post.job', $job->id)}}" style="margin-left:-5px;margin-right:10px" class="btn col-6 btn-default ">Apply</a>
@@ -220,11 +220,11 @@ Job Search
                <div class="modal-body">
                   <div class="form-group">
                      <label>Cover Letter</label>
-                     <textarea rows="10" name="cover_letter" class="form-control"></textarea>
+                     <textarea rows="4" name="cover_letter" class="form-control"></textarea>
                   </div>
                   <div class="form-group mt-4">
                      <label>Motivation Letter</label>
-                     <textarea rows="10" name="motivation_letter" class="form-control"></textarea>
+                     <textarea rows="4" name="motivation_letter" class="form-control"></textarea>
                   </div>
                   <div class="form-group mt-4">
                      <label>Cover Video</label>
