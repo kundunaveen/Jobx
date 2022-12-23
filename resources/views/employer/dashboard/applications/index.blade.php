@@ -157,5 +157,6 @@ Employee Applications
             }
         })
     }
+   
 </script>
 @endsection

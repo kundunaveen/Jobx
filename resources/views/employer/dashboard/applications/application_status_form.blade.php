@@ -29,8 +29,9 @@
                     @endforelse
                 </select>
             </div>
-            <div class="col-md-2">
-                <button type="submit" class="btn btn-search btn-primary">Save</button>
+            <div class="col-md-4">
+                <button type="submit" class="btn btn-search btn-primary w-50 modal_btns_new">Save</button>
+                <button type="button" class="btn btn-danger w-50 modal_btns_new" id="closeStatusModal" >Cancel</button>
             </div>
         </div>
     </form>
@@ -56,4 +57,8 @@
         });
 
     });
+     $('#closeStatusModal').click(function(){
+        // alert()
+         $('#exampleModal').modal('hide');
+    })
 </script>

@@ -1035,13 +1035,21 @@ button.accordion-button.company_list_button {
 
 /* end listing page */
 
-
+.modal_btns_new {
+    padding: 4px 0!important;
+    text-align: center;
+}
 .disable_input {
     background-color: #f5f5f5!important;
     cursor: not-allowed;
 }
 .w-100{
     width: 100%;
+}
+.w-50 {
+    width: 48%!important;
+    display: inline-block;
+    margin: 0!important;
 }
 @media (max-width: 1699px){
 .dashboard-main .dashboard-header {
