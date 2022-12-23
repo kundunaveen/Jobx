@@ -42,7 +42,7 @@ class VacancyController extends Controller
                 'employer_id' => 'required|numeric',
                 'job_title' => 'required|string|max:100',
                 'location' => 'required|string|max:100',
-                'zip' => 'required|numeric|digits_between:5,8',
+                'zip' => 'required|numeric|digits_between:4,8',
                 'department' => 'required|string|max:100',
                 'job_role' => 'required|string|max:100',
                 'description' => 'required',
@@ -109,6 +109,7 @@ class VacancyController extends Controller
                     'video' => $video,                    
                     'min_work_hours' => $request->min_work_hours,
                     'max_work_hours' => $request->max_work_hours,
+                    'company_name'=>$request->company_name
                 ]);
                 Session::flash('success', 'Job Vacancy Created Successfully');
                 return redirect(route('admin.manageVacancy'));
@@ -163,7 +164,7 @@ class VacancyController extends Controller
                 // 'city' => 'required|string|max:50',
                 // 'country' => 'required|string|max:50',
                 'location' => 'required|string',
-                'zip' => 'required|numeric|digits_between:5,8',
+                'zip' => 'required|numeric|digits_between:4,8',
                 'department' => 'required|string|max:100',
                 'job_role' => 'required|string|max:100',
                 'description' => 'required',                

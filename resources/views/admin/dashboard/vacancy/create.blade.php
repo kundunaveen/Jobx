@@ -102,8 +102,9 @@
                                     <form action="" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row"> 
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label">Company Name <span class="text-danger">*</span></label>
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label">Employer Name <span class="text-danger">*</span></label>
+
                                                 <select class="form-control company_name" name="employer_id" required>
                                                     @foreach($employers as $employer)
                                                     @if($employer->profile != null && $employer->profile->company_name != null)
@@ -112,9 +113,20 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label">Company Name </label>
+
+                                                <input type="text" maxlength="100" name="company_name" class="form-control @error('company_name') is-invalid @enderror" value="{{ old('company_name') }}">
+                                                @error('company_name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Company Branch</label>
-                                                <input type="text" maxlength="100" name="branch" class="form-control @error('branch') is-invalid @enderror" required>
+                                                <input type="text" maxlength="100" name="branch" class="form-control @error('branch') is-invalid @enderror" value="{{ old('branch') }}">
                                                 @error('branch')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -125,7 +137,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Job Title <span class="text-danger">*</span></label>
-                                                <input type="text" maxlength="100" name="job_title" class="form-control @error('job_title') is-invalid @enderror" required>
+                                                <input type="text" maxlength="100" name="job_title" class="form-control @error('job_title') is-invalid @enderror" value="{{ old('job_title') }}">
                                                 @error('job_title')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -134,7 +146,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Job Role <span class="text-danger">*</span></label>
-                                                <input type="text" maxlength="100" name="job_role" class="form-control @error('job_role') is-invalid @enderror" required>
+                                                <input type="text" maxlength="100" name="job_role" class="form-control @error('job_role') is-invalid @enderror" value="{{ old('job_role') }}">
                                                 @error('job_role')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -143,7 +155,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Department <span class="text-danger">*</span></label>
-                                                <input type="text" maxlength="100" name="department" class="form-control @error('department') is-invalid @enderror" required>
+                                                <input type="text" maxlength="100" name="department" class="form-control @error('department') is-invalid @enderror" value="{{ old('department') }}">
                                                 @error('department')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -155,7 +167,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Min. Experience Required </label>
-                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" step="0.01" name="min_exp" class="form-control @error('min_exp') is-invalid @enderror" required>
+                                                <input type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="4" step="0.01" name="min_exp" class="form-control @error('min_exp') is-invalid @enderror" >
                                                 @error('min_exp')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -164,7 +176,7 @@
                                             </div>
                                             <div class="form-group col-md-3">
                                                 <label class="form-label">Salary Offer </label>
-                                                <input type="number" step="0.01" name="salary_offer" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" class="form-control @error('salary_offering') is-invalid @enderror" required>
+                                                <input type="number" step="0.01" name="salary_offer" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="5" class="form-control @error('salary_offering') is-invalid @enderror" value="{{ old('salary_offer') }}">
                                                 @error('salary_offer')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -217,7 +229,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Location <span class="text-danger">*</span></label>
-                                                <input type="text" maxlength="100" name="location" class="form-control @error('location') is-invalid @enderror" required>
+                                                <input type="text" maxlength="100" name="location" class="form-control @error('location') is-invalid @enderror" value="{{ old('location') }}">
                                                 @error('location')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -270,7 +282,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Zip Code</label>
-                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7" type="text" name="zip" class="form-control @error('zip') is-invalid @enderror">
+                                                <input oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" maxlength="7" type="text" name="zip" class="form-control @error('zip') is-invalid @enderror" value="{{ old('zip') }}"> 
                                                 @error('zip')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -281,7 +293,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-12">
                                                 <label class="form-label">Description <span class="text-danger">*</span></label>
-                                                <textarea class="form-control @error('description') is-invalid @enderror" name="description"></textarea>
+                                                <textarea class="form-control @error('description') is-invalid @enderror" name="description">{{ old('description') }}</textarea>
                                                 @error('description')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>

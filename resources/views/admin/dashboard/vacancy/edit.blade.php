@@ -102,9 +102,9 @@
                                     <form action="" method="POST" enctype="multipart/form-data">
                                         @csrf
                                         <div class="row"> 
-                                            <div class="form-group col-md-6">
-                                                <label class="form-label">Company Name <span class="text-danger">*</span></label>
-                                                <select class="form-control company_name" disabled required>
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label">Employer Name <span class="text-danger">*</span></label>
+                                                <select class="form-control company_name" disabled >
                                                     @foreach($employers as $employer)
                                                     @if($employer->profile != null && $employer->profile->company_name != null)
                                                     <option {{$employer->id == $vacancy->employer_id ? 'selected':''}} value="{{$employer->id}}">{{$employer->profile->company_name}}</option>
@@ -112,9 +112,19 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="form-group col-md-6">
+                                            <div class="form-group col-md-4">
+                                                <label class="form-label">Company Name </label>
+
+                                                <input type="text" maxlength="100" name="company_name" class="form-control @error('company_name') is-invalid @enderror" value="{{$vacancy->company_name}}" >
+                                                @error('company_name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-4">
                                                 <label class="form-label">Company Branch</label>
-                                                <input type="text" maxlength="100" name="branch" value="{{ $vacancy->branch }}" class="form-control @error('branch') is-invalid @enderror" required>
+                                                <input type="text" maxlength="100" name="branch" value="{{ $vacancy->branch }}" class="form-control @error('branch') is-invalid @enderror" >
                                                 @error('branch')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -125,7 +135,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Job Title <span class="text-danger">*</span></label>
-                                                <input type="text" maxlength="100" name="job_title" value="{{$vacancy->job_title}}" class="form-control @error('job_title') is-invalid @enderror" required>
+                                                <input type="text" maxlength="100" name="job_title" value="{{$vacancy->job_title}}" class="form-control @error('job_title') is-invalid @enderror" >
                                                 @error('job_title')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -134,7 +144,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Job Role <span class="text-danger">*</span></label>
-                                                <input type="text" maxlength="100" name="job_role" value="{{$vacancy->job_role}}" class="form-control @error('job_role') is-invalid @enderror" required>
+                                                <input type="text" maxlength="100" name="job_role" value="{{$vacancy->job_role}}" class="form-control @error('job_role') is-invalid @enderror" >
                                                 @error('job_role')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -143,7 +153,7 @@
                                             </div>
                                             <div class="form-group col-md-4">
                                                 <label class="form-label">Department <span class="text-danger">*</span></label>
-                                                <input type="text" name="department" maxlength="100" value="{{$vacancy->department}}" class="form-control @error('department') is-invalid @enderror" required>
+                                                <input type="text" name="department" maxlength="100" value="{{$vacancy->department}}" class="form-control @error('department') is-invalid @enderror" >
                                                 @error('department')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -218,7 +228,7 @@
                                         <div class="mt-4 row"> 
                                             <div class="form-group col-md-6">
                                                 <label class="form-label">Location <span class="text-danger">*</span></label>
-                                                <input type="text" maxlength="100" name="location" value="{{$vacancy->location}}" class="form-control @error('location') is-invalid @enderror" required>
+                                                <input type="text" maxlength="100" name="location" value="{{$vacancy->location}}" class="form-control @error('location') is-invalid @enderror">
                                                 @error('location')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
