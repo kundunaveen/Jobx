@@ -42,7 +42,10 @@ class EmployerController extends Controller
                 'email' => 'required|email|max:100|unique:users',
                 'password' => 'required|max:100|min:8|confirmed',
                 'company_name' => 'required',
-                'contact' => 'required'
+                'contact' => 'required',
+                'address'=>'required',
+                'zip'=>'required||numeric|digits_between:4,8',
+                'password_confirmation'=>'required'
             ]);
 
             try {

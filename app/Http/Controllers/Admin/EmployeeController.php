@@ -37,78 +37,83 @@ class EmployeeController extends Controller
 
     public function create(Request $request)
     {
-        try {
-            if ($request->method() == "POST") {
 
-                $request->validate([
-                    'first_name' => 'required|string|max:100',
-                    'last_name' => 'required|string|max:100',
-                    'email' => 'required|email|max:100|unique:users',
-                    'password' => 'required|max:100|min:8|confirmed',
-                    'gender' => 'required'
-                ]);
+        if ($request->method() == "POST") {
+            // dd($request->all());
+            $request->validate([
+                'first_name' => 'required|string|max:100',
+                'last_name' => 'required|string|max:100',
+                'email' => 'required|email|max:100|unique:users',
+                'password' => 'required|max:100|min:8|confirmed',
+                'password_confirmation'=> 'required|max:100|min:8',
+                'gender' => 'required',
+                'address'=>'required',
+                'zip'=>'required||numeric|digits_between:4,8'
+            ]);
+            try {
 
-                DB::transaction(function () use ($request) {
+                    DB::transaction(function () use ($request) {
 
-                    $password = $request->password;
+                        $password = $request->password;
 
-                    $user = User::create([
-                        'first_name' => $request->first_name,
-                        'last_name' => $request->last_name,
-                        'email' => $request->email,
-                        'password' => Hash::make($password)
-                    ]);
+                        $user = User::create([
+                            'first_name' => $request->first_name,
+                            'last_name' => $request->last_name,
+                            'email' => $request->email,
+                            'password' => Hash::make($password)
+                        ]);
 
-                    RoleUser::create([
-                        'user_id' => $user->id,
-                        'role_id' => 3
-                    ]);
-                    $profile_data = [];
-                    $profile_data['user_id'] = $user->id;
-                    $profile_data['gender'] = $request->gender;
-                    if ($request->current_salary) {
-                        $profile_data['current_salary'] = $request->current_salary;
-                    }
-                    if ($request->expected_salary) {
-                        $profile_data['expected_salary'] = $request->expected_salary;
-                    }
-                    if ($request->experience) {
-                        $profile_data['experience'] = $request->experience;
-                    }
-                    if ($request->languages && count($request->languages) > 0) {
-                        $profile_data['languages'] = implode(',', $request->languages);
-                    }
-                    if ($request->skills && count($request->skills) > 0) {
-                        $profile_data['skills'] = implode(',', $request->skills);
-                    }
-                    if ($request->address) {
-                        $profile_data['address'] = $request->address;
-                    }
-                    if ($request->city) {
-                        $profile_data['city'] = $request->city;
-                    }
-                    if ($request->state) {
-                        $profile_data['state'] = $request->state;
-                    }
-                    if ($request->country) {
-                        $profile_data['country'] = $request->country;
-                    }
-                    if ($request->zip) {
-                        $profile_data['zip'] = $request->zip;
-                    }
-                    $profile = Profile::create($profile_data);
+                        RoleUser::create([
+                            'user_id' => $user->id,
+                            'role_id' => 3
+                        ]);
+                        $profile_data = [];
+                        $profile_data['user_id'] = $user->id;
+                        $profile_data['gender'] = $request->gender;
+                        if ($request->current_salary) {
+                            $profile_data['current_salary'] = $request->current_salary;
+                        }
+                        if ($request->expected_salary) {
+                            $profile_data['expected_salary'] = $request->expected_salary;
+                        }
+                        if ($request->experience) {
+                            $profile_data['experience'] = $request->experience;
+                        }
+                        if ($request->languages && count($request->languages) > 0) {
+                            $profile_data['languages'] = implode(',', $request->languages);
+                        }
+                        if ($request->skills && count($request->skills) > 0) {
+                            $profile_data['skills'] = implode(',', $request->skills);
+                        }
+                        if ($request->address) {
+                            $profile_data['address'] = $request->address;
+                        }
+                        if ($request->city) {
+                            $profile_data['city'] = $request->city;
+                        }
+                        if ($request->state) {
+                            $profile_data['state'] = $request->state;
+                        }
+                        if ($request->country) {
+                            $profile_data['country'] = $request->country;
+                        }
+                        if ($request->zip) {
+                            $profile_data['zip'] = $request->zip;
+                        }
+                        $profile = Profile::create($profile_data);
 
-                    $user->sendEmailVerificationNotification();
-                    $credential = [];
-                    $credential['password'] = $password;
-                    $user->notify(new Credential($credential));
-                });               
+                        $user->sendEmailVerificationNotification();
+                        $credential = [];
+                        $credential['password'] = $password;
+                        $user->notify(new Credential($credential));
+                    });               
 
-                return redirect()->route('admin.manageEmployee')->with('success', 'Employee created successfully');
+                    return redirect()->route('admin.manageEmployee')->with('success', 'Employee created successfully');
+            } catch (\Exception $e) {
+                // dd($e);
+                Log::error($e->getMessage());
+                return back()->with('error', $e->getMessage())->withInput();
             }
-        } catch (\Exception $e) {
-            Log::error($e->getMessage());
-            return back()->with('error', $e->getMessage())->withInput();
         }
 
 
@@ -144,13 +149,15 @@ class EmployeeController extends Controller
             $languages = null;
         }
         if ($request->method() == "POST") {
+           
             $request->validate([
                 'first_name' => 'required|string|max:100',
                 'last_name' => 'required|string|max:100',
                 'gender' => 'required',
                 'employee_image' => 'mimes:jpeg,bmp,png,jpg|max:2000',
                 'employee_intro' => 'mimes:mp4|max:20000',
-                'resume' => 'mimes:pdf,docx|max:2000'
+                'resume' => 'mimes:pdf,docx|max:2000',
+              
             ]);
 
             $user_data = $request->all();
