@@ -51,8 +51,8 @@ Employee Applications
                                         <div class="card-body">
                                             <form action="{{ route('employer.applications') }}" method="GET">
                                                 <div class="row mb-4">
-                                                    <div class="col-md-2"></div>
-                                                    <div class="col-md-4">
+                                                   
+                                                    <div class="col-md-5">
                                                         <input type="text" name="search_keyword" value="{{ request()->get('search_keyword') }}" class="form-control" placeholder="Search applicant name or job title or job role" />
                                                     </div>
                                                     <div class="col-md-3">
@@ -64,7 +64,7 @@ Employee Applications
                                                             @endforelse
                                                         </select>
                                                     </div>
-                                                    <div class="col-md-3">
+                                                    <div class="col-md-4">
                                                         <button type="submit" class="btn btn-search btn-primary">Search</button>
                                                         <a href="{{ route('employer.applications') }}" class="btn btn-search btn-danger">Reset</a>
                                                     </div>
