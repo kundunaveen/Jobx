@@ -226,24 +226,24 @@ Employer | Edit Post Job
                                     <div class="row form-group">
                                         <div class="col-md-6 mb-5 mb-md-0">
                                             <label for="inputName4" class="form-label">First Name*</label>
-                                            <input type="text" class="form-control form-input" readonly value="{{auth()->user()->first_name}}" placeholder="First name" aria-label="First name">
+                                            <input type="text" class="form-control form-input disable_input" readonly value="{{auth()->user()->first_name}}" placeholder="First name" aria-label="First name">
                                         </div>
                                         <div class="col-md-6">
                                             <label for="inputName4" class="form-label">Last Name*</label>
-                                            <input type="text" class="form-control form-input" readonly value="{{auth()->user()->last_name}}" placeholder="Last name" aria-label="Last name">
+                                            <input type="text" class="form-control form-input disable_input" readonly value="{{auth()->user()->last_name}}" placeholder="Last name" aria-label="Last name">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-12">
                                             <label for="inputName4" class="form-label">Email*</label>
-                                            <input type="text" class="form-control form-input" readonly value="{{auth()->user()->email}}" placeholder="Last name" aria-label="Last name">
+                                            <input type="text" class="form-control form-input disable_input" readonly value="{{auth()->user()->email}}" placeholder="Last name" aria-label="Last name">
                                         </div>
                                     </div>
                                     <div class="row form-group">
                                         <div class="col-12">
                                             <label for="inputName4" class="form-label">Contact*</label>
                                            <!--  <input type="text" class="form-control form-input" readonly value="{{auth()->user()->contact}}" placeholder="Last name" aria-label="Last name"> -->
-                                           <input type="tel" name="contact" id="phone" class="form-control form-input" value="{{auth()->user()->contact}}" placeholder="Ex: 99xxxxx999"
+                                           <input type="tel" name="contact" id="phone" class="form-control form-input disable_input" value="{{auth()->user()->contact}}"  readonly placeholder="Ex: 99xxxxx999"
                                     aria-label="Phone Number">
                                         </div>
                                     </div>
@@ -575,8 +575,10 @@ Employer | Edit Post Job
                                         </div>
                                         @endif
                                     </div>
-                                     <div class=" d-grid col-sm-9">
-                                        <input type="submit" class="btn  btn-primary btn-form" value="Publish">
+                                    <div class="row form-group">
+                                     <div class="col-sm-9">
+                                        <input type="submit" class="btn  btn-primary btn-form w-100" value="Publish">
+                                    </div>
                                         <div class="col-sm-3  text-center text-sm-end">
                                             <input type="reset" class="btn py-3 px-0 bg-transparent fw-bold btn-skip" value="Back" onclick="$('#prevBtn').click();$('#prevBtn').removeClass('d-none')">
                                         </div>

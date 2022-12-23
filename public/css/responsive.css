@@ -1034,3 +1034,23 @@ button.accordion-button.company_list_button {
 
 
 /* end listing page */
+
+
+.disable_input {
+    background-color: #f5f5f5!important;
+    cursor: not-allowed;
+}
+.w-100{
+    width: 100%;
+}
+@media (max-width: 1699px){
+.dashboard-main .dashboard-header {
+    padding-bottom: 0;
+}
+}
+
+@media (min-width: 1024px){
+section.dashboard-section.inner-login-shape {
+    min-height: 100vh;
+}
+}
