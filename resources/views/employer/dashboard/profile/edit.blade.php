@@ -294,7 +294,7 @@ button.btn.btn-custom-posted-jobs.btn-primary.active:hover {
                             <label for="inputType" class="form-label">Type*</label>
                             <div class="col-12">
                                 <select name="industry" class="form-select" aria-label="Default select example">
-                                    <option selected>Enter your industry</option>
+                                    <option value="" selected>Enter your industry</option>
                                     @foreach($industries as $industry)
                                     <option {{$industry->id == optional($employer->profile)->industry_type_id ? 'selected':''}} value="{{$industry->id}}">{{$industry->value}}</option>
                                     @endforeach

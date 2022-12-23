@@ -71,6 +71,7 @@ class HomeController extends Controller
     {
         if($request->method()=="POST")
         {
+            // dd($request->all());
             $request->validate([
                 'first_name' => 'required',
                 'last_name' => 'required',
